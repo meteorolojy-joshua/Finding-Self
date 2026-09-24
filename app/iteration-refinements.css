@@ -1,0 +1,57 @@
+/* Artwork and captions use separate bounds, including at narrow widths. */
+.room-scene .room-label{color:#2c352f;font-weight:500;margin:0}
+.influence-object{container-type:inline-size}
+.influence-object textarea{font-size:5.769cqw;line-height:8.173cqw}
+.influence-object[data-kind=person] textarea{font-size:5.288cqw;line-height:7.211cqw;padding:0!important}
+.influence-object[data-kind=place] textarea{font-size:5.288cqw;line-height:6.73cqw;padding:0!important}
+.growing-leaf .empty-leaf{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.current-notebook{background:url('assets/current/notebook.svg') center/100% 100% no-repeat;filter:none;aspect-ratio:296/149}
+.current-notebook:before{display:none}
+.current-notebook .book-page{background:none!important;clip-path:none;transform:none;min-height:149px;padding:16px 14px;box-shadow:none}
+.current-notebook .book-page:hover{transform:none;filter:brightness(.94)}
+.current-notebook .book-page svg{display:none}
+.current-notebook .book-page-label{font-weight:400;font-size:12px}
+.current-notebook .book-page{position:absolute;top:12%;height:76%;min-height:0;width:32%;padding:8px}
+.current-notebook .book-page-left{left:18%}.current-notebook .book-page-right{right:18%}
+.current-notebook .book-page-hint{font-size:11px}
+.piece-handle{display:block;cursor:grab;touch-action:pan-y}
+.helper-companion{position:fixed;bottom:18px;right:max(18px,calc((100vw - 480px)/2 + 18px));z-index:40;box-shadow:0 3px 14px #0002}
+.room-item.dragging{z-index:2000!important}.landing-preview{z-index:1999}.drag-preview *{pointer-events:none!important}
+.room-item,.packed-item{touch-action:auto}
+.archive-plant{position:relative;width:66px;height:130px}.archive-plant .room-plant-art{inset:0}.archive-plant .room-plant-art img{max-width:100%}.archive-option{display:flex;align-items:center;gap:16px;text-align:left}.archive-option img{width:42px;height:48px;object-fit:contain}
+.current-miniature{position:relative}.current-miniature .room-plant-art{inset:0}.current-miniature.upward-torch img{transform:rotate(-90deg)}
+.pv-magnet.current-miniature img{transform:scaleY(-1)}
+.drag-preview .store-basket{width:100%}.drag-preview .packed-items{top:22%;left:20%;right:20%}
+/* Restore the existing lift only on room destinations and notebook pages.
+   Move artwork with its caption inside a stable hit target. Drag transforms
+   and support geometry remain owned by the room placement controller. */
+.room-fixed-label{display:block;pointer-events:none}
+.room-item>img,.room-item>.room-label,.room-item>.room-plant-art,.room-item>.room-fixed-label{transition:translate 150ms ease-out}
+@media(hover:hover){
+  .room-item:not(.dragging):hover>img,
+  .room-item:not(.dragging):hover>.room-label,
+  .room-item:not(.dragging):hover>.room-plant-art,
+  .room-item:not(.dragging):hover>.room-fixed-label{translate:0 -4px}
+}
+.room-item:not(.dragging):active>img,
+.room-item:not(.dragging):active>.room-label,
+.room-item:not(.dragging):active>.room-plant-art,
+.room-item:not(.dragging):active>.room-fixed-label{translate:0 -6px}
+.room-item.dragging>*{translate:none;transition:none}
+/* Both page illustrations are halves of the supplied notebook asset. */
+.current-notebook{background:none}
+.current-notebook::before,.current-notebook::after{content:"";display:block;position:absolute;inset:0;width:auto;height:auto;margin:0;border:0;border-radius:0;box-shadow:none;background:url('assets/current/notebook.svg') center/100% 100% no-repeat;pointer-events:none;transform:none;transition:translate 150ms ease-out}
+.current-notebook::before{clip-path:inset(0 50% 0 0);z-index:0}
+.current-notebook::after{clip-path:inset(0 0 0 50%);z-index:0}
+.current-notebook .book-page{z-index:1;transition:translate 150ms ease-out}
+@media(hover:hover){
+  .current-notebook:has(.book-page-left:hover)::before,
+  .current-notebook:has(.book-page-right:hover)::after,
+  .current-notebook .book-page:hover{translate:0 -4px}
+}
+.current-notebook:has(.book-page-left:active)::before,
+.current-notebook:has(.book-page-right:active)::after,
+.current-notebook .book-page:active{translate:0 -6px}
+@media(prefers-reduced-motion:reduce){
+  .room-item>*,.current-notebook::before,.current-notebook::after,.current-notebook .book-page{transition:none}
+}

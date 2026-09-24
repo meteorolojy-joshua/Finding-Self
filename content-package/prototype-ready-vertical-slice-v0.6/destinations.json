@@ -1,0 +1,3306 @@
+{
+  "schema_version": "1.0",
+  "content_version": "0.6",
+  "records": [
+    {
+      "id": "EXIT",
+      "destination_class": "defined_external",
+      "definition": "Close the current flow without external action or persistence.",
+      "handler": "defined_external",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:EXIT",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "EXIT:Destination",
+      "destination_class": "defined_external",
+      "definition": "Close the overlay; the user independently opens the destination.",
+      "handler": "defined_external",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:EXIT:Destination",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRACTICE:S1",
+      "destination_class": "practice_entry",
+      "definition": "Enter PRACTICE:S1 through the optional context seam. Preserve any carried_context until the user explicitly decides what to use or discard.",
+      "handler": "practice_entry",
+      "next_node": "PM.00",
+      "return_behavior": "Set active practice to PRACTICE:S1; context-free return uses S1.00.",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PRACTICE:S1 context patch",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "PM.00"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections",
+        "carried_context"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRACTICE:S2",
+      "destination_class": "practice_entry",
+      "definition": "Enter PRACTICE:S2 through the optional context seam. Preserve any carried_context until the user explicitly decides what to use or discard.",
+      "handler": "practice_entry",
+      "next_node": "PM.00",
+      "return_behavior": "Set active practice to PRACTICE:S2; context-free return uses S2.00.",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PRACTICE:S2 context patch",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "PM.00"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections",
+        "carried_context"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "SETTINGS:Trigger",
+      "destination_class": "defined_external",
+      "definition": "Trigger settings.",
+      "handler": "defined_external",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:SETTINGS:Trigger",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "REVIEW:ThisRun",
+      "destination_class": "defined_external",
+      "definition": "Read-only review of current volatile selections.",
+      "handler": "defined_external",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:REVIEW:ThisRun",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:answer_position",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for answer_position; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:answer_position",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:answer_position_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for answer_position_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:answer_position_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:answer_power",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for answer_power; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:answer_power",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:answer_timing",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for answer_timing; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:answer_timing",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:carryover_power",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for carryover_power; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:carryover_power",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:completion_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for completion_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:completion_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:digital_intent",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for digital_intent; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:digital_intent",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:digital_intent_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for digital_intent_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:digital_intent_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:digital_stance",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for digital_stance; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:digital_stance",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:digital_stance_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for digital_stance_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:digital_stance_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:directional_preference",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for directional_preference; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:directional_preference",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:directional_preference_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for directional_preference_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:directional_preference_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:directness_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for directness_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:directness_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:enough_criteria",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for enough_criteria; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:enough_criteria",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:first_standing",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for first_standing; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:first_standing",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:focus",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for focus; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:focus",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:immediate_support",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for immediate_support; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:immediate_support",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:immediate_support_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for immediate_support_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:immediate_support_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:moment_marker_labels",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for moment_marker_labels; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:moment_marker_labels",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:moment_marker_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for moment_marker_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:moment_marker_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:observable_pattern",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for observable_pattern; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:observable_pattern",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:platform_power",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for platform_power; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:platform_power",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:present_jurisdiction",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for present_jurisdiction; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:present_jurisdiction",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:protected_domain",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for protected_domain; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:protected_domain",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:protected_domain_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for protected_domain_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:protected_domain_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:reference_point",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for reference_point; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:reference_point",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_enough",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_enough; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_enough",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_power",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_power; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_power",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_rehearsal",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_rehearsal; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_rehearsal",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_share",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_share; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_share",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_share_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_share_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_share_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_stance",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_stance; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_stance",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:relational_stance_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for relational_stance_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:relational_stance_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:response_form",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for response_form; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:response_form",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:signal_interference",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for signal_interference; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:signal_interference",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:situation_power",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for situation_power; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:situation_power",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_arrangement",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_arrangement; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_arrangement",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_carry",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_carry; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_carry",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_from_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_from_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_from_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_need",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_need; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_need",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_need_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_need_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_need_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_pair",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_pair; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_pair",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:transition_to_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for transition_to_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:transition_to_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:uncertainty_action",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for uncertainty_action; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:uncertainty_action",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:uncertainty_standing_short",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for uncertainty_standing_short; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:uncertainty_standing_short",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:unclear_route",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for unclear_route; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:unclear_route",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "INV:world_location",
+      "destination_class": "inventory_filter",
+      "definition": "Filtered inventory for world_location; return to originating node.",
+      "handler": "inventory_filter",
+      "next_node": "",
+      "return_behavior": "As defined by source",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:INV:world_location",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRIVATE.NOTE.NOW.OFF.S07",
+      "destination_class": "private_note_consent",
+      "definition": "Optional separately confirmed private note, then continue to NOW.OFF.S07.",
+      "handler": "private_note_consent",
+      "next_node": "NOW.OFF.S07",
+      "return_behavior": "Declining or confirming continues without silently saving a note",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:PRIVATE.NOTE.NOW.OFF.S07",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "NOW.OFF.S07"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HOME",
+      "destination_class": "terminal",
+      "definition": "Return to the product home surface.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "Close active run unless explicitly paused",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HOME",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRACTICE.LIBRARY",
+      "destination_class": "terminal",
+      "definition": "Return to the Practice library without starting a run.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "No persistence",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:PRACTICE.LIBRARY",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRACTICE.COMPLETE",
+      "destination_class": "terminal",
+      "definition": "Complete the Practice run and return to the chosen prior surface.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "Discard volatile run after confirmed objects are separated",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:PRACTICE.COMPLETE",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "MOMENTS",
+      "destination_class": "terminal",
+      "definition": "Open the local Moments list.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "Marker persists independently",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:MOMENTS",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "TIME.PICKER.MM03",
+      "destination_class": "time_picker",
+      "definition": "Choose a one-time date or time, then continue to MM.03.",
+      "handler": "time_picker",
+      "next_node": "MM.03",
+      "return_behavior": "Return with volatile return preference",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:TIME.PICKER.MM03",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "MM.03"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRIVATE.NOTE.MM03",
+      "destination_class": "private_note_consent",
+      "definition": "Optional separately confirmed private note, then return to MM.03.",
+      "handler": "private_note_consent",
+      "next_node": "MM.03",
+      "return_behavior": "Return with explicit note preview",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:PRIVATE.NOTE.MM03",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "MM.03"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "MARKER.LIST.PM03",
+      "destination_class": "marker_picker",
+      "definition": "Select a saved marker without revealing a narrative, then continue to PM.03.",
+      "handler": "marker_picker",
+      "next_node": "PM.03",
+      "return_behavior": "Return with proposed context token",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:MARKER.LIST.PM03",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "PM.03"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "FLOW.PREVIEW.TT04",
+      "destination_class": "flow_preview",
+      "definition": "Read-only preview of the future Now flow, then return to TT.04.",
+      "handler": "flow_preview",
+      "next_node": "TT.04",
+      "return_behavior": "No run or patch mutation",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:FLOW.PREVIEW.TT04",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "TT.04"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "TRIGGER.SETTINGS",
+      "destination_class": "terminal",
+      "definition": "Open user-controlled invitation settings.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "Destination access remains independent",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:TRIGGER.SETTINGS",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "TRIGGER.SNOOZE.DISMISS",
+      "destination_class": "terminal",
+      "definition": "Persist the chosen snooze or pause state and dismiss the invitation.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "Destination access remains independent",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:TRIGGER.SNOOZE.DISMISS",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "MARKER.UNDO.EXIT",
+      "destination_class": "terminal",
+      "definition": "Delete the newly saved marker immediately and exit.",
+      "handler": "terminal",
+      "next_node": "",
+      "return_behavior": "Undo only the marker",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:MARKER.UNDO.EXIT",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.ORIGINAL.ENTRY",
+      "destination_class": "practice_context_route",
+      "definition": "Resolve to the selected practice's original entry without context.",
+      "handler": "practice_context_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.00; PRACTICE:S2 → S2.00",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.PRACTICE.ORIGINAL.ENTRY",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.00",
+        "S2.00"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.CONTEXT.RETURN",
+      "destination_class": "practice_context_return",
+      "definition": "Return from source discernment to the exact patched Practice node stored in the context token.",
+      "handler": "practice_context_return",
+      "next_node": "",
+      "return_behavior": "S1 → S1.05; S2 → S2.W1.02 unless the patch specifies another node",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.PRACTICE.CONTEXT.RETURN",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.05",
+        "S2.W1.02"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.COMPLETION",
+      "destination_class": "practice_context_route",
+      "definition": "Return from Toolkit or artifact handling to the active Practice's closure node.",
+      "handler": "practice_context_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.13; PRACTICE:S2 → S2.R3",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.PRACTICE.COMPLETION",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.13",
+        "S2.R3"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.CONTEXT.COMPLETION",
+      "destination_class": "context_completion",
+      "definition": "Complete the active context without assuming that a Practice is running.",
+      "handler": "context_completion",
+      "next_node": "",
+      "return_behavior": "Practice S1 → S1.13; Practice S2 → S2.R3; Now → originating completion or Exit; standalone → previous surface or Home",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.CONTEXT.COMPLETION",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.13",
+        "S2.R3"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.DISCARD.VOLATILE.RUN.CONTEXT.COMPLETION",
+      "destination_class": "context_completion",
+      "definition": "Discard only volatile run state, then complete the active context.",
+      "handler": "context_completion",
+      "next_node": "",
+      "return_behavior": "Use active Practice closure when present; otherwise return to the originating Now completion or Exit",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.DISCARD.VOLATILE.RUN.CONTEXT.COMPLETION",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.ARTIFACT.CANDIDATE.PICKER",
+      "destination_class": "artifact_candidate_picker",
+      "definition": "Choose one exact eligible selection from the current run, then preview it as a portable artifact.",
+      "handler": "artifact_candidate_picker",
+      "next_node": "ARTIFACT.PREVIEW",
+      "return_behavior": "Return with one explicit artifact candidate",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.ARTIFACT.CANDIDATE.PICKER",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "ARTIFACT.PREVIEW"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.ARTIFACT.CUSTOM.PREVIEW",
+      "destination_class": "artifact_custom_input",
+      "definition": "Write one short private phrase, then preview it without saving.",
+      "handler": "artifact_custom_input",
+      "next_node": "ARTIFACT.PREVIEW",
+      "return_behavior": "Return with one volatile artifact candidate",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.ARTIFACT.CUSTOM.PREVIEW",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "ARTIFACT.PREVIEW"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.DATE.TIME.PICKER.MM.03",
+      "destination_class": "ui_primitive",
+      "definition": "Perform the explicit prototype primitive 'Date/time picker → MM.03' and continue to MM.03.",
+      "handler": "ui_primitive",
+      "next_node": "MM.03",
+      "return_behavior": "Return with volatile state only",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.DATE.TIME.PICKER.MM.03",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "MM.03"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PM.00.WITH.THIS.MARKER.SELECTED",
+      "destination_class": "ui_primitive",
+      "definition": "Explicitly handle source route: PM.00 with this marker selected.",
+      "handler": "ui_primitive",
+      "next_node": "",
+      "return_behavior": "As stated in source route",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.PM.00.WITH.THIS.MARKER.SELECTED",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.NOTICE.NODE",
+      "destination_class": "practice_function_route",
+      "definition": "Resolve the selected PM.03 focus inside the active Practice script.",
+      "handler": "practice_function_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.03 route chooser; PRACTICE:S2 → S2.W1.01",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PM.03 conditional route:HANDLER.PRACTICE.NOTICE.NODE",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S2.W1.01"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.POWER.NODE",
+      "destination_class": "practice_function_route",
+      "definition": "Resolve the selected PM.03 focus inside the active Practice script.",
+      "handler": "practice_function_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.05; PRACTICE:S2 → S2.W1.02",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PM.03 conditional route:HANDLER.PRACTICE.POWER.NODE",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.05",
+        "S2.W1.02"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.POWER.NODE.PROTECTIVE.FRAMING",
+      "destination_class": "practice_function_route",
+      "definition": "Resolve the selected PM.03 focus inside the active Practice script.",
+      "handler": "practice_function_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.05; PRACTICE:S2 → S2.W1.02 with protective framing",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PM.03 conditional route:HANDLER.PRACTICE.POWER.NODE.PROTECTIVE.FRAMING",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.05",
+        "S2.W1.02"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.WITNESS.EXPERIMENT.ROUTE",
+      "destination_class": "practice_function_route",
+      "definition": "Resolve the selected PM.03 focus inside the active Practice script.",
+      "handler": "practice_function_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.10; PRACTICE:S2 → S2.W1.04",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PM.03 conditional route:HANDLER.PRACTICE.WITNESS.EXPERIMENT.ROUTE",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.10",
+        "S2.W1.04"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.PRACTICE.ALIGN.NODE",
+      "destination_class": "practice_function_route",
+      "definition": "Resolve the selected PM.03 focus inside the active Practice script.",
+      "handler": "practice_function_route",
+      "next_node": "",
+      "return_behavior": "PRACTICE:S1 → S1.07; PRACTICE:S2 → S2.W1.03",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Lived-Moment Learning Loop Specification and Content Patch - v0.2.docx",
+      "source_location": "PM.03 conditional route:HANDLER.PRACTICE.ALIGN.NODE",
+      "source_status": "Binding patch",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.07",
+        "S2.W1.03"
+      ],
+      "required_context": [
+        "active_practice"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.DISCARD.VOLATILE.RUN.PRACTICE.COMPLETION",
+      "destination_class": "ui_primitive",
+      "definition": "Explicitly handle source route: Discard volatile run; Practice completion.",
+      "handler": "ui_primitive",
+      "next_node": "",
+      "return_behavior": "As stated in source route",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.DISCARD.VOLATILE.RUN.PRACTICE.COMPLETION",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.EXIT.CLOSURE.N",
+      "destination_class": "ui_primitive",
+      "definition": "Explicitly handle source route: Exit: Closure N.",
+      "handler": "ui_primitive",
+      "next_node": "",
+      "return_behavior": "As stated in source route",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.EXIT.CLOSURE.N",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.OPTIONAL.TIMER.S1.10",
+      "destination_class": "ui_primitive",
+      "definition": "Perform the explicit prototype primitive 'Optional timer → S1.10' and continue to S1.10.",
+      "handler": "ui_primitive",
+      "next_node": "S1.10",
+      "return_behavior": "Return with volatile state only",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.OPTIONAL.TIMER.S1.10",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.10"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.EXIT",
+      "destination_class": "ui_primitive",
+      "definition": "Explicitly handle source route: Exit.",
+      "handler": "ui_primitive",
+      "next_node": "",
+      "return_behavior": "As stated in source route",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.EXIT",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.OPTIONAL.QUIET.INTERVAL.S2.W2.04",
+      "destination_class": "ui_primitive",
+      "definition": "Perform the explicit prototype primitive 'Optional quiet interval → S2.W2.04' and continue to S2.W2.04.",
+      "handler": "ui_primitive",
+      "next_node": "S2.W2.04",
+      "return_behavior": "Return with volatile state only",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.OPTIONAL.QUIET.INTERVAL.S2.W2.04",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S2.W2.04"
+      ],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.OPTIONAL.REHEARSAL.RETURN.HERE",
+      "destination_class": "ui_primitive",
+      "definition": "Explicitly handle source route: Optional rehearsal → return here.",
+      "handler": "ui_primitive",
+      "next_node": "",
+      "return_behavior": "As stated in source route",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.OPTIONAL.REHEARSAL.RETURN.HERE",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.FORM.STANCE.SHARE.ARTIFACT.PREVIEW",
+      "destination_class": "ui_primitive",
+      "definition": "Explicitly handle source route: form → stance → share'   → Artifact preview.",
+      "handler": "ui_primitive",
+      "next_node": "",
+      "return_behavior": "As stated in source route",
+      "terminal": true,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.FORM.STANCE.SHARE.ARTIFACT.PREVIEW",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.S2.AFTER.R1A",
+      "destination_class": "conditional_route",
+      "definition": "Conditional practice route after the continuity question.",
+      "handler": "conditional_route",
+      "next_node": "",
+      "return_behavior": "marker context → S2.M0; otherwise → S2.R2",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.S2.AFTER.R1A",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S2.M0",
+        "S2.R2"
+      ],
+      "required_context": [
+        "route_context"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.RETURN.POINTER",
+      "destination_class": "return_pointer",
+      "definition": "Return to the exact originating node with its volatile run state intact.",
+      "handler": "return_pointer",
+      "next_node": "",
+      "return_behavior": "Restore origin node",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.RETURN.POINTER",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.REWORD.CURRENT.NODE",
+      "destination_class": "user_reword",
+      "definition": "Let the user write substitute wording for the current question for this run only, without interpreting it, then return to that question.",
+      "handler": "user_reword",
+      "next_node": "",
+      "return_behavior": "Use the recovery return pointer; cancellation returns without changing wording",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.REWORD.CURRENT.NODE",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.ALTERNATE.ROUTE",
+      "destination_class": "alternate_route",
+      "definition": "Return to a compatible route chooser without changing prior answers.",
+      "handler": "alternate_route",
+      "next_node": "",
+      "return_behavior": "Use active route context",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.ALTERNATE.ROUTE",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.SKIP.NODE",
+      "destination_class": "skip_node",
+      "definition": "Skip the originating node and route to the explicit recovery_skip_destination stored when recovery opened.",
+      "handler": "skip_node",
+      "next_node": "",
+      "return_behavior": "Use recovery payload; never infer a next node from option order",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.SKIP.NODE",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.RESUME.POINTER",
+      "destination_class": "resume_pointer",
+      "definition": "Resume from the minimal bookmark's node and route.",
+      "handler": "resume_pointer",
+      "next_node": "",
+      "return_behavior": "No answer history restored",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.RESUME.POINTER",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.RESTART.ROUTE",
+      "destination_class": "restart_route",
+      "definition": "Restart the bookmarked route from its entry node.",
+      "handler": "restart_route",
+      "next_node": "",
+      "return_behavior": "Discard previous volatile run",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.RESTART.ROUTE",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "confirmed_objects"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "HANDLER.S1.AFTER.11",
+      "destination_class": "conditional_route",
+      "definition": "Conditional marker-disposition route after S1.11.",
+      "handler": "conditional_route",
+      "next_node": "",
+      "return_behavior": "marker context → S1.M0; otherwise → S1.12",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:HANDLER.S1.AFTER.11",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [
+        "S1.M0",
+        "S1.12"
+      ],
+      "required_context": [
+        "route_context"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "ONBOARDING",
+      "destination_class": "onboarding",
+      "definition": "Run the deterministic onboarding questions and filtered recommendation rules.",
+      "handler": "onboarding",
+      "next_node": "",
+      "return_behavior": "User may skip or browse all available starters",
+      "terminal": false,
+      "external_action": "Never",
+      "source_file": "Prototype-Ready Structured Content Package - v0.3",
+      "source_location": "Generated destination:ONBOARDING",
+      "source_status": "Explicit prototype primitive",
+      "content_version": "0.6",
+      "next_destination": "",
+      "possible_next_nodes": [],
+      "required_context": [],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": ""
+    },
+    {
+      "id": "PRACTICE:S1:CARRIED",
+      "destination_class": "practice_entry",
+      "definition": "Set active practice to PRACTICE:S1, preserve the complete carried-context object, and enter at PM.03 without asking the user to repeat whether a moment should be brought in.",
+      "handler": "practice_entry_with_context",
+      "next_node": "PM.03",
+      "next_destination": "",
+      "return_behavior": "Active practice PRACTICE:S1; PM.03 receives carried context and prior selections.",
+      "terminal": false,
+      "required_context": [
+        "carried_context"
+      ],
+      "visible_transition_copy": "This practice is carrying what you already named.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:PRACTICE:S1:CARRIED",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "PM.03"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ]
+    },
+    {
+      "id": "PRACTICE:S1:FRESH",
+      "destination_class": "practice_entry",
+      "definition": "Explicitly discard carried moment context and begin PRACTICE:S1 at its original first page.",
+      "handler": "practice_entry_fresh",
+      "next_node": "S1.00",
+      "next_destination": "",
+      "return_behavior": "Active practice PRACTICE:S1; prior completed run remains untouched but is not injected.",
+      "terminal": false,
+      "required_context": [],
+      "state_preserved": [
+        "confirmed_objects"
+      ],
+      "visible_transition_copy": "Starting fresh because you explicitly chose to.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:PRACTICE:S1:FRESH",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S1.00"
+      ],
+      "fallback_destination": "ROUTE.INVALID"
+    },
+    {
+      "id": "PRACTICE:S2:CARRIED",
+      "destination_class": "practice_entry",
+      "definition": "Set active practice to PRACTICE:S2, preserve the complete carried-context object, and enter at PM.03 without asking the user to repeat whether a moment should be brought in.",
+      "handler": "practice_entry_with_context",
+      "next_node": "PM.03",
+      "next_destination": "",
+      "return_behavior": "Active practice PRACTICE:S2; PM.03 receives carried context and prior selections.",
+      "terminal": false,
+      "required_context": [
+        "carried_context"
+      ],
+      "visible_transition_copy": "This practice is carrying what you already named.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:PRACTICE:S2:CARRIED",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "PM.03"
+      ],
+      "fallback_destination": "ROUTE.INVALID",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ]
+    },
+    {
+      "id": "PRACTICE:S2:FRESH",
+      "destination_class": "practice_entry",
+      "definition": "Explicitly discard carried moment context and begin PRACTICE:S2 at its original first page.",
+      "handler": "practice_entry_fresh",
+      "next_node": "S2.00",
+      "next_destination": "",
+      "return_behavior": "Active practice PRACTICE:S2; prior completed run remains untouched but is not injected.",
+      "terminal": false,
+      "required_context": [],
+      "state_preserved": [
+        "confirmed_objects"
+      ],
+      "visible_transition_copy": "Starting fresh because you explicitly chose to.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:PRACTICE:S2:FRESH",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.00"
+      ],
+      "fallback_destination": "ROUTE.INVALID"
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.011",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.FEED.S01, allow cancellation, and only then continue to NOW.FEED.S02.",
+      "handler": "custom_input",
+      "next_node": "NOW.FEED.S02",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.FEED.S01 without changing state; confirm writes the exact user text under purpose and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.FEED.S01",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.011",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.FEED.S02"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.034",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.FEED.S03, allow cancellation, and only then continue to NOW.FEED.S04.",
+      "handler": "custom_input",
+      "next_node": "NOW.FEED.S04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.FEED.S03 without changing state; confirm writes the exact user text under custom and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.FEED.S03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.034",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.FEED.S04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.045",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.FEED.S04, allow cancellation, and only then continue to NOW.FEED.S05.",
+      "handler": "custom_input",
+      "next_node": "NOW.FEED.S05",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.FEED.S04 without changing state; confirm writes the exact user text under custom and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.FEED.S04",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.045",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.FEED.S05"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.054",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.FEED.S05, allow cancellation, and only then continue to NOW.FEED.S06.",
+      "handler": "custom_input",
+      "next_node": "NOW.FEED.S06",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.FEED.S05 without changing state; confirm writes the exact user text under custom and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.FEED.S05",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.054",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.FEED.S06"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.107",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.OFF.S03, allow cancellation, and only then continue to NOW.OFF.S04.",
+      "handler": "custom_input",
+      "next_node": "NOW.OFF.S04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.OFF.S03 without changing state; confirm writes the exact user text under noticed_signal and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.OFF.S03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.107",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.OFF.S04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.130",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.OFF.S05, allow cancellation, and only then continue to NOW.OFF.S06.",
+      "handler": "custom_input",
+      "next_node": "NOW.OFF.S06",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.OFF.S05 without changing state; confirm writes the exact user text under custom and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.OFF.S05",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.130",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.OFF.S06"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.140",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.OFF.S06, allow cancellation, and only then continue to NOW.OFF.RESOURCE.S.",
+      "handler": "custom_input",
+      "next_node": "NOW.OFF.RESOURCE.S",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.OFF.S06 without changing state; confirm writes the exact user text under requested_support and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.OFF.S06",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.140",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.OFF.RESOURCE.S"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.454",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.UNCLEAR.S03, allow cancellation, and only then continue to NOW.UNCLEAR.NEXT.",
+      "handler": "custom_input",
+      "next_node": "NOW.UNCLEAR.NEXT",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.UNCLEAR.S03 without changing state; confirm writes the exact user text under unclear_signal and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.UNCLEAR.S03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.454",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.UNCLEAR.NEXT"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.NOW.475",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.UNCLEAR.S05, allow cancellation, and only then continue to NOW.UNCLEAR.S06.",
+      "handler": "custom_input",
+      "next_node": "NOW.UNCLEAR.S06",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.UNCLEAR.S05 without changing state; confirm writes the exact user text under custom and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.UNCLEAR.S05",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.NOW.475",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.UNCLEAR.S06"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.MM.01.07",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for MM.01, allow cancellation, and only then continue to MM.02.",
+      "handler": "custom_input",
+      "next_node": "MM.02",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to MM.01 without changing state; confirm writes the exact user text under retention_choice and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "MM.01",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.MM.01.07",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "MM.02"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.SD.01.07",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for SD.01, allow cancellation, and only then continue to HANDLER.PRACTICE.CONTEXT.RETURN.",
+      "handler": "custom_input",
+      "next_node": "",
+      "next_destination": "HANDLER.PRACTICE.CONTEXT.RETURN",
+      "return_behavior": "Cancel returns to SD.01 without changing state; confirm writes the exact user text under chosen_stance and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "SD.01",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.SD.01.07",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": []
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S1.03W.08",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S1.03W, allow cancellation, and only then continue to S1.04.",
+      "handler": "custom_input",
+      "next_node": "S1.04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S1.03W without changing state; confirm writes the exact user text under noticed_signal and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S1.03W",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S1.03W.08",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S1.04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S1.03F.08",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S1.03F, allow cancellation, and only then continue to S1.04.",
+      "handler": "custom_input",
+      "next_node": "S1.04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S1.03F without changing state; confirm writes the exact user text under noticed_signal and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S1.03F",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S1.03F.08",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S1.04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S1.03S.07",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S1.03S, allow cancellation, and only then continue to S1.04.",
+      "handler": "custom_input",
+      "next_node": "S1.04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S1.03S without changing state; confirm writes the exact user text under noticed_signal and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S1.03S",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S1.03S.07",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S1.04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S1.07.08",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S1.07, allow cancellation, and only then continue to S1.08.",
+      "handler": "custom_input",
+      "next_node": "S1.08",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S1.07 without changing state; confirm writes the exact user text under chosen_stance and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S1.07",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S1.07.08",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S1.08"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S1.08.06",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S1.08, allow cancellation, and only then continue to S1.09.",
+      "handler": "custom_input",
+      "next_node": "S1.09",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S1.08 without changing state; confirm writes the exact user text under chosen_stance and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S1.08",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S1.08.06",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S1.09"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S1.12.08",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S1.12, allow cancellation, and only then continue to ARTIFACT.PREVIEW.",
+      "handler": "custom_input",
+      "next_node": "ARTIFACT.PREVIEW",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S1.12 without changing state; confirm writes the exact user text under retention_choice and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S1.12",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S1.12.08",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "ARTIFACT.PREVIEW"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W1.01.09",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W1.01, allow cancellation, and only then continue to S2.W1.01A.",
+      "handler": "custom_input",
+      "next_node": "S2.W1.01A",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W1.01 without changing state; confirm writes the exact user text under noticed_signal and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W1.01",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W1.01.09",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W1.01A"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W1.03.07",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W1.03, allow cancellation, and only then continue to S2.W1.04.",
+      "handler": "custom_input",
+      "next_node": "S2.W1.04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W1.03 without changing state; confirm writes the exact user text under named_jurisdiction and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W1.03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W1.03.07",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W1.04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W2.03.09",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W2.03, allow cancellation, and only then continue to S2.W2.03B.",
+      "handler": "custom_input",
+      "next_node": "S2.W2.03B",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W2.03 without changing state; confirm writes the exact user text under chosen_stance and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W2.03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W2.03.09",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W2.03B"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W3.01.10",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W3.01, allow cancellation, and only then continue to S2.W3.02.",
+      "handler": "custom_input",
+      "next_node": "S2.W3.02",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W3.01 without changing state; confirm writes the exact user text under relational_jurisdiction and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W3.01",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W3.01.10",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W3.02"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W3.03.12",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W3.03, allow cancellation, and only then continue to S2.W3.04.",
+      "handler": "custom_input",
+      "next_node": "S2.W3.04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W3.03 without changing state; confirm writes the exact user text under chosen_stance and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W3.03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W3.03.12",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W3.04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W3.04.11",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W3.04, allow cancellation, and only then continue to S2.W3.05.",
+      "handler": "custom_input",
+      "next_node": "S2.W3.05",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W3.04 without changing state; confirm writes the exact user text under named_resource and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W3.04",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W3.04.11",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W3.05"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W4.03.11",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W4.03, allow cancellation, and only then continue to S2.W4.04.",
+      "handler": "custom_input",
+      "next_node": "S2.W4.04",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W4.03 without changing state; confirm writes the exact user text under named_jurisdiction and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W4.03",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W4.03.11",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W4.04"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.W4.04.11",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W4.04, allow cancellation, and only then continue to S2.W4.05.",
+      "handler": "custom_input",
+      "next_node": "S2.W4.05",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W4.04 without changing state; confirm writes the exact user text under chosen_stance and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W4.04",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.W4.04.11",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W4.05"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.S2.R2.08",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.R2, allow cancellation, and only then continue to ARTIFACT.PREVIEW.",
+      "handler": "custom_input",
+      "next_node": "ARTIFACT.PREVIEW",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.R2 without changing state; confirm writes the exact user text under retention_choice and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.R2",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.S2.R2.08",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "ARTIFACT.PREVIEW"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.V04.RES.S.07",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.OFF.RESOURCE.S, allow cancellation, and only then continue to NOW.OFF.S07.",
+      "handler": "custom_input",
+      "next_node": "NOW.OFF.S07",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.OFF.RESOURCE.S without changing state; confirm writes the exact user text under resource_plan and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.OFF.RESOURCE.S",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.V04.RES.S.07",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.OFF.S07"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.V04.RES.L.06",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.OFF.RESOURCE.L, allow cancellation, and only then continue to NOW.OFF.L03.",
+      "handler": "custom_input",
+      "next_node": "NOW.OFF.L03",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.OFF.RESOURCE.L without changing state; confirm writes the exact user text under resource_plan and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.OFF.RESOURCE.L",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.V04.RES.L.06",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.OFF.L03"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.V04.UNC.INFO.07",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for NOW.UNCLEAR.INFO, allow cancellation, and only then continue to NOW.UNCLEAR.S05.",
+      "handler": "custom_input",
+      "next_node": "NOW.UNCLEAR.S05",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to NOW.UNCLEAR.INFO without changing state; confirm writes the exact user text under information_plan and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "NOW.UNCLEAR.INFO",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.V04.UNC.INFO.07",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "NOW.UNCLEAR.S05"
+      ]
+    },
+    {
+      "id": "CUSTOM.INPUT.OPT.V04.S2.INFO.02",
+      "destination_class": "custom_input",
+      "definition": "Capture an optional custom answer for S2.W1.INFO, allow cancellation, and only then continue to S2.W1.03.",
+      "handler": "custom_input",
+      "next_node": "S2.W1.03",
+      "next_destination": "",
+      "return_behavior": "Cancel returns to S2.W1.INFO without changing state; confirm writes the exact user text under information_kernel and continues.",
+      "terminal": false,
+      "required_context": [
+        "origin_node_id"
+      ],
+      "fallback_destination": "S2.W1.INFO",
+      "state_preserved": [
+        "run_context",
+        "route_context",
+        "prior_selections"
+      ],
+      "visible_transition_copy": "Use your words, or cancel. Nothing is saved beyond this run unless you separately choose to keep it.",
+      "external_action": "Never",
+      "source_file": "Semantic Transition Repair Package - v0.4",
+      "source_location": "New destination:CUSTOM.INPUT.OPT.V04.S2.INFO.02",
+      "source_status": "Binding v0.4 repair",
+      "content_version": "0.6",
+      "possible_next_nodes": [
+        "S2.W1.03"
+      ]
+    }
+  ]
+}
