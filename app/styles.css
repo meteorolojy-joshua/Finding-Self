@@ -1,0 +1,1392 @@
+﻿:root {
+  --bg: #ececec;
+  --surface: #ffffff;
+  --surface-app: #faf7f2;
+  --fg: #191919;
+  --muted: #666666;
+  --border: #cdcdcd;
+  --soft: #e4e4e4;
+  --line: #b5b5b5;
+  --btn: #58705A;
+  --btn-hover: #33463c;
+  --btn-pressed: #1f2d2e;
+  --obsidian: #4F5D6B;
+  --subtext: #DDE8E6;
+  --brown: #5A463A;
+  --brown-hover: #7A5C4D;
+  --w1: #5F7F9A; --w2: #738B72; --w3: #A8844F; --w4: #806C82; --wx: #59636E;
+  --focus: #191919;
+  --banner-ink-hover: #e5d8c6;
+  --banner-ink-active: #c9b493;
+  --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Open Sans', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+button { font: inherit; cursor: pointer; color: inherit; background: none; border: 0; text-align: inherit; }
+a { color: inherit; }
+code { font-family: var(--font-mono); font-size: 0.92em; }
+h1, h2, h3 { margin: 0; line-height: 1.2; }
+.muted { color: var(--obsidian); }
+.small { font-size: 12.5px; }
+.mono { font-family: var(--font-mono); font-size: 11px; }
+button b { font-weight: 600; }
+button .muted { color: var(--subtext); }
+button .sub, button .id, button code { color: var(--surface); }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 8px; top: 8px; background: var(--surface); padding: 8px 12px; border: 1px solid var(--fg); z-index: 50; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 22px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; flex-wrap: wrap; }
+.brand { font-size: 14px; font-weight: 600; }
+.brand .tag { color: var(--muted); font-weight: 400; font-size: 12px; margin-left: 8px; }
+.topnav { display: flex; gap: 4px; flex-wrap: wrap; }
+.tn { padding: 8px 12px; font-size: 13px; color: var(--surface); background: var(--fg); border-radius: 10px; }
+.tn:hover { color: var(--surface); background: var(--muted); }
+.tn:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.tn[aria-pressed="true"] { color: var(--surface); background: var(--muted); }
+.tn-link { text-decoration: none; display: inline-flex; align-items: center; }
+
+.layout { display: flex; align-items: flex-start; }
+.main { flex: 1; min-width: 0; padding: 26px 22px 90px; display: flex; justify-content: center; }
+.view { position: relative; width: 100%; max-width: 480px; }
+/* persistent in-app Settings control — top right of every in-app screen */
+.app-settings { position: absolute; top: 8px; right: 12px; z-index: 6; background: transparent; color: var(--surface); padding: 8px; font-size: 13.5px; font-weight: 600; border-radius: 10px; line-height: 0; }
+.app-settings:hover { background: transparent; color: var(--banner-ink-hover); }
+.app-settings:active { color: var(--banner-ink-active); }
+
+.inspector { width: 340px; flex: 0 0 340px; border-left: 1px solid var(--border); background: var(--surface); min-height: calc(100vh - 55px); position: sticky; top: 55px; max-height: calc(100vh - 55px); overflow: auto; padding: 16px; }
+.insp-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.insp-head h2 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.insp-grid { font-family: var(--font-mono); font-size: 11px; }
+.insp-grid dt { color: var(--muted); margin-top: 8px; }
+.insp-grid dd { margin: 0 0 4px; word-break: break-word; }
+.insp-grid .hist { max-height: 120px; overflow: auto; border: 1px solid var(--border); padding: 6px; }
+.inspector .btn2 { background: var(--fg); color: var(--surface); }
+.inspector .btn2:hover { background: var(--muted); color: var(--surface); }
+
+/* cards & generic node rendering */
+.card { background: var(--surface-app); border: 1px solid var(--line); padding: 26px 26px 30px; }
+.card.quiet { border-color: var(--border); }
+.node-title { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--obsidian); text-transform: uppercase; margin-bottom: 4px; }
+.markrow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 0 auto; }
+.wmark { display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 10.5px; background: var(--surface); border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; line-height: 1.3; }
+.fmark { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; background: var(--surface); border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; line-height: 1.3; }
+.fmark b { font-size: 12px; color: inherit; font-weight: 500; }
+.prompt { font-size: 20px; line-height: 1.35; margin: 6px 0 6px; font-weight: 500; }
+.support { color: var(--obsidian); font-size: 13.5px; margin: 0 0 20px; }
+.card[data-od-id="note-composer"] > .support { font-size: 12px; }
+.metarow { display: flex; align-items: center; gap: 16px; margin: 2px 0 18px; flex-wrap: wrap; }
+.metarow .support { margin: 0; flex: 1 1 auto; min-width: 0; }
+.options { display: flex; flex-direction: column; gap: 8px; margin: 0 0 18px; }
+.home-sec { padding: 14px 26px; margin: 0 -26px 14px; }
+.card[data-od-id="home"] .pcontrols { margin-bottom: 0; }
+.card[data-od-id="home"] .home-sec:first-of-type { margin-top: 0; }
+/* homepage ends flush at the "More Options" section — no dead space below it */
+.card[data-od-id="home"] { padding-bottom: 0; }
+.card[data-od-id="home"] .home-sec:last-child { margin-bottom: 0; }
+.main:has(.card[data-od-id="home"]) { padding-bottom: 0; }
+/* one continuous ground: no per-section background bands — the dotted
+   journal paper runs uninterrupted down the whole home screen, so the
+   areas read as parts of a single place rather than stacked modules */
+/* step-1 practice header band (practice screen only — the homepage hero
+   itself sits on the shared paper ground, no band) */
+.room-hero { margin: 0 -26px 14px; padding: 14px 26px; background: #E3E8DF; }
+.view[data-scheme="pastel"] .room-hero { background: #E5DDE6; }
+.view[data-scheme="dark"] .room-hero { background: color-mix(in srgb, #373F4C 90%, #000); }
+.home-sec .h3 { font-size: 18px; font-weight: 600; line-height: 1.35; margin: 6px 0 14px; }
+/* Note-book font picker (Settings) and its application to the notes */
+.font-select { display: block; min-width: 240px; max-width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--fg); font-size: 14px; font-family: inherit; }
+.card[data-od-id="note-composer"], .card[data-od-id="note-saved"], .note-board, .note-open { font-family: var(--note-font, inherit); }
+/* Note-book: an opened notebook; each page itself is the clickable area */
+.home-sec-book .h3 { text-align: center; }
+.book-shape { position: relative; width: min(296px, 100%); margin: 0 auto; display: flex; align-items: stretch; perspective: 1000px;
+  filter: drop-shadow(0 4px 0 color-mix(in srgb, var(--surface-app) 68%, var(--btn))) drop-shadow(0 8px 0 color-mix(in srgb, var(--surface-app) 52%, var(--btn))); }
+.book-shape::before { /* coil binding: vertical wire loops threading down the full fold where the pages meet */
+  content: ''; position: absolute; z-index: 3; top: 16%; bottom: 0%; left: 50%; width: 18px; transform: translateX(-50%); pointer-events: none;
+  background-image: radial-gradient(5px 11px at 50% 50%,
+    transparent 0 50%,
+    color-mix(in srgb, var(--fg) 40%, var(--surface-app)) 58% 72%,
+    color-mix(in srgb, var(--fg) 12%, transparent) 82%,
+    transparent 92%);
+  background-size: 18px 26px; background-repeat: repeat-y; }
+.book-page { flex: 1 1 50%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 116px; padding: 16px 12px; border: 0; cursor: pointer; color: var(--fg);
+  background-color: #EFF1EB;
+  background-image: repeating-linear-gradient(180deg, transparent 0 24px, color-mix(in srgb, var(--fg) 8%, transparent) 24px 25px);
+  transition: transform .18s ease, filter .18s ease; }
+.book-page-left { transform: rotateY(10deg); transform-origin: right center;
+  /* open-book V: top and bottom edges arc the same way — gentle at the outer edge,
+     steep near the spine; every vertical slice keeps the same height */
+  clip-path: polygon(0% 0%, 12.5% 0.03%, 25% 0.25%, 37.5% 0.84%, 50% 2%, 62.5% 3.91%, 75% 6.75%, 87.5% 10.72%, 100% 16%,
+    100% 100%, 87.5% 94.72%, 75% 90.75%, 62.5% 87.91%, 50% 86%, 37.5% 84.84%, 25% 84.25%, 12.5% 84.03%, 0% 84%);
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0) 68%, rgba(0,0,0,0.10) 100%),
+    repeating-linear-gradient(180deg, transparent 0 24px, color-mix(in srgb, var(--fg) 8%, transparent) 24px 25px); }
+.book-page-right { transform: rotateY(-10deg); transform-origin: left center;
+  clip-path: polygon(0% 16%, 12.5% 10.72%, 25% 6.75%, 37.5% 3.91%, 50% 2%, 62.5% 0.84%, 75% 0.25%, 87.5% 0.03%, 100% 0%,
+    100% 84%, 87.5% 84.03%, 75% 84.25%, 62.5% 84.84%, 50% 86%, 37.5% 87.91%, 25% 90.75%, 12.5% 94.72%, 0% 100%);
+  background-image:
+    linear-gradient(-90deg, rgba(0,0,0,0) 68%, rgba(0,0,0,0.10) 100%),
+    repeating-linear-gradient(180deg, transparent 0 24px, color-mix(in srgb, var(--fg) 8%, transparent) 24px 25px); }
+.book-page-left:hover { transform: rotateY(4deg) translateY(-4px); }
+.book-page-right:hover { transform: rotateY(-4deg) translateY(-4px); }
+.book-page-left:active { transform: rotateY(8deg) translateY(-6px); }
+.book-page-right:active { transform: rotateY(-8deg) translateY(-6px); }
+.book-page svg { flex: 0 0 auto; }
+.book-page-label { font-weight: 600; font-size: 13.5px; line-height: 1.3; text-align: center; }
+/* the notebook rests on a wooden ledge, identical to the tabletop under the
+   Making room baskets (same taupe family, same grain, same shadows) */
+.book-ledge { display: block; position: relative; width: 100%; height: 14px; margin: -5px auto 2px;
+  border-radius: 5px 5px 8px 8px / 4px 4px 8px 8px;
+  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px),
+    #A79A89;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); }
+.view[data-scheme="dark"] .book-ledge { box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); }
+.home-sec .options:last-child { margin-bottom: 0; }
+/* Woodland (default) scheme: darker shelf objects with light text */
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pot-body { fill: #6E4233; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pot-rim { fill: #855244; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-box { fill: #7A4A3B; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-lid { fill: #8C5A48; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-ribbon { fill: #9C7E2C; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-bow { fill: #A68535; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-knot { fill: #B08B36; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pair-head-a,
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pair-body-a { fill: #7A4A3B; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pair-head-b,
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pair-body-b { fill: #4A6354; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .circle-head { fill: #4A6354; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .magnet-body { stroke: #3E3E3E; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .magnet-north { fill: #7A4A3B; }
+.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .magnet-south { fill: #4A6354; }
+.options.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: stretch; }
+.options.grid3 .opt { min-height: 76px; padding: 12px 10px; text-align: center; }
+
+/* Flows cards hang like small frames: one twine loops over a peg in the
+   wall and ties to the top-left and top-right corners — an inverted V.
+   The string SVG stretches to the card's full width, so its ends land on
+   the corners themselves and run a little behind the card. */
+.options.grid3 { gap: 8px 12px; }
+.hang-wrap { position: relative; display: flex; flex-direction: column; padding-top: 34px; }
+.hang-string { position: absolute; top: 0; left: 0; width: 100%; height: 37px; overflow: visible; pointer-events: none; }
+.hang-string .hs { stroke: color-mix(in srgb, var(--brown) 78%, transparent); stroke-width: 2; stroke-linecap: round; }
+/* the wall peg: a domed head on a short nail stem, string looping under it */
+.hang-peg { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 13px; height: 14px; pointer-events: none; z-index: 1; }
+.hang-peg::before { content: ''; position: absolute; left: 50%; top: 6px; transform: translateX(-50%); width: 5px; height: 8px;
+  border-radius: 1px 1px 2px 2px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--fg) 28%, var(--surface)) 0%,
+    color-mix(in srgb, var(--fg) 55%, var(--surface)) 45%, color-mix(in srgb, var(--fg) 28%, var(--surface)) 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+.hang-peg::after { content: ''; position: absolute; left: 0; top: 0; width: 13px; height: 8px; border-radius: 50%; box-sizing: border-box;
+  background: color-mix(in srgb, var(--fg) 38%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--fg) 55%, transparent);
+  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.45), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.25); }
+.opt.hang { position: relative; border-radius: 3px 7px 4px 8px / 7px 3px 8px 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  transform: rotate(var(--tilt, 0deg)); transition: transform 0.15s ease; }
+.options.grid3 .hang-wrap:nth-child(odd) { --tilt: -1.1deg; }
+.options.grid3 .hang-wrap:nth-child(even) { --tilt: 0.9deg; }
+/* no hover/pressed colors — the card is lifted toward the peg instead, and
+   the twine stretches upward as if coming off it; the peg stays on the wall.
+   The string's bottom corners track the card exactly (bottom edge = card
+   top + 3px), while its apex rises well above the peg's top. */
+.opt.hang:hover, .opt.hang:active { background: var(--btn); color: var(--surface); }
+.opt.hang:hover { transform: rotate(var(--tilt, 0deg)) translateY(-4px); box-shadow: 0 6px 10px rgba(0,0,0,0.18); }
+.opt.hang:active { transform: rotate(var(--tilt, 0deg)) translateY(-6px); box-shadow: 0 8px 12px rgba(0,0,0,0.2); }
+.hang-string { transition: top 0.15s ease, height 0.15s ease; }
+.hang-wrap:has(.opt.hang:hover) .hang-string { top: -20px; height: 53px; }
+.hang-wrap:has(.opt.hang:active) .hang-string { top: -26px; height: 57px; }
+.view[data-scheme="dark"] .hang-peg::before { background: linear-gradient(90deg, color-mix(in srgb, var(--fg) 38%, var(--surface)) 0%,
+  color-mix(in srgb, var(--fg) 65%, var(--surface)) 45%, color-mix(in srgb, var(--fg) 38%, var(--surface)) 100%); }
+.view[data-scheme="dark"] .hang-peg::after { background: color-mix(in srgb, var(--fg) 50%, var(--surface)); }
+.view[data-scheme="dark"] .opt.hang { background: #C9D5CF; }
+/* Situational Check-Ins: a quiet centered heading above the wall of
+   hanging signs — heading and signs share one open stretch of paper */
+.flows-sec { text-align: center; }
+.home-sec.flows-sec .h3 { margin: 2px 0 4px; }
+@media (max-width: 720px) {
+  .options.grid3 { grid-template-columns: repeat(2, 1fr); }
+}
+.opt { display: block; width: 100%; background: var(--btn); color: var(--surface); padding: 12px 14px; font-size: 14px; text-align: left; line-height: 1.4; border-radius: 10px; }
+.opt:hover { background: var(--btn-hover); color: var(--surface); }
+.opt:active { background: var(--btn-pressed); color: var(--surface); }
+.opt[aria-pressed="true"] { background: var(--btn-pressed); }
+.opt.more { font-weight: 400; font-style: italic; }
+.opt.custom { font-style: italic; }
+.opt .opt-ico { vertical-align: -2px; margin-right: 6px; }
+.opt.user-added { border-left: 3px solid var(--surface); }
+.opt.continue { font-weight: 600; }
+.opt.multi { text-align: center; clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%); }
+.opt.multi:focus-visible { outline: none; background: var(--btn-hover); }
+.ghostrow { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 6px; }
+.ghost { display: inline-block; color: var(--surface); background: var(--btn); border-radius: 10px; padding: 8px 14px; font-size: 13px; }
+.ghost:hover { color: var(--surface); background: var(--btn-hover); }
+.ghost:active { color: var(--surface); background: var(--btn-pressed); }
+.controls { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--soft); }
+.pcontrols { display: flex; flex-wrap: wrap; gap: 2px; align-items: center; margin: -26px -26px 18px; padding: 8px 16px; background: var(--brown); }
+.scn-logo-btn { display: inline-flex; align-items: center; background: none; border: 0; padding: 0; font: inherit; color: var(--surface); cursor: pointer; }
+.scn-logo { display: inline-flex; align-items: center; flex: 0 0 auto; margin-right: 10px; }
+.scn-logo-text { font-size: 10px; line-height: 1.2; font-weight: 600; margin-right: 12px; text-align: left; }
+.scn-logo-btn:hover .scn-logo, .scn-logo-btn:hover .scn-logo-text { color: var(--banner-ink-hover); }
+.scn-logo-btn:active .scn-logo, .scn-logo-btn:active .scn-logo-text { color: var(--banner-ink-active); }
+.view[data-scheme="dark"] .scn-logo-btn { color: var(--btn-ink); }
+.pcontrols .pctl { background: transparent; color: var(--surface); padding: 6px 10px; font-size: 13.5px; }
+.pcontrols .pctl:hover { background: transparent; color: var(--banner-ink-hover); }
+.pcontrols .pctl:active { background: transparent; color: var(--banner-ink-active); }
+.pcontrols .pctl:disabled { opacity: 0.45; cursor: default; background: transparent; color: var(--surface); }
+.pctl { background: var(--brown); color: var(--surface); padding: 9px 15px; font-size: 14px; font-weight: 600; line-height: 1.2; border-radius: 10px; }
+.pctl:hover { background: var(--brown-hover); color: var(--surface); }
+.pctl:active { background: var(--brown); color: var(--surface); }
+
+.btn { display: inline-block; padding: 11px 18px; background: var(--btn); color: var(--surface); font-size: 14px; border-radius: 10px; }
+.btn:hover { background: var(--btn-hover); }
+.btn:active { background: var(--btn-pressed); }
+.btn2 { display: inline-block; padding: 10px 16px; background: var(--btn); color: var(--surface); font-size: 13.5px; border-radius: 10px; }
+.btn2:hover { background: var(--btn-hover); color: var(--surface); }
+.btn2:active { background: var(--btn-pressed); color: var(--surface); }
+.btn2:disabled { background: var(--surface); color: var(--muted); cursor: default; }
+.btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
+.note { border: 1px solid var(--line); padding: 12px 14px; margin: 12px 0; font-size: 13.5px; }
+.note.dash { border-style: dashed; color: var(--obsidian); }
+.display-only { border: 1px dashed var(--line); padding: 10px 14px; margin: 10px 0 14px; font-size: 13.5px; color: var(--obsidian); }
+.display-only .doline { padding: 3px 0; }
+.list { margin: 0; padding: 0; list-style: none; }
+.list li { border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 8px; font-size: 14px; }
+.list li b { display: block; margin-bottom: 2px; }
+.list .sub { color: var(--obsidian); font-size: 12.5px; }
+/* notes page: only the past-notes list scrolls; header, top bar and sort row stay static */
+.notes-list { max-height: max(280px, calc(100vh - 470px)); overflow-y: auto; overscroll-behavior: contain; padding: 2px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.notes-list li:last-child { margin-bottom: 2px; }
+.field { margin: 14px 0; }
+.field label { display: block; font-size: 13px; color: var(--obsidian); margin-bottom: 6px; }
+.field input[type="text"], .field input[type="search"], .field textarea { width: 100%; border: 1px solid var(--line); padding: 11px 13px; font: inherit; font-size: 14px; background: var(--surface); }
+.field textarea { min-height: 72px; resize: vertical; }
+.fpill { padding: 5px 11px; font-family: var(--font-mono); font-size: 11px; color: var(--surface); background: var(--btn); border-radius: 10px; }
+.fpill[aria-pressed="true"] { background: var(--btn-pressed); color: var(--surface); }
+.resultrow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; border: 1px solid var(--line); padding: 9px 12px; margin-bottom: 6px; font-size: 13.5px; }
+.resultrow .id { font-family: var(--font-mono); font-size: 10.5px; color: var(--obsidian); white-space: nowrap; }
+.h2 { font-size: 17px; margin: 0 0 14px; font-weight: 600; }
+.h3 { font-size: 14px; margin: 20px 0 8px; font-weight: 600; }
+.divider { border: 0; border-top: 1px solid var(--border); margin: 22px 0; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 13px; margin: 12px 0; }
+.kv dt { color: var(--obsidian); } .kv dd { margin: 0; }
+.simrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.banner { border-left: 3px solid var(--fg); padding: 10px 14px; background: var(--surface); margin: 14px 0; font-size: 13.5px; }
+
+/* ---------- color-scheme segmented toggle (Settings) ---------- */
+.segrow { display: inline-flex; border-radius: 10px; overflow: hidden; }
+.seg { padding: 9px 14px; font-size: 13.5px; background: var(--muted); color: var(--surface); border-right: 1px solid var(--surface); }
+.seg:last-child { border-right: 0; }
+.seg:hover { color: var(--surface); background: #575757; }
+.seg:active { color: var(--surface); background: #4a4a4a; }
+.seg[aria-pressed="true"] { background: var(--btn); color: var(--surface); font-weight: 600; }
+.seg[aria-pressed="true"]:hover { background: var(--btn-hover); color: var(--surface); }
+.seg[aria-pressed="true"]:active { background: var(--btn-pressed); color: var(--surface); }
+
+/* ---------- notes sort/filter row (Moments) ---------- */
+.sortrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 18px; }
+.sortlabel { font-size: 13.5px; font-weight: 600; color: var(--obsidian); }
+.sortbtn { padding: 8px 13px; font-size: 13.5px; background: var(--muted); color: var(--surface); border-radius: 10px; }
+.sortbtn:hover { background: #575757; color: var(--surface); }
+.sortbtn:active { background: #4a4a4a; color: var(--surface); }
+.sortbtn[aria-pressed="true"] { background: var(--btn); color: var(--surface); font-weight: 600; }
+.sortbtn[aria-pressed="true"]:hover { background: var(--btn-hover); color: var(--surface); }
+.sortbtn[aria-pressed="true"]:active { background: var(--btn-pressed); color: var(--surface); }
+.sortrow input[type="date"], .sortrow select { border: 1px solid var(--line); padding: 8px 10px; font: inherit; font-size: 13.5px; background: var(--surface); color: var(--fg); color-scheme: light; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.view[data-scheme="dark"] .sortrow input[type="date"], .view[data-scheme="dark"] .sortrow select { color-scheme: dark; }
+.view[data-scheme="dark"] .sortbtn { color: var(--btn-ink); }
+.view[data-scheme="dark"] .sortbtn:hover { background: #575757; color: var(--btn-ink); }
+.view[data-scheme="dark"] .sortbtn:active { background: #4a4a4a; color: var(--btn-ink); }
+.view[data-scheme="dark"] .sortbtn[aria-pressed="true"] { background: var(--btn); color: var(--btn-ink); }
+.view[data-scheme="dark"] .sortbtn[aria-pressed="true"]:hover { background: var(--btn-hover); color: var(--btn-ink); }
+.view[data-scheme="dark"] .sortbtn[aria-pressed="true"]:active { background: var(--btn-pressed); color: var(--btn-ink); }
+
+/* ---------- Warm pastel scheme (middle setting) — app scope only; chrome stays grayscale ---------- */
+.view[data-scheme="pastel"] {
+  --surface: #fff8f3;        /* peach-white chips, inputs */
+  --surface-app: #fbeee6;    /* soft blush pink / warm cream canvas */
+  --fg: #2C2524;             /* dark warm charcoal */
+  --obsidian: #6f5d55;       /* warm muted text */
+  --muted: #8a7568;
+  --border: #e3c8b4;
+  --soft: #f4e3d7;
+  --line: #dcc0a6;
+  --btn: #AF735E;            /* buttons — was muted terracotta */
+  --btn-hover: #9C6250;
+  --btn-pressed: #875143;
+  --subtext: #f9e2d6;
+  --brown: #b7285c;          /* vibrant magenta / crimson — high-priority controls */
+  --brown-hover: #9f2050;
+  --banner-ink-hover: #f3d3de;
+  --banner-ink-active: #e9b4c4;
+  --focus: #2C2524;
+}
+.view[data-scheme="pastel"] .note { background: #e9efe4; border-color: #a9bfa1; color: #4a5344; }
+.view[data-scheme="pastel"] .banner { border-left-color: #a9bfa1; background: #eef3e9; }
+.view[data-scheme="pastel"] .fpill { background: #a9bfa1; color: #3d4638; }
+.view[data-scheme="pastel"] .fpill[aria-pressed="true"] { background: #93ab8b; color: #303830; }
+.view[data-scheme="pastel"] .scn-focus { background: #6b8470; }
+.view[data-scheme="pastel"] .pctl { background: #6B545A; }
+.view[data-scheme="pastel"] .pctl:hover { background: #7B6469; }
+.view[data-scheme="pastel"] .pctl:active { background: #6B545A; }
+.view[data-scheme="pastel"] .pcontrols { background: #6B545A; }
+.view[data-scheme="pastel"] .pcontrols .pctl:hover,
+.view[data-scheme="pastel"] .pcontrols .pctl:active { background: transparent; }
+.view[data-scheme="pastel"] .resultrow { background: var(--surface); }
+/* pastel Making-room + Note-book palette — same taupe-brown family as the other schemes */
+.view[data-scheme="pastel"] .book-ledge { background:
+    repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #846D63 35%, transparent) 26px 28px),
+    #B39A89; }
+.view[data-scheme="pastel"] .opt.entry-row.ledge { background: #FCF8F4; }
+.view[data-scheme="pastel"] .book-page { background-color: #F4EFEA; }
+/* pastel: hanging-card strings and card ledges match the taupe ledge wood */
+.view[data-scheme="pastel"] .hang-string .hs { stroke: #B39A89; }
+.view[data-scheme="pastel"] .opt.entry-row.ledge::after {
+  background: linear-gradient(180deg, #B39A89 0 4px, #846D63 4px); }
+/* hover/pressed states consistent with the pastel palette */
+.view[data-scheme="pastel"] .scn-group .scn-question:hover { background: #f7ece2; }
+.view[data-scheme="pastel"] .scn-group .scn-question:active { background: #f0e0d3; }
+.view[data-scheme="pastel"] .scn-group .scn-answer:hover { background: var(--btn-hover); }
+.view[data-scheme="pastel"] .scn-group .scn-answer:active { background: var(--btn-pressed); }
+.view[data-scheme="pastel"] .seg:hover { background: var(--btn-hover); color: var(--surface); }
+.view[data-scheme="pastel"] .seg:active { background: var(--btn-pressed); color: var(--surface); }
+.view[data-scheme="pastel"] .sortbtn:hover { background: var(--btn-hover); color: var(--surface); }
+.view[data-scheme="pastel"] .sortbtn:active { background: var(--btn-pressed); color: var(--surface); }
+
+/* ---------- Low-stimulation soft dark scheme (right setting) — app scope only; chrome unchanged ---------- */
+.view[data-scheme="dark"] {
+  color: var(--fg);          /* re-anchor inherited text color: body still carries the light-scheme ink */
+  --surface: #373F4C;        /* containers, boxes, inputs — muted blue-gray panels */
+  --surface-app: #2F3744;    /* soft muted blue-gray canvas */
+  --fg: #F4F0E7;             /* warm off-white text */
+  --obsidian: #c6bca6;       /* warm sand muted text */
+  --muted: #59627A;
+  --border: #4E566B;
+  --soft: #3A4250;
+  --line: #5A6280;
+  --btn: #C7D9D3;            /* warm muted sage-blue — buttons read distinctly from cream text */
+  --btn-hover: #B5CAC3;
+  --btn-pressed: #A3BAB4;
+  --subtext: #F4F0E7;        /* warm off-white */
+  --brown: #CBC7DE;          /* softened lavender — persistent controls */
+  --brown-hover: #BBB5D0;
+  --btn-ink: #273039;        /* dark blue-gray text on light fills */
+  --btn-muted-ink: #6b6455;
+  --banner-ink-hover: #6a6493;
+  --banner-ink-active: #55508a;
+  --focus: #F4F0E7;
+}
+.view[data-scheme="dark"] .pcontrols .pctl:hover { color: var(--banner-ink-hover); }
+.view[data-scheme="dark"] .pcontrols .pctl:active { color: var(--banner-ink-active); }
+.view[data-scheme="dark"] .app-settings:hover { color: var(--banner-ink-hover); }
+.view[data-scheme="dark"] .app-settings:active { color: var(--banner-ink-active); }
+/* in-app buttons: light fill + dark text in the soft dark scheme */
+.view[data-scheme="dark"] .opt,
+.view[data-scheme="dark"] .ghost,
+.view[data-scheme="dark"] .pctl,
+.view[data-scheme="dark"] .app-settings,
+.view[data-scheme="dark"] .btn,
+.view[data-scheme="dark"] .btn2,
+.view[data-scheme="dark"] .seg,
+.view[data-scheme="dark"] .fpill,
+.view[data-scheme="dark"] .scn-add,
+.view[data-scheme="dark"] .scn-mini,
+.view[data-scheme="dark"] .scn-answer .scn-text { color: var(--btn-ink); }
+.view[data-scheme="dark"] button .sub,
+.view[data-scheme="dark"] button .id,
+.view[data-scheme="dark"] button code { color: var(--btn-ink); }
+.view[data-scheme="dark"] button .muted { color: var(--btn-muted-ink); }
+.view[data-scheme="dark"] .scn-answer .scn-box-head span { color: var(--btn-muted-ink); }
+.view[data-scheme="dark"] .scn-answer .scn-text em { color: var(--btn-muted-ink); }
+.view[data-scheme="dark"] .seg { background: var(--brown); }
+.view[data-scheme="dark"] .seg:hover { background: var(--btn-hover); color: var(--btn-ink); }
+.view[data-scheme="dark"] .seg:active { background: var(--btn-pressed); color: var(--btn-ink); }
+.view[data-scheme="dark"] .seg[aria-pressed="true"] { background: var(--btn); }
+.view[data-scheme="dark"] .seg[aria-pressed="true"]:hover { background: var(--btn-hover); }
+.view[data-scheme="dark"] .btn2:disabled { background: var(--btn); color: var(--btn-muted-ink); }
+/* everything on a dark surface gets light text — including typed input text */
+.view[data-scheme="dark"] input,
+.view[data-scheme="dark"] textarea { color: var(--fg); }
+.view[data-scheme="dark"] .wmark,
+.view[data-scheme="dark"] .fmark { filter: brightness(1.35); }
+.view[data-scheme="dark"] .scn-group .scn-question:hover { background: #343b52; }
+.view[data-scheme="dark"] .scn-group .scn-question:active { background: #3d4460; }
+.view[data-scheme="dark"] .scn-group .scn-answer:hover { background: var(--btn-hover); }
+.view[data-scheme="dark"] .scn-group .scn-answer:active { background: var(--btn-pressed); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+@media (max-width: 860px) {
+  .layout { flex-direction: column; }
+  .inspector { width: 100%; flex: none; position: static; max-height: none; border-left: 0; border-top: 1px solid var(--border); }
+  .top { position: static; }
+}
+/* ---------- Scenario Setup list + editor ---------- */
+.scn-card { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; background: var(--surface); }
+.scn-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.scn-title { font-weight: 600; font-size: 15px; }
+.scn-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
+.scn-actions { margin-top: 4px; }
+.scn-canvas { display: flex; flex-direction: column; gap: 14px; margin: 14px 0; }
+.scn-group { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.scn-arrow { width: 0; height: 0; border-left: 27px solid transparent; border-right: 27px solid transparent; border-top: 11px solid var(--fg); align-self: center; }
+.scn-level { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; }
+.scn-focus { background: #967BB6; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.scn-focus.scn-drop-hover { outline: 3px solid var(--fg); outline-offset: 2px; }
+.scn-focus-label { align-self: flex-start; font-weight: 700; color: #ffffff; font-size: 14px; line-height: 1.4; }
+.scn-box { border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; background: var(--surface); min-width: 180px; max-width: 340px; }
+.scn-question { border-color: var(--w1, #5F7F9A); }
+.scn-qtext { font-weight: 500; color: var(--fg); line-height: 1.35; }
+.scn-sub { color: var(--obsidian); font-size: 12px; line-height: 1.45; margin-top: 3px; }
+.scn-edit.scn-subfield { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; padding: 4px 6px; font: inherit; font-size: 12px; font-weight: 400; line-height: 1.45; color: var(--obsidian); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.scn-box .scn-field { cursor: pointer; }
+.scn-add { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex: 0 0 auto; background: var(--btn); color: var(--surface); font-size: 20px; font-weight: 500; line-height: 1; border-radius: 10px; padding: 0; }
+.scn-add:hover { background: var(--btn-hover); color: var(--surface); }
+.scn-add:active { background: var(--btn-pressed); color: var(--surface); }
+.scn-add.scn-add-wide { width: auto; padding: 6px 12px; font-size: 12.5px; font-weight: 600; }
+.scn-editor-card { padding-bottom: 96px; }
+.scn-dustbin { position: absolute; bottom: 26px; right: 26px; z-index: 6; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; color: var(--fg); }
+.scn-dustbin.scn-drop-hover { outline: 3px solid var(--fg); outline-offset: 2px; }
+.scn-tip { position: fixed; z-index: 60; display: none; background: var(--fg); color: var(--surface); font-size: 11.5px; line-height: 1.3; padding: 4px 8px; border-radius: 10px; pointer-events: none; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+.scn-tip.on { display: block; }
+.scn-answer { background: var(--btn); border: 0; border-radius: 10px; }
+.scn-answer:hover { background: var(--btn-hover); }
+.scn-answer:active { background: var(--btn-pressed); }
+.scn-answer .scn-box-head span { color: var(--subtext); }
+.scn-answer .scn-text { color: var(--surface); }
+.scn-answer .scn-text em { color: var(--subtext); }
+.scn-answer .scn-mini { background: var(--btn-pressed); }
+/* parent/sibling/child boxes: subtle hover / pressed darkening, scoped to the
+   .scn-group rows so the focused box (in the lavender area) is unaffected */
+.scn-group .scn-question:hover { background: #f2f2f0; }
+.scn-group .scn-question:active { background: #e8e8e6; }
+.scn-group .scn-answer:hover { background: #465c47; }
+.scn-group .scn-answer:active { background: #415542; }
+.scn-continue, .scn-system { background: var(--soft); border-style: dashed; }
+.scn-box-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
+.scn-text { font-size: 14px; line-height: 1.4; cursor: default; }
+.scn-edit { width: 100%; font: inherit; font-size: 14px; line-height: 1.4; padding: 4px 6px; border: 1px solid var(--fg); border-radius: 10px; box-sizing: border-box; background: var(--surface); color: var(--fg); }
+.scn-question .scn-edit { font-weight: 500; }
+.scn-answer .scn-edit { color: var(--fg); }
+.scn-box-actions { display: flex; gap: 6px; margin-top: 6px; }
+.scn-mini { display: inline-block; padding: 1px 6px; font-size: 10.5px; line-height: 1.25; font-weight: 500; background: var(--btn); color: var(--surface); border-radius: 10px; cursor: pointer; }
+.scn-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 50; }
+.scn-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; max-width: 520px; width: 90%; box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+.scn-search { max-height: 320px; overflow: auto; }
+
+.opt.entry-row { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 0; background: transparent; color: var(--fg); text-align: left; padding: 10px 12px; border-radius: 10px; }
+.opt.entry-row b { font-weight: 600; }
+.opt.entry-row .entry-ico { display: inline-flex; flex: 0 0 auto; color: var(--fg); }
+.opt.entry-row:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
+.opt.entry-row:active { background: rgba(0,0,0,0.09); color: var(--fg); }
+
+/* Other Check-In Options: each entry is a small paper note; on wide screens
+   the pair stands side by side on one shared wooden ledge (see .entry-shelf
+   below) — the same shelf language as the exploration preview and the
+   notebook ledge. On narrow screens each note rests on its own small wooden
+   ledge, like the little planked shelves holding jewellery cards on the wall */
+.opt.entry-row.ledge { position: relative; background: #FBFAF7; color: var(--fg);
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent); border-radius: 3px 8px 4px 9px / 8px 3px 9px 4px;
+  padding: 11px 12px 12px; margin-bottom: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+/* the small glyphs sit quieter than the label — like pencil marks on the note */
+.opt.entry-row.ledge .entry-ico { color: var(--obsidian); }
+.opt.entry-row.ledge:nth-child(odd) { transform: rotate(-0.8deg); }
+.opt.entry-row.ledge:nth-child(even) { transform: rotate(0.7deg); }
+.opt.entry-row.ledge::after { content: ''; position: absolute; left: -7px; right: -7px; bottom: -9px; height: 9px;
+  border-radius: 2px 3px 3px 2px / 2px 2px 3px 3px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--brown) 30%, var(--surface)) 0 4px,
+    color-mix(in srgb, var(--brown) 52%, var(--surface)) 4px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18); transition: transform 0.15s ease; }
+/* the ledge is nailed to the wall: while the card lifts, it counters the
+   card's movement so it stays exactly where it rests */
+.opt.entry-row.ledge:hover::after { transform: translateY(4px); }
+.opt.entry-row.ledge:active::after { transform: translateY(6px); }
+.opt.entry-row.ledge:hover { background: #FBFAF7; color: var(--fg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); }
+.opt.entry-row.ledge:nth-child(odd):hover { transform: rotate(-0.8deg) translateY(-4px); }
+.opt.entry-row.ledge:nth-child(even):hover { transform: rotate(0.7deg) translateY(-4px); }
+.opt.entry-row.ledge:nth-child(odd):active { transform: rotate(-0.8deg) translateY(-6px); }
+.opt.entry-row.ledge:nth-child(even):active { transform: rotate(0.7deg) translateY(-6px); }
+.opt.entry-row.ledge:active { background: #FBFAF7; color: var(--fg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09); }
+/* Soft dark keeps its own darker card surface for the paper notes */
+.view[data-scheme="dark"] .opt.entry-row.ledge { background: #E7E7DF; color: #273039; border-color: rgba(0, 0, 0, 0.18); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.32); }
+.view[data-scheme="dark"] .opt.entry-row.ledge:hover { box-shadow: 0 4px 9px rgba(0, 0, 0, 0.45); }
+.view[data-scheme="dark"] .opt.entry-row.ledge::after { box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45); }
+
+/* the shared shelf: both notes rest on a single ledge, clearly distinct
+   objects on one surface — no panel, no frame around the area */
+.home-sec-entries { text-align: center; }
+.home-sec.home-sec-entries .h3 { margin: 2px 0 12px; }
+.entry-shelf { position: relative; display: block; max-width: 560px; margin: 0 auto; padding: 0 14px 11px; }
+.entry-shelf .options.entry-list { flex-direction: row; flex-wrap: wrap; align-items: stretch; justify-content: center; gap: 16px; margin: 0; }
+/* the notes share the shelf width and shrink together as it narrows —
+   they never force the shelf wider than the page */
+.entry-shelf .opt.entry-row.ledge { flex: 1 1 190px; width: auto; max-width: 238px; min-height: 52px; margin-bottom: 0; }
+/* the notes' individual mini-ledges are replaced by the shared shelf */
+.entry-shelf .opt.entry-row.ledge::after { content: none; }
+.entry-shelf-ledge { position: absolute; left: 2px; right: 2px; bottom: 0; height: 13px;
+  border-radius: 5px 5px 8px 8px / 4px 4px 8px 8px;
+  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px),
+    #A79A89;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); }
+.view[data-scheme="pastel"] .entry-shelf-ledge { background:
+  repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #846D63 35%, transparent) 26px 28px),
+  #B39A89; }
+.view[data-scheme="dark"] .entry-shelf-ledge { box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); }
+/* narrow screens: the notes stack full-width inside the page margins, each
+   back on its own small ledge — nothing approaches the viewport edge */
+@media (max-width: 500px) {
+  .entry-shelf { padding: 0 4px; }
+  .entry-shelf .options.entry-list { flex-direction: column; align-items: stretch; gap: 22px; }
+  .entry-shelf .opt.entry-row.ledge { flex: 0 1 auto; max-width: none; margin-bottom: 2px; }
+  .entry-shelf .opt.entry-row.ledge::after { content: ''; }
+  .entry-shelf-ledge { display: none; }
+}
+.noterow { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; }
+.world-chip { padding: 6px 12px; font-size: 12.5px; font-weight: 600; color: var(--surface); border: 0; border-radius: 10px; cursor: pointer; }
+.world-chip:hover { filter: brightness(0.88); }
+.world-chip:active { filter: brightness(0.8); }
+.world-chip[aria-pressed="true"] { filter: brightness(0.8); outline: 2px solid var(--fg); outline-offset: 1px; }
+/* note composer: world picker lives inside the bottom of the note text box */
+.notewrap { border: 1px solid var(--line); background: var(--surface); }
+.notewrap textarea { border: 0; border-radius: 0; background: transparent; display: block; font-size: 13.5px; color: var(--obsidian); }
+.notewrap textarea:focus-visible { outline-offset: -3px; }
+.noteworld { border-top: 1px solid var(--soft); padding: 8px 12px; display: flex; align-items: center; gap: 12px; }
+.noteworld-text { font-size: 13.5px; color: var(--obsidian); flex: 1; line-height: 2; }
+.worldbox { border: 1px solid var(--line); border-radius: 8px; padding: 6px; display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; flex: 0 0 auto; max-width: 46%; }
+.noteworld .world-chip { padding: 3px 8px; font-size: 11px; border-radius: 8px; cursor: grab; }
+.noteworld .world-chip.drag-gone { display: none; }
+.worldbox.over { border-color: var(--fg); background: rgba(0,0,0,0.03); }
+.view[data-scheme="dark"] .worldbox.over { background: rgba(255,255,255,0.06); }
+.noteworld-blank { display: inline-block; min-width: 110px; padding: 0 6px; margin: 0 3px; border-bottom: 1.5px dashed var(--line); text-align: center; white-space: nowrap; vertical-align: baseline; }
+.noteworld-hint { font-size: 9.5px; color: var(--muted); opacity: 0.8; }
+.noteworld-blank.over { border-bottom-color: var(--fg); background: rgba(0,0,0,0.045); }
+.view[data-scheme="dark"] .noteworld-blank.over { background: rgba(255,255,255,0.08); }
+.noteworld-blank.filled { border-bottom: 0; padding: 0; margin: 0 3px; min-width: 0; background: none; }
+.noteworld-blank.filled .noteworld-hint { display: none; }
+.noteworld-blank.sourcing { border-bottom: 1.5px dashed var(--line); min-width: 110px; padding: 0 6px; }
+.noteworld-blank.sourcing .noteworld-hint { display: inline; }
+.noteworld-blank.sourcing .world-chip { display: none; }
+.view[data-scheme="dark"] .opt.entry-row, .view[data-scheme="dark"] .opt.entry-row .entry-ico { color: var(--fg); }
+.view[data-scheme="dark"] .opt.entry-row.ledge .entry-ico { color: var(--btn-ink); }
+.view[data-scheme="dark"] .opt.entry-row:hover { background: rgba(255,255,255,0.07); }
+
+/* ---------- multimodal notes + quiet sharing (notes.js) ----------
+   The note is a free board: photos, words, and recording bars are items
+   placed anywhere (percent coordinates), possibly overlapping. Drag to
+   arrange; tap words to write; tap a bar's play icon to hear it. Media
+   controls stay border-and-surface; positions scale via container units. */
+.note-status { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--obsidian); margin: 2px 0 16px; }
+.note-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--obsidian); flex: 0 0 auto; }
+.note-dot.stored { background: var(--obsidian); }
+/* ---------- the board: a free space for photos, words, recording bars ---------- */
+.note-board { position: relative; width: 100%; min-height: 340px; border: 1px solid var(--line); background: var(--surface); overflow: hidden; margin-bottom: 8px; }
+.note-board-listed { margin-top: 8px; }
+/* opening a kept note: the whole card is one quiet button */
+.note-open { display: block; width: 100%; text-align: left; background: transparent; border: 0; padding: 0; color: var(--fg); cursor: pointer; font: inherit; }
+.note-open:hover .note-board, .note-open:focus-visible .note-board { border-color: var(--obsidian); }
+.note-open:active .note-board { background: rgba(0,0,0,0.03); }
+.note-item { position: absolute; transform: translate(-50%, -50%); cursor: move; user-select: none; touch-action: none; }
+.note-item.frozen, .frozen-board .note-item { cursor: default; pointer-events: auto; } /* bars inside frozen boards remain playable via explicit control */
+.note-item img { display: block; width: auto; height: auto; max-width: 22cqw; max-height: 32cqh; border: 1px solid var(--line); }
+/* corner grip on the selected item: drag to resize photos and words */
+.note-item.sel::after { content: ''; position: absolute; right: -10px; bottom: -10px; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--fg); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: nwse-resize; }
+.note-item-audio.sel::after, .note-item-text.editing::after { display: none; }
+.note-item.frozen::after { display: none; }
+.note-board { container-type: size; }
+.note-board-listed { pointer-events: none; }
+.note-item-text { font-family: var(--note-font, inherit); font-weight: 500; font-size: calc(clamp(13px, 5.2cqw, 22px) * var(--s, 1)); line-height: 1.3; text-align: center; max-width: calc(60cqw * var(--s, 1)); min-width: 24px; padding: 4px 6px; white-space: pre-wrap; word-break: break-word; text-shadow: 0 0 6px rgba(0,0,0,0.25); }
+.note-item-text:empty::before { content: attr(data-phtext); color: var(--obsidian); font-weight: 400; }
+.note-item-text.editing { cursor: text; user-select: text; background: rgba(0,0,0,0.06); min-width: 48px; }
+.note-item.sel { outline: 1.5px dashed var(--fg); outline-offset: 2px; }
+.note-item-audio { min-width: 0; }
+.note-barplay { display: flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); font-size: 12px; cursor: pointer; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.note-bartime { font-family: var(--font-mono); font-size: 11px; color: var(--obsidian); white-space: nowrap; }
+.note-barfill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: rgba(0,0,0,0.08); border-radius: 999px; }
+.note-barplay.playing { border-color: var(--fg); }
+/* tool row + chosen-item toolbar under the board */
+.note-toolrow { display: flex; gap: 8px; margin: 0 0 8px; flex-wrap: wrap; align-items: stretch; }
+.note-add { flex: 0 1 auto; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 12px; border: 1px dashed var(--line); border-radius: 10px; background: transparent; color: var(--obsidian); font-size: 13.5px; }
+.note-add:hover { background: rgba(0,0,0,0.04); color: var(--fg); }
+.note-add:active { background: rgba(0,0,0,0.08); }
+/* drop target: drag a words/photo/recording here to remove it */
+.note-trash { margin-left: auto; width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--line); border-radius: 10px; background: transparent; color: var(--obsidian); }
+.note-trash.over { border: 1.5px solid #9c4a35; color: #9c4a35; background: rgba(156,74,53,0.08); }
+.note-toolbar { min-height: 26px; margin-bottom: 8px; }
+.note-toolbar-hint { margin: 0; }
+.note-captools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+/* words color: one full color wheel (native picker behind a quiet circle) */
+.note-colorwheel { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); padding: 0; cursor: pointer; background: conic-gradient(hsl(0 48% 56%), hsl(45 50% 56%), hsl(90 32% 50%), hsl(160 32% 44%), hsl(200 42% 48%), hsl(260 32% 54%), hsl(310 32% 54%), hsl(0 48% 56%)); }
+.note-colorwheel::-webkit-color-swatch-wrapper { padding: 3px; }
+.note-colorwheel::-webkit-color-swatch { border: 1px solid rgba(0,0,0,0.18); border-radius: 50%; }
+.note-colorwheel::-moz-color-swatch { border: 1px solid rgba(0,0,0,0.18); border-radius: 50%; }
+.note-colorwheel:hover { filter: brightness(1.06); }
+.note-colorwheel:active { filter: brightness(0.96); }
+.note-zgroup { display: inline-flex; align-items: center; gap: 4px; padding-left: 10px; border-left: 1px solid var(--soft); }
+.note-zbtn { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--fg); padding: 0; line-height: 0; }
+.note-zbtn:hover { background: rgba(0,0,0,0.05); }
+.note-zbtn:active { background: rgba(0,0,0,0.09); }
+.note-zbtn:disabled { opacity: 0.35; cursor: default; }
+.note-zbtn:disabled:hover { background: transparent; }
+.note-recstrip { border: 1px dashed var(--line); padding: 10px 12px; margin: 0 0 8px; }
+.note-hint { font-size: 12.5px; color: var(--obsidian); margin: 10px 0 0; line-height: 1.5; }
+.note-hint-inline { font-size: 12px; color: var(--obsidian); margin: 0; }
+.note-audio { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
+.note-play { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--fg); display: flex; align-items: center; justify-content: center; }
+.note-play:hover { background: rgba(0,0,0,0.05); }
+.note-play:active { background: rgba(0,0,0,0.09); }
+.note-track { flex: 1; height: 3px; background: var(--soft); border-radius: 2px; overflow: hidden; }
+.note-fill { height: 100%; width: 0%; background: var(--btn); }
+.note-time { font-family: var(--font-mono); font-size: 11px; color: var(--obsidian); min-width: 64px; text-align: right; }
+.note-rec { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.note-rec-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--btn); flex: 0 0 auto; animation: notePulse 2s ease-in-out infinite; }
+@keyframes notePulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+.note-rec-time { font-family: var(--font-mono); font-size: 13px; color: var(--fg); }
+.note-foot { display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--soft); }
+.note-sharebtn { padding: 11px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--fg); font-size: 14px; min-height: 44px; }
+.note-sharebtn:hover { background: rgba(0,0,0,0.05); }
+.note-sharebtn:active { background: rgba(0,0,0,0.09); }
+.note-sharebtn:disabled, .note-foot .btn:disabled { opacity: 0.45; cursor: default; }
+.note-sharebtn:disabled:hover { background: var(--surface); }
+.note-foot .btn:disabled, .note-foot .btn:disabled:hover { background: var(--btn); }
+.note-confirm { border: 1px dashed var(--line); padding: 10px 14px; margin-top: 12px; font-size: 13.5px; color: var(--obsidian); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.note-share-summary { border: 1px solid var(--line); padding: 10px 14px; margin: 10px 0 14px; font-size: 13.5px; }
+.note-share-summary .sline { padding: 3px 0; }
+.note-share-sheet .prompt { font-size: 18px; margin: 6px 0 12px; }
+.note-share-sheet .support { margin-bottom: 14px; }
+/* soft dark scheme: brighten translucent hovers, keep ink legible */
+.view[data-scheme="dark"] .note-act:hover { background: rgba(255,255,255,0.08); }
+.view[data-scheme="dark"] .note-act:active { background: rgba(255,255,255,0.12); }
+.view[data-scheme="dark"] .note-zbtn:hover { background: rgba(255,255,255,0.08); }
+.view[data-scheme="dark"] .note-zbtn:active { background: rgba(255,255,255,0.12); }
+.view[data-scheme="dark"] .note-add:hover { background: rgba(255,255,255,0.06); }
+.view[data-scheme="dark"] .note-add:active { background: rgba(255,255,255,0.1); }
+.view[data-scheme="dark"] .book-shape::before { opacity: 0.7; }
+/* Soft dark keeps its scheme-derived dark pages; the fixed warm-green paper is for the light schemes */
+.view[data-scheme="dark"] .book-page { background-color: #C9D5CF; color: var(--btn-ink); background-image: repeating-linear-gradient(180deg, transparent 0 24px, #273039 24px 25px); }
+.view[data-scheme="dark"] .book-page-left { background-image: linear-gradient(90deg, rgba(0,0,0,0) 68%, rgba(0,0,0,0.10) 100%), repeating-linear-gradient(180deg, transparent 0 24px, #273039 24px 25px); }
+.view[data-scheme="dark"] .book-page-right { background-image: linear-gradient(-90deg, rgba(0,0,0,0) 68%, rgba(0,0,0,0.10) 100%), repeating-linear-gradient(180deg, transparent 0 24px, #273039 24px 25px); }
+.view[data-scheme="dark"] .note-trash.over { border-color: #d0705a; color: #d0705a; background: rgba(208,112,90,0.12); }
+.view[data-scheme="dark"] .note-play:hover { background: rgba(255,255,255,0.07); }
+.view[data-scheme="dark"] .note-play:active { background: rgba(255,255,255,0.11); }
+.view[data-scheme="dark"] .note-sharebtn:hover { background: rgba(255,255,255,0.07); }
+.view[data-scheme="dark"] .note-sharebtn:active { background: rgba(255,255,255,0.11); }
+.view[data-scheme="dark"] .note-cap.sel { outline-color: #fff; }
+@media (max-width: 420px) {
+  .note-add { font-size: 12.5px; min-height: 40px; }
+}
+
+/* ---------- handmade journal layer (reference-inspired; palette unchanged) ---------- */
+/* paper grain over the whole app — sits above surfaces, below tooltips and modals */
+.view::after { content: ''; position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  opacity: 0.075; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.view[data-scheme="dark"]::after { mix-blend-mode: screen; opacity: 0.09; filter: invert(1); }
+
+/* hand-inked corners — slightly irregular radii, like a drawn outline */
+.card { border-radius: 4px 16px 6px 14px / 14px 6px 16px 4px; }
+.btn, .btn2 { border-radius: 12px 15px 11px 16px / 15px 11px 16px 12px; }
+.opt, .seg, .fpill, .sortbtn, .scn-add, .scn-mini, .pctl, .world-chip { border-radius: 11px 14px 10px 15px / 14px 10px 15px 11px; }
+input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 8px 12px 7px 13px / 12px 7px 13px 8px; }
+.note-board { border-width: 1.5px; border-radius: 6px 14px 8px 12px / 12px 8px 14px 6px; }
+.note-act, .note-add, .note-zbtn, .note-sharebtn, .note-play { border-radius: 10px 13px 9px 14px / 13px 9px 14px 10px; }
+
+/* paper weight — a soft shadow so surfaces sit like sheets, not pixels */
+.card, #view .opt { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07); }
+.view[data-scheme="dark"] .card, .view[data-scheme="dark"] #view .opt { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35); }
+
+/* dotted journal paper — inner-app cards carry a faint dot grid; the
+   homepage shares it too, one continuous ground under every area */
+#view .card { background-image: radial-gradient(color-mix(in srgb, var(--muted) 22%, transparent) 1px, transparent 1.2px); background-size: 24px 24px; }
+.note-board { background-image: radial-gradient(color-mix(in srgb, var(--muted) 32%, transparent) 1.1px, transparent 1.3px); background-size: 22px 22px; }
+
+/* hand-drawn squiggle underline — page titles and section headings everywhere */
+.ink-underline, .prompt, .home-sec .h3 { display: inline-block; padding-bottom: 9px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='7' viewBox='0 0 140 7'%3E%3Cpath d='M2 4 Q 12 1, 24 3.6 T 46 3.4 T 68 3.8 T 90 3.2 T 112 3.6 T 138 3.4' fill='none' stroke='%23000' stroke-opacity='0.38' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 7px; }
+.view[data-scheme="dark"] .ink-underline, .view[data-scheme="dark"] .prompt, .view[data-scheme="dark"] .home-sec .h3 { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='7' viewBox='0 0 140 7'%3E%3Cpath d='M2 4 Q 12 1, 24 3.6 T 46 3.4 T 68 3.8 T 90 3.2 T 112 3.6 T 138 3.4' fill='none' stroke='%23fff' stroke-opacity='0.5' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
+/* no curvy line under the homepage headers (hero question + section headings) */
+#view .home-sec .h3, #view .home-sec .prompt { background-image: none; padding-bottom: 0; }
+
+.home-sec .h3 { margin: 16px 2px 24px; }
+.home-sec-book { text-align: center; }
+
+/* wavy hand-drawn divider in place of the straight hairline */
+.divider { border: 0; height: 7px; margin: 22px 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='7' viewBox='0 0 140 7'%3E%3Cpath d='M2 4 Q 12 1, 24 3.6 T 46 3.4 T 68 3.8 T 90 3.2 T 112 3.6 T 138 3.4' fill='none' stroke='%23000' stroke-opacity='0.3' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x 0 center / auto 7px; }
+.view[data-scheme="dark"] .divider {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='7' viewBox='0 0 140 7'%3E%3Cpath d='M2 4 Q 12 1, 24 3.6 T 46 3.4 T 68 3.8 T 90 3.2 T 112 3.6 T 138 3.4' fill='none' stroke='%23fff' stroke-opacity='0.4' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+
+/* kept notes as taped, slightly tilted paper cards — pinned to the page */
+#notes-kept .note-open { position: relative; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 3px 12px 4px 10px / 10px 4px 12px 3px; padding: 14px 16px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07); transition: transform 0.18s ease; }
+#notes-kept li:nth-child(odd) .note-open { transform: rotate(-0.7deg); }
+#notes-kept li:nth-child(even) .note-open { transform: rotate(0.6deg); }
+#notes-kept .note-open:hover { transform: rotate(0deg) scale(1.012); }
+#notes-kept .note-open::before { content: ''; position: absolute; top: -9px; left: 50%; z-index: 2;
+  width: 84px; height: 22px; transform: translateX(-50%) rotate(-2.5deg); pointer-events: none;
+  background: color-mix(in srgb, var(--btn) 16%, var(--surface)); opacity: 0.7;
+  border-left: 1px dashed rgba(0, 0, 0, 0.1); border-right: 1px dashed rgba(0, 0, 0, 0.1);
+  border-radius: 2px; }
+.view[data-scheme="dark"] #notes-kept .note-open { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
+.view[data-scheme="dark"] #notes-kept .note-open::before { opacity: 0.45; }
+
+/* ---------- collage layer (Artizine-inspired original compositions) ----------
+   Palette: cream/green base extended with sea-glass, lavender, butter, coral —
+   used only inside artwork, never as UI text/background. Brighter combinations
+   live in exploratory areas (kept notes, Things I'm keeping). Quiet screens
+   (questions, scenario editing, short routes) stay spare: the artwork classes
+   below appear only on Home, entrances, and saved collections. */
+:root {
+  --cg-sea: #7FA3A3;
+  --cg-lav: #B7AEC6;
+  --cg-butter: #E4CE8A;
+  --cg-coral: #C97B63;
+}
+.view[data-scheme="pastel"] { --cg-sea: #6E9494; --cg-lav: #A79EB9; --cg-butter: #D9BC72; --cg-coral: #C4715C; }
+.view[data-scheme="dark"] { --cg-sea: #8E9D89; --cg-lav: #C2BAD1; --cg-butter: #D4C77A; --cg-coral: #C98270; }
+
+/* 1 · signature collage on Home — a small open-ended landscape above the question */
+.home-hero { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.home-hero-text { min-width: 0; }
+
+/* the framed header sits centered on the page above the explorations — the
+   room opens up here, with the shelf below */
+.home-sec[data-od-id="home-making-room"] { text-align: center; padding-top: 34px; }
+.home-sec[data-od-id="home-making-room"] .h3 { margin-bottom: 18px; }
+
+.pot-body { fill: color-mix(in srgb, var(--cg-coral) 60%, var(--surface));
+  stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.5; }
+.pot-rim { fill: color-mix(in srgb, var(--cg-coral) 82%, var(--surface));
+  stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.5; }
+.plant-stem { fill: none; stroke: color-mix(in srgb, var(--fg) 50%, transparent); stroke-width: 1.8;
+  stroke-linecap: round; }
+.plant-leaf { fill: var(--btn); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.2; }
+.torch-body { fill: color-mix(in srgb, var(--fg) 78%, var(--surface));
+  stroke: color-mix(in srgb, var(--fg) 55%, transparent); stroke-width: 1.2; }
+.torch-head { fill: color-mix(in srgb, var(--fg) 88%, var(--surface));
+  stroke: color-mix(in srgb, var(--fg) 55%, transparent); stroke-width: 1.2; }
+.torch-grip { stroke: color-mix(in srgb, var(--surface) 45%, var(--fg)); stroke-width: 1.4; }
+.torch-btn { fill: var(--cg-butter); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1; }
+.torch-lens { fill: color-mix(in srgb, var(--cg-butter) 90%, #fff);
+  stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.2; }
+.torch-beam { fill: color-mix(in srgb, var(--cg-butter) 38%, transparent); }
+.view[data-scheme="dark"] .book-ledge { background:
+    repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #6F685F 35%, transparent) 26px 28px),
+    #9C9284; }
+
+/* ---- Longer Self-Explorations: home shelf preview + dedicated page ---- */
+.explore-preview { display: block; width: 100%; text-align: center; padding: 4px 4px 2px;
+  transition: transform 0.15s ease, filter 0.15s ease; }
+.explore-preview .pv-scene { display: block; }
+.explore-preview .pv-row { display: flex; align-items: flex-end; justify-content: center; gap: 8px; }
+.explore-preview .pv-obj { flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: center; }
+.explore-preview .pv-obj svg { display: block; overflow: visible; }
+.explore-preview .pv-plant svg { width: 46px; height: 48px; }
+.explore-preview .pv-torch svg { width: 15px; height: 44px; }
+.explore-preview .pv-magnet svg { width: 28px; height: 28px; }
+.explore-preview .pv-book svg { width: 17px; height: 23px; }
+.explore-preview .pv-pair svg { width: 42px; height: 26px; }
+.explore-preview .pv-circle svg { width: 50px; height: 38px; }
+.explore-preview .pv-gift svg { width: 38px; height: 28px; }
+.explore-preview .pv-ledge { display: block; height: 13px; margin: 0 2px; border-radius: 5px;
+  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px), #A79A89;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); transition: transform 0.15s ease; }
+.explore-preview .pv-title { display: block; margin: 0; font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--fg); transition: transform 0.15s ease; }
+.explore-preview .pv-cta { display: inline-block; margin: 3px 0 12px; font-size: 13px; font-weight: 600; color: var(--btn-hover); }
+.explore-preview:hover { transform: translateY(-4px); }
+.explore-preview:active { transform: translateY(-6px); }
+.explore-preview:hover .pv-title { transform: translateY(4px); }
+.explore-preview:active .pv-title { transform: translateY(6px); }
+.explore-preview:hover .pv-ledge { transform: translateY(4px); }
+.explore-preview:active .pv-ledge { transform: translateY(6px); }
+.explore-preview .book-cover { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.explore-preview .book-pages { fill: color-mix(in srgb, var(--surface) 92%, #fff); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1; }
+.explore-preview .book-spine { fill: color-mix(in srgb, var(--cg-sea) 72%, var(--surface)); }
+.view[data-scheme="dark"] .explore-preview .pv-ledge {
+  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #6F685F 35%, transparent) 26px 28px), #9C9284;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); }
+.view[data-scheme="dark"] .explore-preview .book-cover { fill: color-mix(in srgb, var(--cg-sea) 58%, #fff); }
+.view[data-scheme="dark"] .explore-preview .book-spine { fill: color-mix(in srgb, var(--cg-sea) 72%, #fff); }
+.view[data-scheme="dark"] .explore-preview .book-pages { fill: color-mix(in srgb, var(--surface) 70%, #fff); }
+/* dedicated page: breadcrumb + title chrome (the landscape styles live below) */
+.explore-page .explore-crumb { display: flex; align-items: baseline; gap: 7px; font-family: var(--font-mono);
+  font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--obsidian); margin: 2px 0 10px; }
+.explore-crumb .crumb-link { padding: 0; background: none; border: 0; font: inherit; letter-spacing: inherit;
+  text-transform: inherit; color: var(--obsidian); text-decoration: underline; text-underline-offset: 3px; }
+.explore-crumb .crumb-link:hover { color: var(--obsidian); text-decoration-thickness: 2px; }
+.explore-crumb .crumb-sep { opacity: 0.55; }
+.explore-title { margin-top: 0; }
+
+/* ==========================================================================
+   Longer Self-Explorations — QUIET LANDSCAPE (Variation E)
+   One open, airy field. A single soft horizon; three regions separated by
+   generous whitespace and a small integrated marker. Objects sit on two
+   planes — a raised ledge for the smaller things, the open ground for the
+   standing ones — with labels in clear reserved bands beneath each.
+   Every destination is a real, generously sized button. The scene scales with
+   `cqw` units inside a size container, so spatial relationships hold.
+   ========================================================================== */
+.explore-page .landscape {
+  position: relative; width: 100%; aspect-ratio: 2 / 3;
+  container-type: size; margin-top: 26px;
+}
+.ls-sky { position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--cg-sea) 5%, var(--surface-app)) 0%,
+    var(--surface-app) 60%,
+    color-mix(in srgb, var(--brown) 6%, var(--surface-app)) 100%); }
+.ls-ground { position: absolute; left: 0; right: 0; top: 46.2%; bottom: 0;
+  border-top: 2px solid color-mix(in srgb, var(--brown) 22%, var(--surface-app));
+  background: color-mix(in srgb, var(--brown) 4%, var(--surface-app)); }
+.view[data-scheme="dark"] .ls-sky {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--cg-sea) 9%, var(--surface-app)) 0%,
+    var(--surface-app) 60%,
+    color-mix(in srgb, #000 9%, var(--surface-app)) 100%); }
+.view[data-scheme="dark"] .ls-ground {
+  border-top: 2px solid color-mix(in srgb, var(--border) 70%, var(--surface-app));
+  background: color-mix(in srgb, #000 8%, var(--surface-app)); }
+/* a thin wooden shelf mounted on the wall, above the floor line — its length
+   is just under half the room's width */
+.wall-ledge { position: absolute; left: 11%; bottom: 68%; width: 48%; height: 1.5%;
+  border-radius: 3px;
+  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px), #A79A89;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); }
+.view[data-scheme="dark"] .wall-ledge {
+  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #6F685F 35%, transparent) 26px 28px), #9C9284;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
+
+/* the room's backdrop (sky + ground + wall ledge) as one layer, so hovering or
+   pressing the "Room to Be Myself" text lifts the whole background with it */
+.room-bg { position: absolute; inset: 0; transition: transform 0.18s ease; }
+.landscape:has(.o-lamp:hover) .room-bg,
+.landscape:has(.o-lamp:active) .room-bg { transform: translateY(-4px); }
+
+/* regional markers sit high, integrated into the field rather than as headings;
+   each mark floats roughly above its own region, with clear air between them */
+.region-mark { position: absolute; top: 5%; font-family: var(--font-mono);
+  font-size: clamp(9.5px, 2.2cqw, 11px); font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--btn-hover); display: flex; align-items: center; gap: 8px;
+  pointer-events: none; }
+.region-mark::after { content: ''; width: 26px; height: 2px;
+  background: color-mix(in srgb, var(--btn) 50%, transparent); border-radius: 1px; }
+.rm-1 { left: 4%; } .rm-2 { left: 36%; } .rm-3 { left: 62%; }
+/* the third mark runs to the room's right edge — no room for its trailing dash */
+.rm-3::after { display: none; }
+
+/* every destination: a real button with a clear label band beneath its object */
+.spot { position: absolute; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 10px; margin: -10px; border-radius: 12px; background: none; border: 0;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform 0.18s ease; }
+.spot-art { position: relative; display: flex; align-items: flex-end; justify-content: center; }
+.spot-art svg { display: block; overflow: visible; }
+/* on hover or press the whole destination lifts together — object and its
+   text move up by the same amount, never the object alone */
+.spot:hover, .spot:active { transform: translateX(-50%) translateY(-4px); }
+.spot-label { display: block; margin-top: 9px; text-align: center;
+  font-size: clamp(12px, 3.1cqw, 14px); font-weight: 600; line-height: 1.3;
+  color: var(--fg); text-wrap: balance; }
+.spot:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* --- placement ------------------------------------------------------------
+   The room is tall (2:3), and the objects are staggered in depth rather than
+   lined up in a row: the gift and the "Room to Be Myself" words at the front
+   edge of the floor, the plant and the coffee-table group mid-floor, the
+   torch lying farther back, and the book and magnet high on the wall shelf.
+   Companions stay together: plant + torch on the left, book + magnet on the
+   shelf, table + loops + gift on the right. Two pieces of text belonging to
+   different objects always keep at least two line-breaks of air between
+   them. Sizes target the inline SVG each spot holds, in the same `cqw`
+   units as the whole scene. */
+.o-plant  { left: 15%;  bottom: 7%; }  .o-plant .spot-art svg { width: 23cqw; height: 46.4cqw; }
+/* the plant's words sit wholly inside the wide, filled pot */
+.o-plant .spot-label { position: absolute; left: 50%; top: 64%; transform: translate(-50%, -50%);
+  max-width: 18cqw; width: max-content; text-align: center; line-height: 1.25; color: #FFFDF7; }
+.o-gift   { left: 84%; bottom: 1.5%; }  .o-gift .spot-art svg { width: 23cqw; height: auto; }
+/* the gift's words sit wholly inside the filled box front */
+.o-gift .spot-label { position: absolute; left: 50%; top: 65.5%; transform: translate(-50%, -50%);
+  margin-top: 0; max-width: 19cqw; width: max-content; text-align: center; line-height: 1.25; color: #FFFDF7; }
+.o-circle { left: 66%; bottom: 16%; }   .o-circle .spot-art svg { width: 54cqw; height: auto; }
+/* the table's words sit wholly inside the filled plinth base */
+.o-circle .spot-label { position: absolute; left: 50%; top: 80.4%; transform: translate(-50%, -50%);
+  max-width: 16cqw; width: max-content; text-align: center; line-height: 1.25; color: #F7F1E6; }
+/* the loops rest on the coffee table's top, their words floating just above */
+.o-pair   { left: 66%; bottom: 21.8%; } .o-pair .spot-art svg { width: 13cqw; height: auto; }
+.o-pair .spot-label { max-width: none; width: max-content; }
+.o-pair.spot-above { gap: 14px; }
+/* the torch lies on the floor farther back in the room, beside the plant,
+   head toward the open room; its words sit beneath it */
+.o-torch  { left: 36%; bottom: 46%; }  .o-torch .spot-art svg { width: 16cqw; height: auto; transform: scaleX(-1) rotate(5deg); }
+.o-torch .spot-label { max-width: 24cqw; }
+/* book and magnet stand side by side on top of the wall shelf */
+.o-book   { left: 25.5%; bottom: 69.7%; }  .o-book .spot-art svg { width: 21.6cqw; height: auto; }
+.o-book .spot-label { max-width: 30cqw; }
+.o-magnet { left: 47%; bottom: 69.7%; }  .o-magnet .spot-art svg { width: 13cqw; height: auto; }
+/* the lamp is gone; only its words remain, resting on the front floor */
+.o-lamp   { left: 30%; right: auto; top: auto; bottom: 1.5%; transform: translateX(-50%); align-items: center; }
+.o-lamp .spot-label { margin-top: 0; max-width: 34cqw; text-align: center; }
+.spot.o-lamp:hover, .spot.o-lamp:active { transform: translateX(-50%) translateY(-4px); }
+
+/* labels enclosed inside an object part (pot, plinth, gift box) run a step
+   smaller than the free-floating ones, so every word fits its component */
+.o-plant .spot-label, .o-circle .spot-label, .o-gift .spot-label {
+  font-size: clamp(10.5px, 2.7cqw, 13px); }
+
+/* wall-shelf objects and the loops on the table carry their label just above
+   the art — flex reverses, so the art stays grounded and the words float above */
+.spot-above { flex-direction: column-reverse; gap: 9px; }
+.spot-above .spot-label { margin-top: 0; }
+/* the magnet differs: its words sit just to the right of the magnet, at the
+   same vertical level — abs-positioned so the shelf layout stays put */
+.o-magnet .spot-label { position: absolute; left: calc(50% + 6.5cqw + 8px); top: 50%;
+  transform: translateY(-50%); margin-top: 0; text-align: left; max-width: none; width: max-content; }
+
+/* symbol paints — the eight objects reuse the app's existing SVG paths;
+   these map their classes onto the warm palette inside the landscape. */
+.landscape .pot-body { fill: color-mix(in srgb, var(--cg-coral) 60%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1.5; stroke-linejoin: round; }
+.landscape .pot-rim  { fill: color-mix(in srgb, var(--cg-coral) 82%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1.5; }
+.landscape .plant-stem { fill: none; stroke: color-mix(in srgb, var(--fg) 50%, transparent); stroke-width: 1.8; stroke-linecap: round; }
+.landscape .plant-leaf { fill: var(--btn); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.2; }
+.landscape .torch-body { fill: color-mix(in srgb, var(--fg) 78%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.landscape .torch-head { fill: color-mix(in srgb, var(--fg) 88%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.landscape .torch-grip { fill: none; stroke: color-mix(in srgb, var(--surface) 45%, var(--fg)); stroke-width: 1.4; }
+.landscape .torch-btn  { fill: var(--cg-butter); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1; }
+.landscape .torch-lens { fill: color-mix(in srgb, var(--cg-butter) 90%, #fff); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1; }
+.landscape .torch-beam { fill: color-mix(in srgb, var(--cg-butter) 38%, transparent); }
+.landscape .magnet-body  { fill: none; stroke: color-mix(in srgb, var(--fg) 52%, var(--surface)); stroke-width: 18; stroke-linecap: round; }
+.landscape .magnet-north { fill: color-mix(in srgb, var(--cg-coral) 74%, #fff); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1; }
+.landscape .magnet-south { fill: color-mix(in srgb, var(--cg-sea) 74%, #fff); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1; }
+.landscape .book-cover { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.landscape .book-pages { fill: color-mix(in srgb, var(--surface) 92%, #fff); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1; }
+.landscape .book-spine { fill: color-mix(in srgb, var(--cg-sea) 72%, var(--surface)); }
+.landscape .rs-sun   { fill: color-mix(in srgb, var(--cg-butter) 80%, #fff); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.6; }
+.landscape .rs-light { fill: color-mix(in srgb, var(--cg-butter) 45%, transparent); }
+.landscape .rs-stem  { fill: none; stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.6; stroke-linecap: round; }
+.landscape .tbl-top, .explore-preview .tbl-top { fill: #A79A89; stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1.5; }
+.landscape .tbl-leg, .explore-preview .tbl-leg { fill: #87796A; stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1.2; }
+.landscape .tbl-leg-back, .explore-preview .tbl-leg-back { fill: #9C8E7E; stroke: color-mix(in srgb, var(--fg) 22%, transparent); stroke-width: 1.2; }
+.landscape .chair-back, .landscape .chair-seat, .landscape .chair-leg,
+.explore-preview .chair-back, .explore-preview .chair-seat, .explore-preview .chair-leg { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); }
+.landscape .chair-leg-rear, .explore-preview .chair-leg-rear { fill: color-mix(in srgb, var(--cg-sea) 46%, var(--surface)); }
+/* darker chairs on the landscape page — woodland + warm pastel only; the soft
+   dark scheme keeps its muted existing tone (the rules above stay in force) */
+.view:not([data-scheme="dark"]) .landscape .chair-back,
+.view:not([data-scheme="dark"]) .landscape .chair-seat,
+.view:not([data-scheme="dark"]) .landscape .chair-leg { fill: color-mix(in srgb, var(--cg-sea) 45%, #24302C); }
+.view:not([data-scheme="dark"]) .landscape .chair-leg-rear { fill: color-mix(in srgb, var(--cg-sea) 33%, #24302C); }
+.landscape .loop-a, .explore-preview .loop-a { fill: none; stroke: color-mix(in srgb, var(--cg-coral) 68%, var(--surface)); stroke-width: 8; stroke-linecap: round; }
+.landscape .loop-b, .explore-preview .loop-b { fill: none; stroke: color-mix(in srgb, var(--cg-sea) 68%, var(--surface)); stroke-width: 8; stroke-linecap: round; }
+/* darker, more prominent interlocked loops — woodland + warm pastel only; the soft dark scheme keeps its muted tones */
+.view:not([data-scheme="dark"]) .landscape .loop-a,
+.view:not([data-scheme="dark"]) .explore-preview .loop-a { stroke: color-mix(in srgb, var(--cg-coral) 55%, #43271f); stroke-width: 9; }
+.view:not([data-scheme="dark"]) .landscape .loop-b,
+.view:not([data-scheme="dark"]) .explore-preview .loop-b { stroke: color-mix(in srgb, var(--cg-sea) 55%, #213c3c); stroke-width: 9; }
+.landscape .book-mark, .explore-preview .book-mark { fill: none; stroke: color-mix(in srgb, var(--cg-butter) 92%, #fff); stroke-width: 3; stroke-linecap: round; }
+.view[data-scheme="dark"] .landscape .tbl-top, .view[data-scheme="dark"] .explore-preview .tbl-top { fill: #9C9284; }
+.view[data-scheme="dark"] .landscape .tbl-leg, .view[data-scheme="dark"] .explore-preview .tbl-leg { fill: #7E7366; }
+.view[data-scheme="dark"] .landscape .tbl-leg-back, .view[data-scheme="dark"] .explore-preview .tbl-leg-back { fill: #8C8174; }
+/* darker coffee-table top and base on the landscape page (all schemes) */
+.landscape .tbl-top { fill: #8D7E6E; }
+.landscape .tbl-leg { fill: #6C5F51; }
+.view[data-scheme="dark"] .landscape .tbl-top { fill: #8A8175; }
+.view[data-scheme="dark"] .landscape .tbl-leg { fill: #6C6357; }
+.landscape .gift-box    { fill: color-mix(in srgb, var(--cg-coral) 55%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.5; }
+.landscape .gift-lid    { fill: color-mix(in srgb, var(--cg-coral) 78%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.5; }
+.landscape .gift-ribbon { fill: color-mix(in srgb, var(--cg-butter) 82%, #fff); }
+.landscape .gift-bow    { fill: color-mix(in srgb, var(--cg-butter) 88%, #fff); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1; }
+.landscape .gift-knot   { fill: color-mix(in srgb, var(--cg-butter) 92%, #fff); }
+
+@media (max-width: 420px) {
+  .explore-preview .pv-row { gap: 5px; }
+  .explore-preview .pv-plant svg { width: 38px; height: 40px; }
+  .explore-preview .pv-torch svg { width: 12px; height: 36px; }
+  .explore-preview .pv-magnet svg { width: 22px; height: 22px; }
+  .explore-preview .pv-book svg { width: 14px; height: 19px; }
+  .explore-preview .pv-pair svg { width: 36px; height: 22px; }
+  .explore-preview .pv-circle svg { width: 43px; height: 33px; }
+  .explore-preview .pv-gift svg { width: 32px; height: 24px; }
+}
+
+/* 3 · postcard edge + corner motif on kept notes (restrained; content stays the focus) */
+#notes-kept li:nth-child(3n+1) .note-open { border-right: 5px solid var(--cg-sea); }
+#notes-kept li:nth-child(3n+2) .note-open { border-right: 5px solid var(--cg-lav); }
+#notes-kept li:nth-child(3n) .note-open { border-right: 5px solid var(--cg-butter); }
+#notes-kept .note-open::after { content: ''; position: absolute; top: 10px; right: 12px; width: 26px; height: 20px; pointer-events: none;
+  border: 1.5px solid color-mix(in srgb, var(--fg) 26%, transparent); border-radius: 2px 5px 3px 6px / 5px 3px 6px 2px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--cg-sea) 55%, var(--surface)) 55%, color-mix(in srgb, var(--btn) 45%, var(--surface)) 55%); }
+
+/* 2 · folded keepsake in the empty Moments state (remembering) */
+.collage-keepsake { position: relative; width: 74px; height: 56px; margin: 4px 0 10px; }
+.collage-keepsake i { position: absolute; display: block; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14); }
+.collage-keepsake .k1 { inset: 10px 6px 6px 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 2px 6px 3px 7px / 6px 3px 7px 2px; transform: rotate(-2deg); }
+.collage-keepsake .k2 { left: 10px; right: 10px; top: 4px; height: 26px; background: color-mix(in srgb, var(--cg-butter) 78%, var(--surface)); border-radius: 3px 7px 2px 8px / 7px 2px 8px 3px; transform: rotate(1.5deg); }
+.collage-keepsake .k3 { left: 16px; top: 12px; width: 20px; height: 12px; background: var(--cg-sea); transform: rotate(-3deg); }
+.collage-keepsake .k4 { left: 42px; top: 16px; width: 14px; height: 14px; background: var(--cg-coral); border-radius: 50%; }
+
+/* 5 · consolidation — one motif per surface */
+.view::after { opacity: 0.05; }
+#view .card { background-image: radial-gradient(color-mix(in srgb, var(--muted) 12%, transparent) 1px, transparent 1.2px); }
+
+/* ---------- making room (room.js) ---------- */
+.room-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
+.room-label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin: 14px 0 4px; }
+.room-section-h { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+.room-viewfield { margin: 10px 0; }
+.room-viewfield p { margin: 2px 0 0; }
+.room-status { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; }
+.room-status-active { border-color: var(--btn); color: var(--btn); }
+.room-status-paused { color: var(--muted); }
+.room-status-archived { color: var(--muted); border-style: dashed; }
+.view[data-scheme="dark"] .room-status-active { color: var(--btn-ink); }
+.room-related { margin: 12px 0 4px; }
+[data-od-id^="room-"] textarea { width: 100%; box-sizing: border-box; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); padding: 10px 12px; margin: 2px 0 6px; resize: vertical; }
+[data-od-id^="room-"] textarea:focus-visible { outline: 2px solid var(--btn); outline-offset: 1px; }
+#room-picker .note-open { position: relative; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 3px 12px 4px 10px / 10px 4px 12px 3px; padding: 12px 14px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07); }
+#room-picker .note-open:hover { border-color: var(--obsidian); }
+/* ---------- Make room for this: the scene + sticky notes ---------- */
+.room-scene { margin: 14px 0 4px; }
+.room-scene-stage { position: relative; }
+.rs-svg { display: block; width: 100%; height: auto; }
+.rs-ground { stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 2; stroke-linecap: round; }
+.rs-roof { fill: color-mix(in srgb, var(--cg-coral) 62%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 38%, transparent); stroke-width: 2; stroke-linejoin: round; }
+.rs-house { fill: color-mix(in srgb, var(--cg-butter) 55%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 38%, transparent); stroke-width: 2; }
+.rs-door { fill: color-mix(in srgb, var(--brown) 60%, #faf7f2); }
+.rs-window { fill: color-mix(in srgb, var(--cg-sea) 45%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 38%, transparent); stroke-width: 2; }
+.rs-trunk { fill: color-mix(in srgb, var(--brown) 55%, #faf7f2); }
+.rs-canopy { fill: color-mix(in srgb, var(--btn) 52%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 2; }
+.rs-wood { fill: color-mix(in srgb, var(--brown) 58%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1.5; stroke-linejoin: round; }
+.rs-ink { fill: color-mix(in srgb, var(--fg) 76%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.rs-limb { fill: none; stroke: color-mix(in srgb, var(--fg) 76%, var(--surface)); stroke-width: 8; stroke-linecap: round; }
+.rs-cup { fill: color-mix(in srgb, var(--cg-sea) 55%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1.5; }
+.rs-cupline { fill: none; stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 2; stroke-linecap: round; }
+.rs-book { fill: color-mix(in srgb, var(--cg-lav) 58%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1.5; }
+.rs-pot { fill: color-mix(in srgb, var(--cg-coral) 55%, #faf7f2); stroke: color-mix(in srgb, var(--fg) 30%, transparent); stroke-width: 1.5; stroke-linejoin: round; }
+.rs-sprig { fill: none; stroke: color-mix(in srgb, var(--btn) 70%, #faf7f2); stroke-width: 2.5; stroke-linecap: round; }
+.rs-label { fill: color-mix(in srgb, var(--fg) 72%, transparent); font-size: 13.5px; font-weight: 600; }
+.rs-hint { margin-top: 8px; }
+
+/* the pile, top right of the scene — the language note sits to its right */
+.rs-pile { position: absolute; top: 4px; right: 96px; width: 72px; height: 76px; cursor: grab; touch-action: none; z-index: 6; border-radius: 4px; }
+.rs-pile span { position: absolute; width: 58px; height: 58px; border-radius: 3px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18); display: block; }
+.rs-p3 { top: 12px; left: 3px; background: color-mix(in srgb, var(--cg-butter) 72%, var(--surface)); transform: rotate(-6deg); }
+.rs-p2 { top: 7px; left: 8px; background: color-mix(in srgb, var(--cg-butter) 85%, var(--surface)); transform: rotate(3deg); }
+.rs-p1 { top: 3px; left: 5px; background: var(--cg-butter); transform: rotate(-1deg); }
+.rs-pile:hover .rs-p1 { transform: rotate(-1deg) translateY(-3px); box-shadow: 0 4px 9px rgba(0, 0, 0, 0.22); }
+.rs-pile:active .rs-p1 { transform: rotate(-1deg) translateY(0); }
+.rs-pile:focus-visible { outline: 2px solid var(--btn); outline-offset: 2px; }
+
+/* the "help me find language" note — same sticky, moderately different color */
+.rs-lang { position: absolute; top: 5px; right: 10px; width: 78px; height: 74px; box-sizing: border-box;
+  background: color-mix(in srgb, var(--cg-sea) 55%, var(--surface)); border: 0; border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18); padding: 9px 7px;
+  font: inherit; font-size: 10px; font-weight: 600; line-height: 1.3; color: var(--fg);
+  text-align: center; cursor: pointer; transform: rotate(2.5deg); z-index: 6; overflow-wrap: break-word;
+  transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.rs-lang:hover { transform: rotate(2.5deg) translateY(-2px); box-shadow: 0 5px 9px rgba(0, 0, 0, 0.22); }
+.rs-lang:active { transform: rotate(2.5deg); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16); }
+.rs-lang:focus-visible { outline: 2px solid var(--btn); outline-offset: 2px; }
+.view[data-scheme="dark"] .rs-lang { background: color-mix(in srgb, var(--cg-sea) 40%, var(--surface)); }
+
+/* the language popup's two dropdowns */
+#room-lang-backdrop select { width: 100%; box-sizing: border-box; font: inherit; color: var(--fg);
+  background: var(--surface); border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 6px;
+  border-radius: 8px 11px 8px 11px / 11px 8px 11px 8px; cursor: pointer; }
+#room-lang-backdrop select:focus-visible { outline: 2px solid var(--btn); outline-offset: 1px; }
+#room-lang-backdrop select:disabled { color: var(--muted); cursor: default; }
+
+/* placed sticky notes */
+.rs-note { position: absolute; width: clamp(78px, 16%, 106px); aspect-ratio: 1; box-sizing: border-box;
+  background: color-mix(in srgb, var(--cg-butter) 82%, var(--surface)); border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16); padding: 9px; transform: rotate(var(--rot, 0deg));
+  cursor: grab; touch-action: none; z-index: 5; font-size: 12.5px; line-height: 1.35; overflow: hidden; }
+.rs-note:hover { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+.rs-note:active { cursor: grabbing; }
+.rs-note.dragging { cursor: grabbing; z-index: 20; box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28); }
+.rs-note:focus-visible { outline: 2px solid var(--btn); outline-offset: 2px; }
+.rs-note-text { display: block; overflow: hidden; max-height: 100%; overflow-wrap: break-word; color: var(--fg); }
+.rs-note-empty { color: color-mix(in srgb, var(--fg) 48%, transparent); }
+.room-scene .rs-note textarea { width: 100%; height: 100%; box-sizing: border-box; background: transparent; border: 0;
+  padding: 0; margin: 0; resize: none; font: inherit; color: var(--fg); outline: none; }
+.room-scene .rs-note textarea::placeholder { color: color-mix(in srgb, var(--fg) 45%, transparent); }
+.rs-note.editing { z-index: 21; }
+
+/* stickies kept with a saved arrangement */
+.rs-saved { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 2px; }
+.rs-mini { display: inline-block; max-width: 180px; box-sizing: border-box; background: color-mix(in srgb, var(--cg-butter) 82%, var(--surface));
+  border-radius: 2px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); padding: 8px 10px; font-size: 12.5px; line-height: 1.35;
+  transform: rotate(var(--rot, 0deg)); overflow-wrap: break-word; color: var(--fg); }
+
+.view[data-scheme="dark"] .rs-roof { fill: color-mix(in srgb, var(--cg-coral) 40%, var(--surface)); }
+.view[data-scheme="dark"] .rs-house { fill: color-mix(in srgb, var(--cg-butter) 34%, var(--surface)); }
+.view[data-scheme="dark"] .rs-door { fill: color-mix(in srgb, var(--brown) 45%, var(--surface)); }
+.view[data-scheme="dark"] .rs-window { fill: color-mix(in srgb, var(--cg-sea) 34%, var(--surface)); }
+.view[data-scheme="dark"] .rs-trunk { fill: color-mix(in srgb, var(--brown) 40%, var(--surface)); }
+.view[data-scheme="dark"] .rs-canopy { fill: color-mix(in srgb, var(--btn) 38%, var(--surface)); }
+.view[data-scheme="dark"] .rs-wood { fill: color-mix(in srgb, var(--brown) 42%, var(--surface)); }
+.view[data-scheme="dark"] .rs-cup { fill: color-mix(in srgb, var(--cg-sea) 40%, var(--surface)); }
+.view[data-scheme="dark"] .rs-book { fill: color-mix(in srgb, var(--cg-lav) 40%, var(--surface)); }
+.view[data-scheme="dark"] .rs-pot { fill: color-mix(in srgb, var(--cg-coral) 40%, var(--surface)); }
+.view[data-scheme="dark"] .rs-pile span,
+.view[data-scheme="dark"] .rs-note,
+.view[data-scheme="dark"] .rs-mini { background: color-mix(in srgb, var(--cg-butter) 62%, var(--surface)); }
+
+/* ---------- field notebook: Keep exploring something ----------
+   A page opening onto a lightly sketched, unfinished landscape.
+   Decorative SVG only; scheme-scoped via --x-* custom properties. */
+.xpage { position: relative; overflow: hidden; border-radius: 0; min-height: 70vh; box-sizing: border-box;
+  background: var(--x-bg);
+  --x-bg: #F6F3EC; --x-note: #FFFCF5; --x-note2: #F0EBDD; --x-ink: #302F2A; --x-sub: #61685E;
+  --x-sketch: #A3A695; --x-border: #DCD6C6; }
+.view[data-scheme="pastel"] .xpage { --x-bg: #FAEFE7; --x-note: #FFFCF8; --x-note2: #F4E8DE; --x-ink: #2C2524; --x-sub: #8a7568; --x-sketch: #C9AC9C; --x-border: #E6CDB9; }
+.view[data-scheme="dark"] .xpage { --x-bg: color-mix(in srgb, var(--surface-app) 92%, #000); --x-note: var(--surface); --x-note2: color-mix(in srgb, var(--surface) 92%, #000); --x-ink: var(--fg); --x-sub: var(--muted); --x-sketch: #6E7787; --x-border: #3d4459; }
+.x-decor { position: absolute; pointer-events: none; }
+.x-horizon { top: 58px; left: -60px; width: calc(100% + 120px); height: 46px; }
+.x-contours-l { left: -34px; top: 330px; width: 90px; height: 120px; }
+.x-contours-r { right: -30px; top: 430px; width: 90px; height: 120px; }
+.x-strokes { left: 3%; top: 560px; width: 220px; height: 110px; }
+.x-botanical { right: -16px; bottom: -34px; width: 112px; height: 140px; }
+.xpage-head { position: relative; z-index: 1; }
+/* the top bar matches every other in-app page (brown bar + standard chip);
+   only its margins are adjusted for the notebook page's geometry */
+.xpage .pcontrols { margin: 0; padding: 8px 16px; }
+.xpage-col { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 54px 24px 52px; }
+.x-intro { margin-bottom: 28px; }
+.x-eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--x-sub); line-height: 1.5; max-width: 46ch; }
+#view .x-title { font-size: 20px; line-height: 1.35; color: var(--x-ink); margin: 10px 0 14px;
+  background-image: none; padding-bottom: 0; display: block; }
+.x-lede { font-size: 13.5px; line-height: 1.55; color: var(--x-ink); max-width: 60ch; margin: 0; }
+.x-underline { position: relative; display: inline-block; }
+.x-underline svg { position: absolute; left: -1%; bottom: -9px; width: 102%; height: 10px; pointer-events: none; }
+.xnote { position: relative; background: var(--x-note); border: 1px solid var(--x-border); border-radius: 7px;
+  padding: 18px 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 10px 22px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.xnote:focus-within { border-color: color-mix(in srgb, var(--btn) 55%, var(--x-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--btn) 16%, transparent), 0 1px 3px rgba(0, 0, 0, 0.06); }
+.xnote-main { max-width: 440px; margin-inline: auto; margin-bottom: 20px; }
+.xnote-support { background: var(--x-note2); max-width: 390px; margin-inline: auto; left: 24px; }
+.x-note-label { display: block; font-size: 14px; font-weight: 600; color: var(--x-sub); margin: 0 0 8px; }
+.xpage textarea { width: 100%; box-sizing: border-box; background: transparent; border: 0; padding: 0; margin: 0;
+  font: inherit; font-size: 16.5px; line-height: 1.5; color: var(--x-ink); resize: vertical; outline: none; }
+.xnote-main textarea { min-height: 190px; }
+.xnote-support textarea { min-height: 140px; }
+.x-marker { position: absolute; top: 12px; right: 14px; width: 44px; height: 18px; pointer-events: none; }
+.x-link { position: absolute; left: -30px; top: -24px; width: 40px; height: 40px; pointer-events: none; }
+.x-clip { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; margin-left: 24px; max-width: 560px;
+  background: var(--x-note2); border: 1px dashed var(--x-border); border-radius: 6px; padding: 10px 14px; }
+.x-clip > svg { width: 15px; height: 15px; flex: 0 0 auto; color: var(--x-sub); margin-top: 2px; }
+.x-clip-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.x-clip-title { display: block; font-size: 13px; font-weight: 600; color: var(--x-ink); }
+.x-clip-preview { display: block; font-size: 12.5px; color: var(--x-sub); line-height: 1.45; overflow-wrap: break-word; }
+.x-bring { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; margin-top: 26px;
+  padding: 8px 16px; background: transparent; border: 1px solid var(--x-border); border-radius: 9px;
+  color: var(--x-ink); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease; }
+.x-bring:hover { border-color: color-mix(in srgb, var(--btn) 60%, var(--x-border));
+  background: color-mix(in srgb, var(--btn) 7%, transparent); }
+.x-bring:active { background: color-mix(in srgb, var(--btn) 12%, transparent); }
+.x-bring svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.x-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+.xpage .btn { min-height: 44px; }
+.x-kept { --x-sketch: #A3A695; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; animation: xSettle 260ms ease; }
+.view[data-scheme="pastel"] .x-kept { --x-sketch: #C9AC9C; }
+.view[data-scheme="dark"] .x-kept { --x-sketch: #6E7787; }
+.x-kept-art { width: 120px; height: 44px; flex: 0 0 auto; }
+.x-kept-line { margin: 0; font-size: 14px; font-weight: 600; color: var(--fg); }
+.x-kept-title { margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 46ch; overflow-wrap: break-word; }
+@keyframes xSettle { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .x-kept { animation: none; } }
+@media (max-width: 620px) {
+  .xpage-col { padding: 70px 20px 40px; }
+  .xnote { padding: 17px 18px; }
+  .xnote-main, .xnote-support { max-width: 100%; }
+  .xnote-support { left: 0; }
+  .x-link, .x-contours-l, .x-contours-r, .x-strokes { display: none; }
+  .x-horizon { top: 76px; }
+  .x-clip { margin-left: 0; }
+}
+
+/* ---------- Make room for this: plant with leaf categories + leaf popup ----------
+   The scene is an SVG (520 × H) whose y axis runs negative above the ground
+   line. Leaf/lamp positions are mapped to % by room.js plantHtml (pctY + LAMP
+   constants); this file only styles the paint — never the placement. */
+.x-plant { position: relative; width: min(520px, 100%); margin: 12px auto 4px; }
+/* practice step 1: the "Begin with…" caption tucked directly under the plant */
+.room-sub-h { text-align: center; font-size: 14px; margin: 0 auto 4px; max-width: 360px; }
+.room-sub-ex { text-align: center; font-size: 12px; margin: 0 auto; max-width: 380px; }
+/* the "Notice what…" captions beside/above the floor lamp, inside the scene */
+.lamp-note-h { position: absolute; font-size: 11px; font-weight: 700; line-height: 1.25;
+  color: var(--fg); z-index: 2; pointer-events: none; text-align: left; }
+.lamp-note-ex { position: absolute; font-size: 9.5px; line-height: 1.25; color: var(--muted);
+  z-index: 2; pointer-events: none; text-align: left; }
+.x-plant .plant-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rs-stem { fill: none; stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.6; stroke-linecap: round; }
+.rs-leaf { fill: var(--btn); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.2; }
+.rs-light { fill: color-mix(in srgb, var(--cg-butter) 45%, transparent); }
+.rs-sun { fill: color-mix(in srgb, var(--cg-butter) 80%, #fff); stroke: color-mix(in srgb, var(--fg) 40%, transparent);
+  stroke-width: 1.6; }
+.x-leaf-label { position: absolute; background: transparent; border: 0; padding: 4px 8px; font: inherit;
+  font-size: 11px; font-weight: 600; color: var(--fg); border-radius: 7px; line-height: 1.3;
+  max-width: 20.5%; pointer-events: none; }
+.x-leaf-label.is-example { color: var(--muted); font-weight: 500; font-style: italic; }
+.rs-leaf-add { fill: none; stroke-dasharray: 4 3; stroke-width: 1.4; }
+.rs-plus path { fill: none; stroke: color-mix(in srgb, var(--fg) 55%, transparent);
+  stroke-width: 2; stroke-linecap: round; }
+.xl-1 { right: 44.7%; top: 71%; text-align: right; }
+.xl-2 { left: 78.3%; top: 63%; text-align: left; }
+.xl-3 { right: 44.7%; top: 38%; text-align: right; }
+.xl-4 { left: 75.3%; top: 32%; max-width: 19.5%; text-align: left; }
+.xw-1 { left: 4.5%; top: 15.2%; text-align: left; }
+/* centered plant (practice page — no lamp): labels follow the plant's new
+   midpoint, shifting left by the same 16.29% the plant moved */
+.x-plant.x-plant-ctr .xl-1, .x-plant.x-plant-ctr .xl-3 { right: 61%; }
+.x-plant.x-plant-ctr .xl-2 { left: 62%; }
+.x-plant.x-plant-ctr .xl-4 { left: 59%; }
+/* centered practice plant hugs the frame: a small buffer, nothing more */
+.x-plant.x-plant-ctr { margin-top: 4px; }
+.card[data-od-id="room-practice"] .room-hero + .support { margin-bottom: 10px; }
+.leaf-modal { max-width: 560px; }
+/* leaf-shaped popup: the card becomes a leaf held near-vertical, with a
+   fuller belly so the tall, narrow content fits; the tips peek past it */
+.leaf-modal.leaf-shape { position: relative; max-width: 420px; background: transparent; border: 0;
+  box-shadow: none; padding: 44px 34px 40px; max-height: calc(100vh - 32px); overflow-y: auto; }
+.leaf-shape > *:not(.leaf-shape-bg) { position: relative; z-index: 1; }
+.leaf-shape-bg { position: absolute; inset: -60px -50px -70px; z-index: 0; overflow: visible;
+  pointer-events: none; filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.18)); }
+.leaf-shape-bg .leaf-blade { stroke: color-mix(in srgb, var(--fg) 42%, transparent);
+  stroke-width: 1.5; }
+.leaf-shape-bg .leaf-tint-deep { stop-color: color-mix(in srgb, var(--btn) 24%, var(--surface)); }
+.leaf-shape-bg .leaf-tint-mid { stop-color: color-mix(in srgb, var(--btn) 14%, var(--surface)); }
+.leaf-shape-bg .leaf-tint-pale { stop-color: color-mix(in srgb, var(--btn) 7%, var(--surface)); }
+.leaf-shape-bg .leaf-petiole { fill: none; stroke: color-mix(in srgb, var(--fg) 45%, transparent);
+  stroke-width: 2.2; stroke-linecap: round; }
+.leaf-shape-bg .leaf-midrib { fill: none; stroke: color-mix(in srgb, var(--fg) 24%, transparent);
+  stroke-width: 1.6; }
+.leaf-shape-bg .leaf-vein { fill: none; stroke: color-mix(in srgb, var(--fg) 15%, transparent);
+  stroke-width: 1.1; }
+.view[data-scheme="dark"] .leaf-shape-bg { filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45)); }
+@media (max-height: 820px) { .leaf-shape-bg { inset: -36px -50px -44px; }
+  .leaf-modal.leaf-shape { padding: 40px 34px 48px; } }
+@media (max-width: 780px) { .leaf-shape-bg { inset: -40px -36px -46px; }
+  .leaf-modal.leaf-shape { max-width: 400px; padding: 40px 40px 48px; } }
+@media (max-width: 620px) { .leaf-modal.leaf-shape { width: calc(100% - 64px); max-width: 360px; padding: 30px 48px 30px; }
+  .leaf-shape-bg { inset: -24px -26px -30px; }
+  .leaf-paper textarea { min-height: 130px; } }
+/* sun-shaped popup: a warm disc with radiating rays; the content sits
+   inside the disc — used for the sun on the practice screen */
+.leaf-modal.sun-shape { position: relative; max-width: 380px; background: transparent; border: 0;
+  box-shadow: none; padding: 22px 42px 20px; text-align: center; max-height: calc(100vh - 32px);
+  overflow-y: auto; }
+.sun-shape > *:not(.sun-shape-bg) { position: relative; z-index: 1; }
+.sun-shape .leaf-paper, .sun-shape .leaf-paper textarea { text-align: left; }
+.sun-shape .leaf-paper textarea { min-height: 140px; }
+.sun-shape .prompt { max-width: 260px; margin-left: auto; margin-right: auto; }
+.sun-shape .btnrow { justify-content: center; }
+.sun-shape-bg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  height: calc(100% + 60px); aspect-ratio: 1 / 1; z-index: 0; overflow: visible; pointer-events: none;
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.18)); }
+.sun-shape-bg .sun-disc { fill: color-mix(in srgb, var(--cg-butter) 80%, #fff);
+  stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.6; }
+.sun-shape-bg .sun-rays { fill: none; stroke: var(--cg-butter); stroke-width: 2; stroke-linecap: round; }
+.view[data-scheme="dark"] .leaf-modal.sun-shape { color: #273039; }
+.view[data-scheme="dark"] .leaf-modal.sun-shape .node-title { color: rgba(0, 0, 0, 0.55); }
+.view[data-scheme="dark"] .sun-shape-bg { filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45)); }
+.leaf-paper { position: relative; border: 1px solid var(--line); border-radius: 7px; background: var(--surface);
+  padding: 14px; overflow: hidden; }
+.leaf-paper .leaf-ill { position: absolute; inset: 0; pointer-events: none; opacity: 0.28;
+  display: flex; align-items: center; justify-content: center; }
+.leaf-paper .leaf-ill svg { width: 80%; height: 96%; }
+.leaf-paper textarea { position: relative; width: 100%; box-sizing: border-box; min-height: 180px;
+  background: transparent; border: 0; outline: none; resize: vertical; font: inherit; font-size: 15px;
+  line-height: 1.5; color: var(--fg); }
+.leaf-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0 4px; }
+.leaf-card { position: relative; border: 1.5px solid var(--line); background: var(--surface); border-radius: 7px;
+  padding: 6px; cursor: pointer; font: inherit; min-height: 78px; overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.leaf-card .leaf-card-ill { position: absolute; inset: 0; opacity: 0.35; pointer-events: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.leaf-card .leaf-card-ill svg { width: 100%; height: 80%; }
+.leaf-card-label { position: relative; display: block; font-size: 11px; font-weight: 600; color: var(--fg);
+  line-height: 1.25; text-align: center; background: color-mix(in srgb, var(--surface) 74%, transparent);
+  border-radius: 4px; padding: 2px 3px; }
+.leaf-card.noill .leaf-card-label { margin-top: 28px; background: transparent; }
+.leaf-card.sel { border-color: var(--btn); box-shadow: 0 0 0 2px color-mix(in srgb, var(--btn) 30%, transparent); }
+.leaf-card:hover { border-color: color-mix(in srgb, var(--btn) 60%, var(--line)); }
+.leaf-card:focus-visible { outline: 2px solid var(--btn); outline-offset: 1px; }
+@media (max-width: 620px) { .leaf-cards { grid-template-columns: repeat(2, 1fr); } .x-leaf-label { font-size: 10px; } }
+
+/* horseshoe magnet: the magnet shapes used by the preview and landscape SVGs */
+.magnet-body { fill: none; stroke: color-mix(in srgb, var(--fg) 52%, var(--surface)); stroke-width: 18; stroke-linecap: round; }
+.magnet-north { fill: color-mix(in srgb, var(--cg-coral) 74%, #fff); }
+.magnet-south { fill: color-mix(in srgb, var(--cg-sea) 74%, #fff); }
+.gift-box { fill: color-mix(in srgb, var(--cg-coral) 55%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.5; }
+.gift-lid { fill: color-mix(in srgb, var(--cg-coral) 78%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 45%, transparent); stroke-width: 1.5; }
+.gift-ribbon { fill: color-mix(in srgb, var(--cg-butter) 82%, #fff); }
+.gift-bow { fill: color-mix(in srgb, var(--cg-butter) 88%, #fff); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1; }
+.gift-knot { fill: color-mix(in srgb, var(--cg-butter) 92%, #fff); }
+.view[data-scheme="dark"] .gift-box { fill: color-mix(in srgb, var(--cg-coral) 55%, #fff); }
+.view[data-scheme="dark"] .gift-lid { fill: color-mix(in srgb, var(--cg-coral) 78%, #fff); }
+.view[data-scheme="dark"] .gift-ribbon { fill: color-mix(in srgb, var(--cg-butter) 55%, #fff); }
+.view[data-scheme="dark"] .gift-bow { fill: color-mix(in srgb, var(--cg-butter) 62%, #fff); }
+.view[data-scheme="dark"] .gift-knot { fill: color-mix(in srgb, var(--cg-butter) 70%, #fff); }
+.view[data-scheme="dark"] .circle-head { fill: color-mix(in srgb, var(--cg-sea) 58%, #fff); }
+.view[data-scheme="dark"] .pair-head-a,
+.view[data-scheme="dark"] .pair-body-a { fill: color-mix(in srgb, var(--cg-coral) 58%, #fff); }
+.view[data-scheme="dark"] .pair-head-b,
+.view[data-scheme="dark"] .pair-body-b { fill: color-mix(in srgb, var(--cg-sea) 58%, #fff); }
+.circle-ring { stroke: color-mix(in srgb, var(--fg) 40%, transparent); }
+.circle-head { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.pair-head-a, .pair-body-a { fill: color-mix(in srgb, var(--cg-coral) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.pair-head-b, .pair-body-b { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
+.pair-arms { stroke: color-mix(in srgb, var(--fg) 55%, transparent); }
+
+/* transparent HTML buttons over each leaf — the reliable click targets */
+.x-leafhit-btn { position: absolute; background: transparent; border: 0; cursor: pointer;
+  border-radius: 10px; min-height: 34px; padding: 0; }
+.x-leafhit-btn:hover { background: color-mix(in srgb, var(--btn) 14%, transparent); }
+.x-leafhit-btn:focus-visible { outline: 2px solid var(--btn); outline-offset: 1px; }
+
+/* ---------- leaf-gathering: piles in the scene + drop zones on the plant ---------- */
+.leaf-piles { position: absolute; inset: 0; pointer-events: none; }
+.leaf-pile { position: absolute; width: 30px; height: 44px; transform: translateX(-50%);
+  pointer-events: none; }
+.leaf-pile .pile-leaf { position: absolute; bottom: 0; left: 50%; width: 18px; height: 21px;
+  margin-left: -9px; pointer-events: auto; touch-action: none; cursor: grab;
+  transform: rotate(calc(var(--i) * 13deg)); transform-origin: 50% 100%; }
+.leaf-pile .pile-leaf.dragging { opacity: 0.18; }
+.leaf-pile .pile-leaf svg { display: block; width: 100%; height: auto; }
+.leaf-pile .pile-leaf svg path { stroke: color-mix(in srgb, var(--fg) 42%, transparent); stroke-width: 1.3; }
+.lp-a .pile-leaf svg path { fill: color-mix(in srgb, var(--btn) 86%, #fff); }
+.lp-b .pile-leaf svg path { fill: var(--btn); }
+.lp-c .pile-leaf svg path { fill: color-mix(in srgb, var(--btn) 72%, #23302a); }
+/* "help me find language" as a leaf — one copy beside each pile, same shape
+   and tint as the pile it sits next to */
+.leaf-langs { position: absolute; inset: 0; pointer-events: none; }
+.leaf-lang { position: absolute; width: 18px; height: 21px; transform: translateX(-50%);
+  pointer-events: auto; cursor: pointer; background: none; border: 0; padding: 0;
+  transition: transform 0.15s ease; }
+.leaf-lang svg { display: block; width: 100%; height: auto; }
+.leaf-lang svg path { stroke: color-mix(in srgb, var(--fg) 42%, transparent); stroke-width: 1.3; }
+.lp-a .leaf-lang svg path { fill: color-mix(in srgb, var(--btn) 86%, #fff); }
+.lp-b .leaf-lang svg path { fill: var(--btn); }
+.lp-c .leaf-lang svg path { fill: color-mix(in srgb, var(--btn) 72%, #23302a); }
+.leaf-lang:hover { transform: translateX(-50%) translateY(-3px) rotate(8deg); }
+.leaf-lang:focus-visible { outline: 2px solid var(--btn); outline-offset: 2px; }
+.leaf-drag-ghost { position: fixed; width: 22px; height: 26px; z-index: 70; pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25)); transform: rotate(9deg); }
+.leaf-drag-ghost svg { display: block; width: 100%; height: auto; }
+.leaf-drag-ghost svg path { fill: var(--btn); stroke: color-mix(in srgb, var(--fg) 42%, transparent); stroke-width: 1.3; }
+/* quiet drop zones over the plant's potential leaves — hover hints "drag a leaf here" */
+.leaf-drop { position: absolute; background: transparent; border-radius: 14px; cursor: grab; touch-action: none; }
+.leaf-drop:hover { background: color-mix(in srgb, var(--btn) 13%, transparent); }
+.leaf-drop.over { background: color-mix(in srgb, var(--btn) 16%, transparent);
+  box-shadow: inset 0 0 0 2px var(--btn); }
+.gp-tip { position: fixed; }

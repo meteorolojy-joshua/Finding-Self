@@ -1,0 +1,3598 @@
+{
+  "schema_version": "1.0",
+  "content_version": "0.6",
+  "records": [
+    {
+      "id": "DEFAULT.NOW.FEED.S01",
+      "node_id": "NOW.FEED.S01",
+      "node_prompt": "What do you want this platform to be for today?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.001",
+        "OPT.NOW.002",
+        "OPT.NOW.004",
+        "OPT.NOW.011"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.012"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.003",
+        "OPT.NOW.005",
+        "OPT.NOW.006",
+        "OPT.NOW.007",
+        "OPT.NOW.008",
+        "OPT.NOW.009",
+        "OPT.NOW.010"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.S02",
+      "node_id": "NOW.FEED.S02",
+      "node_prompt": "What is this platform likely to pull your attention or behavior toward?",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.013",
+        "OPT.NOW.015",
+        "OPT.NOW.021"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.NOW.023"
+      ],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.024"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.014",
+        "OPT.NOW.016",
+        "OPT.NOW.017",
+        "OPT.NOW.018",
+        "OPT.NOW.019",
+        "OPT.NOW.020",
+        "OPT.NOW.022"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.S03",
+      "node_id": "NOW.FEED.S03",
+      "node_prompt": "What do you want to protect while using this platform and after you leave it?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.025",
+        "OPT.NOW.028",
+        "OPT.NOW.031",
+        "OPT.NOW.034"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.035"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.026",
+        "OPT.NOW.027",
+        "OPT.NOW.029",
+        "OPT.NOW.030",
+        "OPT.NOW.032",
+        "OPT.NOW.033"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.S04",
+      "node_id": "NOW.FEED.S04",
+      "node_prompt": "How do you want to use this platform while you are there?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.036",
+        "OPT.NOW.040",
+        "OPT.NOW.042",
+        "OPT.NOW.043"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.046"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.037",
+        "OPT.NOW.038",
+        "OPT.NOW.039",
+        "OPT.NOW.041",
+        "OPT.NOW.044",
+        "OPT.NOW.045"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.S05",
+      "node_id": "NOW.FEED.S05",
+      "node_prompt": "What would make you feel ready to leave this platform for now?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.047",
+        "OPT.NOW.049",
+        "OPT.NOW.052",
+        "OPT.NOW.054"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.055"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.048",
+        "OPT.NOW.050",
+        "OPT.NOW.051",
+        "OPT.NOW.053"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.S06",
+      "node_id": "NOW.FEED.S06",
+      "node_prompt": "You have named what matters here. What would you like to do next?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.056",
+        "OPT.NOW.057",
+        "OPT.NOW.058",
+        "OPT.NOW.059"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.L01",
+      "node_id": "NOW.FEED.L01",
+      "node_prompt": "Why are you opening this platform right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.060",
+        "OPT.NOW.061",
+        "OPT.NOW.062",
+        "OPT.NOW.064"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.066"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.063",
+        "OPT.NOW.065"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.L02",
+      "node_id": "NOW.FEED.L02",
+      "node_prompt": "What do you want to protect while you use it?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.067",
+        "OPT.NOW.068",
+        "OPT.NOW.070",
+        "OPT.NOW.072"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.074"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.069",
+        "OPT.NOW.071",
+        "OPT.NOW.073"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.FEED.L03",
+      "node_id": "NOW.FEED.L03",
+      "node_prompt": "How do you want to use it?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.075",
+        "OPT.NOW.077",
+        "OPT.NOW.079",
+        "OPT.NOW.080"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.081"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.076",
+        "OPT.NOW.078"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S01",
+      "node_id": "NOW.OFF.S01",
+      "node_prompt": "Where does what you are noticing seem to be happening?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.082",
+        "OPT.NOW.083",
+        "OPT.NOW.084",
+        "OPT.NOW.087"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.090"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.085",
+        "OPT.NOW.086",
+        "OPT.NOW.088",
+        "OPT.NOW.089"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S02",
+      "node_id": "NOW.OFF.S02",
+      "node_prompt": "What kind of question would be useful right now?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.091",
+        "OPT.NOW.093",
+        "OPT.NOW.094",
+        "OPT.NOW.096"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.098"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.092",
+        "OPT.NOW.095",
+        "OPT.NOW.097"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S03",
+      "node_id": "NOW.OFF.S03",
+      "node_prompt": "What is most noticeable, if anything?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.099",
+        "OPT.NOW.102",
+        "OPT.NOW.105",
+        "OPT.NOW.107"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.108"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.100",
+        "OPT.NOW.101",
+        "OPT.NOW.103",
+        "OPT.NOW.104",
+        "OPT.NOW.106"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S04",
+      "node_id": "NOW.OFF.S04",
+      "node_prompt": "What may have shaped what happened in this situation?",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.109",
+        "OPT.NOW.116",
+        "OPT.NOW.118"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.NOW.119"
+      ],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.120"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.110",
+        "OPT.NOW.111",
+        "OPT.NOW.112",
+        "OPT.NOW.113",
+        "OPT.NOW.114",
+        "OPT.NOW.115",
+        "OPT.NOW.117"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S05",
+      "node_id": "NOW.OFF.S05",
+      "node_prompt": "What can you still choose or control now?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.121",
+        "OPT.NOW.123",
+        "OPT.NOW.124",
+        "OPT.NOW.128"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.131"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.122",
+        "OPT.NOW.125",
+        "OPT.NOW.126",
+        "OPT.NOW.127",
+        "OPT.NOW.129",
+        "OPT.NOW.130"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S06",
+      "node_id": "NOW.OFF.S06",
+      "node_prompt": "What would help in the next few minutes?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.132",
+        "OPT.NOW.134",
+        "OPT.NOW.136",
+        "OPT.NOW.138"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.141"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.133",
+        "OPT.NOW.135",
+        "OPT.NOW.137",
+        "OPT.NOW.139",
+        "OPT.NOW.140"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.S07",
+      "node_id": "NOW.OFF.S07",
+      "node_prompt": "What, if anything, do you want to keep or return to later?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.142",
+        "OPT.NOW.143",
+        "OPT.NOW.145",
+        "OPT.NOW.146"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.144"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.L01",
+      "node_id": "NOW.OFF.L01",
+      "node_prompt": "Which answer comes closest to what you noticed?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.147",
+        "OPT.NOW.149",
+        "OPT.NOW.151",
+        "OPT.NOW.152"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.154"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.148",
+        "OPT.NOW.150",
+        "OPT.NOW.153"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.L02",
+      "node_id": "NOW.OFF.L02",
+      "node_prompt": "What would help right now?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.155",
+        "OPT.NOW.157",
+        "OPT.NOW.159",
+        "OPT.NOW.160"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.162"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.156",
+        "OPT.NOW.158",
+        "OPT.NOW.161"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.L03",
+      "node_id": "NOW.OFF.L03",
+      "node_prompt": "Do you want to keep anything from this moment?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.163",
+        "OPT.NOW.164",
+        "OPT.NOW.165",
+        "OPT.NOW.166"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.167"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.S01",
+      "node_id": "NOW.UNCLEAR.S01",
+      "node_prompt": "What kind of question would be useful right now?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.429",
+        "OPT.NOW.431",
+        "OPT.NOW.432",
+        "OPT.NOW.433"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.435"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.430",
+        "OPT.NOW.434"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.S02",
+      "node_id": "NOW.UNCLEAR.S02",
+      "node_prompt": "Which word comes closest to what you want right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.436",
+        "OPT.NOW.437",
+        "OPT.NOW.444",
+        "OPT.NOW.445"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.446"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.438",
+        "OPT.NOW.439",
+        "OPT.NOW.440",
+        "OPT.NOW.441",
+        "OPT.NOW.442",
+        "OPT.NOW.443"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.S03",
+      "node_id": "NOW.UNCLEAR.S03",
+      "node_prompt": "What can you notice as a simple fact, without explaining it yet?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.447",
+        "OPT.NOW.449",
+        "OPT.NOW.452",
+        "OPT.NOW.454"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.455"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.448",
+        "OPT.NOW.450",
+        "OPT.NOW.451",
+        "OPT.NOW.453"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.S04",
+      "node_id": "NOW.UNCLEAR.S04",
+      "node_prompt": "What may be making it hard to know what you feel or want?",
+      "page_role": "INTERPRET",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.456",
+        "OPT.NOW.457",
+        "OPT.NOW.459"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.NOW.465"
+      ],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.466"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.458",
+        "OPT.NOW.460",
+        "OPT.NOW.461",
+        "OPT.NOW.462",
+        "OPT.NOW.463",
+        "OPT.NOW.464"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.S05",
+      "node_id": "NOW.UNCLEAR.S05",
+      "node_prompt": "Even though you are unsure, what would you like to do for now?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.467",
+        "OPT.NOW.469",
+        "OPT.NOW.470",
+        "OPT.NOW.471"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.476"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.468",
+        "OPT.NOW.472",
+        "OPT.NOW.473",
+        "OPT.NOW.474",
+        "OPT.NOW.475"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.S06",
+      "node_id": "NOW.UNCLEAR.S06",
+      "node_prompt": "Is this enough for now?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.477",
+        "OPT.NOW.478",
+        "OPT.NOW.481",
+        "OPT.NOW.482"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.483"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.479",
+        "OPT.NOW.480"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.L01",
+      "node_id": "NOW.UNCLEAR.L01",
+      "node_prompt": "Which word comes closest to what you feel or want?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.484",
+        "OPT.NOW.485",
+        "OPT.NOW.488",
+        "OPT.NOW.489"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.491"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.486",
+        "OPT.NOW.487",
+        "OPT.NOW.490"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.L02",
+      "node_id": "NOW.UNCLEAR.L02",
+      "node_prompt": "How do you want to treat your uncertainty right now?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.492",
+        "OPT.NOW.493",
+        "OPT.NOW.494",
+        "OPT.NOW.495"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.NOW.497"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.NOW.496"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.L03",
+      "node_id": "NOW.UNCLEAR.L03",
+      "node_prompt": "Is that enough for now?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.NOW.498",
+        "OPT.NOW.499",
+        "OPT.NOW.500"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.MM.00",
+      "node_id": "MM.00",
+      "node_prompt": "Do you want to keep anything from this moment?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.MM.00.01",
+        "OPT.MM.00.02",
+        "OPT.MM.00.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.MM.01",
+      "node_id": "MM.01",
+      "node_prompt": "Which label would help you recognize this moment later?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.MM.01.01",
+        "OPT.MM.01.04",
+        "OPT.MM.01.05",
+        "OPT.MM.01.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.MM.01.08"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.MM.01.02",
+        "OPT.MM.01.03",
+        "OPT.MM.01.06",
+        "OPT.MM.01.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.MM.02",
+      "node_id": "MM.02",
+      "node_prompt": "When, if ever, should the app show you this marker again?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.MM.02.01",
+        "OPT.MM.02.04",
+        "OPT.MM.02.05",
+        "OPT.MM.02.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.MM.02.02",
+        "OPT.MM.02.03"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.MM.03",
+      "node_id": "MM.03",
+      "node_prompt": "Do you want to save this marker?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.MM.03.01",
+        "OPT.MM.03.02",
+        "OPT.MM.03.04",
+        "OPT.MM.03.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.MM.03.03"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.MM.04",
+      "node_id": "MM.04",
+      "node_prompt": "This can wait until you choose to return.",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.MM.04.01",
+        "OPT.MM.04.02",
+        "OPT.MM.04.03",
+        "OPT.MM.04.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.PM.00",
+      "node_id": "PM.00",
+      "node_prompt": "Would you like to focus on a specific moment or kind of situation in this practice?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.PM.00.01",
+        "OPT.PM.00.02",
+        "OPT.PM.00.04",
+        "OPT.PM.00.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.PM.00.03",
+        "OPT.PM.00.05",
+        "OPT.PM.00.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.PM.01",
+      "node_id": "PM.01",
+      "node_prompt": "Which saved marker, if any, do you want to use here?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.PM.01.01",
+        "OPT.PM.01.02",
+        "OPT.PM.01.03",
+        "OPT.PM.01.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.PM.02",
+      "node_id": "PM.02",
+      "node_prompt": "How much information about the moment do you want to use in this practice?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.PM.02.01",
+        "OPT.PM.02.02",
+        "OPT.PM.02.03",
+        "OPT.PM.02.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.PM.02.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.PM.03",
+      "node_id": "PM.03",
+      "node_prompt": "What part of this moment would you like to explore in this practice?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.PM.03.01",
+        "OPT.PM.03.02",
+        "OPT.PM.03.03",
+        "OPT.PM.03.08"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.PM.03.09"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.PM.03.04",
+        "OPT.PM.03.05",
+        "OPT.PM.03.06",
+        "OPT.PM.03.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.SD.00",
+      "node_id": "SD.00",
+      "node_prompt": "Which description best fits this feeling, thought, or preference?",
+      "page_role": "INTERPRET",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.SD.00.01",
+        "OPT.SD.00.04",
+        "OPT.SD.00.05",
+        "OPT.SD.00.08"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.SD.00.10"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.SD.00.02",
+        "OPT.SD.00.03",
+        "OPT.SD.00.06",
+        "OPT.SD.00.07",
+        "OPT.SD.00.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.SD.01",
+      "node_id": "SD.01",
+      "node_prompt": "How do you want to treat it for now?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.SD.01.01",
+        "OPT.SD.01.04",
+        "OPT.SD.01.05",
+        "OPT.SD.01.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.SD.01.02",
+        "OPT.SD.01.03",
+        "OPT.SD.01.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TT.00",
+      "node_id": "TT.00",
+      "node_prompt": "Should anything about the guidance change next time?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.TT.00.01",
+        "OPT.TT.00.02",
+        "OPT.TT.00.03",
+        "OPT.TT.00.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TT.01",
+      "node_id": "TT.01",
+      "node_prompt": "What change would make this guidance fit you better?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.TT.01.02",
+        "OPT.TT.01.04",
+        "OPT.TT.01.05",
+        "OPT.TT.01.09"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.TT.01.11"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.TT.01.01",
+        "OPT.TT.01.03",
+        "OPT.TT.01.06",
+        "OPT.TT.01.07",
+        "OPT.TT.01.08",
+        "OPT.TT.01.10"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TT.02",
+      "node_id": "TT.02",
+      "node_prompt": "Where should this change apply?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.TT.02.01",
+        "OPT.TT.02.02",
+        "OPT.TT.02.04",
+        "OPT.TT.02.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.TT.02.03",
+        "OPT.TT.02.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TT.03",
+      "node_id": "TT.03",
+      "node_prompt": "Do you want to make this change?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.TT.03.01",
+        "OPT.TT.03.02",
+        "OPT.TT.03.03",
+        "OPT.TT.03.04",
+        "OPT.TT.03.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TT.04",
+      "node_id": "TT.04",
+      "node_prompt": "The confirmed change will be available next time in {scope}.",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.TT.04.01",
+        "OPT.TT.04.02",
+        "OPT.TT.04.03",
+        "OPT.TT.04.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TR.00",
+      "node_id": "TR.00",
+      "node_prompt": "Would you like a moment to notice what you feel or want?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.TR.00.01",
+        "OPT.TR.00.02",
+        "OPT.TR.00.03",
+        "OPT.TR.00.04",
+        "OPT.TR.00.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.TR.01",
+      "node_id": "TR.01",
+      "node_prompt": "How long should this invitation stay hidden?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.TR.01.01",
+        "OPT.TR.01.02",
+        "OPT.TR.01.03",
+        "OPT.TR.01.04",
+        "OPT.TR.01.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.00",
+      "node_id": "S1.00",
+      "node_prompt": "Would you like to spend a little time noticing your own experience and treating it as important?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.00.01",
+        "OPT.S1.00.02",
+        "OPT.S1.00.03",
+        "OPT.S1.00.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.01",
+      "node_id": "S1.01",
+      "node_prompt": "How much time and attention do you have for this right now?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.01.01",
+        "OPT.S1.01.02",
+        "OPT.S1.01.03",
+        "OPT.S1.01.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.02",
+      "node_id": "S1.02",
+      "node_prompt": "What is the easiest way for you to notice your experience right now?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.02.01",
+        "OPT.S1.02.02",
+        "OPT.S1.02.03",
+        "OPT.S1.02.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.02.04",
+        "OPT.S1.02.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.03W",
+      "node_id": "S1.03W",
+      "node_prompt": "What part of your experience is easiest to name right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.03W.01",
+        "OPT.S1.03W.02",
+        "OPT.S1.03W.04",
+        "OPT.S1.03W.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.03W.10"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.03W.03",
+        "OPT.S1.03W.05",
+        "OPT.S1.03W.06",
+        "OPT.S1.03W.08",
+        "OPT.S1.03W.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.03F",
+      "node_id": "S1.03F",
+      "node_prompt": "What is most observable, without deciding what it means?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.03F.01",
+        "OPT.S1.03F.02",
+        "OPT.S1.03F.03",
+        "OPT.S1.03F.08"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.03F.09"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.03F.04",
+        "OPT.S1.03F.05",
+        "OPT.S1.03F.06",
+        "OPT.S1.03F.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.03S",
+      "node_id": "S1.03S",
+      "node_prompt": "If the screen shows your attention as a room, where would you place what you are noticing?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.03S.01",
+        "OPT.S1.03S.02",
+        "OPT.S1.03S.04",
+        "OPT.S1.03S.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.03S.03",
+        "OPT.S1.03S.05",
+        "OPT.S1.03S.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.03P",
+      "node_id": "S1.03P",
+      "node_prompt": "Which word comes closest to your preference right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.03P.01",
+        "OPT.S1.03P.02",
+        "OPT.S1.03P.06",
+        "OPT.S1.03P.10"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.03P.03",
+        "OPT.S1.03P.04",
+        "OPT.S1.03P.05",
+        "OPT.S1.03P.07",
+        "OPT.S1.03P.08",
+        "OPT.S1.03P.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.03N",
+      "node_id": "S1.03N",
+      "node_prompt": "Which answer is closest to your experience right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.03N.01",
+        "OPT.S1.03N.02",
+        "OPT.S1.03N.03",
+        "OPT.S1.03N.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.03N.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.04",
+      "node_id": "S1.04",
+      "node_prompt": "Which description best fits what you selected for the next few minutes?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.04.01",
+        "OPT.S1.04.02",
+        "OPT.S1.04.04",
+        "OPT.S1.04.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.04.03",
+        "OPT.S1.04.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.05",
+      "node_id": "S1.05",
+      "node_prompt": "What may be shaping your thoughts, feelings, or attention right now?",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.S1.05.01",
+        "OPT.S1.05.08",
+        "OPT.S1.05.09"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.S1.05.14"
+      ],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.05.13"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.05.02",
+        "OPT.S1.05.03",
+        "OPT.S1.05.04",
+        "OPT.S1.05.05",
+        "OPT.S1.05.06",
+        "OPT.S1.05.07",
+        "OPT.S1.05.10",
+        "OPT.S1.05.11",
+        "OPT.S1.05.12"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.06",
+      "node_id": "S1.06",
+      "node_prompt": "Which idea, if any, would make it easier to notice and accept your own experience?",
+      "page_role": "INTERPRET",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.06.01",
+        "OPT.S1.06.03",
+        "OPT.S1.06.04",
+        "OPT.S1.06.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.06.08"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.06.02",
+        "OPT.S1.06.05",
+        "OPT.S1.06.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.06B",
+      "node_id": "S1.06B",
+      "node_prompt": "Did that idea make it easier to notice and accept your experience?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.06B.01",
+        "OPT.S1.06B.03",
+        "OPT.S1.06B.04",
+        "OPT.S1.06B.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.06B.02"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.07",
+      "node_id": "S1.07",
+      "node_prompt": "What do you want the thing you selected to influence in your own mind?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.07.01",
+        "OPT.S1.07.02",
+        "OPT.S1.07.03",
+        "OPT.S1.07.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.07.09"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.07.04",
+        "OPT.S1.07.05",
+        "OPT.S1.07.06",
+        "OPT.S1.07.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.08",
+      "node_id": "S1.08",
+      "node_prompt": "How do you want to give it attention right now?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.08.01",
+        "OPT.S1.08.02",
+        "OPT.S1.08.04",
+        "OPT.S1.08.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.08.09"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.08.03",
+        "OPT.S1.08.06",
+        "OPT.S1.08.07",
+        "OPT.S1.08.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.09",
+      "node_id": "S1.09",
+      "node_prompt": "For this moment, the thing you selected is allowed to count.",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.09.01",
+        "OPT.S1.09.02",
+        "OPT.S1.09.03",
+        "OPT.S1.09.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.09.04"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.10",
+      "node_id": "S1.10",
+      "node_prompt": "What happened when you gave it that space and attention?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.10.01",
+        "OPT.S1.10.04",
+        "OPT.S1.10.07",
+        "OPT.S1.10.10"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.10.12"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.10.02",
+        "OPT.S1.10.03",
+        "OPT.S1.10.05",
+        "OPT.S1.10.06",
+        "OPT.S1.10.08",
+        "OPT.S1.10.09",
+        "OPT.S1.10.11"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.11",
+      "node_id": "S1.11",
+      "node_prompt": "Do you want to give this experience a meaning, or leave it without one?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.11.01",
+        "OPT.S1.11.02",
+        "OPT.S1.11.03",
+        "OPT.S1.11.08"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.11.04",
+        "OPT.S1.11.05",
+        "OPT.S1.11.06",
+        "OPT.S1.11.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.12",
+      "node_id": "S1.12",
+      "node_prompt": "Do you want to save anything from this practice for a future quick check-in?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.12.01",
+        "OPT.S1.12.06",
+        "OPT.S1.12.08",
+        "OPT.S1.12.09"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S1.12.10"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.12.02",
+        "OPT.S1.12.03",
+        "OPT.S1.12.04",
+        "OPT.S1.12.05",
+        "OPT.S1.12.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.13",
+      "node_id": "S1.13",
+      "node_prompt": "Who decides what happens next?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.13.01",
+        "OPT.S1.13.02",
+        "OPT.S1.13.03",
+        "OPT.S1.13.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.13.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.L1",
+      "node_id": "S1.L1",
+      "node_prompt": "Which is closest right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.L1.01",
+        "OPT.S1.L1.02",
+        "OPT.S1.L1.07",
+        "OPT.S1.L1.08"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.L1.03",
+        "OPT.S1.L1.04",
+        "OPT.S1.L1.05",
+        "OPT.S1.L1.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.L2",
+      "node_id": "S1.L2",
+      "node_prompt": "How should that word affect what happens next?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.L2.01",
+        "OPT.S1.L2.02",
+        "OPT.S1.L2.03",
+        "OPT.S1.L2.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S1.L2.04"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.L3",
+      "node_id": "S1.L3",
+      "node_prompt": "What would you like to do now?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S1.L3.01",
+        "OPT.S1.L3.02",
+        "OPT.S1.L3.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.00",
+      "node_id": "S2.00",
+      "node_prompt": "Would you like to practice staying aware of one of your own wants, needs, or views as you move into the world around you?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.00.01",
+        "OPT.S2.00.02",
+        "OPT.S2.00.03",
+        "OPT.S2.00.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.01",
+      "node_id": "S2.01",
+      "node_prompt": "Which parts of your world do you want to include in this practice?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.01.01",
+        "OPT.S2.01.03",
+        "OPT.S2.01.04",
+        "OPT.S2.01.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.01.02",
+        "OPT.S2.01.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.01",
+      "node_id": "S2.W1.01",
+      "node_prompt": "Which small want, need, or view do you want to keep with you through this practice?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.01.01",
+        "OPT.S2.W1.01.02",
+        "OPT.S2.W1.01.03",
+        "OPT.S2.W1.01.09"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.W1.01.11"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W1.01.04",
+        "OPT.S2.W1.01.05",
+        "OPT.S2.W1.01.06",
+        "OPT.S2.W1.01.07",
+        "OPT.S2.W1.01.08",
+        "OPT.S2.W1.01.10"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.N",
+      "node_id": "S2.W1.N",
+      "node_prompt": "Can you use 'I do not know yet' as your current answer during this practice?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.N.01",
+        "OPT.S2.W1.N.03",
+        "OPT.S2.W1.N.04",
+        "OPT.S2.W1.N.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W1.N.02"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.P",
+      "node_id": "S2.W1.P",
+      "node_prompt": "Which small preference is closest?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.P.01",
+        "OPT.S2.W1.P.03",
+        "OPT.S2.W1.P.04",
+        "OPT.S2.W1.P.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W1.P.02",
+        "OPT.S2.W1.P.05",
+        "OPT.S2.W1.P.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.02",
+      "node_id": "S2.W1.02",
+      "node_prompt": "What may have been given more importance than the want, need, or view you selected?",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.02.01",
+        "OPT.S2.W1.02.07",
+        "OPT.S2.W1.02.09"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.S2.W1.02.12"
+      ],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W1.02.02",
+        "OPT.S2.W1.02.03",
+        "OPT.S2.W1.02.04",
+        "OPT.S2.W1.02.05",
+        "OPT.S2.W1.02.06",
+        "OPT.S2.W1.02.08",
+        "OPT.S2.W1.02.10",
+        "OPT.S2.W1.02.11"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.03",
+      "node_id": "S2.W1.03",
+      "node_prompt": "Before you act on it, what do you want to do with it in your own thoughts and attention?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.03.01",
+        "OPT.S2.W1.03.03",
+        "OPT.S2.W1.03.04",
+        "OPT.S2.W1.03.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W1.03.02",
+        "OPT.S2.W1.03.05",
+        "OPT.S2.W1.03.07"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.04",
+      "node_id": "S2.W1.04",
+      "node_prompt": "After paying attention to it in the way you chose, what is true now?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.04.01",
+        "OPT.S2.W1.04.02",
+        "OPT.S2.W1.04.05",
+        "OPT.S2.W1.04.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W1.04.03",
+        "OPT.S2.W1.04.04",
+        "OPT.S2.W1.04.07",
+        "OPT.S2.W1.04.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.T12",
+      "node_id": "S2.T12",
+      "node_prompt": "What would you like to do next?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.T12.01",
+        "OPT.S2.T12.02",
+        "OPT.S2.T12.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W2.01",
+      "node_id": "S2.W2.01",
+      "node_prompt": "How could you express the want, need, or view you selected through your body, personal space, appearance, or device?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W2.01.01",
+        "OPT.S2.W2.01.04",
+        "OPT.S2.W2.01.05",
+        "OPT.S2.W2.01.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W2.01.02",
+        "OPT.S2.W2.01.03",
+        "OPT.S2.W2.01.06",
+        "OPT.S2.W2.01.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W2.02",
+      "node_id": "S2.W2.02",
+      "node_prompt": "What might limit or shape how you can express it safely?",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W2.02.01",
+        "OPT.S2.W2.02.02",
+        "OPT.S2.W2.02.07"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.S2.W2.02.12"
+      ],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W2.02.03",
+        "OPT.S2.W2.02.04",
+        "OPT.S2.W2.02.05",
+        "OPT.S2.W2.02.06",
+        "OPT.S2.W2.02.08",
+        "OPT.S2.W2.02.09",
+        "OPT.S2.W2.02.10",
+        "OPT.S2.W2.02.11"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W2.03",
+      "node_id": "S2.W2.03",
+      "node_prompt": "What small change could express the want, need, or view you selected in your body or surroundings?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W2.03.01",
+        "OPT.S2.W2.03.03",
+        "OPT.S2.W2.03.06",
+        "OPT.S2.W2.03.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.W2.03.10"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W2.03.02",
+        "OPT.S2.W2.03.04",
+        "OPT.S2.W2.03.05",
+        "OPT.S2.W2.03.08",
+        "OPT.S2.W2.03.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W2.03B",
+      "node_id": "S2.W2.03B",
+      "node_prompt": "Would you like to try that now?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W2.03B.01",
+        "OPT.S2.W2.03B.02",
+        "OPT.S2.W2.03B.04",
+        "OPT.S2.W2.03B.05"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W2.03B.03"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W2.04",
+      "node_id": "S2.W2.04",
+      "node_prompt": "What happened when you expressed it in a small way, or imagined doing so?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W2.04.01",
+        "OPT.S2.W2.04.02",
+        "OPT.S2.W2.04.04",
+        "OPT.S2.W2.04.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W2.04.03",
+        "OPT.S2.W2.04.05",
+        "OPT.S2.W2.04.07",
+        "OPT.S2.W2.04.08",
+        "OPT.S2.W2.04.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.T23",
+      "node_id": "S2.T23",
+      "node_prompt": "What would you like to do next?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.T23.01",
+        "OPT.S2.T23.02",
+        "OPT.S2.T23.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W3.01",
+      "node_id": "S2.W3.01",
+      "node_prompt": "When you are with another person, what part of the want, need, or view you selected do you want to keep as your own?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W3.01.03",
+        "OPT.S2.W3.01.06",
+        "OPT.S2.W3.01.08",
+        "OPT.S2.W3.01.10"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.W3.01.11"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W3.01.01",
+        "OPT.S2.W3.01.02",
+        "OPT.S2.W3.01.04",
+        "OPT.S2.W3.01.05",
+        "OPT.S2.W3.01.07",
+        "OPT.S2.W3.01.09"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W3.02",
+      "node_id": "S2.W3.02",
+      "node_prompt": "What affects how much power or freedom you have in this situation?",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W3.02.01",
+        "OPT.S2.W3.02.07",
+        "OPT.S2.W3.02.12"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.S2.W3.02.13"
+      ],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W3.02.02",
+        "OPT.S2.W3.02.03",
+        "OPT.S2.W3.02.04",
+        "OPT.S2.W3.02.05",
+        "OPT.S2.W3.02.06",
+        "OPT.S2.W3.02.08",
+        "OPT.S2.W3.02.09",
+        "OPT.S2.W3.02.10",
+        "OPT.S2.W3.02.11"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W3.03",
+      "node_id": "S2.W3.03",
+      "node_prompt": "How could you keep some ability to choose for yourself in this situation?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W3.03.01",
+        "OPT.S2.W3.03.04",
+        "OPT.S2.W3.03.07",
+        "OPT.S2.W3.03.10"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.W3.03.13"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W3.03.02",
+        "OPT.S2.W3.03.03",
+        "OPT.S2.W3.03.05",
+        "OPT.S2.W3.03.06",
+        "OPT.S2.W3.03.08",
+        "OPT.S2.W3.03.09",
+        "OPT.S2.W3.03.11",
+        "OPT.S2.W3.03.12"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W3.04",
+      "node_id": "S2.W3.04",
+      "node_prompt": "Which words, private thought, or silence could help you keep your position?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W3.04.01",
+        "OPT.S2.W3.04.03",
+        "OPT.S2.W3.04.07",
+        "OPT.S2.W3.04.08"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W3.04.02",
+        "OPT.S2.W3.04.04",
+        "OPT.S2.W3.04.05",
+        "OPT.S2.W3.04.06",
+        "OPT.S2.W3.04.09",
+        "OPT.S2.W3.04.10",
+        "OPT.S2.W3.04.11",
+        "OPT.S2.W3.04.12"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W3.05",
+      "node_id": "S2.W3.05",
+      "node_prompt": "After privately practicing that response, is it easier to stay aware of your own needs and position around these people?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W3.05.01",
+        "OPT.S2.W3.05.02",
+        "OPT.S2.W3.05.03",
+        "OPT.S2.W3.05.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W3.05.04",
+        "OPT.S2.W3.05.05",
+        "OPT.S2.W3.05.06",
+        "OPT.S2.W3.05.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.T34",
+      "node_id": "S2.T34",
+      "node_prompt": "What would you like to do next?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.T34.01",
+        "OPT.S2.T34.02",
+        "OPT.S2.T34.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W4.01",
+      "node_id": "S2.W4.01",
+      "node_prompt": "What kind of larger social setting are you thinking about?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W4.01.01",
+        "OPT.S2.W4.01.02",
+        "OPT.S2.W4.01.04",
+        "OPT.S2.W4.01.09"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W4.01.03",
+        "OPT.S2.W4.01.05",
+        "OPT.S2.W4.01.06",
+        "OPT.S2.W4.01.07",
+        "OPT.S2.W4.01.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W4.02",
+      "node_id": "S2.W4.02",
+      "node_prompt": "Which parts of this situation can you control, influence, or not control? Select each area you want to map.",
+      "page_role": "READ_POWER",
+      "selection_mode": "Multi; Continue always available",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 3,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W4.02.01",
+        "OPT.S2.W4.02.02",
+        "OPT.S2.W4.02.03"
+      ],
+      "continuation_control_option_ids": [
+        "OPT.S2.W4.02.06"
+      ],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W4.02.04",
+        "OPT.S2.W4.02.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W4.03",
+      "node_id": "S2.W4.03",
+      "node_prompt": "Which ways of participating or making choices feel available to you in this larger setting?",
+      "page_role": "LOCATE_JURISDICTION",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W4.03.01",
+        "OPT.S2.W4.03.04",
+        "OPT.S2.W4.03.08",
+        "OPT.S2.W4.03.10"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.W4.03.12"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W4.03.02",
+        "OPT.S2.W4.03.03",
+        "OPT.S2.W4.03.05",
+        "OPT.S2.W4.03.06",
+        "OPT.S2.W4.03.07",
+        "OPT.S2.W4.03.09",
+        "OPT.S2.W4.03.11"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W4.04",
+      "node_id": "S2.W4.04",
+      "node_prompt": "Based on the ways you can participate, what would you like to do?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W4.04.01",
+        "OPT.S2.W4.04.03",
+        "OPT.S2.W4.04.06",
+        "OPT.S2.W4.04.10"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.W4.04.12"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W4.04.02",
+        "OPT.S2.W4.04.04",
+        "OPT.S2.W4.04.05",
+        "OPT.S2.W4.04.07",
+        "OPT.S2.W4.04.08",
+        "OPT.S2.W4.04.09",
+        "OPT.S2.W4.04.11"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W4.05",
+      "node_id": "S2.W4.05",
+      "node_prompt": "After naming how you can participate, what feels different, if anything?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W4.05.01",
+        "OPT.S2.W4.05.03",
+        "OPT.S2.W4.05.05",
+        "OPT.S2.W4.05.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.W4.05.02",
+        "OPT.S2.W4.05.04",
+        "OPT.S2.W4.05.07",
+        "OPT.S2.W4.05.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.R1",
+      "node_id": "S2.R1",
+      "node_prompt": "Here is what traveled. Worlds you did not visit remain marked as not visited.",
+      "page_role": "WITNESS",
+      "selection_mode": "Summary; Continue controls only",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.R1.05",
+        "OPT.S2.R1.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [
+        "OPT.S2.R1.01",
+        "OPT.S2.R1.02",
+        "OPT.S2.R1.03",
+        "OPT.S2.R1.04"
+      ],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.R2",
+      "node_id": "S2.R2",
+      "node_prompt": "Which part of this practice would help you remember your own needs or position when time is short?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.R2.01",
+        "OPT.S2.R2.03",
+        "OPT.S2.R2.07",
+        "OPT.S2.R2.09"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "EXPLICIT_FILTERED_CONTROL",
+      "more_options_option_ids": [
+        "OPT.S2.R2.10"
+      ],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.R2.02",
+        "OPT.S2.R2.04",
+        "OPT.S2.R2.05",
+        "OPT.S2.R2.06",
+        "OPT.S2.R2.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.R3",
+      "node_id": "S2.R3",
+      "node_prompt": "Where do you feel able to make choices for yourself now?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.R3.01",
+        "OPT.S2.R3.05",
+        "OPT.S2.R3.06",
+        "OPT.S2.R3.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.R3.02",
+        "OPT.S2.R3.03",
+        "OPT.S2.R3.04",
+        "OPT.S2.R3.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.L1",
+      "node_id": "S2.L1",
+      "node_prompt": "Which word comes closest to your own view right now?",
+      "page_role": "NOTICE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.L1.01",
+        "OPT.S2.L1.02",
+        "OPT.S2.L1.04",
+        "OPT.S2.L1.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.L1.03",
+        "OPT.S2.L1.05",
+        "OPT.S2.L1.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.L2",
+      "node_id": "S2.L2",
+      "node_prompt": "Which word comes closest to how you want to express it in your body or space?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.L2.01",
+        "OPT.S2.L2.04",
+        "OPT.S2.L2.05",
+        "OPT.S2.L2.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.L2.02",
+        "OPT.S2.L2.03",
+        "OPT.S2.L2.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.L3",
+      "node_id": "S2.L3",
+      "node_prompt": "Which word comes closest to how you want to respond around other people?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.L3.01",
+        "OPT.S2.L3.03",
+        "OPT.S2.L3.05",
+        "OPT.S2.L3.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.L3.02",
+        "OPT.S2.L3.04",
+        "OPT.S2.L3.06",
+        "OPT.S2.L3.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.L4",
+      "node_id": "S2.L4",
+      "node_prompt": "Which word comes closest to how you want to participate in the larger setting?",
+      "page_role": "CHOOSE_STANCE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.L4.01",
+        "OPT.S2.L4.03",
+        "OPT.S2.L4.04",
+        "OPT.S2.L4.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.L4.02",
+        "OPT.S2.L4.05",
+        "OPT.S2.L4.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.LC",
+      "node_id": "S2.LC",
+      "node_prompt": "What would you like to do with this short practice now?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.LC.01",
+        "OPT.S2.LC.02",
+        "OPT.S2.LC.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.04A",
+      "node_id": "S1.04A",
+      "node_prompt": "Would it help to think about whether this feeling, thought, or preference comes from you, other people, or both?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.S1.04A.01",
+        "OPT.S1.04A.02",
+        "OPT.S1.04A.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S1.M0",
+      "node_id": "S1.M0",
+      "node_prompt": "What should happen to the marker now?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.S1.M0.01",
+        "OPT.S1.M0.02",
+        "OPT.S1.M0.03",
+        "OPT.S1.M0.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.01A",
+      "node_id": "S2.W1.01A",
+      "node_prompt": "Would it help to think about whether this feeling, thought, or preference comes from you, other people, or both?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.S2.W1.01A.01",
+        "OPT.S2.W1.01A.02",
+        "OPT.S2.W1.01A.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.R1A",
+      "node_id": "S2.R1A",
+      "node_prompt": "During which part of the practice did you most notice whether you could stay connected to your own want, need, or view?",
+      "page_role": "WITNESS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.S2.R1A.01",
+        "OPT.S2.R1A.02",
+        "OPT.S2.R1A.03",
+        "OPT.S2.R1A.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.S2.R1A.05",
+        "OPT.S2.R1A.06",
+        "OPT.S2.R1A.07",
+        "OPT.S2.R1A.08"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.M0",
+      "node_id": "S2.M0",
+      "node_prompt": "What should happen to the marker now?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.S2.M0.01",
+        "OPT.S2.M0.02",
+        "OPT.S2.M0.03",
+        "OPT.S2.M0.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.PRACTICE.CHOOSER.SS02",
+      "node_id": "PRACTICE.CHOOSER.SS02",
+      "node_prompt": "Which kind of longer practice fits?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.PRACTICE.CHOOSER.SS02.01",
+        "OPT.PRACTICE.CHOOSER.SS02.02",
+        "OPT.PRACTICE.CHOOSER.SS02.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.INV.SEARCH",
+      "node_id": "INV.SEARCH",
+      "node_prompt": "More options",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.INV.SEARCH.01",
+        "OPT.INV.SEARCH.02",
+        "OPT.INV.SEARCH.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.INV.SCOPE",
+      "node_id": "INV.SCOPE",
+      "node_prompt": "Do you want to use this option once or add it for future use?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.INV.SCOPE.01",
+        "OPT.INV.SCOPE.02",
+        "OPT.INV.SCOPE.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.INV.PREVIEW",
+      "node_id": "INV.PREVIEW",
+      "node_prompt": "Add this option here for future runs?",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.INV.PREVIEW.01",
+        "OPT.INV.PREVIEW.02",
+        "OPT.INV.PREVIEW.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.INV.CONFIRMED",
+      "node_id": "INV.CONFIRMED",
+      "node_prompt": "This option will appear here next time.",
+      "page_role": "CONFIGURE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.INV.CONFIRMED.01",
+        "OPT.INV.CONFIRMED.02"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 2,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.ARTIFACT.SELECT",
+      "node_id": "ARTIFACT.SELECT",
+      "node_prompt": "Which piece, if any, do you want to keep?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.ARTIFACT.SELECT.01",
+        "OPT.ARTIFACT.SELECT.02",
+        "OPT.ARTIFACT.SELECT.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.ARTIFACT.PREVIEW",
+      "node_id": "ARTIFACT.PREVIEW",
+      "node_prompt": "Keep this piece for future use?",
+      "page_role": "RETAIN",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.ARTIFACT.PREVIEW.01",
+        "OPT.ARTIFACT.PREVIEW.02",
+        "OPT.ARTIFACT.PREVIEW.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.ARTIFACT.AFTER",
+      "node_id": "ARTIFACT.AFTER",
+      "node_prompt": "Anything else before you finish?",
+      "page_role": "COMPLETE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.ARTIFACT.AFTER.01",
+        "OPT.ARTIFACT.AFTER.02",
+        "OPT.ARTIFACT.AFTER.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.ROUTE.REPAIR",
+      "node_id": "ROUTE.REPAIR",
+      "node_prompt": "What would make this step fit you better?",
+      "page_role": "RECOVER",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.ROUTE.REPAIR.01",
+        "OPT.ROUTE.REPAIR.02",
+        "OPT.ROUTE.REPAIR.03",
+        "OPT.ROUTE.REPAIR.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.RUN.RESUME",
+      "node_id": "RUN.RESUME",
+      "node_prompt": "Would you like to continue from where you stopped?",
+      "page_role": "RECOVER",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.RUN.RESUME.01",
+        "OPT.RUN.RESUME.02",
+        "OPT.RUN.RESUME.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.ROUTE.INVALID",
+      "node_id": "ROUTE.INVALID",
+      "node_prompt": "This route is unavailable.",
+      "page_role": "RECOVER",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 5,
+      "seeded_answer_option_ids": [
+        "OPT.ROUTE.INVALID.01",
+        "OPT.ROUTE.INVALID.02",
+        "OPT.ROUTE.INVALID.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "NONE",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 3,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.RESOURCE.S",
+      "node_id": "NOW.OFF.RESOURCE.S",
+      "node_prompt": "What would make {requested_support} possible or useful in your current situation?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.V04.RES.S.01",
+        "OPT.V04.RES.S.02",
+        "OPT.V04.RES.S.05",
+        "OPT.V04.RES.S.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.V04.RES.S.03",
+        "OPT.V04.RES.S.04",
+        "OPT.V04.RES.S.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.OFF.RESOURCE.L",
+      "node_id": "NOW.OFF.RESOURCE.L",
+      "node_prompt": "What do you want to do about {requested_support}?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.V04.RES.L.01",
+        "OPT.V04.RES.L.02",
+        "OPT.V04.RES.L.04",
+        "OPT.V04.RES.L.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.V04.RES.L.03",
+        "OPT.V04.RES.L.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.NEXT",
+      "node_id": "NOW.UNCLEAR.NEXT",
+      "node_prompt": "You chose {unclear_signal}. What kind of next question would help?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.V04.UNC.NEXT.01",
+        "OPT.V04.UNC.NEXT.02",
+        "OPT.V04.UNC.NEXT.04",
+        "OPT.V04.UNC.NEXT.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.V04.UNC.NEXT.03",
+        "OPT.V04.UNC.NEXT.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.NOW.UNCLEAR.INFO",
+      "node_id": "NOW.UNCLEAR.INFO",
+      "node_prompt": "How could you make it easier or safer to get the information you need?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.V04.UNC.INFO.02",
+        "OPT.V04.UNC.INFO.04",
+        "OPT.V04.UNC.INFO.05",
+        "OPT.V04.UNC.INFO.07"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.V04.UNC.INFO.01",
+        "OPT.V04.UNC.INFO.03",
+        "OPT.V04.UNC.INFO.06"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.S2.W1.INFO",
+      "node_id": "S2.W1.INFO",
+      "node_prompt": "What would you like to do with your need for more information?",
+      "page_role": "OPERATIONALIZE",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.V04.S2.INFO.01",
+        "OPT.V04.S2.INFO.02",
+        "OPT.V04.S2.INFO.03",
+        "OPT.V04.S2.INFO.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.V04.S2.INFO.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.BRIDGE.NOW.OFF.MORE",
+      "node_id": "BRIDGE.NOW.OFF.MORE",
+      "node_prompt": "What would you like to look at more closely?",
+      "page_role": "CHOOSE_LENS",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "OPT.V04.OFF.MORE.01",
+        "OPT.V04.OFF.MORE.02",
+        "OPT.V04.OFF.MORE.04",
+        "OPT.V04.OFF.MORE.06"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [
+        "OPT.V04.OFF.MORE.03",
+        "OPT.V04.OFF.MORE.05"
+      ],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "MANUAL",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.BRIDGE.EXPAND.S1",
+      "node_id": "BRIDGE.EXPAND.S1",
+      "node_prompt": "A longer practice can carry what you named instead of starting you over. How should it begin?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "BRIDGE.EXPAND.S1.OPT.01",
+        "BRIDGE.EXPAND.S1.OPT.02",
+        "BRIDGE.EXPAND.S1.OPT.03",
+        "BRIDGE.EXPAND.S1.OPT.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.BRIDGE.EXPAND.S2",
+      "node_id": "BRIDGE.EXPAND.S2",
+      "node_prompt": "A longer practice can carry what you named instead of starting you over. How should it begin?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "BRIDGE.EXPAND.S2.OPT.01",
+        "BRIDGE.EXPAND.S2.OPT.02",
+        "BRIDGE.EXPAND.S2.OPT.03",
+        "BRIDGE.EXPAND.S2.OPT.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.BRIDGE.EXPAND.CHOOSER",
+      "node_id": "BRIDGE.EXPAND.CHOOSER",
+      "node_prompt": "A longer practice can carry what you named instead of starting you over. How should it begin?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "BRIDGE.EXPAND.CHOOSER.OPT.01",
+        "BRIDGE.EXPAND.CHOOSER.OPT.02",
+        "BRIDGE.EXPAND.CHOOSER.OPT.03",
+        "BRIDGE.EXPAND.CHOOSER.OPT.04"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 5,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    },
+    {
+      "id": "DEFAULT.BRIDGE.S1.LOW.FULL",
+      "node_id": "BRIDGE.S1.LOW.FULL",
+      "node_prompt": "A longer practice can carry what you named instead of starting you over. How should it begin?",
+      "page_role": "ORIENT",
+      "selection_mode": "Single",
+      "primary_button_limit": 5,
+      "seeded_answer_limit": 4,
+      "seeded_answer_option_ids": [
+        "BRIDGE.S1.LOW.FULL.OPT.01",
+        "BRIDGE.S1.LOW.FULL.OPT.02",
+        "BRIDGE.S1.LOW.FULL.OPT.03"
+      ],
+      "continuation_control_option_ids": [],
+      "more_options_mode": "GLOBAL_NODE_INVENTORY_CONTROL",
+      "more_options_option_ids": [],
+      "display_only_option_ids": [],
+      "node_inventory_option_ids": [],
+      "default_primary_button_count": 4,
+      "user_added_answers_may_exceed_default_limit": true,
+      "curation_method": "KEEP_ALL_WITHIN_BUDGET",
+      "content_version": "0.6"
+    }
+  ]
+}

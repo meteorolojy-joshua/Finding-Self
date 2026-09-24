@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Finding Self prototype — test suite</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">Finding Self prototype <span class="tag">test suite</span></div>
+    <nav class="topnav"><a class="tn tn-link" href="index.html">Back to prototype</a></nav>
+  </header>
+  <div class="layout"><main class="main"><div class="view" style="max-width:760px">
+    <div class="card">
+      <div class="node-title">Automated checks · engine level</div>
+      <h1 class="prompt">Routing, persistence, recovery, acceptance journeys</h1>
+      <p class="support" id="summary">Loading…</p>
+      <div id="results"></div>
+    </div>
+  </div></main></div>
+
+  <div id="view-stub" style="display:none"><div id="view"></div></div>
+  <aside id="inspector" hidden><div id="insp-body"></div></aside>
+
+  <script src="engine.js"></script>
+  <script>
+    /* Minimal UI stub so engine render() calls do not crash headless tests */
+    window.UI = {
+      render: () => {}, renderHome: () => {}, renderTerminal: () => {},
+      renderExternalTerminal: () => {}, renderPrimitiveTerminal: () => {},
+      renderOnboardingResult: () => {}, updateInspector: () => {}
+    };
+  </script>
+  <script src="tests.js"></script>
+</body>
+</html>
