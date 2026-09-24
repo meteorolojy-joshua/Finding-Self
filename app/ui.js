@@ -204,7 +204,7 @@ const UI = (() => {
     $view().innerHTML = `
       <div class="card quiet" data-od-id="node-${esc(node.id)}">
         ${controlRow(node)}
-        ${ENGINE.Session.transitionAck ? `<div class="note dash" role="note">${esc(ENGINE.Session.transitionAck)}</div>` : ''}
+        ${node.content_area !== 'Now' && ENGINE.Session.transitionAck ? `<div class="note dash" role="note">${esc(ENGINE.Session.transitionAck)}</div>` : ''}
         <div class="node-title">${esc(node.id)} · ${esc(node.content_area)} · ${esc(node.variant)}</div>
         <h1 class="prompt">${esc(promptText)}</h1>
         <div class="metarow">

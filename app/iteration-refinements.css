@@ -1,4 +1,5 @@
 /* Artwork and captions use separate bounds, including at narrow widths. */
+.scene-instruction:empty{display:none}
 .room-scene .room-label{color:#2c352f;font-weight:500;margin:0}
 .influence-object{container-type:inline-size}
 .influence-object textarea{font-size:5.769cqw;line-height:8.173cqw}
@@ -21,6 +22,8 @@
 .archive-plant{position:relative;width:66px;height:130px}.archive-plant .room-plant-art{inset:0}.archive-plant .room-plant-art img{max-width:100%}.archive-option{display:flex;align-items:center;gap:16px;text-align:left}.archive-option img{width:42px;height:48px;object-fit:contain}
 .current-miniature{position:relative}.current-miniature .room-plant-art{inset:0}.current-miniature.upward-torch img{transform:rotate(-90deg)}
 .pv-magnet.current-miniature img{transform:scaleY(-1)}
+.explore-preview .pv-book.current-miniature{width:40px;height:14px}
+.pv-book.current-miniature img{position:static;transform:none;width:100%;height:100%}
 .drag-preview .store-basket{width:100%}.drag-preview .packed-items{top:22%;left:20%;right:20%}
 /* Restore the existing lift only on room destinations and notebook pages.
    Move artwork with its caption inside a stable hit target. Drag transforms
