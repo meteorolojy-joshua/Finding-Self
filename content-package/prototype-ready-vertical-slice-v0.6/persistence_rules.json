@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "content_version": "0.6",
+  "records": [
+    {
+      "id": "PERSIST.RUN",
+      "object": "Now or Practice run",
+      "default_state": "Volatile",
+      "may_persist_only_when": "User explicitly pauses; keep only minimum resume pointer",
+      "must_not_be_silently_added": "Answers, free text, people, destination behavior",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    },
+    {
+      "id": "PERSIST.MARKER",
+      "object": "Moment Marker",
+      "default_state": "Absent",
+      "may_persist_only_when": "User confirms label, relative date metadata, and return preference",
+      "must_not_be_silently_added": "Narrative, person name, inferred severity",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    },
+    {
+      "id": "PERSIST.MARKER_NOTE",
+      "object": "Private marker note",
+      "default_state": "Absent",
+      "may_persist_only_when": "Separately previewed and confirmed",
+      "must_not_be_silently_added": "Any note inferred from selections",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    },
+    {
+      "id": "PERSIST.ARTIFACT",
+      "object": "Portable artifact",
+      "default_state": "Absent",
+      "may_persist_only_when": "Exact content and placement are previewed and confirmed",
+      "must_not_be_silently_added": "Unreviewed interpretation",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    },
+    {
+      "id": "PERSIST.PATCH",
+      "object": "Toolkit patch",
+      "default_state": "Absent",
+      "may_persist_only_when": "Before/after, scope, version, and undo are confirmed",
+      "must_not_be_silently_added": "Bundled or inferred changes",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    },
+    {
+      "id": "PERSIST.TRIGGER",
+      "object": "Trigger",
+      "default_state": "Absent",
+      "may_persist_only_when": "User configures label, association/schedule, route, and controls",
+      "must_not_be_silently_added": "Passive emotional inference",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    },
+    {
+      "id": "PERSIST.DIAGNOSTIC",
+      "object": "Testing trace",
+      "default_state": "Off",
+      "may_persist_only_when": "Participant knowingly enables a local diagnostic session",
+      "must_not_be_silently_added": "Custom text or destination-use history",
+      "source_file": "Functional Prototype Contract and Learning Plan - v0.1.docx",
+      "source_location": "Section 7.2 persistence matrix",
+      "source_status": "Binding prototype contract",
+      "content_version": "0.6"
+    }
+  ]
+}
