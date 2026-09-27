@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "content_version": "0.6",
+  "records": [
+    {
+      "id": "RG-RESOURCE-STANDARD",
+      "start": "NOW.OFF.S06",
+      "selections": [
+        "OPT.NOW.132",
+        "OPT.V04.RES.S.05"
+      ],
+      "expected_sequence": [
+        "NOW.OFF.S06",
+        "NOW.OFF.RESOURCE.S",
+        "NOW.OFF.S07"
+      ],
+      "assertion": "Distance is operationalized; unavailable-now remains valid; retention comes afterward."
+    },
+    {
+      "id": "RG-RESOURCE-LOW",
+      "start": "NOW.OFF.L02",
+      "selections": [
+        "OPT.NOW.159",
+        "OPT.V04.RES.L.02"
+      ],
+      "expected_sequence": [
+        "NOW.OFF.L02",
+        "NOW.OFF.RESOURCE.L",
+        "NOW.OFF.L03"
+      ],
+      "assertion": "Information is made usable in a very-low-capacity step before closure."
+    },
+    {
+      "id": "RG-UNCLEAR-CONSENT",
+      "start": "NOW.UNCLEAR.S02",
+      "selections": [
+        "OPT.NOW.438",
+        "OPT.V04.UNC.NEXT.01"
+      ],
+      "expected_sequence": [
+        "NOW.UNCLEAR.S02",
+        "NOW.UNCLEAR.NEXT",
+        "NOW.UNCLEAR.S05"
+      ],
+      "assertion": "A direction does not silently become signal-interference analysis."
+    },
+    {
+      "id": "RG-UNCLEAR-POWER-OPT-IN",
+      "start": "NOW.UNCLEAR.S03",
+      "selections": [
+        "OPT.NOW.447",
+        "OPT.V04.UNC.NEXT.02"
+      ],
+      "expected_sequence": [
+        "NOW.UNCLEAR.S03",
+        "NOW.UNCLEAR.NEXT",
+        "NOW.UNCLEAR.S04"
+      ],
+      "assertion": "Power analysis occurs only after an explicit lens choice."
+    },
+    {
+      "id": "RG-EXPANSION-CARRY",
+      "start": "NOW.FEED.S06",
+      "selections": [
+        "OPT.NOW.059",
+        "BRIDGE.EXPAND.S2.OPT.01"
+      ],
+      "expected_sequence": [
+        "NOW.FEED.S06",
+        "BRIDGE.EXPAND.S2",
+        "PM.03"
+      ],
+      "expected_destinations": [
+        "BRIDGE.EXPAND.S2",
+        "PRACTICE:S2:CARRIED"
+      ],
+      "assertion": "The completed thread enters practice with context; no restart occurs."
+    },
+    {
+      "id": "RG-LOW-MORE",
+      "start": "NOW.OFF.L03",
+      "selections": [
+        "OPT.NOW.166",
+        "OPT.V04.OFF.MORE.02"
+      ],
+      "expected_sequence": [
+        "NOW.OFF.L03",
+        "BRIDGE.NOW.OFF.MORE",
+        "NOW.OFF.S04"
+      ],
+      "assertion": "More expands the existing thread and does not restart at NOW.OFF.S01."
+    },
+    {
+      "id": "RG-S2-INFORMATION",
+      "start": "S2.W1.P",
+      "selections": [
+        "OPT.S2.W1.P.04",
+        "OPT.V04.S2.INFO.01"
+      ],
+      "expected_sequence": [
+        "S2.W1.P",
+        "S2.W1.INFO",
+        "S2.W1.03"
+      ],
+      "assertion": "More information becomes a usable kernel without mandatory power analysis."
+    },
+    {
+      "id": "RG-CUSTOM-INPUT",
+      "start": "NOW.FEED.S01",
+      "selections": [
+        "OPT.NOW.011"
+      ],
+      "expected_sequence": [
+        "NOW.FEED.S01",
+        "NOW.FEED.S02"
+      ],
+      "expected_destination_prefix": "CUSTOM.INPUT.",
+      "assertion": "Write my own opens capture and advances only after confirmation."
+    },
+    {
+      "id": "RG-VISIBLE-CONTINUITY",
+      "start": "S2.W3.01",
+      "selections": [
+        "OPT.S2.W3.01.03"
+      ],
+      "expected_sequence": [
+        "S2.W3.01",
+        "S2.W3.02"
+      ],
+      "assertion": "My consent remains visible while the page changes from jurisdiction to power analysis."
+    }
+  ]
+}
