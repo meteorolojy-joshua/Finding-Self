@@ -296,6 +296,10 @@ const UI = (() => {
     });
   }
   function startPageTutorial() {
+    // The garden page has its own interactive tutorial; everything else uses the home tour.
+    if (document.querySelector('#view .card')?.dataset.page === 'garden') {
+      if (window.GARDEN_TUTORIAL?.start()) return;
+    }
     // The tour points at home-page sections; make sure we're home before starting it.
     if (!$view().querySelector('[data-od-id="home"]')) renderHome();
     startTour();
@@ -716,6 +720,8 @@ const UI = (() => {
         <div class="pcontrols"><button class="pctl" type="button" data-act="home">Home</button></div>
         <div class="node-title">Help</div>
         <h1 class="prompt">Help</h1>
+        <h2 class="h3">How to use a specific page in the app</h2>
+        <p class="support">To learn how to use a specific page in the app, go to the page, click "About This Page" in the top right corner, and then click "View tutorial for this page".</p>
         <h2 class="h3">Start here</h2>
         <ol class="list">
           <li>Pick the moment you are in under <b>Check-Ins</b>.</li>
@@ -727,7 +733,7 @@ const UI = (() => {
         <h2 class="h3">Self-records</h2>
         <p class="support">Everything the app keeps for you, all in one place. Self-records opens with Your sampler — a cloth that grows, season by season, as you stitch completed practices into it. Practices 1 and 2 rehearse something you want ready next time, rather than meeting a moment that is already here; completing one lets you draw your own stitch straight onto the sampler cloth. Practice 3 — Small things is a lighter one: a day's micro-list you can leave open and fill as things happen, or key in all at once, in words or photos. A photo can be left whole, or cut into a shape of your choosing with the little scissors — drag them around the part you want and the cut finishes when your line closes into a loop. Nothing is kept until you close the list.</p>
         <h2 class="h3">Explorations — open rooms, no finish line</h2>
-        <p class="support">Quiet spaces to wander in — a plant to grow, gemstones, stories — with nothing to complete and no wrong way through. Two rooms are for harder feelings: Furnace of rage is a low ember field for anger, with no requirement to calm down, reframe it, or find the lesson; In memory is deep water for grief — for a person, a hard year, or a version of you that is gone. In both, you arrange small objects like a memorial altar as well as, or instead of, writing — words and objects are both optional, and nothing is kept unless you choose to keep it.</p>
+        <p class="support">Quiet spaces to wander in — a plant to grow, gemstones, stories — with nothing to complete and no wrong way through. Two rooms are for harder feelings: Furnace of rage is a fireplace for anger, with no requirement to calm down, reframe it, or find the lesson; In memory is a quiet room for grief — for a person, a hard year, or a version of you that is gone — with rain falling outside its window and a dial to say how heavy it feels. In both, you arrange small objects like a memorial altar as well as, or instead of, writing — words and objects are both optional, and nothing is kept unless you choose to keep it.</p>
         <h2 class="h3">Your check-in scenarios</h2>
         <p class="support">Each check-in on the home page has a small pencil button at its top-right corner — tap it to edit that check-in. Editing a pre-made check-in makes it your own editable copy; the pre-made original is never changed. The dotted “add a check-in” box lets you start a brand-new check-in from a blank page, or from one of the pre-made templates. The home page holds up to 6 check-ins.</p>
         <h2 class="h3">Your data</h2>

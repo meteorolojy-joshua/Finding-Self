@@ -136,6 +136,7 @@ window.ELEMENTAL = (() => {
   const FREE_SLOTS = [[30, 32], [66, 28], [46, 55], [24, 66], [70, 62], [50, 38]];
   function roomHTML(element) {
     const R = ROOMS[element];
+    if (element === 'grief') return griefRoomHTML(R);
     return `
     <div class="card el-room" data-od-id="elemental-room-${element}" data-page="elemental-room">
       <div class="pcontrols"><button class="pctl" type="button" data-el="back">Self-Explorations</button></div>
@@ -159,8 +160,179 @@ window.ELEMENTAL = (() => {
     </div>`;
   }
 
+  /* In Memory — normal background, a rainy window holding the altar,
+     and a dial beside it for how heavy the grief (and rain) feels. */
+  const GRIEF_LEVELS = ['a little glum', '', '', '', 'weeping an ocean of grief'];
+  function griefRoomHTML(R) {
+    const level = griefRainLevel();
+    return `
+    <div class="card el-room" data-od-id="elemental-room-grief" data-page="elemental-room">
+      <div class="pcontrols"><button class="pctl" type="button" data-el="back">Self-Explorations</button></div>
+      <div class="el-pad">
+        <div class="el-field el-grief el-grief-new" id="el-field">
+          <div class="el-title"><b>${esc(R.title)}</b><span>${esc(R.intro)}</span></div>
+          <div class="grief-window-row">
+            <div class="grief-window" id="grief-window">
+              <canvas class="grief-rain-canvas" id="grief-rain" aria-hidden="true"></canvas>
+              <div class="el-stage" id="el-stage"><p class="el-hint" id="el-hint">${esc(R.hint)}</p></div>
+              <div class="grief-window-frame" aria-hidden="true"></div>
+              <div class="grief-window-sill" aria-hidden="true"></div>
+            </div>
+            <div class="grief-dial-col">
+              <div class="grief-dial" id="grief-dial">
+                <p class="grief-dial-caption">How heavy does the grief feel right now?</p>
+                <div class="grief-dial-body">
+                  <div class="grief-knob" role="slider" tabindex="0" aria-label="How heavy the grief feels"
+                       aria-valuemin="0" aria-valuemax="4" aria-valuenow="${level}" aria-valuetext="${esc(griefLevelLabel(level))}"
+                       data-level="${level}" style="touch-action:none">
+                    <span class="grief-knob-pointer"></span>
+                  </div>
+                  <div class="grief-settings" aria-hidden="true">
+                    ${[4, 3, 2, 1, 0].map(l => `
+                      <button type="button" tabindex="-1" class="grief-setting${l === level ? ' on' : ''}" data-set="${l}">
+                        <span class="grief-setting-line"></span><span class="grief-setting-label">${esc(GRIEF_LEVELS[l])}</span>
+                      </button>`).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-dock">
+            <div class="el-chip el-q"><p id="el-qtext"></p><button type="button" class="el-link" data-el="another">Another question</button></div>
+            <div class="el-chip el-w"><label class="sr-only" for="el-text">Your words</label><textarea id="el-text" rows="2" placeholder="Write as little or as much as you like…"></textarea></div>
+            <div class="el-chip el-tray" id="el-tray" role="group" aria-label="Small objects to place in the room"></div>
+            <div class="el-actions">
+              <button type="button" class="el-keep" data-el="keep">Keep this</button>
+              <button type="button" class="el-ghost" data-el="leave">Leave</button>
+            </div>
+            <p class="el-note" id="el-note" role="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+  function griefLevelLabel(l) { return GRIEF_LEVELS[l] || ('level ' + (l + 1) + ' of 5'); }
+  function griefRainLevel() {
+    try { const v = JSON.parse(localStorage.getItem('fsaw.grief.v1') || '{}').rain; return Number.isInteger(v) ? clamp(v, 0, 4) : 1; }
+    catch (e) { return 1; }
+  }
+  function setGriefRainLevel(l) {
+    l = clamp(Math.round(l), 0, 4);
+    try { localStorage.setItem('fsaw.grief.v1', JSON.stringify({ rain: l })); } catch (e) { /* ignore */ }
+    const dial = $('#grief-dial');
+    if (dial) {
+      const knob = dial.querySelector('.grief-knob');
+      knob.dataset.level = l;
+      knob.setAttribute('aria-valuenow', l);
+      knob.setAttribute('aria-valuetext', griefLevelLabel(l));
+      dial.querySelectorAll('.grief-setting').forEach(b => b.classList.toggle('on', Number(b.dataset.set) === l));
+    }
+    if (typeof griefRainSet === 'function') griefRainSet(l);
+  }
+  let griefRainSet = null;
+
+  /* Rain falling outside the window. Heavier with the dial level. */
+  function startRain(canvas) {
+    const ctx = canvas.getContext('2d');
+    const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    let w = 0, h = 0, raf = 0, stopped = false;
+    let level = griefRainLevel();
+    griefRainSet = l => { level = l; seed(); };
+    let drops = [];
+    function size() {
+      const r = canvas.getBoundingClientRect();
+      w = Math.max(1, r.width); h = Math.max(1, r.height);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+    }
+    function seed() {
+      // More drops, faster and longer as the level rises.
+      const n = [36, 70, 120, 180, 260][level];
+      drops = Array.from({ length: n }, () => ({
+        x: Math.random() * (w + 40) - 20,
+        y: Math.random() * h,
+        len: 9 + Math.random() * 8 + level * 4,
+        spd: 3.2 + Math.random() * 2.4 + level * 1.9,
+        op: .28 + Math.random() * .22 + level * .06,
+      }));
+    }
+    function paint() {
+      // Dusky sky outside.
+      const g = ctx.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#3a4656'); g.addColorStop(.6, '#2c3644'); g.addColorStop(1, '#232b36');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      // Faint distant hills.
+      ctx.fillStyle = 'rgba(18,24,32,.55)';
+      ctx.beginPath(); ctx.moveTo(0, h);
+      ctx.quadraticCurveTo(w * .25, h * .62, w * .5, h * .78);
+      ctx.quadraticCurveTo(w * .75, h * .92, w, h * .7);
+      ctx.lineTo(w, h); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = '#aebfd0'; ctx.lineCap = 'round';
+      for (const d of drops) {
+        d.y += d.spd; d.x -= d.spd * .18;
+        if (d.y > h + 20) { d.y = -20; d.x = Math.random() * (w + 40) - 20; }
+        ctx.globalAlpha = Math.min(.9, d.op);
+        ctx.lineWidth = 1 + level * .28;
+        ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x + d.len * .18, d.y + d.len); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function frame() { if (stopped) return; paint(); raf = requestAnimationFrame(frame); }
+    size();
+    paint();
+    if (!reduced) raf = requestAnimationFrame(frame);
+    const onVis = () => {
+      if (stopped) return;
+      if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }
+      else if (!reduced && !raf) raf = requestAnimationFrame(frame);
+    };
+    document.addEventListener('visibilitychange', onVis);
+    window.addEventListener('resize', size);
+    const stop = function () {
+      stopped = true; cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVis);
+      window.removeEventListener('resize', size);
+      if (griefRainSet) griefRainSet = null;
+    };
+    return stop;
+  }
+
+  function wireGriefDial() {
+    const dial = $('#grief-dial');
+    if (!dial) return;
+    const knob = dial.querySelector('.grief-knob');
+    let dragging = false, startY = 0, startLevel = 0;
+    const pxPerLevel = 40;
+    knob.addEventListener('pointerdown', e => {
+      dragging = true; startY = e.clientY;
+      startLevel = Number(knob.dataset.level) || 0;
+      knob.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    knob.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const d = Math.round((startY - e.clientY) / pxPerLevel);
+      setGriefRainLevel(startLevel + d);
+      startY = e.clientY; startLevel = clamp(startLevel + d, 0, 4);
+    });
+    const stop = () => { dragging = false; };
+    knob.addEventListener('pointerup', stop);
+    knob.addEventListener('pointercancel', stop);
+    knob.addEventListener('keydown', e => {
+      const cur = Number(knob.dataset.level) || 0;
+      if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); setGriefRainLevel(cur + 1); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); setGriefRainLevel(cur - 1); }
+    });
+    dial.querySelectorAll('.grief-setting').forEach(btn => {
+      btn.addEventListener('click', () => setGriefRainLevel(Number(btn.dataset.set)));
+    });
+  }
+
   function openRoom(element) {
     if (!ROOMS[element]) element = 'fury';
+    if (element === 'fury' && window.FURY_ROOM) { stop(); window.FURY_ROOM.open(); return; }
     stop();
     view().innerHTML = roomHTML(element);
     const R = ROOMS[element];
@@ -168,7 +340,22 @@ window.ELEMENTAL = (() => {
       text = $('#el-text'), qtext = $('#el-qtext');
     let qi = 0;
     qtext.textContent = R.prompts[0];
-    stopScene = startScene(view().querySelector('.el-canvas'), element);
+    if (element === 'grief') {
+      stopScene = startRain(view().querySelector('#grief-rain'));
+      wireGriefDial();
+      /* enhance() runs on the next microtask via MutationObserver and clears
+         the About text, so set ours on a macrotask after it. */
+      setTimeout(() => {
+        if (window.ITERATION && typeof window.ITERATION.setPageAbout === 'function') {
+          window.ITERATION.setPageAbout(
+            'A quiet room for grief — for a person, a hard year, or a version of you that is gone. Nothing here needs to be positive. Outside the window the rain falls; turn the dial beside it from "a little glum" to "weeping an ocean of grief" and the rain falls heavier with how heavy it feels. Arrange the small objects on the altar below however feels right, and write as little or as much as you like.',
+            'About this exploration'
+          );
+        }
+      }, 0);
+    } else {
+      stopScene = startScene(view().querySelector('.el-canvas'), element);
+    }
 
     const placed = []; // {uid,key,x,y,el,label}
     const trayKeys = R.objects.map(o => o.key);

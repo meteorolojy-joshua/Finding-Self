@@ -10,8 +10,106 @@ window.ITERATION=(()=>{
   let currentAbout=null;
   function setPageAbout(text,title){currentAbout={text,title:title||'About this exploration'};}
   function openPageAbout(){if(!currentAbout)return false;const {text,title}=currentAbout;const body=text.split(/\n\s*\n/).map(paragraph=>`<p>${E().esc(paragraph)}</p>`).join('')+`<div class="btnrow"><button class="btn2" type="button" data-page-tutorial>View tutorial for this page</button></div>`;const d=dialog(title,body);d.node.addEventListener('click',e=>{if(!e.target.closest('[data-page-tutorial]'))return;e.preventDefault();d.close();if(window.UI&&typeof window.UI.startPageTutorial==='function')window.UI.startPageTutorial();});return true;}
-  function contributions(){E().page('contributions','contribution','Ways I Want to Contribute','Open an object. Imagine what you’d enjoy contributing.',`<div class="contribution-objects">${ITERATION_DATA.contributions.map(item=>{const b=item.key==='notebook'?[49,64,110,64]:item.box,w=item.key==='others'?428:204,h=item.key==='others'?100:180;return `<button class="contribution-object ${item.key==='others'?'wide':''}" data-iteration="contribution" data-id="${item.key}" aria-label="${E().esc(item.label)}"><span class="contribution-art">${E().asset('current/contribution-'+item.key)}<span class="contribution-preview ${E().data.contributions[item.key]?'has-words':''}" style="left:${b[0]/w*100}%;top:${b[1]/h*100}%;width:${b[2]/w*100}%;height:${b[3]/h*100}%">${E().esc(E().data.contributions[item.key]||item.cue)}</span></span><span class="contribution-label">${E().esc(item.label)}</span></button>`;}).join('')}</div><p class="note-hint" id="contribution-status">One object is enough. You can return and change your words.</p><button class="btn" data-iteration="keep-contributions">Keep these contributions</button>`);enhance();}
-  function editContribution(id){const item=ITERATION_DATA.contributions.find(x=>x.key===id);if(!item)return;E().openModal('contribution-dialog',E().esc(item.label),`<p>What would your own version look like? A few words, a wish, or an unfinished thought.</p>${E().field('My words',E().data.contributions[id]||'','words','Jot down a thought…')}`,v=>{if(!E().commit('contributions',id,v.words))return false;E().closeModal();E().redraw(contributions);$(`[data-iteration="contribution"][data-id="${id}"]`)?.focus();E().notify('Your words are kept on this device.');});}
+  function getShovels(){const s=E().data.contributions._shovels;return Array.isArray(s)&&s.length===4?s.slice():[null,null,null,null];}
+  function labelForContribution(key){const it=ITERATION_DATA.contributions.find(x=>x.key===key);return it?it.label:key;}
+  function placeShovel(si,key){
+    const shovels=getShovels();
+    shovels.forEach((k,j)=>{if(j!==si&&k===key)shovels[j]=null;});
+    shovels[si]=key;
+    if(!E().commit('contributions','_shovels',shovels))return;
+    E().redraw(contributions);
+    E().notify('Shovel leaned on '+labelForContribution(key)+'.');
+  }
+  function takeShovelDown(si){
+    const shovels=getShovels();shovels[si]=null;
+    if(!E().commit('contributions','_shovels',shovels))return;
+    E().redraw(contributions);
+    E().notify('Shovel back on the wall.');
+  }
+  function dropTargetAt(x,y){
+    const el=document.elementFromPoint(x,y);
+    if(!el)return null;
+    return el.closest('.contribution-slot')||el.closest('.shovel-bracket');
+  }
+  function startShovelDrag(e,si){
+    e.preventDefault();
+    const fromItem=getShovels()[si];
+    const startX=e.clientX,startY=e.clientY;
+    let ghost=null,dragging=false;
+    const move=ev=>{
+      if(!dragging){
+        if(Math.hypot(ev.clientX-startX,ev.clientY-startY)<7)return;
+        dragging=true;
+        ghost=document.createElement('div');
+        ghost.className='shovel-ghost';
+        ghost.innerHTML='<img src="assets/current/shovel.svg" alt="">';
+        document.body.appendChild(ghost);
+        document.querySelectorAll('[data-shovel="'+si+'"]').forEach(o=>o.classList.add('shovel-dragging-src'));
+      }
+      ghost.style.transform='translate('+ev.clientX+'px,'+ev.clientY+'px)';
+      document.querySelectorAll('.drop-hint').forEach(x=>x.classList.remove('drop-hint'));
+      const t=dropTargetAt(ev.clientX,ev.clientY);
+      if(t)t.classList.add('drop-hint');
+    };
+    const up=ev=>{
+      window.removeEventListener('pointermove',move);
+      window.removeEventListener('pointerup',up);
+      window.removeEventListener('pointercancel',up);
+      if(ghost)ghost.remove();
+      document.querySelectorAll('.drop-hint').forEach(x=>x.classList.remove('drop-hint'));
+      document.querySelectorAll('.shovel-dragging-src').forEach(x=>x.classList.remove('shovel-dragging-src'));
+      if(!dragging){if(fromItem!==null)takeShovelDown(si);return;}
+      const t=dropTargetAt(ev.clientX,ev.clientY);
+      if(!t)return;
+      if(t.classList.contains('contribution-slot'))placeShovel(si,t.dataset.item);
+      else takeShovelDown(si);
+    };
+    window.addEventListener('pointermove',move);
+    window.addEventListener('pointerup',up);
+    window.addEventListener('pointercancel',up);
+  }
+  function wireShovels(){
+    document.querySelectorAll('.wall-shovel,.placed-shovel').forEach(el=>{
+      el.addEventListener('pointerdown',e=>startShovelDrag(e,Number(el.dataset.shovel)));
+    });
+  }
+  function contributions(){
+    const shovels=getShovels();
+    E().page('contributions','contribution','Ways I Want to Contribute','Drag a shovel from the wall onto something you’d like to contribute to — or open any object to write about what you’d bring.',`<div class="shovel-wall" id="shovel-wall">
+      <p class="shovel-wall-caption">Four shovels hang on the wall. Drag one onto something you’d like to contribute to.</p>
+      <div class="shovel-plank">${[0,1,2,3].map(i=>`
+        <div class="shovel-bracket" data-bracket="${i}">${shovels[i]===null?`
+          <button type="button" class="wall-shovel" data-shovel="${i}" aria-label="Shovel ${i+1} — drag it onto something you’d like to contribute to">${E().asset('current/shovel')}</button>`
+          :`<span class="shovel-bracket-empty" aria-hidden="true"></span>`}
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="contribution-objects">${ITERATION_DATA.contributions.map(item=>{const b=item.key==='notebook'?[49,64,110,64]:item.box,w=item.key==='others'?428:204,h=item.key==='others'?100:180;const si=shovels.indexOf(item.key);return `<div class="contribution-slot" data-item="${item.key}"><button class="contribution-object ${item.key==='others'?'wide':''}" data-iteration="contribution" data-id="${item.key}" aria-label="${E().esc(item.label)}"><span class="contribution-art">${E().asset('current/contribution-'+item.key)}<span class="contribution-preview ${E().data.contributions[item.key]?'has-words':''}" style="left:${b[0]/w*100}%;top:${b[1]/h*100}%;width:${b[2]/w*100}%;height:${b[3]/h*100}%">${E().esc(E().data.contributions[item.key]||item.cue)}</span></span><span class="contribution-label">${E().esc(item.label)}</span></button>${si!==-1?`<span class="placed-shovel" data-shovel="${si}" title="Shovel ${si+1} on ${E().esc(item.label)} — drag to move it, or tap to take it down"><img src="assets/current/shovel.svg" alt="" draggable="false"></span>`:''}</div>`;}).join('')}</div><p class="note-hint" id="contribution-status">One object is enough. You can return and change your words.</p><button class="btn" data-iteration="keep-contributions">Keep these contributions</button>`);
+    wireShovels();
+    enhance();
+    setTimeout(()=>{
+      const sup=document.querySelector('#view [data-page="contributions"] .support');
+      if(sup)sup.textContent='Drag a shovel from the wall onto something you\u2019d like to contribute to \u2014 or open any object to write about what you\u2019d bring.';
+      if(window.ITERATION&&typeof window.ITERATION.setPageAbout==='function')window.ITERATION.setPageAbout('What would you enjoy bringing into the lives and places around you? Four shovels hang on the wall \u2014 drag one onto anything you\u2019d like to contribute to. Open any object to jot down a thought. The pictures are starting points; write whatever feels like yours.','About contributing');
+    },0);
+  }
+  function editContribution(id){
+    const item=ITERATION_DATA.contributions.find(x=>x.key===id);if(!item)return;
+    const shovels=getShovels();
+    const onThis=shovels.indexOf(id);
+    const wallFree=shovels.indexOf(null);
+    const shovelBtn=onThis!==-1
+      ?`<button type="button" class="btn2" id="shovel-dialog-btn">Take the shovel down</button>`
+      :wallFree!==-1
+        ?`<button type="button" class="btn2" id="shovel-dialog-btn">Lean a shovel here</button>`
+        :`<p class="note-hint">All four shovels are already leaning on other things.</p>`;
+    E().openModal('contribution-dialog',E().esc(item.label),`<p>What would your own version look like? A few words, a wish, or an unfinished thought.</p>${E().field('My words',E().data.contributions[id]||'','words','Jot down a thought\u2026')}<div class="btnrow">${shovelBtn}</div>`,v=>{if(!E().commit('contributions',id,v.words))return false;E().closeModal();E().redraw(contributions);$(`[data-iteration="contribution"][data-id="${id}"]`)?.focus();E().notify('Your words are kept on this device.');});
+    const sb=document.getElementById('shovel-dialog-btn');
+    if(sb)sb.addEventListener('click',()=>{
+      E().closeModal();
+      if(onThis!==-1)takeShovelDown(onThis);else if(wallFree!==-1)placeShovel(wallFree,id);
+    });
+  }
   function enhance(){const card=$('#view .card');if(!card)return;const id=card.dataset.page||card.dataset.odId;
     currentAbout=null;
     const major={garden:plantAbout, 'longer-explorations':livingRoomAbout, 'spaces':spacesAbout};
