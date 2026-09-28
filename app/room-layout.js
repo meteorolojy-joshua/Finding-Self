@@ -14,7 +14,7 @@ window.ROOM_LAYOUT=(()=>{
     basket:{label:'pick more self-explorations',art:'basket',x:30,y:650,w:154,h:186,body:[12,0,130,140],base:[30,128,94],labelBox:[0,148,154,38],mass:2},
     cupboard:{label:'archive a self-exploration',art:'cupboard',x:238,y:549,w:154,h:186,body:[12,0,130,140],base:[24,136,108],labelBox:[0,148,154,38],surface:[15,6,124,4],mass:10,floorOnly:true},
     spaces:{label:'Room to Be Myself',action:'open-lamp-room',x:75,y:38.90625,w:146,h:38,fixed:true},
-    fireplace:{label:'Somewhere to put the fury',action:'open-fury-room',art:'room-fireplace',x:149,y:177.90625,w:200,h:100,fixed:true,sideLabel:true},
+    fireplace:{label:'Furnace of rage',action:'open-fury-room',art:'room-fireplace',x:149,y:177.90625,w:200,h:100,fixed:true,sideLabel:true},
     altar:{label:'In memory',action:'open-grief-room',art:'room-altar',x:10,y:494,w:110,h:120,imgBox:[0,8,110,104],body:[15,40,80,60],base:[20,100,60],labelBox:[-8,102,126,38],mass:1}
   };
   concepts.forEach(([id,label],i)=>registry[id]={label,art:'concept-'+id,x:8+(i%3)*144,y:i<3?755:902,w:124,h:133,body:[12,0,100,100],base:[24,94,76],labelBox:[0,112,124,21],mass:1,concept:true});

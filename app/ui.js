@@ -194,7 +194,6 @@ const UI = (() => {
   const TUT_KEY = 'fsaw.tutorial.v1';
   /* Tutorial steps — placeholder content; J will specify the final tutorial. */
   const TOUR_STEPS = [
-    { title: 'A quick tour', text: 'My Presence has three parts. Follow the arrows — each step points at the part it describes.', target: null },
     { title: 'Check-Ins', text: 'Short guided check-ins for right now. Tap one to begin, tap its pencil to edit it, or add your own from scratch with the dotted box.', target: '[data-od-id="checkins"]' },
     { title: 'Self-Explorations', text: 'Open rooms with no finish line. Wander in, arrange things, write a little.', target: '[data-od-id="longer-explorations-preview"]' },
     { title: 'Self-Records', text: 'What you keep: stitches on your sampler, days gathered in small things.', target: '[data-od-id="self-records"]' }
@@ -295,6 +294,11 @@ const UI = (() => {
       if (answer === 'yes') startTour();
     });
   }
+  function startPageTutorial() {
+    // The tour points at home-page sections; make sure we're home before starting it.
+    if (!$view().querySelector('[data-od-id="home"]')) renderHome();
+    startTour();
+  }
   function renderHome() {
     const bm = ENGINE.Session.pausedBookmark;
     $view().innerHTML = `
@@ -304,13 +308,13 @@ const UI = (() => {
           <div class="home-hero-text">
             <div class="node-title">Home</div>
             <h1 class="prompt">What would help you feel more grounded right now?</h1>
-            <p class="support">Check-ins are short guided moments for right now · Self-records keep what you keep — stitches on your sampler, days gathered in small things · Explorations are open rooms with no finish line.</p>
           </div>
         </div>
         ${firstVisit() ? '<div class="banner" role="status">Everything you write stays on this device.</div>' : ''}
         ${bm ? `<div class="banner">A paused run is kept at <code>${esc(bm.nodeId)}</code>. <button class="ghost" type="button" data-act="entry" data-entry="ENTRY.RESUME">Resume</button> <button class="ghost" type="button" data-act="discard-bookmark">Discard</button></div>` : ''}
         <div class="home-sec flows-sec" data-od-id="checkins">
           <h2 class="h3">Check-Ins</h2>
+          <p class="support">Check-ins are short guided moments for right now.</p>
           ${(() => {
             const chosenIds = SCENARIO.getChosenStarterIds();
             const starters = ENGINE.PKG.starters.filter(s => chosenIds.indexOf(s.id) !== -1);
@@ -346,10 +350,11 @@ const UI = (() => {
               <span class="pv-ledge"></span>
             </span>
           </button>
+          <p class="support">Explorations are open rooms with no finish line.</p>
         </div>
         <div class="home-sec home-sec-entries" data-od-id="self-records">
           <h2 class="h3">Self-Records</h2>
-          <p class="support">Keep fragments of your lived reality</p>
+          <p class="support">Self-records keep what you keep — stitches on your sampler, days gathered in small things.</p>
           <div class="entry-shelf">
             <div class="options entry-list">
               <button class="opt entry-row ledge has-cursor-tip" type="button" data-act="practice-library" data-tip="Your sampler, your practices, and your kept days — everything the app keeps for you"><span class="entry-ico" aria-hidden="true">${ICO_ARM}</span><b>Open your self-records</b></button>
@@ -721,7 +726,7 @@ const UI = (() => {
         <h2 class="h3">Self-records</h2>
         <p class="support">Everything the app keeps for you, all in one place. Self-records opens with Your sampler — a cloth that grows, season by season, as you stitch completed practices into it. Practices 1 and 2 rehearse something you want ready next time, rather than meeting a moment that is already here; completing one lets you draw your own stitch straight onto the sampler cloth. Practice 3 — Small things is a lighter one: a day's micro-list you can leave open and fill as things happen, or key in all at once, in words or photos. A photo can be left whole, or cut into a shape of your choosing with the little scissors — drag them around the part you want and the cut finishes when your line closes into a loop. Nothing is kept until you close the list.</p>
         <h2 class="h3">Explorations — open rooms, no finish line</h2>
-        <p class="support">Quiet spaces to wander in — a plant to grow, gemstones, stories — with nothing to complete and no wrong way through. Two rooms are for harder feelings: Somewhere to put the fury is a low ember field for anger, with no requirement to calm down, reframe it, or find the lesson; In memory is deep water for grief — for a person, a hard year, or a version of you that is gone. In both, you arrange small objects like a memorial altar as well as, or instead of, writing — words and objects are both optional, and nothing is kept unless you choose to keep it.</p>
+        <p class="support">Quiet spaces to wander in — a plant to grow, gemstones, stories — with nothing to complete and no wrong way through. Two rooms are for harder feelings: Furnace of rage is a low ember field for anger, with no requirement to calm down, reframe it, or find the lesson; In memory is deep water for grief — for a person, a hard year, or a version of you that is gone. In both, you arrange small objects like a memorial altar as well as, or instead of, writing — words and objects are both optional, and nothing is kept unless you choose to keep it.</p>
         <h2 class="h3">Your check-in scenarios</h2>
         <p class="support">Each check-in on the home page has a small pencil button at its top-right corner — tap it to edit that check-in. Editing a pre-made check-in makes it your own editable copy; the pre-made original is never changed. The dotted “add a check-in” box lets you start a brand-new check-in from a blank page, or from one of the pre-made templates. The home page holds up to 6 check-ins.</p>
         <h2 class="h3">Your data</h2>
@@ -1474,6 +1479,9 @@ const UI = (() => {
         document.querySelectorAll('[data-ui="inspector"]').forEach(x => x.setAttribute('aria-pressed', String(ENGINE.Session.inspectorVisible)));
         updateInspector();
       }
+      if (k === 'about-page') {
+        if (window.ITERATION && typeof window.ITERATION.openPageAbout === 'function') window.ITERATION.openPageAbout();
+      }
     }));
 
     $view().addEventListener('click', (e) => {
@@ -1688,7 +1696,7 @@ const UI = (() => {
   return {
     init, render, renderHome, renderLongerExplorations, renderTerminal, renderExternalTerminal,
     renderPrimitiveTerminal, renderOnboardingResult, renderNode, renderHelp, renderPracticeLibrary,
-    renderSettings, updateInspector,
+    renderSettings, updateInspector, startPageTutorial,
     _ob: null, _invQuery: '', _invOrigin: null, _stitchPad: null, _cutter: null
   };
 })();

@@ -1,5 +1,5 @@
 /* Elemental rooms — two Self-Explorations with animated elemental
-   fields. "Somewhere to put the fury" is a low ember field; "In memory" is
+   fields. "Furnace of rage" is a low ember field; "In memory" is
    deep water. Each room gives space for visual expression first: a tray of
    small objects to arrange freely, plus a few words if wanted. Keeping is
    explicit — nothing is stored unless "Keep this" is chosen. */
@@ -8,7 +8,7 @@ window.ELEMENTAL = (() => {
   const svg = inner => `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">${inner}</svg>`;
   const ROOMS = {
     fury: {
-      title: 'Somewhere to put the fury',
+      title: 'Furnace of rage',
       intro: 'Anger, without the requirement to calm down, reframe it, or find the lesson.',
       hint: 'A tray of small objects waits below — set them wherever the fury sits.',
       prompts: [
@@ -39,8 +39,7 @@ window.ELEMENTAL = (() => {
         { key: 'candle', label: 'A candle', svg: svg('<circle cx="24" cy="12" r="9" fill="#e8b64c" opacity=".25"/><rect x="20" y="20" width="8" height="20" rx="2" fill="#e9e2d2"/><rect x="23" y="14" width="2" height="7" fill="#8a7a5a"/><path d="M24 3c3 4 3 7 0 10-3-3-3-6 0-10z" fill="#f2b134"/>') },
         { key: 'stone', label: 'A stone', svg: svg('<path d="M10 33c2-11 13-17 22-13 7 3 9 11 3 16-7 6-21 5-25-3z" fill="#7d94a6"/><path d="M16 28c3-5 9-8 14-7" stroke="#b9cede" stroke-width="2" fill="none" stroke-linecap="round"/>') },
         { key: 'flower', label: 'A flower', svg: svg('<path d="M24 44V26" stroke="#6f8f6a" stroke-width="2.5" stroke-linecap="round"/><g fill="#c9d8e2"><ellipse cx="24" cy="11" rx="4.5" ry="7"/><ellipse cx="24" cy="11" rx="4.5" ry="7" transform="rotate(72 24 18)"/><ellipse cx="24" cy="11" rx="4.5" ry="7" transform="rotate(144 24 18)"/><ellipse cx="24" cy="11" rx="4.5" ry="7" transform="rotate(216 24 18)"/><ellipse cx="24" cy="11" rx="4.5" ry="7" transform="rotate(288 24 18)"/></g><circle cx="24" cy="18" r="4" fill="#e8c86a"/>') },
-        { key: 'frame', label: 'A small frame', svg: svg('<rect x="12" y="10" width="24" height="20" rx="1.5" fill="#8a6f4d"/><rect x="16" y="14" width="16" height="12" fill="#22384c"/><path d="M16 22c3-2 5 2 8 0s5 2 8 0" stroke="#9fc3d8" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M18 30l4 8M30 30l-4 8" stroke="#8a6f4d" stroke-width="2" stroke-linecap="round"/>') },
-        { key: 'shell', label: 'A shell', svg: svg('<path d="M24 42 L11 24 A17 17 0 0 1 37 24 Z" fill="#d8c9b0"/><path d="M24 42 L18 25 M24 42 L24 24 M24 42 L30 25" stroke="#a89478" stroke-width="1.5" stroke-linecap="round"/>') },
+        { key: 'photo', label: 'A photo of your own', photo: true, svg: svg('<rect x="9" y="13" width="30" height="22" rx="2.5" fill="#22384c"/><circle cx="18" cy="21" r="4" fill="#e8c86a"/><path d="M9 31l9-7 6 5 5-4 9 6v4H9z" fill="#6f8f6a"/><rect x="9" y="13" width="30" height="22" rx="2.5" fill="none" stroke="#8a6f4d" stroke-width="2.5"/>') },
       ],
     },
   };
@@ -177,7 +176,7 @@ window.ELEMENTAL = (() => {
 
     function renderTray() {
       tray.innerHTML = R.objects.filter(o => trayKeys.includes(o.key)).map(o =>
-        `<button type="button" class="el-tray-obj" data-obj="${esc(o.key)}" title="${esc(o.label)}" aria-label="Place ${esc(o.label)}" style="touch-action:none">${o.svg}</button>`).join('');
+        `<button type="button" class="el-tray-obj" data-obj="${esc(o.key)}" title="${esc(o.label)}" aria-label="${o.photo ? 'Add ' : 'Place '}${esc(o.label)}" style="touch-action:none">${o.svg}</button>`).join('');
       tray.querySelectorAll('.el-tray-obj').forEach(attachTray);
     }
     function freeSlot() {
@@ -186,18 +185,25 @@ window.ELEMENTAL = (() => {
       }
       return { x: 20 + Math.random() * 60, y: 25 + Math.random() * 45 };
     }
-    function addPlaced(key, x, y) {
+    function addPlaced(key, x, y, extra) {
       const o = objByKey(key); if (!o) return null;
       const uid = 'p' + Math.random().toString(36).slice(2);
       const d = document.createElement('div');
-      d.className = 'el-placed'; d.dataset.uid = uid;
+      d.className = 'el-placed' + (o.photo ? ' el-photo' : ''); d.dataset.uid = uid;
       d.style.left = x + '%'; d.style.top = y + '%';
       d.style.touchAction = 'none';
       d.tabIndex = 0; d.setAttribute('role', 'button');
-      d.setAttribute('aria-label', `${o.label} — drag to move, Enter for options`);
-      d.innerHTML = `${o.svg}<button type="button" class="el-rm" tabindex="-1" aria-label="Remove ${esc(o.label)}">×</button>`;
+      const rec = { uid, key, x, y, el: d, label: o.label, img: null, frame: 'none' };
+      if (o.photo && extra && typeof extra.img === 'string' && extra.img.indexOf('data:image/') === 0) {
+        rec.img = extra.img;
+        rec.frame = FRAMES.some(f => f.key === extra.frame) ? extra.frame : 'none';
+        d.setAttribute('aria-label', `${o.label} — drag to move, tap for frame options`);
+        d.innerHTML = `<div class="photo-frame photo-frame-${rec.frame}"><img src="${rec.img}" alt="${esc(o.label)}"></div><button type="button" class="el-rm" tabindex="-1" aria-label="Remove ${esc(o.label)}">×</button>`;
+      } else {
+        d.setAttribute('aria-label', `${o.label} — drag to move, Enter for options`);
+        d.innerHTML = `${o.svg}<button type="button" class="el-rm" tabindex="-1" aria-label="Remove ${esc(o.label)}">×</button>`;
+      }
       stage.append(d);
-      const rec = { uid, key, x, y, el: d, label: o.label };
       placed.push(rec);
       $('#el-hint')?.remove();
       attachPlaced(rec);
@@ -210,9 +216,116 @@ window.ELEMENTAL = (() => {
       if (!trayKeys.includes(rec.key)) { trayKeys.push(rec.key); renderTray(); }
     }
 
-    /* tray: drag an object out, or tap to place it at a free spot */
+    /* ---------- your own photo: source, file, frame ---------- */
+    const FRAMES = [
+      { key: 'none', label: 'No frame' },
+      { key: 'wood', label: 'Wooden' },
+      { key: 'dark', label: 'Dark' },
+      { key: 'white', label: 'White' },
+    ];
+    function elModal(html) {
+      const close = () => ov.remove();
+      const ov = document.createElement('div');
+      ov.className = 'el-modal-ov';
+      ov.innerHTML = `<div class="el-modal" role="dialog" aria-modal="true">${html}</div>`;
+      view().querySelector('.el-room').append(ov);
+      ov.addEventListener('pointerdown', e => { if (e.target === ov) close(); });
+      return { ov, close };
+    }
+    function choosePhotoSource() {
+      return new Promise(resolve => {
+        const { ov, close } = elModal(`
+          <b>Add your own photo</b>
+          <p>Take a new picture, or choose one from your camera roll.</p>
+          <div class="el-modal-btns">
+            <button type="button" data-src="camera">Take a photo</button>
+            <button type="button" data-src="roll">Camera roll</button>
+          </div>
+          <button type="button" class="el-ghostbtn" data-src="">Cancel</button>`);
+        ov.querySelectorAll('[data-src]').forEach(b => b.addEventListener('click', () => {
+          const v = b.dataset.src; close(); resolve(v || null);
+        }));
+      });
+    }
+    function pickPhotoFile(source) {
+      return new Promise(resolve => {
+        const inp = document.createElement('input');
+        inp.type = 'file'; inp.accept = 'image/*';
+        if (source === 'camera') inp.setAttribute('capture', 'environment');
+        inp.onchange = () => resolve(inp.files && inp.files[0] ? inp.files[0] : null);
+        inp.click();
+      });
+    }
+    function downscaleImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const max = 640, sc = Math.min(1, max / Math.max(img.width, img.height));
+            const c = document.createElement('canvas');
+            c.width = Math.max(1, Math.round(img.width * sc));
+            c.height = Math.max(1, Math.round(img.height * sc));
+            c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+            URL.revokeObjectURL(url);
+            resolve(c.toDataURL('image/jpeg', 0.82));
+          } catch (err) { URL.revokeObjectURL(url); reject(err); }
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('unreadable')); };
+        img.src = url;
+      });
+    }
+    function chooseFrame(dataURL, current, allowRemove) {
+      return new Promise(resolve => {
+        const opts = FRAMES.map(f => `
+          <button type="button" class="el-frame-opt${f.key === current ? ' sel' : ''}" data-frame="${f.key}" aria-pressed="${f.key === current}" aria-label="${f.label} frame">
+            <span class="photo-frame photo-frame-${f.key}"><img src="${dataURL}" alt=""></span>
+            <small>${f.label}</small>
+          </button>`).join('');
+        const { ov, close } = elModal(`
+          <b>${allowRemove ? 'Photo frame' : 'Frame this photo'}</b>
+          <div class="el-frame-opts">${opts}</div>
+          <div class="el-modal-btns">
+            ${allowRemove ? '<button type="button" class="el-ghostbtn danger" data-remove>Remove photo</button>' : ''}
+            <button type="button" class="el-ghostbtn" data-cancel>Cancel</button>
+          </div>`);
+        ov.querySelectorAll('.el-frame-opt').forEach(b => b.addEventListener('click', () => {
+          const f = b.dataset.frame; close(); resolve({ frame: f });
+        }));
+        const rm = ov.querySelector('[data-remove]');
+        if (rm) rm.addEventListener('click', () => { close(); resolve({ remove: true }); });
+        ov.querySelector('[data-cancel]').addEventListener('click', () => { close(); resolve(null); });
+      });
+    }
+    async function addPhotoFlow() {
+      const src = await choosePhotoSource();
+      if (!src) return;
+      const file = await pickPhotoFile(src);
+      if (!file) return;
+      let dataURL;
+      try { dataURL = await downscaleImage(file); }
+      catch { note.textContent = 'That image could not be read. Try another.'; return; }
+      const picked = await chooseFrame(dataURL, 'none', false);
+      if (!picked) return;
+      const s = freeSlot();
+      addPlaced('photo', s.x, s.y, { img: dataURL, frame: picked.frame });
+    }
+    async function editPhotoFrame(rec) {
+      const picked = await chooseFrame(rec.img, rec.frame, true);
+      if (!picked) return;
+      if (picked.remove) { removePlaced(rec); return; }
+      if (picked.frame && picked.frame !== rec.frame) {
+        rec.frame = picked.frame;
+        const fw = rec.el.querySelector('.photo-frame');
+        if (fw) fw.className = 'photo-frame photo-frame-' + picked.frame;
+      }
+    }
+
+    /* tray: drag an object out, or tap to place it at a free spot.
+       The photo button opens the camera/roll picker instead. */
     function attachTray(btn) {
       const key = btn.dataset.obj, o = objByKey(key);
+      if (o.photo) { btn.addEventListener('click', () => addPhotoFlow()); return; }
       let pid = null, sx = 0, sy = 0, dragging = false, ghost = null;
       btn.addEventListener('pointerdown', e => {
         e.preventDefault();
@@ -278,7 +391,10 @@ window.ELEMENTAL = (() => {
       const up = e => {
         if (e.pointerId !== pid) return;
         pid = null; d.classList.remove('dragging');
-        if (!moved) d.classList.toggle('show-rm');
+        if (!moved) {
+          if (rec.img) editPhotoFrame(rec);
+          else d.classList.toggle('show-rm');
+        }
         moved = false;
       };
       d.addEventListener('pointerup', up);
@@ -290,7 +406,7 @@ window.ELEMENTAL = (() => {
         else if (e.key === 'ArrowRight') rec.x = clamp(rec.x + step, 4, 96);
         else if (e.key === 'ArrowUp') rec.y = clamp(rec.y - step, 6, 94);
         else if (e.key === 'ArrowDown') rec.y = clamp(rec.y + step, 6, 94);
-        else if (e.key === 'Enter' || e.key === ' ') d.classList.toggle('show-rm');
+        else if (e.key === 'Enter' || e.key === ' ') { if (rec.img) editPhotoFrame(rec); else d.classList.toggle('show-rm'); }
         else handled = false;
         if (handled) {
           e.preventDefault();
@@ -324,7 +440,11 @@ window.ELEMENTAL = (() => {
     view().querySelector('[data-el="keep"]').addEventListener('click', () => {
       const entry = ENGINE.Elemental.keep({
         element, prompt: R.prompts[qi], text: text.value,
-        altar: placed.map(p => ({ obj: p.key, x: Math.round(p.x * 10) / 10, y: Math.round(p.y * 10) / 10 })),
+        altar: placed.map(p => {
+          const a = { obj: p.key, x: Math.round(p.x * 10) / 10, y: Math.round(p.y * 10) / 10 };
+          if (p.img) { a.img = p.img; a.frame = p.frame; }
+          return a;
+        }),
       });
       if (!entry) { note.textContent = 'Add a few words or place an object first — or leave it unkept.'; return; }
       keptConfirm(element, entry.id);
@@ -371,7 +491,14 @@ window.ELEMENTAL = (() => {
       <div class="pcontrols"><button class="pctl" type="button" data-el="back">Things I’m keeping</button></div>
       <div class="el-pad"><div class="el-field el-${e.element}" id="el-field">
         <canvas class="el-canvas" aria-hidden="true"></canvas>
-        ${e.altar.map(a => { const o = R.objects.find(o => o.key === a.obj); return o ? `<div class="el-placed static" style="left:${a.x}%;top:${a.y}%" aria-hidden="true">${o.svg}</div>` : ''; }).join('')}
+        ${e.altar.map(a => {
+          if (a.obj === 'photo' && typeof a.img === 'string' && a.img.indexOf('data:image/') === 0) {
+            const fr = /^(none|wood|dark|white)$/.test(a.frame) ? a.frame : 'none';
+            return `<div class="el-placed static el-photo" style="left:${a.x}%;top:${a.y}%" aria-hidden="true"><div class="photo-frame photo-frame-${fr}"><img src="${a.img}" alt="A kept photo"></div></div>`;
+          }
+          const o = R.objects.find(o => o.key === a.obj);
+          return o ? `<div class="el-placed static" style="left:${a.x}%;top:${a.y}%" aria-hidden="true">${o.svg}</div>` : '';
+        }).join('')}
         <div class="el-kept-words">
           <b>${esc(R.title)}</b>
           <span class="el-kept-date">${esc(date)}</span>

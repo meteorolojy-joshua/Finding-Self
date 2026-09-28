@@ -74,18 +74,29 @@ window.EXPLORATIONS = (() => {
   }
   function shelf(){ensureStories();
     const cover=(s,i,cls='')=>`<button type="button" class="story-cover ${cls}" data-new="story-open" data-id="${i}">${asset('current/story-'+(i%3+1))}<span><b>${esc(s.source||'Story '+(i+1))}</b><em>${esc(s.words||'A story you inherited\u2026')}</em><small>${esc(s.bookmark||'No bookmark yet')}</small></span></button>`;
-    const level=(bm,extra='')=>{const books=storyDraft.map((s,i)=>({s,i})).filter(({s})=>(s.bookmark||'Undecided')===bm);
-      return `<div class="shelf-level" data-level="${bm.toLowerCase()}"><div class="shelf-books">${books.map(({s,i})=>cover(s,i,'shelf-book')).join('')}${extra}</div><div class="shelf-plank" aria-hidden="true"></div></div>`;};
+    const level=(bm)=>{const books=storyDraft.map((s,i)=>({s,i})).filter(({s})=>(s.bookmark||'Undecided')===bm);
+      return `<div class="shelf-level" data-level="${bm.toLowerCase()}"><div class="shelf-books">${books.map(({s,i})=>cover(s,i,'shelf-book')).join('')}</div><div class="shelf-plank" aria-hidden="true"></div></div>`;};
     const addBook=`<button type="button" class="story-add-book has-cursor-tip" data-new="story-add" data-tip="Add a new story" aria-label="Add a story"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>add story</span></button>`;
     const discarded=storyDraft.map((s,i)=>({s,i})).filter(({s})=>s.bookmark==='Discard');
-    page('story-shelf','stories','An inherited story','Each book holds a story you inherited. Open one to revisit its words or change its bookmark.',
-      `<h2 class="serif">Your bookshelf</h2><div class="shelf-wrap"><div class="shelf-levels">${level('Keep')}${level('Undecided',addBook)}${level('Change')}</div><div class="trash-bin-wrap"><div class="trash-bin"><div class="bin-top"><div class="bin-mouth">${discarded.length?discarded.map(({s,i})=>cover(s,i,'bin-book')).join(''):'<p class="bin-empty">Nothing discarded yet.</p>'}</div><button type="button" class="bin-lid has-cursor-tip" data-tip="drag open to view discarded stories" aria-label="Trash bin lid. Drag open to view discarded stories."></button></div><div class="bin-body"><span class="bin-label">discarded stories</span></div></div></div></div>`);
-    bindBinLid();
+    page('story-shelf','stories','An inherited story','Each book holds a story you inherited. Open one to revisit its words, or drag it to another shelf — or the bin — to change its bookmark. New stories arrive on the trolley.',
+      `<div class="shelf-wrap"><div class="shelf-frame"><div class="shelf-frame-title"><span>My bookshelf</span></div><div class="shelf-levels">${level('Keep')}${level('Undecided')}${level('Change')}</div></div><div class="shelf-side"><div class="book-trolley">${asset('current/book-trolley','trolley-art')}${addBook}</div><div class="trash-bin-wrap"><div class="trash-bin"><button type="button" class="bin-lid has-cursor-tip" data-tip="drag open to view discarded stories" aria-label="Trash bin lid. Drag open to view discarded stories."></button><div class="bin-mouth">${discarded.length?discarded.map(({s,i})=>cover(s,i,'bin-book')).join(''):'<p class="bin-empty">Nothing discarded yet.</p>'}</div><div class="bin-body"><span class="bin-label">discarded stories</span></div></div></div></div></div>`);
+    bindBinLid();bindBookDrag();
+  }
+  function bindBookDrag(){
+    const bmFor=t=>t.classList.contains('trash-bin')?'Discard':{keep:'Keep',undecided:'Undecided',change:'Change'}[t.dataset.level];
+    view().querySelectorAll('.story-cover.shelf-book,.story-cover.bin-book').forEach(book=>{
+      book.setAttribute('aria-label',(book.querySelector('b')?.textContent||'Story')+'. Drag to another shelf or the bin to change its bookmark, or open it to revisit its words.');
+      dragTo(book,'.shelf-level,.trash-bin',target=>{
+        const nb=bmFor(target),i=Number(book.dataset.id);
+        if(nb&&storyDraft[i]&&storyDraft[i].bookmark!==nb){storyDraft[i].bookmark=nb;notify('Book moved. Its bookmark now reads '+nb+'.');}
+        redraw(shelf);
+      },null,'book-drag');
+    });
   }
   function bindBinLid(){
     const lid=view().querySelector('.bin-lid');if(!lid)return;
     const wrap=lid.closest('.trash-bin-wrap');
-    const OPEN_ANGLE=115,SNAP=45;let dragging=false,moved=false,suppressClick=false,startY=0,startAngle=0,angle=0,open=false;
+    const OPEN_ANGLE=90,SNAP=45;let dragging=false,moved=false,suppressClick=false,startY=0,startAngle=0,angle=0,open=false;
     const setAngle=(a,animate)=>{angle=Math.max(0,Math.min(OPEN_ANGLE,a));lid.style.transition=animate?'transform .3s ease':'none';lid.style.transform=`rotate(${-angle}deg)`;};
     const setOpen=o=>{open=o;wrap.classList.toggle('lid-open',o);document.querySelector('.scn-tip')?.classList.remove('on');lid.dataset.tip=o?'click to close':'drag open to view discarded stories';lid.setAttribute('aria-label',o?'Trash bin lid. Click to close.':'Trash bin lid. Drag open to view discarded stories.');setAngle(o?OPEN_ANGLE:0,true);};
     lid.addEventListener('pointerdown',e=>{dragging=true;moved=false;startY=e.clientY;startAngle=angle;wrap.classList.add('lid-moving');try{lid.setPointerCapture(e.pointerId);}catch(_){}});
@@ -113,13 +124,13 @@ window.EXPLORATIONS = (() => {
   // Only the currently picked-up object is retained by global cancellation.
   // Detached page controls keep their own listeners and can be garbage-collected.
   let cancelActiveDrag=null;
-  function dragTo(el,selector,drop,preview){
+  function dragTo(el,selector,drop,preview,ghostClass){
     let drag=null,timer;el.style.touchAction='auto';
     const clean=()=>{clearTimeout(timer);drag?.ghost?.remove();document.querySelectorAll('.store-drop-active').forEach(x=>x.classList.remove('store-drop-active'));drag=null;if(cancelActiveDrag===cancel)cancelActiveDrag=null;};
     const suppress=()=>{el.dataset.suppressClick='yes';setTimeout(()=>delete el.dataset.suppressClick,300);};
     const cancel=()=>{if(drag){suppress();clean();}};
     const down=(e,touch=false)=>{cancelActiveDrag?.();cancelActiveDrag=cancel;drag={x:e.clientX,y:e.clientY,moved:false,ghost:null,ready:!touch,touch};if(touch)timer=setTimeout(()=>{if(drag)drag.ready=true;},250);else{e.preventDefault();el.setPointerCapture(e.pointerId);}};
-    const move=e=>{if(!drag)return;const distance=Math.hypot(e.clientX-drag.x,e.clientY-drag.y);if(!drag.ready){if(distance>6)clean();return;}if(distance>6)drag.moved=true;if(!drag.moved)return;if(!drag.ghost){drag.ghost=document.createElement('div');drag.ghost.innerHTML=preview?asset(preview):el.classList.contains('store-basket')?el.parentElement.innerHTML:el.innerHTML;drag.ghost.className='drag-preview';document.body.append(drag.ghost);}document.querySelectorAll('.store-drop-active').forEach(x=>x.classList.remove('store-drop-active'));document.elementFromPoint(e.clientX,e.clientY)?.closest(selector)?.classList.add('store-drop-active');drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';if(e.clientY<60)window.scrollBy(0,-12);if(e.clientY>innerHeight-60)window.scrollBy(0,12);};
+    const move=e=>{if(!drag)return;const distance=Math.hypot(e.clientX-drag.x,e.clientY-drag.y);if(!drag.ready){if(distance>6)clean();return;}if(distance>6)drag.moved=true;if(!drag.moved)return;if(!drag.ghost){drag.ghost=document.createElement('div');drag.ghost.innerHTML=preview?asset(preview):el.classList.contains('store-basket')?el.parentElement.innerHTML:el.innerHTML;drag.ghost.className='drag-preview'+(ghostClass?' '+ghostClass:'');document.body.append(drag.ghost);}document.querySelectorAll('.store-drop-active').forEach(x=>x.classList.remove('store-drop-active'));document.elementFromPoint(e.clientX,e.clientY)?.closest(selector)?.classList.add('store-drop-active');drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';if(e.clientY<60)window.scrollBy(0,-12);if(e.clientY>innerHeight-60)window.scrollBy(0,12);};
     const finish=e=>{if(!drag)return;const moved=drag.moved;clean();if(moved){const target=document.elementFromPoint(e.clientX,e.clientY)?.closest(selector);suppress();if(target)drop(target);}};
     el.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'&&e.button===0)down(e);});el.addEventListener('pointermove',e=>{if(e.pointerType!=='touch'){if(drag)e.preventDefault();move(e);}});el.addEventListener('pointerup',e=>{if(e.pointerType!=='touch')finish(e);});el.addEventListener('pointercancel',e=>{if(e.pointerType!=='touch')clean();});
     el.addEventListener('touchstart',e=>{if(e.touches.length===1)down(e.touches[0],true);},{passive:true});el.addEventListener('touchmove',e=>{if(drag?.ready&&e.cancelable)e.preventDefault();if(e.touches.length===1)move(e.touches[0]);},{passive:false});el.addEventListener('touchend',e=>{if(drag?.moved&&e.cancelable)e.preventDefault();if(e.changedTouches[0])finish(e.changedTouches[0]);},{passive:false});el.addEventListener('touchcancel',clean);

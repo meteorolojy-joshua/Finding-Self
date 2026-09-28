@@ -1,3 +1,24 @@
+# My Presence — Updated Working Prototype 15 (2026-09-28)
+
+## What changed since Prototype 14
+
+**About this page, in the top bar.** The in-app top bar now has an "About this page" button on every page. It opens the same popup the old "About this exploration" button used to open — specific to the page you are on (the Self-Explorations page and the "What is the Self You Want to Grow?" page each open their own different popup). The in-page "About this exploration" buttons are gone.
+
+**View tutorial for this page.** The about popup now has a "View tutorial for this page" button below its text. Tapping it closes the popup and starts the tutorial tour (taking you home first if you are on another page, since the tour points at the home page sections).
+
+**Tutorial is now 3 steps.** The intro card ("A quick tour") is removed — the tour starts directly at Check-Ins and runs 1 of 3, 2 of 3, 3 of 3.
+
+**Add-a-check-in button lifts instead of recolouring.** The dotted "+ add a check-in" box on the home page no longer changes border colour when hovered or pressed — it lifts vertically, like the "Open your self-records" button does.
+
+**Home page descriptions moved under their sections.** The single line under the home heading ("Check-ins are short guided moments for right now · Self-records keep what you keep … · Explorations are open rooms with no finish line.") is split up: each part now sits under its own section header (Check-Ins, Self-Explorations, Self-Records). The Self-Records section's old "Keep fragments of your lived reality" line is replaced by its moved text.
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: top-bar "About this page" opens the correct per-page popup on Self-Explorations and on the garden page; no in-page About buttons remain; "View tutorial for this page" starts the 3-step tour; add-a-check-in lifts on hover with no border colour change; home page shows each description under its section.
+
+---
+
 # Finding Self — Updated Working Prototype 12 (2026-09-26)
 
 ## What changed since Prototype 11

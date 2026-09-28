@@ -238,7 +238,12 @@ const Elemental = {
     if (!Array.isArray(altar)) return [];
     return altar
       .filter(a => a && typeof a.obj === 'string')
-      .map(a => ({ obj: a.obj, x: Math.max(0, Math.min(100, +a.x || 0)), y: Math.max(0, Math.min(100, +a.y || 0)) }));
+      .map(a => {
+        const c = { obj: a.obj, x: Math.max(0, Math.min(100, +a.x || 0)), y: Math.max(0, Math.min(100, +a.y || 0)) };
+        if (typeof a.img === 'string' && a.img.indexOf('data:image/') === 0) c.img = a.img.slice(0, 600000);
+        if (typeof a.frame === 'string' && /^(none|wood|dark|white)$/.test(a.frame)) c.frame = a.frame;
+        return c;
+      });
   },
   getEntries() {
     const raw = lsGet(LS.elemental, []);

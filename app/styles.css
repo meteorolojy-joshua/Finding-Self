@@ -936,10 +936,8 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .o-lamp .spot-label { margin-top: 0; max-width: 34cqw; text-align: center; }
 .spot.o-lamp:hover, .spot.o-lamp:active { transform: translateX(-50%) translateY(-4px); }
 
-/* labels enclosed inside an object part (pot, plinth, gift box) run a step
-   smaller than the free-floating ones, so every word fits its component */
-.o-plant .spot-label, .o-circle .spot-label, .o-shovel .spot-label {
-  font-size: clamp(10.5px, 2.7cqw, 13px); }
+/* labels enclosed inside an object part (pot, plinth, gift box) use the same
+   size as the free-floating ones, so every object's words match */
 
 /* wall-shelf objects and the loops on the table carry their label just above
    the art — flex reverses, so the art stays grounded and the words float above */
@@ -1640,3 +1638,31 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .el-tile-grief .el-tile-art { background: linear-gradient(#0d2a40, #081726); }
 .el-tile-tx b { display: block; font-size: 14.5px; color: #3a3227; }
 .el-tile-tx small { display: block; font-size: 12.5px; color: #8a7c64; margin-top: 2px; }
+
+/* your own photo in the grief room */
+.el-placed.el-photo { width: 76px; height: 76px; }
+.photo-frame { display: block; width: 100%; height: 100%; box-sizing: border-box; padding: 7px; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.photo-frame-none { padding: 0; }
+.photo-frame-none img { border-radius: 2px; }
+.photo-frame-wood { background: linear-gradient(135deg, #9a7d55, #7a6242); border-radius: 3px; box-shadow: inset 0 0 0 1px #5e4c33; }
+.photo-frame-dark { background: linear-gradient(135deg, #3a2f26, #241d16); border-radius: 3px; box-shadow: inset 0 0 0 1px #14100b; }
+.photo-frame-white { background: #f5f0e6; border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.4), inset 0 0 0 1px #d8d0bd; }
+/* photo source + frame chooser modals */
+.el-modal-ov { position: absolute; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;
+  background: rgba(5,10,18,.62); padding: 18px; box-sizing: border-box; }
+.el-modal { background: #f5efe2; color: #333; border-radius: 14px; padding: 18px; max-width: 340px; width: 100%;
+  box-shadow: 0 8px 30px rgba(0,0,0,.5); text-align: center; }
+.el-modal b { display: block; font-size: 17px; margin-bottom: 6px; font-family: Georgia, serif; }
+.el-modal p { font-size: 14px; margin: 0 0 12px; color: #5a5348; }
+.el-modal-btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap; }
+.el-modal-btns button, .el-ghostbtn { border: 0; border-radius: 9px; padding: 10px 14px; font-size: 14px; cursor: pointer; }
+.el-modal-btns button { background: #2a4a63; color: #f5efe2; }
+.el-modal-btns button:hover { background: #35608a; }
+.el-ghostbtn { background: transparent; color: #5a5348; text-decoration: underline; }
+.el-ghostbtn.danger { color: #a03a2e; }
+.el-frame-opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+.el-frame-opt { border: 2px solid transparent; border-radius: 10px; background: #e9e2d2; padding: 6px 4px; cursor: pointer; }
+.el-frame-opt.sel { border-color: #2a4a63; }
+.el-frame-opt .photo-frame { height: 56px; pointer-events: none; }
+.el-frame-opt small { display: block; margin-top: 4px; font-size: 11px; color: #5a5348; }
