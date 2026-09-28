@@ -1,3 +1,18 @@
+# My Presence — Updated Working Prototype 16 (2026-09-28)
+
+## What changed since Prototype 15
+
+**"About this page" is now in the real top bar.** The button was briefly in a hidden header; it now sits in the app's actual top bar between Help and the gear icon, on every page. The unused hidden header has been removed from the code entirely.
+
+**Tutorial buttons (placeholders).** Each tutorial step now has its button below the text: "see how to make and use a check-in" (Check-Ins), "see how to use a self-exploration" (Self-Explorations), "See how to make a self-record" (Self-Records). Tapping them does nothing for now — what they should do is still to be decided.
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: "About this page" visible in the top bar on every page and opening the correct per-page popup; tutorial buttons present on all three steps and inert; static header removal leaves home, settings, and navigation working.
+
+---
+
 # My Presence — Updated Working Prototype 15 (2026-09-28)
 
 ## What changed since Prototype 14

@@ -59,7 +59,7 @@ window.NAV = (() => {
     view=document.getElementById('view');
     const wrapper=view.parentElement;
     bar=document.createElement('header');bar.className='app-bar';
-    bar.innerHTML='<span class="app-identity"><img src="assets/brand-icon.svg" alt=""><span>My Presence,<br>Author of Worlds</span></span><nav aria-label="Page navigation"><button type="button" data-nav="back">Back</button><button type="button" data-nav="exit">Exit</button><button type="button" data-nav="help">Help</button><button type="button" data-nav="settings" aria-label="Settings"><img src="assets/settings-icon.svg" alt=""></button></nav>';
+    bar.innerHTML='<span class="app-identity"><img src="assets/brand-icon.svg" alt=""><span>My Presence,<br>Author of Worlds</span></span><nav aria-label="Page navigation"><button type="button" data-nav="back">Back</button><button type="button" data-nav="exit">Exit</button><button type="button" data-nav="help">Help</button><button type="button" data-nav="about-page">About this page</button><button type="button" data-nav="settings" aria-label="Settings"><img src="assets/settings-icon.svg" alt=""></button></nav>';
     wrapper.insertBefore(bar,view);
     const descriptor=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');
     Object.defineProperty(view,'innerHTML',{get(){return descriptor.get.call(this);},set(html){
@@ -83,7 +83,7 @@ window.NAV = (() => {
     }});
     window.addEventListener('click',e=>{
       const n=e.target.closest('[data-nav]');
-      if(n){e.preventDefault();e.stopImmediatePropagation();capture();if(n.dataset.nav==='back')back();if(n.dataset.nav==='exit')exit();if(n.dataset.nav==='settings')UI.renderSettings();if(n.dataset.nav==='help')UI.renderHelp();return;}
+      if(n){e.preventDefault();e.stopImmediatePropagation();capture();if(n.dataset.nav==='back')back();if(n.dataset.nav==='exit')exit();if(n.dataset.nav==='settings')UI.renderSettings();if(n.dataset.nav==='help')UI.renderHelp();if(n.dataset.nav==='about-page'&&window.ITERATION&&typeof window.ITERATION.openPageAbout==='function')window.ITERATION.openPageAbout();return;}
       if(e.target.closest('dialog,[role="dialog"]'))return;
       capture();
       const b=e.target.closest('button');

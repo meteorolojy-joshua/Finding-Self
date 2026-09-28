@@ -194,9 +194,9 @@ const UI = (() => {
   const TUT_KEY = 'fsaw.tutorial.v1';
   /* Tutorial steps — placeholder content; J will specify the final tutorial. */
   const TOUR_STEPS = [
-    { title: 'Check-Ins', text: 'Short guided check-ins for right now. Tap one to begin, tap its pencil to edit it, or add your own from scratch with the dotted box.', target: '[data-od-id="checkins"]' },
-    { title: 'Self-Explorations', text: 'Open rooms with no finish line. Wander in, arrange things, write a little.', target: '[data-od-id="longer-explorations-preview"]' },
-    { title: 'Self-Records', text: 'What you keep: stitches on your sampler, days gathered in small things.', target: '[data-od-id="self-records"]' }
+    { title: 'Check-Ins', text: 'Short guided check-ins for right now. Tap one to begin, tap its pencil to edit it, or add your own from scratch with the dotted box.', target: '[data-od-id="checkins"]', cta: 'see how to make and use a check-in' },
+    { title: 'Self-Explorations', text: 'Open rooms with no finish line. Wander in, arrange things, write a little.', target: '[data-od-id="longer-explorations-preview"]', cta: 'see how to use a self-exploration' },
+    { title: 'Self-Records', text: 'What you keep: stitches on your sampler, days gathered in small things.', target: '[data-od-id="self-records"]', cta: 'See how to make a self-record' }
   ];
   function tutorialAnswered() {
     try { return !!localStorage.getItem(TUT_KEY); } catch (err) { return true; }
@@ -222,6 +222,7 @@ const UI = (() => {
           <p class="muted small">Tutorial · ${i + 1} of ${TOUR_STEPS.length}</p>
           <h2 class="prompt">${esc(s.title)}</h2>
           <p class="support">${esc(s.text)}</p>
+          ${s.cta ? `<div class="btnrow"><button class="btn2" type="button" data-tour-cta>${esc(s.cta)}</button></div>` : ''}
           <div class="btnrow">
             ${i > 0 ? '<button class="btn2" type="button" data-tour="back">Back</button>' : ''}
             ${i < TOUR_STEPS.length - 1
@@ -1478,9 +1479,6 @@ const UI = (() => {
         ENGINE.Session.inspectorVisible = !ENGINE.Session.inspectorVisible;
         document.querySelectorAll('[data-ui="inspector"]').forEach(x => x.setAttribute('aria-pressed', String(ENGINE.Session.inspectorVisible)));
         updateInspector();
-      }
-      if (k === 'about-page') {
-        if (window.ITERATION && typeof window.ITERATION.openPageAbout === 'function') window.ITERATION.openPageAbout();
       }
     }));
 
