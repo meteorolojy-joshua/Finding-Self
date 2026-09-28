@@ -763,6 +763,35 @@ async function run() {
     const clean = SCENARIO.listScenarios().length === before && SCENARIO.homeCheckinCount() === 0;
     return max === 6 && count === 4 && clean;
   })());
+  group('untitled-ghost');
+  check('pristine Untitled check-in is excluded from home count and purged', (() => {
+    SCENARIO.setChosenStarterIds([]);
+    const g = SCENARIO.createScenario('Untitled check-in', 'BLANK');
+    const excluded = SCENARIO.isPristineUntitled(g) && SCENARIO.homeCheckinCount() === 0;
+    SCENARIO.purgePristineUntitled();
+    const gone = SCENARIO.listScenarios().every(s => s.scenario_id !== g.scenario_id);
+    SCENARIO.setChosenStarterIds([]);
+    return excluded && gone;
+  })());
+  check('Untitled check-in with content is counted and labeled by its first question', (() => {
+    SCENARIO.setChosenStarterIds([]);
+    const s = SCENARIO.createScenario('Untitled check-in', 'BLANK');
+    const qref = [...SCENARIO.composeGraph(s).elements.values()].find(e => e.kind === 'QUESTION').ref;
+    SCENARIO.commitTextEdit(s.scenario_id, qref, 'How am I arriving?');
+    const again = SCENARIO.getScenario(s.scenario_id);
+    const ok = !SCENARIO.isPristineUntitled(again)
+      && SCENARIO.homeCheckinCount() === 1
+      && SCENARIO.checkinLabel(again) === 'How am I arriving?';
+    SCENARIO.deleteScenario(s.scenario_id);
+    SCENARIO.setChosenStarterIds([]);
+    return ok;
+  })());
+  check('named check-in keeps its name as label', (() => {
+    const s = SCENARIO.createScenario('Morning tune-in', 'BLANK');
+    const ok = SCENARIO.checkinLabel(s) === 'Morning tune-in';
+    SCENARIO.deleteScenario(s.scenario_id);
+    return ok;
+  })());
 
   /* ---------- report ---------- */
   const pass = Results.filter(r => r.pass).length;

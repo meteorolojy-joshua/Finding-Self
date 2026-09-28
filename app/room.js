@@ -438,7 +438,7 @@ const ROOM = (() => {
         }).join('')}
       </div>`}
       <div class="btnrow">
-        <button class="btn" type="button" data-ract="leaf-keep">Keep these words</button>
+        <button class="btn" type="button" data-ract="leaf-keep">Confirm</button>
         <button class="note-act" type="button" data-ract="leaf-close">Not now</button>
       </div>
     </div>`;
@@ -1693,7 +1693,7 @@ const ROOM = (() => {
     continueCommunity(contract) { bDraft={where:contract.fields.Name||'',whereText:contract.fields.Name||'',terms:[],ifChanged:'',whoCarries:'',supportNeeded:'',proposal:{need:'',expressed:contract.fields['Terms I Agree With']||'',assuming:'',arrangement:contract.fields['Current Arrangement']||'',work:contract.fields['Obligation level']||'',revisit:contract.fields['Terms to Reconsider']||''}}; renderBelonging(2); },
     continueInfluence(words) { sDraft={key:'influence',q1:words,extraQ1:'',fields:{},step:2}; renderSmall(); },
     openArrangement: renderArrangement,
-    reviewStories(stories) { const filled=stories.filter(s=>s.words.trim()||s.source.trim()); const fields={}; ['keep','change','release','undecided'].forEach(k=>fields[k]=filled.filter(s=>(s.bookmark||'Undecided').toLowerCase()===k).map(s=>(s.source?s.source+': ':'')+s.words).join('\n\n')); sDraft={key:'story',q1:filled.map(s=>(s.source?s.source+': ':'')+s.words).join('\n\n'),extraQ1:'',fields,step:2}; renderSmallKeep(); },
+    reviewStories(stories) { const filled=stories.filter(s=>s.words.trim()||s.source.trim()); const fields={}; ['keep','discard','change','undecided'].forEach(k=>fields[k]=filled.filter(s=>(s.bookmark||'Undecided').toLowerCase()===k).map(s=>(s.source?s.source+': ':'')+s.words).join('\n\n')); sDraft={key:'story',q1:filled.map(s=>(s.source?s.source+': ':'')+s.words).join('\n\n'),extraQ1:'',fields,step:2}; renderSmallKeep(); },
     keepExploration(title, sections, kind='story', material=[]) { const a={id:uid('arr'),kind,title,sections,material,attachedNotes:[],reviews:[],versions:[],status:'active',createdAt:today(),updatedAt:today()}; putArrangement(a); renderArrangement(a.id); return a.id; }
   };
 })();

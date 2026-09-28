@@ -23,12 +23,19 @@
 .current-miniature{position:relative}.current-miniature .room-plant-art{inset:0}.current-miniature.upward-torch img{transform:rotate(-90deg)}
 .pv-magnet.current-miniature img{transform:scaleY(-1)}
 .explore-preview .pv-book.current-miniature{width:40px;height:14px}
+.explore-preview .pv-torch.current-miniature{width:54px;height:21px}
 .pv-book.current-miniature img{position:static;transform:none;width:100%;height:100%}
 .drag-preview .store-basket{width:100%}.drag-preview .packed-items{top:22%;left:20%;right:20%}
 /* Restore the existing lift only on room destinations and notebook pages.
    Move artwork with its caption inside a stable hit target. Drag transforms
    and support geometry remain owned by the room placement controller. */
 .room-fixed-label{display:block;pointer-events:none}
+.room-item.room-fixed-art{display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.room-item.room-fixed-art>img{position:relative;left:auto;top:auto;width:100%;height:auto;flex:none}
+.room-item.room-fixed-art .room-fixed-label{margin-top:8px}
+.room-item.room-fixed-art.label-side{flex-direction:row;align-items:center}
+.room-item.room-fixed-art.label-side>img{width:65%;height:auto}
+.room-item.room-fixed-art.label-side .room-fixed-label{margin:0 0 0 8px;text-align:left;flex:1;min-width:0;font-size:12px;line-height:17px}
 .room-item>img,.room-item>.room-label,.room-item>.room-plant-art,.room-item>.room-fixed-label{transition:translate 150ms ease-out}
 @media(hover:hover){
   .room-item:not(.dragging):hover>img,

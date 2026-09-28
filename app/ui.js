@@ -58,28 +58,26 @@ const UI = (() => {
      pot below stay put. Stroke widths stay crisp thanks to
      vector-effect="non-scaling-stroke". To change the foliage spread, edit the
      scale in this transform — nothing else moves. */
-  const PLANT_SVG = '<svg viewBox="0 14 120 138" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g transform="translate(60 0) scale(1.5 1) translate(-60 0)"><path class="plant-stem" vector-effect="non-scaling-stroke" d="M60 100 C 59 78, 61 58, 60 36"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 84 C 48 82, 38 74, 36 62 C 46 64, 56 72, 60 80 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 70 C 72 68, 82 60, 84 48 C 74 50, 64 58, 60 66 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 56 C 50 54, 42 47, 40 37 C 48 39, 56 46, 60 52 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 42 C 69 40, 76 34, 78 25 C 70 27, 63 33, 60 38 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 36 C 57 30, 57 23, 60 17 C 63 23, 63 30, 60 36 Z"/></g><path class="pot-body" vector-effect="non-scaling-stroke" d="M10 106 L110 106 L100 150 L20 150 Z"/><rect class="pot-rim" vector-effect="non-scaling-stroke" x="5" y="97" width="110" height="11" rx="2.5"/></svg>';
   /* Self-Explorations plant: same foliage; the pot is 80% taller than
      the previous squashed pot and widened to a broad planter, so the object's
      label fits wholly inside the pot's filled body */
+  const PLANT_SVG = '<svg viewBox="0 14 120 138" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g transform="translate(60 0) scale(1.5 1) translate(-60 0)"><path class="plant-stem" vector-effect="non-scaling-stroke" d="M60 100 C 59 78, 61 58, 60 36"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 84 C 48 82, 38 74, 36 62 C 46 64, 56 72, 60 80 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 70 C 72 68, 82 60, 84 48 C 74 50, 64 58, 60 66 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 56 C 50 54, 42 47, 40 37 C 48 39, 56 46, 60 52 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 42 C 69 40, 76 34, 78 25 C 70 27, 63 33, 60 38 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 36 C 57 30, 57 23, 60 17 C 63 23, 63 30, 60 36 Z"/></g><path class="pot-body" vector-effect="non-scaling-stroke" d="M10 106 L110 106 L100 150 L20 150 Z"/><rect class="pot-rim" vector-effect="non-scaling-stroke" x="5" y="97" width="110" height="11" rx="2.5"/></svg>';
   const PLANT_SLIM_SVG = '<svg viewBox="0 14 120 161.44" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g transform="translate(60 0) scale(1.5 1) translate(-60 0)"><path class="plant-stem" vector-effect="non-scaling-stroke" d="M60 118.2 C 59 78, 61 58, 60 36"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 102 C 50 100, 43 93, 42 83 C 50 85, 57 92, 60 98 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 90 C 71 88, 81 80, 82 69 C 73 71, 65 79, 60 86 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 84 C 48 82, 38 74, 36 62 C 46 64, 56 72, 60 80 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 70 C 72 68, 82 60, 84 48 C 74 50, 64 58, 60 66 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 56 C 50 54, 42 47, 40 37 C 48 39, 56 46, 60 52 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 42 C 69 40, 76 34, 78 25 C 70 27, 63 33, 60 38 Z"/><path class="plant-leaf" vector-effect="non-scaling-stroke" d="M60 36 C 57 30, 57 23, 60 17 C 63 23, 63 30, 60 36 Z"/></g><g transform="translate(0 175.44) scale(1 1.08) translate(0 -150)"><path class="pot-body" vector-effect="non-scaling-stroke" d="M6 106 L114 106 L104 150 L16 150 Z"/><rect class="pot-rim" vector-effect="non-scaling-stroke" x="2" y="97" width="116" height="11" rx="2.5"/></g></svg>';
   /* Flashlight: now vertical, standing on the shelf with its beam pointing up. */
+  /* Shovel hanging from a wall bracket — "Ways I Want to Contribute". Placeholder;
+     EXPLORATIONS.enhance() swaps in assets/current/shovel.svg at runtime. */
   const TORCH_SVG = '<svg viewBox="0 0 48 140" aria-hidden="true" focusable="false"><path class="torch-beam" d="M14 24 L34 24 L38 2 L10 2 Z"/><rect class="torch-body" x="15" y="54" width="18" height="86" rx="8"/><path class="torch-grip" d="M15 70 H33 M15 84 H33 M15 98 H33"/><rect class="torch-btn" x="22" y="56" width="4" height="12" rx="2"/><rect class="torch-head" x="9" y="24" width="30" height="30" rx="5"/><rect class="torch-lens" x="16" y="14" width="16" height="11" rx="2"/></svg>';
-  /* Gift box (present) — "Ways I Want to Contribute". A wide, low gift: the
-     ribbon and bow sit on the lid only, so the box front is one clean filled
-     surface, large enough to hold the object's whole label inside it. */
-  const GIFT_SVG = '<svg viewBox="0 0 100 74" aria-hidden="true" focusable="false"><rect class="gift-box" x="8" y="27" width="84" height="43" rx="4"/><rect class="gift-lid" x="3" y="16" width="94" height="11" rx="3"/><rect class="gift-ribbon" x="47" y="16" width="6" height="11"/><ellipse class="gift-bow" cx="41" cy="11" rx="9" ry="6" transform="rotate(-24 41 11)"/><ellipse class="gift-bow" cx="59" cy="11" rx="9" ry="6" transform="rotate(24 59 11)"/><circle class="gift-knot" cx="50" cy="15" r="3.5"/></svg>';
+  const SHOVEL_SVG = '<svg viewBox="0 0 90 150" aria-hidden="true" focusable="false"><rect x="20" y="6" width="50" height="12" rx="3" class="shovel-bracket"/><rect x="35" y="23" width="20" height="8" rx="4" class="shovel-grip"/><rect x="42.5" y="38" width="5" height="68" rx="2.5" class="shovel-shaft"/><path d="M36.5 112 C34.5 124 37.5 134 45 141 C52.5 134 55.5 124 53.5 112 Z" class="shovel-blade"/></svg>';
   /* Standing book — a kept story: cover and page-block seen side-on, leaning
      slightly back, a ribbon over the top edge. */
-  const BOOK_SVG = '<svg viewBox="0 0 60 80" aria-hidden="true" focusable="false"><g transform="rotate(-4 30 76)"><rect class="book-cover" x="8" y="6" width="44" height="70" rx="3"/><rect class="book-pages" x="46" y="9" width="6" height="64" rx="1"/><rect class="book-spine" x="8" y="6" width="8" height="70" rx="2"/><path class="book-mark" d="M24 5 V28"/></g></svg>';
   /* Self-Explorations variant: the book lies flat on the shelf, seen
      from above — spine along the left, the open fore-edge on the right, and
      the page block stacked between the front and back covers */
+  const BOOK_SVG = '<svg viewBox="0 0 60 80" aria-hidden="true" focusable="false"><g transform="rotate(-4 30 76)"><rect class="book-cover" x="8" y="6" width="44" height="70" rx="3"/><rect class="book-pages" x="46" y="9" width="6" height="64" rx="1"/><rect class="book-spine" x="8" y="6" width="8" height="70" rx="2"/><path class="book-mark" d="M24 5 V28"/></g></svg>';
   const BOOK_LY_SVG = '<svg viewBox="0 0 100 26" aria-hidden="true" focusable="false"><rect class="book-cover" x="4" y="17" width="90" height="7" rx="2"/><rect class="book-pages" x="12" y="6" width="76" height="13"/><path class="book-mark" d="M76 7 V18 M82 6.5 V19 M88 6 V20"/><rect class="book-cover" x="6" y="2" width="86" height="8" rx="2"/><rect class="book-spine" x="0" y="2" width="10" height="22" rx="1.5"/></svg>';
   /* Two interlocked loops — friendship-bracelet links: "Relationships". */
   const LOOPS_SVG = '<svg viewBox="0 4 120 72" aria-hidden="true" focusable="false"><path class="loop-a" d="M4 37 A30 20 0 0 1 64 37"/><path class="loop-b" d="M48 37 A30 20 0 0 1 108 37"/><path class="loop-b" d="M48 37 A30 20 0 0 0 108 37"/><path class="loop-a" d="M4 37 A30 20 0 0 0 64 37"/></svg>';
   /* A table with a few chairs gathered around it: "Communities I Belong In". */
-  const TABLE_SVG = '<svg viewBox="0 0 140 106" aria-hidden="true" focusable="false"><rect class="tbl-top" x="28" y="42" width="84" height="10" rx="3"/><rect class="tbl-leg-back" x="46" y="52" width="6" height="34"/><rect class="tbl-leg-back" x="88" y="52" width="6" height="34"/><rect class="tbl-leg" x="38" y="52" width="7" height="42"/><rect class="tbl-leg" x="95" y="52" width="7" height="42"/><rect class="chair-leg-rear" x="6" y="32" width="4" height="58"/><rect class="chair-seat" x="4" y="56" width="17" height="5"/><rect class="chair-leg" x="16" y="61" width="4" height="29"/><rect class="chair-leg" x="8" y="78" width="10" height="3"/><rect class="chair-leg-rear" x="130" y="32" width="4" height="58"/><rect class="chair-seat" x="119" y="56" width="17" height="5"/><rect class="chair-leg" x="120" y="61" width="4" height="29"/><rect class="chair-leg" x="122" y="78" width="10" height="3"/></svg>';
   /* Self-Explorations variant: a real coffee table between two chairs
      facing each other. True-to-life proportions: the table is low — its top
      sits just BELOW the chair seats (coffee-table height, not dining height),
@@ -87,6 +85,7 @@ const UI = (() => {
      is a solid plinth piece, long relative to its height (~2.6:1), and its
      base is wide enough to carry the object's label inside it. The viewBox is
      trimmed to the furniture (y 40..100) so no dead air inflates the box. */
+  const TABLE_SVG = '<svg viewBox="0 0 140 106" aria-hidden="true" focusable="false"><rect class="tbl-top" x="28" y="42" width="84" height="10" rx="3"/><rect class="tbl-leg-back" x="46" y="52" width="6" height="34"/><rect class="tbl-leg-back" x="88" y="52" width="6" height="34"/><rect class="tbl-leg" x="38" y="52" width="7" height="42"/><rect class="tbl-leg" x="95" y="52" width="7" height="42"/><rect class="chair-leg-rear" x="6" y="32" width="4" height="58"/><rect class="chair-seat" x="4" y="56" width="17" height="5"/><rect class="chair-leg" x="16" y="61" width="4" height="29"/><rect class="chair-leg" x="8" y="78" width="10" height="3"/><rect class="chair-leg-rear" x="130" y="32" width="4" height="58"/><rect class="chair-seat" x="119" y="56" width="17" height="5"/><rect class="chair-leg" x="120" y="61" width="4" height="29"/><rect class="chair-leg" x="122" y="78" width="10" height="3"/></svg>';
   const COFFEE_TABLE_SVG = '<svg viewBox="0 40 170 60" aria-hidden="true" focusable="false"><rect class="chair-leg-rear" x="14" y="44" width="4" height="56"/><rect class="chair-leg-rear" x="14" y="56" width="12" height="3"/><rect class="chair-seat" x="14" y="70" width="24" height="4" rx="1"/><rect class="chair-leg" x="32" y="74" width="4" height="26"/><rect class="chair-leg-rear" x="152" y="44" width="4" height="56"/><rect class="chair-leg-rear" x="144" y="56" width="12" height="3"/><rect class="chair-seat" x="132" y="70" width="24" height="4" rx="1"/><rect class="chair-leg" x="134" y="74" width="4" height="26"/><rect class="tbl-top" x="48" y="72" width="74" height="4.5" rx="2"/><rect class="tbl-leg" x="56" y="76.5" width="58" height="23.5" rx="2"/></svg>';
   /* The flashlight laid on its side, head to the left, beam reaching left. */
   const TORCH_LY_SVG = '<svg viewBox="0 8 120 42" aria-hidden="true" focusable="false"><path class="torch-beam" d="M16 20 L16 30 L-40 42 L-40 10 Z"/><rect class="torch-head" x="22" y="10" width="30" height="30" rx="6"/><rect class="torch-lens" x="13" y="17" width="11" height="16" rx="3"/><rect class="torch-body" x="46" y="16" width="66" height="18" rx="7"/><path class="torch-grip" d="M48 23 H102 M52 28 H92"/><rect class="torch-btn" x="58" y="13" width="12" height="5" rx="2"/></svg>';
@@ -312,20 +311,20 @@ const UI = (() => {
         ${bm ? `<div class="banner">A paused run is kept at <code>${esc(bm.nodeId)}</code>. <button class="ghost" type="button" data-act="entry" data-entry="ENTRY.RESUME">Resume</button> <button class="ghost" type="button" data-act="discard-bookmark">Discard</button></div>` : ''}
         <div class="home-sec flows-sec" data-od-id="checkins">
           <h2 class="h3">Check-Ins</h2>
-          <p class="support">For right now — pick the moment you are in.</p>
           ${(() => {
             const chosenIds = SCENARIO.getChosenStarterIds();
             const starters = ENGINE.PKG.starters.filter(s => chosenIds.indexOf(s.id) !== -1);
-            const customs = SCENARIO.listScenarios().filter(s => !s.scenario_id.startsWith('SCN.DEFAULT.'));
+            SCENARIO.purgePristineUntitled();
+            const customs = SCENARIO.listScenarios().filter(s => !s.scenario_id.startsWith('SCN.DEFAULT.') && !SCENARIO.isPristineUntitled(s));
             const total = starters.length + customs.length;
             const cards = [
               ...starters.map(s => `
               <div class="hang-wrap"><svg class="hang-string" viewBox="0 0 200 37" preserveAspectRatio="none" aria-hidden="true"><line class="hs" x1="0" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/><line class="hs" x1="200" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/></svg><span class="hang-peg" aria-hidden="true"></span><button class="opt hang has-cursor-tip" type="button" data-act="start-starter" data-starter="${esc(s.id)}" data-variant="Standard" data-tip="${esc(s.promise)}"><b>${esc(displayName(s.title))}</b></button><button class="hang-edit has-cursor-tip" type="button" data-act="customize-starter" data-starter="${esc(s.id)}" data-tip="Make an editable copy to edit" aria-label="Edit your own copy of ${esc(displayName(s.title))}">${ICO_PENCIL}</button></div>`),
               ...customs.map(s => `
-              <div class="hang-wrap"><svg class="hang-string" viewBox="0 0 200 37" preserveAspectRatio="none" aria-hidden="true"><line class="hs" x1="0" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/><line class="hs" x1="200" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/></svg><span class="hang-peg" aria-hidden="true"></span><button class="opt hang has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Open in Scenario Setup"><b>${esc(displayName(s.name))}</b></button><button class="hang-edit has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Edit this check-in" aria-label="Edit check-in ${esc(displayName(s.name))}">${ICO_PENCIL}</button></div>`)
+              <div class="hang-wrap"><svg class="hang-string" viewBox="0 0 200 37" preserveAspectRatio="none" aria-hidden="true"><line class="hs" x1="0" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/><line class="hs" x1="200" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/></svg><span class="hang-peg" aria-hidden="true"></span><button class="opt hang has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Open in Scenario Setup"><b>${esc(displayName(SCENARIO.checkinLabel(s)))}</b></button><button class="hang-edit has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Edit this check-in" aria-label="Edit check-in ${esc(displayName(SCENARIO.checkinLabel(s)))}">${ICO_PENCIL}</button></div>`)
             ].slice(0, SCENARIO.MAX_HOME_CHECKINS);
             const addBox = total < SCENARIO.MAX_HOME_CHECKINS
-              ? `<div class="checkin-add-cell"><button class="checkin-add has-cursor-tip" type="button" data-act="new-blank-checkin" data-tip="Start a new check-in from scratch"><span class="dotted-plus" aria-hidden="true">${ICO_PLUS}</span><b>add a check-in</b></button></div>`
+              ? `<div class="checkin-add-cell"><button class="checkin-add has-cursor-tip" type="button" data-act="add-checkin" data-tip="Start a new check-in — from scratch or from a template"><span class="dotted-plus" aria-hidden="true">${ICO_PLUS}</span><b>add a check-in</b></button></div>`
               : '';
             return `<div class="options checkin-grid">${cards.join('')}${addBox}</div>`;
           })()}
@@ -342,7 +341,7 @@ const UI = (() => {
                 <span class="pv-obj pv-book">${BOOK_SVG}</span>
                 <span class="pv-obj pv-pair">${LOOPS_SVG}</span>
                 <span class="pv-obj pv-circle">${TABLE_SVG}</span>
-                <span class="pv-obj pv-gift">${GIFT_SVG}</span>
+                <span class="pv-obj pv-shovel">${SHOVEL_SVG}</span>
               </span>
               <span class="pv-ledge"></span>
             </span>
@@ -350,7 +349,7 @@ const UI = (() => {
         </div>
         <div class="home-sec home-sec-entries" data-od-id="self-records">
           <h2 class="h3">Self-Records</h2>
-          <p class="support">What you keep — stitches on your sampler, days gathered in small things.</p>
+          <p class="support">Keep fragments of your lived reality</p>
           <div class="entry-shelf">
             <div class="options entry-list">
               <button class="opt entry-row ledge has-cursor-tip" type="button" data-act="practice-library" data-tip="Your sampler, your practices, and your kept days — everything the app keeps for you"><span class="entry-ico" aria-hidden="true">${ICO_ARM}</span><b>Open your self-records</b></button>
@@ -371,8 +370,8 @@ const UI = (() => {
       the magnet; the plant stands mid-floor with the torch lying farther
       back; on the right a low coffee table sits between two facing chairs —
       its top below their seats, as a real coffee table's is — with the loops
-      resting on it and the gift on the front floor. The plant's, table's, and
-      gift's labels sit wholly inside a filled part of their object (pot,
+      resting on it. The plant's and table's labels sit wholly inside a filled
+      part of their object (pot,
       plinth base, box front). Each object is a real button; the lamp is gone,
       and only its words, "Room to Be Myself", remain on the front floor.
       Layout lives in styles.css. */
@@ -398,7 +397,7 @@ const UI = (() => {
           <span class="region-mark rm-2" data-od-id="region-shapes-me">II · What Shapes Me</span>
           <span class="region-mark rm-3" data-od-id="region-relationships">III · Relationships &amp; Community</span>
           ${spot('basket-plant', 'open-practice', 'A small, concrete arrangement for something you want more room for — companionship, a creative interest, time in nature; partial answers are fine', 'The Self I Want to Grow', 'o-plant', PLANT_SLIM_SVG, 'The Self I Want to Grow')}
-          ${spot('obj-gift', 'open-contrib', 'Turn something you care about into participation sized to your actual energy', 'Ways I Want to Contribute', 'o-gift', GIFT_SVG, 'Ways I Want to Contribute')}
+          ${spot('obj-shovel', 'open-contrib', 'Turn something you care about into participation sized to your actual energy', 'Ways I Want to Contribute', 'o-shovel', SHOVEL_SVG, 'Ways I Want to Contribute')}
           ${spot('obj-circle', 'open-belonging', 'Look at the terms you belong on, and draft a shared arrangement if you want one', 'Communities I Belong In', 'o-circle', COFFEE_TABLE_SVG, 'Communities I Belong In')}
           ${spot('obj-pair', 'open-connection', 'What you might share, what you’d like to understand about someone, and what stays private', 'Relationships', 'o-pair spot-above', LOOPS_SVG, 'Relationships')}
           ${spot('basket-explore', 'open-explore', 'Keep an interest or a question open — drawing, a hometown, what friendship means — no problem needed', 'Aspects of My Self to Explore', 'o-torch', TORCH_LY_SVG, 'Aspects of My Self to Explore')}
@@ -409,6 +408,93 @@ const UI = (() => {
         <div class="btnrow" style="margin-top:12px"><button class="btn2" type="button" data-new="collection">Things I’m keeping</button></div>
       </div>`;
     updateInspector();
+  }
+
+  /* ---------- add-check-in flow: from scratch or from a template ---------- */
+  const TEMPLATE_STARTER_IDS = ['SS01', 'SS02', 'SS06'];
+
+  // popups belong to the page beneath them — dismiss on any navigation
+  window.addEventListener('my-presence-navigation', () => {
+    document.querySelectorAll('[data-od-id="create-choice"],[data-od-id="template-use"]').forEach(el => el.remove());
+  });
+
+  function atCheckinCap() { return SCENARIO.homeCheckinCount() >= SCENARIO.MAX_HOME_CHECKINS; }
+  function capNotice() { SCENARIO_UI.notice(`Your home page already holds ${SCENARIO.MAX_HOME_CHECKINS} check-ins — remove one to add another.`); }
+
+  function offerCreateChoice() {
+    if (document.querySelector('[data-od-id="create-choice"]')) return;
+    const ov = document.createElement('div');
+    ov.className = 'scn-modal-backdrop';
+    ov.setAttribute('data-od-id', 'create-choice');
+    ov.innerHTML = `
+      <div class="scn-modal" role="dialog" aria-modal="true" aria-labelledby="cc-q">
+        <h2 class="prompt" id="cc-q">Create from scratch or use template?</h2>
+        <div class="btnrow">
+          <button class="btn" type="button" data-cc="scratch">Create from scratch</button>
+          <button class="btn2" type="button" data-cc="template">Use template</button>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', (e) => {
+      if (e.target === ov) { ov.remove(); return; }
+      const b = e.target.closest('[data-cc]');
+      if (!b) return;
+      const choice = b.getAttribute('data-cc');
+      ov.remove();
+      if (choice === 'scratch') SCENARIO_UI.newBlankCheckin();
+      else renderTemplatePicker();
+    });
+  }
+
+  function renderTemplatePicker() {
+    const chosen = SCENARIO.getChosenStarterIds();
+    const cards = TEMPLATE_STARTER_IDS.map(sid => {
+      const st = ENGINE.PKG.starterById && ENGINE.PKG.starterById[sid];
+      if (!st) return '';
+      const onHome = chosen.includes(sid);
+      return `<button class="opt" type="button" data-act="template-pick" data-starter="${esc(sid)}"><b>${esc(displayName(st.title))}</b><br><span class="muted small">${esc(st.promise || '')}${onHome ? ' · On your home page' : ''}</span></button>`;
+    }).join('');
+    $view().innerHTML = `
+      <div class="card" data-od-id="template-picker">
+        <h1 class="prompt">Choose a template</h1>
+        <p class="support">Start from one of these pre-made check-ins.</p>
+        <div class="options">${cards}</div>
+        <div class="btnrow"><button class="btn2" type="button" data-act="template-back">Back</button></div>
+      </div>`;
+    updateInspector();
+  }
+
+  function offerTemplateUse(sid) {
+    const st = ENGINE.PKG.starterById && ENGINE.PKG.starterById[sid];
+    if (!st || document.querySelector('[data-od-id="template-use"]')) return;
+    const ov = document.createElement('div');
+    ov.className = 'scn-modal-backdrop';
+    ov.setAttribute('data-od-id', 'template-use');
+    ov.innerHTML = `
+      <div class="scn-modal" role="dialog" aria-modal="true" aria-labelledby="tu-q">
+        <h2 class="prompt" id="tu-q">Use template as is or modify it yourself?</h2>
+        <p class="support">${esc(displayName(st.title))}</p>
+        <div class="btnrow">
+          <button class="btn" type="button" data-tu="asis">Use template as is</button>
+          <button class="btn2" type="button" data-tu="modify">Modify template myself</button>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', (e) => {
+      if (e.target === ov) { ov.remove(); return; }
+      const b = e.target.closest('[data-tu]');
+      if (!b) return;
+      const choice = b.getAttribute('data-tu');
+      ov.remove();
+      if (atCheckinCap()) { capNotice(); return; }
+      if (choice === 'asis') {
+        SCENARIO.addChosenStarter(sid);
+        renderHome();
+      } else {
+        const s = SCENARIO.createScenario(displayName(st.title) + ' — my version', 'TEMPLATE', sid);
+        SCENARIO_UI.openEditor(s.scenario_id);
+      }
+    });
   }
 
   /* ---------- starter detail ---------- */
@@ -637,7 +723,7 @@ const UI = (() => {
         <h2 class="h3">Explorations — open rooms, no finish line</h2>
         <p class="support">Quiet spaces to wander in — a plant to grow, gemstones, stories — with nothing to complete and no wrong way through. Two rooms are for harder feelings: Somewhere to put the fury is a low ember field for anger, with no requirement to calm down, reframe it, or find the lesson; In memory is deep water for grief — for a person, a hard year, or a version of you that is gone. In both, you arrange small objects like a memorial altar as well as, or instead of, writing — words and objects are both optional, and nothing is kept unless you choose to keep it.</p>
         <h2 class="h3">Your check-in scenarios</h2>
-        <p class="support">Each check-in on the home page has a small pencil button at its top-right corner — tap it to edit that check-in. Editing a pre-made check-in makes it your own editable copy; the pre-made original is never changed. The dotted “add a check-in” box starts a brand-new check-in from a blank page. The home page holds up to 6 check-ins.</p>
+        <p class="support">Each check-in on the home page has a small pencil button at its top-right corner — tap it to edit that check-in. Editing a pre-made check-in makes it your own editable copy; the pre-made original is never changed. The dotted “add a check-in” box lets you start a brand-new check-in from a blank page, or from one of the pre-made templates. The home page holds up to 6 check-ins.</p>
         <h2 class="h3">Your data</h2>
         <p class="support">Everything you write stays on this device. Export or delete it any time under Settings &amp; data.</p>
       </div>`;
@@ -1521,6 +1607,9 @@ const UI = (() => {
           SCENARIO_UI.openEditor(s.scenario_id);
         },
         'new-blank-checkin': () => SCENARIO_UI.newBlankCheckin(),
+        'add-checkin': () => offerCreateChoice(),
+        'template-pick': () => offerTemplateUse(btn.getAttribute('data-starter')),
+        'template-back': () => renderHome(),
       };
       if (acts[act]) acts[act]();
     });

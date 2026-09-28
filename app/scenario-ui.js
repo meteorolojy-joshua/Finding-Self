@@ -47,6 +47,7 @@ window.SCENARIO_UI = (() => {
   /* create a blank check-in (one empty question, three empty answers) and open its editor */
   function newBlankCheckin() {
     if (atHomeCap()) { notice(capMsg()); return; }
+    SCN().purgePristineUntitled();
     const s = SCN().createScenario('Untitled check-in', 'BLANK');
     openEditor(s.scenario_id);
   }
@@ -69,7 +70,7 @@ window.SCENARIO_UI = (() => {
     const proj = SCN().projection(s, focusRef);
     const draftActive = s.lifecycle_state === 'DRAFT_CHANGES_NOT_ACTIVE';
 
-    const box = (ref, text, kind, opts) => {
+    const box = (ref, text, kind, opts, isFocus) => {
       const editable = kind === 'QUESTION' || kind === 'ANSWER';
       const label = kind === 'QUESTION' ? 'Question' : (kind === 'ANSWER' ? 'Answer' : kind);
       let sub = '';
@@ -85,11 +86,15 @@ window.SCENARIO_UI = (() => {
       const editStyle = (_editingRef === ref && _editWidth) ? ` style="width:${_editWidth}px"` : '';
       const editing = _editingRef === ref;
       const qtext = kind === 'QUESTION' ? ' scn-qtext' : '';
+      const emptyHint = kind === 'QUESTION' ? 'write question text here' : (kind === 'ANSWER' ? 'write answer text here' : '(empty)');
+      const emptyHtml = `<em class="muted">${emptyHint}</em>`;
       const mainField = editing
         ? (_editField === 'sub'
-          ? `<div class="scn-text${qtext} scn-field" data-scact="begin-edit-text" data-ref="${esc(ref)}" title="Click to edit the main text">${esc(text) || '<em class="muted">(empty)</em>'}</div>`
+          ? `<div class="scn-text${qtext} scn-field" data-scact="begin-edit-text" data-ref="${esc(ref)}" title="Click to edit the main text">${esc(text) || emptyHtml}</div>`
           : `<textarea class="scn-edit" data-scact="edit-input" data-field="text" data-ref="${esc(ref)}" rows="2">${esc(text)}</textarea>`)
-        : `<div class="scn-text${qtext}">${esc(text) || '<em class="muted">(empty)</em>'}</div>`;
+        : (isFocus
+          ? `<div class="scn-text${qtext} scn-clickedit" data-scact="begin-edit" data-ref="${esc(ref)}" title="Click to edit the text">${esc(text) || emptyHtml}</div>`
+          : `<div class="scn-text${qtext}">${esc(text) || emptyHtml}</div>`);
       const subField = sub ? (editing
         ? (_editField === 'sub'
           ? `<textarea class="scn-edit scn-subfield" data-scact="edit-input" data-field="sub" data-ref="${esc(ref)}" rows="2">${esc(sub)}</textarea>`
@@ -129,8 +134,8 @@ window.SCENARIO_UI = (() => {
 
     const focusBox = proj.focus ? box(proj.focus_ref, proj.focus.text, proj.focus.kind, `
       <div class="scn-box-actions">
-        ${(proj.focus.kind === 'QUESTION' || proj.focus.kind === 'ANSWER') ? `<button class="scn-mini" type="button" data-scact="replace" data-ref="${esc(proj.focus_ref)}">Browse Alternatives</button><button class="scn-mini" type="button" data-scact="begin-edit" data-ref="${esc(proj.focus_ref)}">Manual Edit</button>` : ''}
-      </div>`) : '';
+        ${(proj.focus.kind === 'QUESTION' || proj.focus.kind === 'ANSWER') ? `<button class="scn-mini" type="button" data-scact="replace" data-ref="${esc(proj.focus_ref)}">Browse Alternatives</button>` : ''}
+      </div>`, true) : '';
 
     // add child / sibling availability — questions never get a sibling "+":
     // siblings of a question are reached by adding/routing answers
@@ -144,7 +149,7 @@ window.SCENARIO_UI = (() => {
           <button class="pctl" type="button" data-scact="undo" ${(s.history && s.history.length) ? '' : 'disabled'} aria-label="Undo" title="Undo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
           <button class="pctl" type="button" data-scact="redo" aria-label="Redo" title="Redo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
         </div>
-        <div class="node-title">${esc(displayName(s.name))} · ${esc(stateLabel(s))}</div>
+        <div class="node-title">${esc(displayName(SCN().checkinLabel(s)))} · ${esc(stateLabel(s))}</div>
         <div class="scn-doc-actions">
           <button class="ghost" type="button" data-scact="rename-scenario">Rename</button>
           <button class="ghost" type="button" data-scact="delete-scenario" data-id="${esc(s.scenario_id)}" aria-label="Delete check-in ${esc(displayName(s.name))}">Delete check-in</button>
@@ -153,7 +158,7 @@ window.SCENARIO_UI = (() => {
         <div class="scn-canvas">
           ${parents ? `<div class="scn-group"><div class="scn-level">${parents}</div></div>` : ''}
           ${parents ? '<div class="scn-arrow" aria-hidden="true"></div>' : ''}
-          <div class="scn-focus" data-scact="drop-zone" data-ref="${esc(proj.focus_ref)}"><div class="scn-focus-label">Currently editing — drag a question or answer here to edit it:</div><div class="scn-level">${focusBox}</div></div>
+          <div class="scn-focus" data-scact="drop-zone" data-ref="${esc(proj.focus_ref)}"><div class="scn-focus-label">Drag item here to edit</div><div class="scn-level">${focusBox}</div></div>
           ${(siblings || canAddSibling) ? `<div class="scn-group"><div class="scn-level">${siblings}${canAddSibling ? `<button class="scn-add has-cursor-tip" type="button" data-scact="add-sibling" data-ref="${esc(proj.focus_ref)}" data-tip="add another answer" aria-label="Add sibling">+</button>` : ''}</div></div>` : ''}
           ${(children || canAddChild) ? '<div class="scn-arrow" aria-hidden="true"></div>' : ''}
           ${(children || canAddChild) ? `<div class="scn-group"><div class="scn-level">${children}${canAddChild ? (proj.focus.kind === 'QUESTION'
@@ -328,7 +333,7 @@ window.SCENARIO_UI = (() => {
     // tooltip follows the cursor over draggable boxes saying "drag and drop"
     const tip = document.createElement('div');
     tip.className = 'scn-tip';
-    tip.textContent = 'drag into the “Currently editing” box';
+    tip.textContent = 'Drag into the editor box to edit';
     document.body.appendChild(tip);
     function currentFocusRef() {
       const s = SCN().getScenario(_scenarioId);
@@ -408,5 +413,5 @@ window.SCENARIO_UI = (() => {
   }
 
   function navSnapshot() { const saved = structuredClone({_mode,_scenarioId,_editingRef,_editField,_editWidth,_switchTo,_modal,_pendingReplaceRef}); return () => { ({_mode,_scenarioId,_editingRef,_editField,_editWidth,_switchTo,_modal,_pendingReplaceRef} = structuredClone(saved)); }; }
-  return { navSnapshot, openEditor, newBlankCheckin, bind };
+  return { navSnapshot, openEditor, newBlankCheckin, notice, bind };
 })();

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 120">
+  <!-- table legs -->
+  <rect x="26" y="68" width="9" height="42" rx="2" fill="#7a5c40"/>
+  <rect x="75" y="68" width="9" height="42" rx="2" fill="#6b4f36"/>
+  <rect x="26" y="96" width="58" height="6" rx="2" fill="#7a5c40" opacity=".7"/>
+  <!-- tabletop -->
+  <rect x="18" y="60" width="74" height="10" rx="3" fill="#8a6a48"/>
+  <rect x="18" y="60" width="74" height="10" rx="3" fill="none" stroke="#6b4f36" stroke-width="1.5"/>
+  <!-- draped cloth -->
+  <path d="M22 64 h66 v18 c-7 7 -14 -1 -22 3 c-8 4 -15 -4 -23 0 c-7 3.6 -13 -2 -21 1 Z" fill="#ece5d8"/>
+  <path d="M22 64 h66 v6 h-66 Z" fill="#f5f0e6"/>
+  <path d="M40 70 v14 M58 72 v13 M74 70 v12" stroke="#d8cfbc" stroke-width="1.6" opacity=".8"/>
+  <!-- tall candle left -->
+  <rect x="30" y="30" width="9" height="32" rx="2.5" fill="#f4ede0"/>
+  <rect x="30" y="30" width="9" height="32" rx="2.5" fill="none" stroke="#d9cfba" stroke-width="1.2"/>
+  <path d="M34.5 22 C36.5 26 38.5 27.5 38.5 30.5 a4 4 0 0 1 -8 0 C30.5 27.5 32.5 26 34.5 22 Z" fill="#f2b134"/>
+  <path d="M34.5 26.5 c1 2 2 2.6 2 4 a2 2 0 0 1 -4 0 c0-1.4 1-2 2-4z" fill="#fbe3a8"/>
+  <ellipse cx="34.5" cy="62" rx="7" ry="2.4" fill="#e0d5c0"/>
+  <!-- short candle right -->
+  <rect x="70" y="40" width="9" height="22" rx="2.5" fill="#f4ede0"/>
+  <rect x="70" y="40" width="9" height="22" rx="2.5" fill="none" stroke="#d9cfba" stroke-width="1.2"/>
+  <path d="M74.5 32 C76.5 36 78.5 37.5 78.5 40.5 a4 4 0 0 1 -8 0 C70.5 37.5 72.5 36 74.5 32 Z" fill="#f2b134"/>
+  <ellipse cx="74.5" cy="62" rx="7" ry="2.4" fill="#e0d5c0"/>
+  <!-- small framed remembrance -->
+  <g transform="rotate(-4 52 46)">
+    <rect x="44" y="34" width="17" height="22" rx="1.5" fill="#8a6a48"/>
+    <rect x="46.5" y="36.5" width="12" height="17" fill="#b9c4c9"/>
+    <circle cx="52.5" cy="43" r="3" fill="#8fa0a8"/>
+    <path d="M46.5 53.5 l4 -4 3 3 3 -4 2.5 2.5 v2.5 h-12.5 Z" fill="#7d8b92"/>
+  </g>
+  <!-- flower sprigs in a small vase -->
+  <path d="M52 60 C50 52 48 48 44 44 M55 60 C56 52 58 48 62 45 M53.5 60 C53.5 53 53.5 50 53.5 46" stroke="#5c7350" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="43" cy="42" r="3.4" fill="#c98a94"/>
+  <circle cx="63" cy="43" r="3.4" fill="#c98a94"/>
+  <circle cx="53.5" cy="44" r="3.4" fill="#dba7ae"/>
+  <circle cx="43" cy="42" r="1.3" fill="#a86a74"/>
+  <circle cx="63" cy="43" r="1.3" fill="#a86a74"/>
+  <circle cx="53.5" cy="44" r="1.3" fill="#b9838c"/>
+  <path d="M47 62 h13 l-2.5 8 h-8 Z" fill="#7d8b92"/>
+  <ellipse cx="53.5" cy="62" rx="6.5" ry="2" fill="#5f6e75"/>
+  <!-- soft shadow -->
+  <ellipse cx="55" cy="112" rx="36" ry="5" fill="#3a3a3a" opacity=".08"/>
+</svg>

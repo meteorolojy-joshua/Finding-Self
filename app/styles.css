@@ -147,7 +147,7 @@ button .sub, button .id, button code { color: var(--surface); }
 /* Woodland (default) scheme: darker shelf objects with light text */
 .view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pot-body { fill: #6E4233; }
 .view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .pot-rim { fill: #855244; }
-.view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-box { fill: #7A4A3B; }
+.pv-shovel .shovel-bracket { fill: #6d7278; } .pv-shovel .shovel-grip { fill: #8a5f36; } .pv-shovel .shovel-shaft { fill: #a4713e; } .pv-shovel .shovel-blade { fill: #9aa3ab; }
 .view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-lid { fill: #8C5A48; }
 .view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-ribbon { fill: #9C7E2C; }
 .view:not([data-scheme="pastel"]):not([data-scheme="dark"]) .gift-bow { fill: #A68535; }
@@ -191,6 +191,7 @@ button .sub, button .id, button code { color: var(--surface); }
    The string's bottom corners track the card exactly (bottom edge = card
    top + 3px), while its apex rises well above the peg's top. */
 .opt.hang:hover, .opt.hang:active { background: var(--btn); color: var(--surface); }
+.checkin-grid .opt.hang b { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .opt.hang:hover { transform: rotate(var(--tilt, 0deg)) translateY(-4px); box-shadow: 0 6px 10px rgba(0,0,0,0.18); }
 .opt.hang:active { transform: rotate(var(--tilt, 0deg)) translateY(-6px); box-shadow: 0 8px 12px rgba(0,0,0,0.2); }
 .hang-string { transition: top 0.15s ease, height 0.15s ease; }
@@ -793,7 +794,7 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .explore-preview .pv-book svg { width: 17px; height: 23px; }
 .explore-preview .pv-pair svg { width: 42px; height: 26px; }
 .explore-preview .pv-circle svg { width: 50px; height: 38px; }
-.explore-preview .pv-gift svg { width: 38px; height: 28px; }
+.explore-preview .pv-shovel svg { width: 38px; height: 28px; }
 .explore-preview .pv-ledge { display: block; height: 13px; margin: 0 2px; border-radius: 5px;
   background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px), #A79A89;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); transition: transform 0.15s ease; }
@@ -910,9 +911,9 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 /* the plant's words sit wholly inside the wide, filled pot */
 .o-plant .spot-label { position: absolute; left: 50%; top: 64%; transform: translate(-50%, -50%);
   max-width: 18cqw; width: max-content; text-align: center; line-height: 1.25; color: #FFFDF7; }
-.o-gift   { left: 84%; bottom: 1.5%; }  .o-gift .spot-art svg { width: 23cqw; height: auto; }
+.o-shovel   { left: 84%; bottom: 1.5%; }  .o-shovel .spot-art svg { width: 23cqw; height: auto; }
 /* the gift's words sit wholly inside the filled box front */
-.o-gift .spot-label { position: absolute; left: 50%; top: 65.5%; transform: translate(-50%, -50%);
+.o-shovel .spot-label { position: absolute; left: 50%; top: 65.5%; transform: translate(-50%, -50%);
   margin-top: 0; max-width: 19cqw; width: max-content; text-align: center; line-height: 1.25; color: #FFFDF7; }
 .o-circle { left: 66%; bottom: 16%; }   .o-circle .spot-art svg { width: 54cqw; height: auto; }
 /* the table's words sit wholly inside the filled plinth base */
@@ -937,7 +938,7 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 
 /* labels enclosed inside an object part (pot, plinth, gift box) run a step
    smaller than the free-floating ones, so every word fits its component */
-.o-plant .spot-label, .o-circle .spot-label, .o-gift .spot-label {
+.o-plant .spot-label, .o-circle .spot-label, .o-shovel .spot-label {
   font-size: clamp(10.5px, 2.7cqw, 13px); }
 
 /* wall-shelf objects and the loops on the table carry their label just above
@@ -1012,7 +1013,7 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
   .explore-preview .pv-book svg { width: 14px; height: 19px; }
   .explore-preview .pv-pair svg { width: 36px; height: 22px; }
   .explore-preview .pv-circle svg { width: 43px; height: 33px; }
-  .explore-preview .pv-gift svg { width: 32px; height: 24px; }
+  .explore-preview .pv-shovel svg { width: 32px; height: 24px; }
 }
 
 /* 3 · postcard edge + corner motif on kept notes (restrained; content stays the focus) */

@@ -622,7 +622,41 @@ window.SCENARIO = (() => {
   const MAX_HOME_CHECKINS = 6;
   function homeCheckinCount() {
     return getChosenStarterIds().length
-      + listScenarios().filter(s => !s.scenario_id.startsWith('SCN.DEFAULT.')).length;
+      + listScenarios().filter(s => !s.scenario_id.startsWith('SCN.DEFAULT.') && !isPristineUntitled(s)).length;
+  }
+  /* A check-in still called "Untitled check-in" with no text typed anywhere.
+     Merely opening its editor and leaving must never leave an
+     "Untitled check-in" card on the home page, so these are excluded from
+     home counts and purged whenever home renders or a new blank is started. */
+  function isPristineUntitled(s) {
+    if (!s || s.name !== 'Untitled check-in' || s.scenario_id.startsWith('SCN.DEFAULT.')) return false;
+    try {
+      const els = composeGraph(s).elements;
+      for (const el of els.values()) {
+        if ((el.kind === 'QUESTION' || el.kind === 'ANSWER') && (el.text || '').trim()) return false;
+        if (el.kind === 'QUESTION' && typeof el.support === 'string' && el.support.trim()) return false;
+      }
+    } catch (e) { return false; }
+    return true;
+  }
+  function purgePristineUntitled() {
+    listScenarios().filter(isPristineUntitled).forEach(s => deleteScenario(s.scenario_id));
+  }
+  /* Label for a custom check-in on home and in the editor. A check-in the user
+     built content for but never renamed shows its first question (else first
+     answer) text rather than "Untitled check-in". */
+  function checkinLabel(s) {
+    if (!s || s.name !== 'Untitled check-in') return s ? s.name : '';
+    try {
+      const els = composeGraph(s).elements;
+      for (const el of els.values()) {
+        if (el.kind === 'QUESTION' && (el.text || '').trim()) return el.text.trim();
+      }
+      for (const el of els.values()) {
+        if (el.kind === 'ANSWER' && (el.text || '').trim()) return el.text.trim();
+      }
+    } catch (e) {}
+    return s.name;
   }
   const CHOSEN_KEY = 'fsaw.checkins.chosen.v1';
   function getChosenStarterIds() {
@@ -651,6 +685,6 @@ window.SCENARIO = (() => {
     commitTextEdit, commitSubTextEdit, replaceContentReference, addChild, addExistingChild, addSibling,
     deleteElementPlacement, deleteElementEverywhere, setRoot, setFocus, undo, redo, uuid,
     getChosenStarterIds, setChosenStarterIds, addChosenStarter, removeChosenStarter,
-    MAX_HOME_CHECKINS, homeCheckinCount
+    MAX_HOME_CHECKINS, homeCheckinCount, isPristineUntitled, purgePristineUntitled, checkinLabel
   };
 })();
