@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    My Presence, Author of Worlds — functional prototype engine
    Generic content player + deterministic router.
    All content, routes, classifications, and persistence rules

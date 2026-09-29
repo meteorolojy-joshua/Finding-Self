@@ -87,7 +87,7 @@ window.EXPLORATIONS = (() => {
       return `<div class="shelf-level" data-level="${bm.toLowerCase()}"><div class="shelf-books">${books.map(({s,i})=>cover(s,i,'shelf-book')).join('')}</div><div class="shelf-plank" aria-hidden="true"></div></div>`;};
     const addBook=`<button type="button" class="story-add-book has-cursor-tip" data-new="story-add" data-tip="Add a new story" aria-label="Add a story"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>add story</span></button>`;
     const discarded=storyDraft.map((s,i)=>({s,i})).filter(({s})=>s.bookmark==='Discard');
-    page('story-shelf','stories','An inherited story','Each book holds a story you inherited. Open one to revisit its words, or drag it to another shelf — or the bin — to change its bookmark. New stories arrive on the trolley.',
+    page('story-shelf','stories','What narratives have you inherited? Which ones do you want to discard, keep, change, or remain undecided about?','Each book holds a story you inherited. Open one to revisit its words, or drag it to another shelf — or the bin — to change its bookmark. New stories arrive on the trolley.',
       `<div class="shelf-wrap"><div class="shelf-frame"><div class="shelf-frame-title"><span>My bookshelf</span></div><div class="shelf-levels">${level('Keep')}${level('Undecided')}${level('Change')}</div></div><div class="shelf-side"><div class="book-trolley">${asset('current/book-trolley','trolley-art')}${addBook}</div><div class="trash-bin-wrap"><div class="trash-bin"><button type="button" class="bin-lid has-cursor-tip" data-tip="drag open to view discarded stories" aria-label="Trash bin lid. Drag open to view discarded stories."></button><div class="bin-mouth">${discarded.length?discarded.map(({s,i})=>cover(s,i,'bin-book')).join(''):'<p class="bin-empty">Nothing discarded yet.</p>'}</div><div class="bin-body"><span class="bin-label">discarded stories</span></div></div></div></div></div>`);
     bindBinLid();bindBookDrag();
   }
@@ -154,22 +154,21 @@ window.EXPLORATIONS = (() => {
     // Obligation rock + weight slider (replaces the "Obligation level" text field).
     const oblWeight=draft.fields['Obligation weight']??50;
     const oblText=esc(draft.fields['Obligation level']||'');
-    const oblBlock=`<div class="contract-scale-block"><h3 class="serif">Obligations This Community Wants From Me:</h3><div class="contract-scale-row"><div class="contract-rock" data-rock><img src="assets/current/contract-rock.svg" alt="" draggable="false"><textarea name="Obligation level" aria-label="What the obligations are" placeholder="${esc(cph[1])}">${oblText}</textarea></div><div class="contract-hslider"><label for="obl-weight">How heavy the obligations are</label><input type="range" id="obl-weight" name="Obligation weight" min="0" max="100" value="${oblWeight}" aria-label="How heavy the obligations are"><div class="contract-hslider-ends"><span>light</span><span>heavy</span></div></div></div></div>`;
+    const oblBlock=`<div class="contract-scale-block"><h3 class="serif">Obligations This Community Wants From Me:</h3><div class="contract-scale-row"><div class="contract-rock-stage"><div class="contract-rock" data-rock data-aspect="0.876"><img src="assets/current/contract-rock.svg" alt="" draggable="false"><textarea name="Obligation level" aria-label="What the obligations are" placeholder="${esc(cph[1])}">${oblText}</textarea></div></div><div class="contract-hslider"><label for="obl-weight">How heavy the obligations are</label><input type="range" id="obl-weight" name="Obligation weight" min="0" max="100" value="${oblWeight}" aria-label="How heavy the obligations are"><div class="contract-hslider-ends"><span>light</span><span>heavy</span></div></div></div></div>`;
     // Appreciation gift-box + received slider (new section).
     const appAmt=draft.fields['Appreciation amount']??50;
     const appText=esc(draft.fields['Appreciation']||'');
-    const appBlock=`<div class="contract-scale-block"><h3 class="serif">What I appreciate getting in or from this Community:</h3><div class="contract-scale-row"><div class="contract-rock" data-rock><img src="assets/current/contract-gift.svg" alt="" draggable="false"><textarea name="Appreciation" aria-label="What I appreciate getting" placeholder="What you receive here that you actually want…">${appText}</textarea></div><div class="contract-hslider"><label for="app-amount">How much I experience myself receiving that I actually want</label><input type="range" id="app-amount" name="Appreciation amount" min="0" max="100" value="${appAmt}" aria-label="How much I experience myself receiving that I actually want"><div class="contract-hslider-ends"><span>little</span><span>much</span></div></div></div></div>`;
+    const appBlock=`<div class="contract-scale-block"><h3 class="serif">What I can count on this community for:</h3><div class="contract-scale-row"><div class="contract-rock-stage"><div class="contract-rock" data-rock data-aspect="1"><img src="assets/current/contract-gift.svg" alt="" draggable="false"><textarea name="Appreciation" aria-label="What I appreciate getting" placeholder="What you receive here that you actually want…">${appText}</textarea></div></div><div class="contract-hslider"><label for="app-amount">How much I experience myself receiving that I actually want</label><input type="range" id="app-amount" name="Appreciation amount" min="0" max="100" value="${appAmt}" aria-label="How much I experience myself receiving that I actually want"><div class="contract-hslider-ends"><span>little</span><span>much</span></div></div></div></div>`;
     openModal('contract-dialog','My Assessment of This Community',`<p class="contract-subtitle">The arrangements I choose, question,<br>or leave undecided.</p>
       <label class="new-field"><span>The Name I Use for This Community:</span><input type="text" name="Name" maxlength="60" value="${esc(draft.fields['Name']||'')}" placeholder="${esc(cph[0])}"></label>
       ${oblBlock}${appBlock}
-      ${[2,3,4].map(i=>PhotoBody.field(cfields[i],cfields[i]+':',draft.fields[cfields[i]],(draft.photos||{})[cfields[i]],{placeholder:cph[i]})).join('')}
-      <h3 class="serif">In this community, I feel:</h3><div class="feeling-sliders">${labels.map((label,i)=>`<div class="feeling-column"><div class="face-slider" role="slider" tabindex="0" aria-label="${label}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${draft.ratings[label]??50}" aria-valuetext="${draft.ratings[label]==null?'Unanswered':draft.ratings[label]+' out of 100'}" data-rating="${label}"><span class="slider-rail"></span><span class="slider-face">${[0,1,2,3,4].map(n=>asset('current/face-'+n,'face-stage stage-'+n)).join('')}</span></div><span class="feeling-label">${label}</span><output>${draft.ratings[label]==null?'Not set':Math.round(draft.ratings[label])}</output></div>`).join('')}</div><p class="note-hint">Leave any slider unanswered. Drag a face upward or downward, or use arrow keys, Home, and End.</p>`,values=>{draft.fields=values;draft.photos=mergePhotos(draft.photos,modal,cfields.slice(2));if(!commit('contracts',id,draft))return false;redraw(contracts);returnFocus=view().querySelector(`[data-new="contract"][data-id="${id}"]`);notify('Contract kept.');});
+      <h3 class="serif">In this community, I feel:</h3><div class="feeling-sliders">${labels.map((label,i)=>`<div class="feeling-column"><div class="face-slider" role="slider" tabindex="0" aria-label="${label}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${draft.ratings[label]??50}" aria-valuetext="${draft.ratings[label]==null?'Unanswered':draft.ratings[label]+' out of 100'}" data-rating="${label}"><span class="slider-rail"></span><span class="slider-face">${[0,1,2,3,4].map(n=>asset('current/face-'+n,'face-stage stage-'+n)).join('')}</span></div><span class="feeling-label">${label}</span><output>${draft.ratings[label]==null?'Not set':Math.round(draft.ratings[label])}</output></div>`).join('')}</div><div class="investment-block"><h3 class="serif">Imagine you have a choice (maybe you already do). How invested or distanced do I want to be in/from this community?</h3><div class="investment-scene"><svg viewBox="0 0 424 200" role="group" aria-label="A figure holding a plant, with five pots in a row. Drag the figure to a pot to plant it there."><line x1="10" y1="170" x2="414" y2="170" stroke="#c4b591" stroke-width="2"/><g class="invest-pot" transform="translate(115,130)"><rect x="-24" y="0" width="48" height="10" rx="3" fill="#b5674a"/><path d="M-20,10 L-14,40 L14,40 L20,10 Z" fill="#c47a52"/><rect x="-18" y="15" width="36" height="5" fill="#a85a3e" opacity="0.4"/></g><g class="invest-pot" transform="translate(175,130)"><rect x="-24" y="0" width="48" height="10" rx="3" fill="#b5674a"/><path d="M-20,10 L-14,40 L14,40 L20,10 Z" fill="#c47a52"/><rect x="-18" y="15" width="36" height="5" fill="#a85a3e" opacity="0.4"/></g><g class="invest-pot" transform="translate(235,130)"><rect x="-24" y="0" width="48" height="10" rx="3" fill="#b5674a"/><path d="M-20,10 L-14,40 L14,40 L20,10 Z" fill="#c47a52"/><rect x="-18" y="15" width="36" height="5" fill="#a85a3e" opacity="0.4"/></g><g class="invest-pot" transform="translate(295,130)"><rect x="-24" y="0" width="48" height="10" rx="3" fill="#b5674a"/><path d="M-20,10 L-14,40 L14,40 L20,10 Z" fill="#c47a52"/><rect x="-18" y="15" width="36" height="5" fill="#a85a3e" opacity="0.4"/></g><g class="invest-pot" transform="translate(355,130)"><rect x="-24" y="0" width="48" height="10" rx="3" fill="#b5674a"/><path d="M-20,10 L-14,40 L14,40 L20,10 Z" fill="#c47a52"/><rect x="-18" y="15" width="36" height="5" fill="#a85a3e" opacity="0.4"/></g><g class="invest-man movable" style="transform:translate(35px,170px)"><rect x="-22" y="-72" width="52" height="74" fill="rgba(0,0,0,0)" pointer-events="all"/><g class="man-bob"><circle cx="0" cy="-58" r="9" fill="#f5f0e6" stroke="#5a4a3a" stroke-width="3"/><line x1="0" y1="-49" x2="0" y2="-20" stroke="#5a4a3a" stroke-width="3" stroke-linecap="round"/><line x1="0" y1="-42" x2="16" y2="-32" stroke="#5a4a3a" stroke-width="3" stroke-linecap="round"/><line x1="0" y1="-42" x2="16" y2="-28" stroke="#5a4a3a" stroke-width="3" stroke-linecap="round"/><line x1="0" y1="-20" x2="-10" y2="0" stroke="#5a4a3a" stroke-width="3" stroke-linecap="round"/><line x1="0" y1="-20" x2="10" y2="0" stroke="#5a4a3a" stroke-width="3" stroke-linecap="round"/></g></g><g class="invest-plant movable" style="transform:translate(51px,140px)"><circle cx="0" cy="0" r="7" fill="#6b4a2f"/><circle cx="-2" cy="-2" r="2.5" fill="#7d5a3a"/><path d="M0,-7 Q-8,-18 -14,-24" stroke="#4a7c3a" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M0,-7 Q8,-18 14,-24" stroke="#4a7c3a" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M0,-7 Q0,-20 0,-27" stroke="#4a7c3a" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="-15" cy="-26" rx="6.5" ry="3.5" fill="#5a9c4a" transform="rotate(-30 -15 -26)"/><ellipse cx="15" cy="-26" rx="6.5" ry="3.5" fill="#5a9c4a" transform="rotate(30 15 -26)"/><ellipse cx="0" cy="-29" rx="6.5" ry="3.5" fill="#6ab05a"/></g></svg><p class="note-hint">Drag the figure to one of the pots to plant it there.</p></div></div>`,values=>{draft.fields=values;if(!commit('contracts',id,draft))return false;redraw(contracts);returnFocus=view().querySelector(`[data-new="contract"][data-id="${id}"]`);notify('Contract kept.');});
     PhotoBody.bind(modal);
-    // Rock/gift-box size sliders: 0-100 maps to 180px-300px; never below 180px so the text field stays usable.
+    // Rock/gift-box size sliders: 0-100 maps to 170px-260px; never below 170px so the text field stays usable.
     modal.querySelectorAll('.contract-scale-row').forEach(row=>{
       const rock=row.querySelector('[data-rock]'),slider=row.querySelector('input[type=range]');
       if(!rock||!slider)return;
-      const size=()=>{const v=Number(slider.value||50);const px=Math.round(180+v/100*120);rock.style.width=px+'px';rock.style.height=Math.round(px*0.83)+'px';slider.setAttribute('aria-valuetext',v+' out of 100');};
+      const size=()=>{const v=Number(slider.value||50);const px=Math.round(170+v/100*90);const aspect=parseFloat(rock.dataset.aspect||'0.876');rock.style.width=px+'px';rock.style.height=Math.round(px*aspect)+'px';slider.setAttribute('aria-valuetext',v+' out of 100');};
       slider.addEventListener('input',size);size();
     });
     modal.querySelectorAll('.face-slider').forEach(slider=>{
@@ -180,6 +179,62 @@ window.EXPLORATIONS = (() => {
       slider.addEventListener('pointerdown',e=>{e.preventDefault();dragging=true;slider.setPointerCapture(e.pointerId);slider.focus({preventScroll:true});at(e);});
       slider.addEventListener('pointermove',e=>{if(dragging){e.preventDefault();at(e);}});slider.addEventListener('pointerup',()=>dragging=false);slider.addEventListener('pointercancel',()=>dragging=false);
       slider.addEventListener('keydown',e=>{const v=draft.ratings[label]??50;const vals={ArrowUp:v+1,ArrowRight:v+1,ArrowDown:v-1,ArrowLeft:v-1,PageUp:v+10,PageDown:v-10,Home:0,End:100};if(e.key in vals){e.preventDefault();set(vals[e.key]);}});paint();
+    });
+    initInvestment(modal,draft);
+  }
+
+  // Investment scene: drag the figure to a pot to plant the community there.
+  function initInvestment(modal,draft){
+    const svg=modal.querySelector('.investment-scene svg');if(!svg)return;
+    const man=svg.querySelector('.invest-man'),plant=svg.querySelector('.invest-plant');
+    const pots=Array.from(svg.querySelectorAll('.invest-pot'));
+    const START_X=35,GROUND_Y=170;
+    const potX=i=>115+i*60;
+    let manX=START_X,carrying=draft.investment==null,placed=draft.investment;
+    const setMan=x=>{man.style.transform=`translate(${x}px,${GROUND_Y}px)`;};
+    const setPlantHands=x=>{plant.style.transform=`translate(${x+16}px,140px)`;};
+    const setPlantPot=i=>{plant.style.transform=`translate(${potX(i)}px,140px)`;};
+    setMan(START_X);
+    if(placed!=null){setPlantPot(placed);}else{setPlantHands(START_X);}
+    const toSvgX=clientX=>{const pt=svg.createSVGPoint();pt.x=clientX;pt.y=0;return pt.matrixTransform(svg.getScreenCTM().inverse()).x;};
+    let dragging=false;
+    const placeInPot=i=>{
+      placed=i;draft.investment=i;carrying=false;
+      manX=potX(i);setMan(manX);setPlantHands(manX);
+      setTimeout(()=>{setPlantPot(i);
+        man.classList.add('walking');
+        setTimeout(()=>{manX=START_X;setMan(START_X);},380);
+        setTimeout(()=>man.classList.remove('walking'),1000);
+      },620);
+    };
+    man.addEventListener('pointerdown',e=>{
+      e.preventDefault();dragging=true;man.setPointerCapture(e.pointerId);man.classList.add('dragging');
+      if(!carrying){carrying=true;placed=null;draft.investment=null;}
+    });
+    man.addEventListener('pointermove',e=>{
+      if(!dragging)return;e.preventDefault();
+      manX=Math.max(20,Math.min(404,toSvgX(e.clientX)));
+      setMan(manX);if(carrying)setPlantHands(manX);
+    });
+    const endDrag=()=>{
+      if(!dragging)return;dragging=false;man.classList.remove('dragging');
+      let hit=-1;
+      for(let i=0;i<5;i++){if(Math.abs(manX-potX(i))<34){hit=i;break;}}
+      if(hit>=0&&carrying){placeInPot(hit);}
+      else{manX=START_X;setMan(START_X);if(carrying)setPlantHands(START_X);}
+    };
+    man.addEventListener('pointerup',endDrag);
+    man.addEventListener('pointercancel',endDrag);
+    const nearWords=['nearest to you','near','in the middle','far','farthest from you'];
+    pots.forEach((pot,i)=>{
+      pot.setAttribute('tabindex','0');pot.setAttribute('role','button');
+      pot.setAttribute('aria-label',`Plant in pot ${i+1}, ${nearWords[i]}`);
+      const activate=()=>{
+        if(!carrying){carrying=true;placed=null;draft.investment=null;setPlantHands(START_X);}
+        placeInPot(i);
+      };
+      pot.addEventListener('click',activate);
+      pot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
     });
   }
   function collection(){page('kept-explorations','explorations','Things I’m keeping','Revisit your illustrated explorations and the arrangements you have made.',`<div class="kept-exploration-links">${[['garden','Growing self'],['spaces','Spaces for my self'],['gems','Aspects of my self'],['story-shelf','Inherited stories'],['influences','Influences'],['contracts','Community contracts']].map(([a,l])=>btn(a,l,'btn2')).join('')}</div><h2 class="h3">Arrangements and practices</h2><div class="options">${ENGINE.lsGet(ENGINE.LS.arrangement,[]).map(a=>btn('arrangement',esc(a.title||a.whatMatters||a.care||a.kind),'btn2',`data-id="${esc(a.id)}"`)).join('')||'<p class="muted">No arrangements kept yet.</p>'}</div><h2 class="h3">Elemental rooms</h2>${ELEMENTAL.keptTiles()}`);}

@@ -1,3 +1,30 @@
+# My Presence — Updated Working Prototype 20 (2026-09-29)
+
+## What changed since Prototype 19
+
+**The cursor now grabs.** Holding the mouse button down turns the open grabby hand into a closed fist — the hand visibly grabs — and it opens back up when you let go. Text fields still show the I-beam.
+
+**Your cupboard and basket.** The Self-Explorations room now uses your cupboard and shopping basket illustrations in place of the previous drawings.
+
+**Your Furnace dial base.** The fire-intensity dials now sit on your clean dial illustration, so no incomplete grey patch shows behind the rotating pointer.
+
+**Inherited stories page.** The page header is now "What narratives have you inherited? Which ones do you want to discard, keep, change, or remain undecided about?" The old "Collect inherited stories. Decide what you want to keep." line is gone.
+
+**Community scroll, continued.** Your rock and present illustrations now hold the writing areas (the present's old white box is gone — it sits directly on the cream scroll). "What I appreciate getting in or from this Community:" is now "What I can count on this community for:". The "Current arrangement:", "Terms I agree with:", and "Terms to reconsider:" lines and the bottom slider hint are removed. New investment question: "Imagine you have a choice (maybe you already do). How invested or distanced do I want to be in/from this community?" — five pots, the leftmost nearest; drag the figure to a pot and she plants the community there and walks back; pots also work from the keyboard; the choice is kept with the contract.
+
+**Your home altar.** "In memory" on the Self-Explorations page now uses your small home altar illustration.
+
+**Room welcome text.** The Self-Explorations page now opens with: "Click on the household objects, and use them to build a sense of your own presence, as well as your feelings, preferences, and intentions for action regarding the various people and situations around you in your life."
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: cursor open-hand → closed-fist on press → open-hand on release; cupboard and basket rendering in the room and the store; dial face complete at all five anger settings with the pointer aiming at the set level; story-shelf page showing the new title with no leftover support text; community scroll (rock/present artwork, investment drag to a pot and keyboard choice, persistence after save/reopen); the new altar opening the grief room; the new room welcome text. Desktop and 390px phone layouts checked, zero horizontal overflow.
+
+**Known open items (unchanged).** Photo options on the community rock/present writing areas, typed-only gemstone "What draws me to it", lamp-room leaf photo persistence, real photo-picker testing for the Furnace wood, specialized-cursor behavior against the app-wide hand rules, and the bookshelf/trash-can/trolley illustrations (supplied artwork, not yet integrated).
+
+---
+
 # My Presence — Updated Working Prototype 19 (2026-09-29)
 
 ## What changed since Prototype 18
@@ -17,7 +44,10 @@
 - Automated suite: 143/143 passing, zero page errors.
 - Walked through in a browser: title/photo flows across all exploration dialogs (typed/photo switching, replace/remove, blank titles, 60-char limits, reopen/reload, legacy entries); Furnace dial drag/keys at all five levels, chip hanging tilted on the wall; contract rock/gift-box sliders resizing with text and positions persisting; cursor styles on body, buttons, and text inputs. Desktop and 390px phone layouts checked, zero horizontal overflow.
 
----
+**Corrections (2026-09-29, post-P19 review).** Two notes above overstated what was actually verified:
+
+- *Photos instead of typed words.* Coverage was not as complete as written: the community contract's rock and present writing areas do not yet offer photo options; the gemstone "What draws me to it" field is typed-only; lamp-room leaf photo persistence across reopen/reload was not re-verified; and the Furnace wood photo flow was exercised with synthetic file input, not a real photo picker. These are still open.
+- *Cursor.* The specialized-cursor check was not done: drag grips, the Furnace/grief dial vertical-resize, the community horizontal sliders, and disabled controls were not individually rechecked against the app-wide hand rules, which may still override them. That check is still open.
 
 # My Presence — Updated Working Prototype 18 (2026-09-28)
 

@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    Making room — arrangements, helpful conditions, belonging,
    and contribution for the FS-AW prototype.
    Additive module: its own stores (fsaw.arrangements.v1,

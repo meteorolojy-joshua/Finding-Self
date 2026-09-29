@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #ececec;
   --surface: #ffffff;
   --surface-app: #faf7f2;
@@ -1676,5 +1676,8 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
    Text-typing situations keep the customary I-beam at normal size, since a
    larger cursor would make precise text clicking difficult. */
 html, body, body *{cursor:url('assets/current/cursor-grab.svg') 16 16, grab !important;}
+html:active, body:active, body *:active{cursor:url('assets/current/cursor-grabbing.svg') 16 16, grabbing !important;}
 html body input[type=text], html body input[type=email], html body input[type=search],
 html body input[type=password], html body textarea, html body [contenteditable=true]{cursor:text !important;}
+html body input[type=text]:active, html body input[type=email]:active, html body input[type=search]:active,
+html body input[type=password]:active, html body textarea:active, html body [contenteditable=true]:active{cursor:text !important;}

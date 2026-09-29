@@ -134,3 +134,32 @@ dialog.illustrated-dialog{border:0;padding:0;background:transparent;color:var(--
 .contract-hslider label{display:block;font-size:13px;font-style:italic;color:var(--muted);margin-bottom:8px;}
 .contract-hslider input[type=range]{width:100%;accent-color:var(--btn);cursor:ew-resize;}
 .contract-hslider-ends{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* Contract scroll spans the full app width. */
+dialog.illustrated-dialog.contract-dialog{width:min(480px,100vw);}
+
+/* Contract dialog at full app width: tighten side padding so rock+slider fit without overflow. */
+.contract-dialog .dialog-surface{padding-left:28px;padding-right:28px;}
+.contract-hslider{min-width:140px;}
+
+/* Rock/gift-box sliders sit below their objects, not beside them. */
+.contract-scale-row{flex-direction:column;align-items:flex-start;}
+.contract-hslider{width:100%;min-width:0;}
+
+/* Rock/gift-box: fixed-height stage reserves max-size space; object stays centered as it resizes. */
+.contract-scale-row{align-items:center;}
+.contract-rock-stage{height:272px;display:flex;align-items:center;justify-content:center;width:100%;}
+
+/* Investment scene: stick figure, plant, and five pots. */
+.investment-block{margin:30px 0 8px;}
+.investment-scene svg{width:100%;height:auto;display:block;touch-action:none;user-select:none;-webkit-user-select:none;}
+.investment-scene .movable{transition:transform .55s ease;}
+.investment-scene .movable.dragging{transition:none;}
+.invest-man{cursor:grab;}
+.invest-man.dragging{cursor:grabbing;}
+.invest-pot{cursor:pointer;}
+.invest-pot:focus{outline:2px solid #6a8a5a;outline-offset:4px;}
+.invest-pot:focus:not(:focus-visible){outline:none;}
+.invest-pot:focus-visible{outline:2px solid #6a8a5a;outline-offset:4px;}
+@keyframes manbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.invest-man.walking .man-bob{animation:manbob .28s ease-in-out 2;}
