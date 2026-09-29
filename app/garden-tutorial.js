@@ -222,7 +222,7 @@ window.GARDEN_TUTORIAL = (() => {
     },
     { // Part 6: the placed leaf
       title: 'There it is',
-      text: 'There is your new leaf on the plant — and the words you wrote beside it. You can add more leaves whenever you like.',
+      text: 'There is your new leaf on the plant — and the title you gave it beside it. You can add more leaves whenever you like.',
       showDone: true,
       getTargets: () => {
         const el = slotId

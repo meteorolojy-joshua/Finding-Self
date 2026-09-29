@@ -261,7 +261,8 @@ const Elemental = {
       altar: Elemental._cleanAltar(entry.altar),
       keptAt: typeof entry.keptAt === 'string' ? entry.keptAt : new Date().toISOString(),
     };
-    if (!clean.text.trim() && !clean.altar.length) return null;
+    if (typeof entry.photo === 'string' && entry.photo.indexOf('data:image/') === 0) clean.photo = entry.photo.slice(0, 600000);
+    if (!clean.text.trim() && !clean.altar.length && !clean.photo) return null;
     const all = Elemental.getEntries();
     const i = all.findIndex(e => e.id === clean.id);
     if (i >= 0) all[i] = clean; else all.unshift(clean);

@@ -1,3 +1,24 @@
+# My Presence — Updated Working Prototype 19 (2026-09-29)
+
+## What changed since Prototype 18
+
+**Titles on self-exploration objects.** Garden leaves, gemstones, and lamp-room leaves now have a Title field (60 characters) in their popups; saved titles appear beside their objects outside the popup. The wood dialog in the Furnace needs no title — "What are you angry about?" already identifies the piece.
+
+**Photos instead of typed words.** Anywhere in Self-Explorations where you could type body text, you can now take a photo or choose one from your camera roll instead — a photograph of handwriting can replace the typed words. Titles stay typed (and may stay blank). Reopening an entry shows its saved photograph where the typed words would have been. Covers garden leaves, gemstones, spaces, community contracts, stories, contributions, lamp-room leaves, grief-room words, influences, and the Furnace wood response.
+
+**Your Furnace dial and chip artwork.** The fire-intensity dials now use your dial illustration (face and pointer), with the pointer aiming at the level that is actually set across all five anger settings. Post-fire pieces hung on the wall now use your residual wood chip illustration, each tilted at a slight angle.
+
+**Community scroll redesign.** The popup is now titled "My Assessment of This Community." "Name:" is now "The Name I Use for This Community:". "Obligation Level:" is now "Obligations This Community Wants From Me:" — with a rock holding the writing space and a horizontal slider to its right ("How heavy the obligations are"): drag left to shrink the rock, right to grow it; the rock never gets too small to write in. New section after that: "What I appreciate getting in or from this Community:" with a gift box and slider ("How much I experience myself receiving that I actually want"), working the same way.
+
+**Cursor.** Your cursor is now a grabby hand everywhere in the app (slightly larger than usual). Text fields keep the normal I-beam text cursor so precise clicking stays easy.
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: title/photo flows across all exploration dialogs (typed/photo switching, replace/remove, blank titles, 60-char limits, reopen/reload, legacy entries); Furnace dial drag/keys at all five levels, chip hanging tilted on the wall; contract rock/gift-box sliders resizing with text and positions persisting; cursor styles on body, buttons, and text inputs. Desktop and 390px phone layouts checked, zero horizontal overflow.
+
+---
+
 # My Presence — Updated Working Prototype 18 (2026-09-28)
 
 ## What changed since Prototype 17

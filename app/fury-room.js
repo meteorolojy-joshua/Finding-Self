@@ -8,6 +8,14 @@ window.FURY_ROOM = (() => {
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  // A piece's label: its typed words, or the photo of its handwritten words,
+  // which stands in for the name wherever the name would appear.
+  function pieceCaption(p) {
+    if ((p.title || '').trim()) return esc(p.title);
+    if (p.titlePhoto) return `<img class="fury-label-photo" src="${p.titlePhoto}" alt="Your handwritten words">`;
+    return 'Unnamed piece';
+  }
+  function pieceSpoken(p) { return (p.title || '').trim() || 'your handwritten words'; }
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const LS_KEY = 'fsaw.fury.v1';
   const MAX_BURNING = 5;
@@ -29,6 +37,7 @@ window.FURY_ROOM = (() => {
   // J's own artwork for the furnace: the fireplace, a plain piece of wood,
   // and a piece of wood on fire. Used in place of the earlier drawn versions.
   const WOOD_IMG = '<img class="fury-art" src="assets/current/fury-wood.svg" alt="" draggable="false">';
+  const CHIP_IMG = '<img class="fury-art fury-chip-art" src="assets/current/fury-chip.svg" alt="" draggable="false">';
   const BURNING_IMG = '<img class="fury-art" src="assets/current/fury-wood-burning.svg" alt="" draggable="false">';
   const FIREPLACE_IMG = '<img class="fury-fireplace-art" src="assets/current/fury-fireplace.svg" alt="A fireplace" draggable="false">';
 
@@ -73,9 +82,14 @@ window.FURY_ROOM = (() => {
           <div class="fury-wall-pieces" id="fury-wall-pieces"></div>
         </section>
         <section class="fury-hearth" aria-label="Fireplace">
-          <div class="fury-fireplace" id="fury-fireplace">
-            ${FIREPLACE_IMG}
-            <div class="fury-firebox" id="fury-firebox" aria-label="Fireplace — drag wood here"></div>
+          <div class="fury-hearth-row">
+            <div class="fury-fireplace" id="fury-fireplace">
+              ${FIREPLACE_IMG}
+              <div class="fury-firebox" id="fury-firebox" aria-label="Fireplace — drag wood here"></div>
+            </div>
+            <div class="fury-bin" id="fury-bin" aria-label="Bin — drag a piece here to forget it">
+              ${BIN_SVG}
+            </div>
           </div>
         </section>
         <section class="fury-stack" id="fury-stack" aria-label="Wood pile — drag a piece to the fireplace">
@@ -85,9 +99,6 @@ window.FURY_ROOM = (() => {
         <section class="fury-dials" id="fury-dials" aria-label="Anger dials"></section>
       </div>
       <div class="fury-foot">
-        <div class="fury-bin" id="fury-bin" aria-label="Disposal bin — drag a piece here to forget it">
-          ${BIN_SVG}<span>Forget it</span>
-        </div>
         <button class="btn2" type="button" data-fury="leave">Done for now</button>
       </div>
       <p class="fury-status" id="fury-status" role="status"></p>
@@ -117,7 +128,7 @@ window.FURY_ROOM = (() => {
       // Pieces rest on the floor of the fireplace, spread across its width.
       // Sizes stay proportional to the fireplace so nothing can spill past it.
       const left = n > 1 ? 20 + (i / (n - 1)) * 60 : 50;
-      return `<div class="fury-piece" data-id="${esc(p.id)}" style="left:${left.toFixed(1)}%;touch-action:none" role="button" tabindex="0" aria-label="${esc(p.title)} — drag to the bin to forget it, or to the wall to keep it as a reminder">
+      return `<div class="fury-piece" data-id="${esc(p.id)}" style="left:${left.toFixed(1)}%;touch-action:none" role="button" tabindex="0" aria-label="${esc(pieceSpoken(p))} — drag to the bin to forget it, or to the wall to keep it as a reminder">
         <div class="fury-piece-scale" style="transform:scale(${s.toFixed(2)})">
           <img class="fury-art fury-piece-art" src="assets/current/fury-wood-burning.svg" alt="" draggable="false">
         </div>
@@ -133,9 +144,9 @@ window.FURY_ROOM = (() => {
     const pieces = burningPieces();
     wrap.innerHTML = pieces.length ? pieces.map(p => `
       <div class="fury-dial" data-id="${esc(p.id)}">
-        <div class="fury-dial-title">${esc(p.title)}</div>
+        <div class="fury-dial-title">${pieceCaption(p)}</div>
         <div class="fury-dial-body">
-          <div class="fury-knob" role="slider" tabindex="0" aria-label="How angry: ${esc(p.title)}"
+          <div class="fury-knob" role="slider" tabindex="0" aria-label="How angry: ${esc(pieceSpoken(p))}"
                aria-valuemin="0" aria-valuemax="4" aria-valuenow="${p.level}" aria-valuetext="${esc(levelLabel(p.level))}"
                data-level="${p.level}" style="touch-action:none">
             <span class="fury-knob-pointer"></span>
@@ -245,9 +256,10 @@ window.FURY_ROOM = (() => {
     const pieces = wallPieces();
     wall.innerHTML = pieces.length ? pieces.map(p => `
       <div class="fury-hung" data-id="${esc(p.id)}" style="touch-action:none" role="button" tabindex="0"
-           aria-label="${esc(p.title)} — once burned here. Drag to the bin to forget it entirely." title="${esc(p.title)}">
+           aria-label="${esc(pieceSpoken(p))} — once burned here. Drag to the bin to forget it entirely." title="${esc(pieceSpoken(p))}">
         <span class="fury-string" aria-hidden="true"></span>
-        <span class="fury-hung-log" aria-hidden="true">${WOOD_IMG}</span>
+        <span class="fury-hung-log" aria-hidden="true">${CHIP_IMG}</span>
+        <span class="fury-hung-title">${pieceCaption(p)}</span>
       </div>`).join('')
       : `<p class="fury-wall-empty">Nothing hung yet.</p>`;
     wall.querySelectorAll('.fury-hung').forEach(el => {
@@ -335,7 +347,7 @@ window.FURY_ROOM = (() => {
 
   function showPieceTitle(id) {
     const p = state.pieces.find(x => x.id === id);
-    if (p) status(p.place === 'fire' ? `"${p.title}" — burning at "${LEVELS[p.level]}". Drag it to the bin to forget it, or to the wall to keep it as a reminder.` : `"${p.title}" — once burned here.`);
+    if (p) status(p.place === 'fire' ? `"${pieceSpoken(p)}" — burning at "${LEVELS[p.level]}". Drag it to the bin to forget it, or to the wall to keep it as a reminder.` : `"${pieceSpoken(p)}" — once burned here.`);
   }
 
   function removePiece(id, how) {
@@ -351,7 +363,7 @@ window.FURY_ROOM = (() => {
     p.place = place;
     saveState(state);
     renderAll();
-    status(place === 'wall' ? `"${p.title}" now hangs on the wall — a small reminder of what once burned.` : 'Moved.');
+    status(place === 'wall' ? `"${pieceSpoken(p)}" now hangs on the wall — a small reminder of what once burned.` : 'Moved.');
   }
 
   function status(msg) {
@@ -367,9 +379,7 @@ window.FURY_ROOM = (() => {
       <div class="fury-dialog" role="dialog" aria-modal="true" aria-labelledby="fury-dialog-title">
         <div class="fury-dialog-log">${WOOD_IMG}</div>
         <h2 id="fury-dialog-title">A piece of wood</h2>
-        <label class="fury-field"><span>What are you angry about?</span>
-          <textarea name="title" rows="3" placeholder="Name it in your own words…"></textarea>
-        </label>
+        ${PhotoBody.field('title','What are you angry about?','',null,{placeholder:'Name it in your own words…',required:true,maxlength:60})}
         <p class="dialog-error" role="alert"></p>
         <div class="btnrow">
           <button class="btn" type="button" data-fd="confirm">Confirm</button>
@@ -377,6 +387,8 @@ window.FURY_ROOM = (() => {
         </div>
       </div>`;
     document.body.append(ov);
+    PhotoBody.reset(ov);
+    PhotoBody.bind(ov);
     const close = () => ov.remove();
     const ta = ov.querySelector('textarea');
     ta.focus();
@@ -386,16 +398,17 @@ window.FURY_ROOM = (() => {
       if (!b) return;
       if (b.dataset.fd === 'cancel') { close(); return; }
       const title = ta.value.trim();
-      if (!title) {
-        ov.querySelector('.dialog-error').textContent = 'Give the piece a name — even a few words will do.';
+      const titlePhoto = PhotoBody.get(ov, 'title') || null;
+      if (!title && !titlePhoto) {
+        ov.querySelector('.dialog-error').textContent = 'Give the piece a name — a few words, or a photo of your handwriting.';
         ta.focus();
         return;
       }
-      state.pieces.push({ id: 'w' + Math.random().toString(36).slice(2), title, level: 0, place: 'fire' });
+      state.pieces.push({ id: 'w' + Math.random().toString(36).slice(2), title, titlePhoto, level: 0, place: 'fire' });
       saveState(state);
       close();
       renderAll();
-      status(`"${title}" is in the fire. Turn its dial to say how hot it burns.`);
+      status(title ? `"${title}" is in the fire. Turn its dial to say how hot it burns.` : 'Your piece is in the fire. Turn its dial to say how hot it burns.');
     });
     ov.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
   }

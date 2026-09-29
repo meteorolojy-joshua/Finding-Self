@@ -1306,6 +1306,11 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .leaf-paper textarea { position: relative; width: 100%; box-sizing: border-box; min-height: 180px;
   background: transparent; border: 0; outline: none; resize: vertical; font: inherit; font-size: 15px;
   line-height: 1.5; color: var(--fg); }
+.leaf-title-field { display: block; margin: 0 0 10px; position: relative; }
+.leaf-title-field span { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+.leaf-title-field input { width: 100%; box-sizing: border-box; background: transparent; border: 1px solid var(--line);
+  border-radius: 6px; padding: 8px 10px; font: inherit; font-size: 14px; color: var(--fg); }
+.leaf-pb .pb-photo img { max-height: 240px; }
 .leaf-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0 4px; }
 .leaf-card { position: relative; border: 1.5px solid var(--line); background: var(--surface); border-radius: 7px;
   padding: 6px; cursor: pointer; font: inherit; min-height: 78px; overflow: hidden;
@@ -1666,3 +1671,10 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .el-frame-opt.sel { border-color: #2a4a63; }
 .el-frame-opt .photo-frame { height: 56px; pointer-events: none; }
 .el-frame-opt small { display: block; margin-top: 4px; font-size: 11px; color: #5a5348; }
+
+/* Default cursor: a slightly larger grabby hand (not the pointed arrow).
+   Text-typing situations keep the customary I-beam at normal size, since a
+   larger cursor would make precise text clicking difficult. */
+html, body, body *{cursor:url('assets/current/cursor-grab.svg') 16 16, grab !important;}
+html body input[type=text], html body input[type=email], html body input[type=search],
+html body input[type=password], html body textarea, html body [contenteditable=true]{cursor:text !important;}

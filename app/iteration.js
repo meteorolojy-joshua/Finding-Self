@@ -103,7 +103,9 @@ window.ITERATION=(()=>{
       :wallFree!==-1
         ?`<button type="button" class="btn2" id="shovel-dialog-btn">Lean a shovel here</button>`
         :`<p class="note-hint">All four shovels are already leaning on other things.</p>`;
-    E().openModal('contribution-dialog',E().esc(item.label),`<p>What would your own version look like? A few words, a wish, or an unfinished thought.</p>${E().field('My words',E().data.contributions[id]||'','words','Jot down a thought\u2026')}<div class="btnrow">${shovelBtn}</div>`,v=>{if(!E().commit('contributions',id,v.words))return false;E().closeModal();E().redraw(contributions);$(`[data-iteration="contribution"][data-id="${id}"]`)?.focus();E().notify('Your words are kept on this device.');});
+    const cphotos=E().data.contributions._photos||{};
+    E().openModal('contribution-dialog',E().esc(item.label),`<p>What would your own version look like? A few words, a wish, or an unfinished thought.</p>${PhotoBody.field('words','My words',E().data.contributions[id]||'',cphotos[id],{placeholder:'Jot down a thought\u2026'})}<div class="btnrow">${shovelBtn}</div>`,v=>{const m=E().getModal();const wp=PhotoBody.get(m,'words');const photos=Object.assign({},cphotos);if(wp===null)delete photos[id];else if(wp!==undefined)photos[id]=wp;const next=structuredClone(E().data);next.contributions[id]=v.words;next.contributions._photos=photos;if(!E().save(next))return false;E().closeModal();E().redraw(contributions);$(`[data-iteration="contribution"][data-id="${id}"]`)?.focus();E().notify('Your words are kept on this device.');});
+    PhotoBody.bind(E().getModal());
     const sb=document.getElementById('shovel-dialog-btn');
     if(sb)sb.addEventListener('click',()=>{
       E().closeModal();

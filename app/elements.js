@@ -147,7 +147,7 @@ window.ELEMENTAL = (() => {
           <div class="el-stage" id="el-stage"><p class="el-hint" id="el-hint">${esc(R.hint)}</p></div>
           <div class="el-dock">
             <div class="el-chip el-q"><p id="el-qtext"></p><button type="button" class="el-link" data-el="another">Another question</button></div>
-            <div class="el-chip el-w"><label class="sr-only" for="el-text">Your words</label><textarea id="el-text" rows="2" placeholder="Write as little or as much as you like…"></textarea></div>
+            <div class="el-chip el-w"><div class="pb-field" data-pb-field="words"><div class="pb-text"><label class="sr-only" for="el-text">Your words</label><textarea id="el-text" rows="2" placeholder="Write as little or as much as you like…"></textarea><button type="button" class="btn2 pb-add" data-pb-add="words">Add a photo instead</button></div><div class="pb-photo" hidden><img alt="Your photo for this room"><div class="btnrow pb-btnrow"><button type="button" class="btn2" data-pb-replace="words">Replace photo</button><button type="button" class="note-act" data-pb-remove="words">Remove photo</button></div></div></div></div>
             <div class="el-chip el-tray" id="el-tray" role="group" aria-label="Small objects to place in the room"></div>
             <div class="el-actions">
               <button type="button" class="el-keep" data-el="keep">Keep this</button>
@@ -335,6 +335,8 @@ window.ELEMENTAL = (() => {
     if (element === 'fury' && window.FURY_ROOM) { stop(); window.FURY_ROOM.open(); return; }
     stop();
     view().innerHTML = roomHTML(element);
+    PhotoBody.reset(view());
+    PhotoBody.bind(view(), null);
     const R = ROOMS[element];
     const stage = $('#el-stage'), tray = $('#el-tray'), note = $('#el-note'),
       text = $('#el-text'), qtext = $('#el-qtext');
@@ -627,13 +629,14 @@ window.ELEMENTAL = (() => {
     view().querySelector('[data-el="keep"]').addEventListener('click', () => {
       const entry = ENGINE.Elemental.keep({
         element, prompt: R.prompts[qi], text: text.value,
+        photo: PhotoBody.get(view(), 'words') || null,
         altar: placed.map(p => {
           const a = { obj: p.key, x: Math.round(p.x * 10) / 10, y: Math.round(p.y * 10) / 10 };
           if (p.img) { a.img = p.img; a.frame = p.frame; }
           return a;
         }),
       });
-      if (!entry) { note.textContent = 'Add a few words or place an object first — or leave it unkept.'; return; }
+      if (!entry) { note.textContent = 'Add a few words, a photo, or place an object first — or leave it unkept.'; return; }
       keptConfirm(element, entry.id);
     });
     document.addEventListener('keydown', function esc2(e) {
@@ -690,7 +693,8 @@ window.ELEMENTAL = (() => {
           <b>${esc(R.title)}</b>
           <span class="el-kept-date">${esc(date)}</span>
           ${e.prompt ? `<span class="el-kept-prompt">${esc(e.prompt)}</span>` : ''}
-          ${e.text.trim() ? `<p>${esc(e.text.trim()).replace(/\n/g, '<br>')}</p>` : '<p class="el-muted">An arrangement of objects, no words.</p>'}
+          ${e.photo ? `<img class="el-kept-photo" src="${e.photo}" alt="Your handwritten words">` : ''}
+          ${e.text.trim() ? `<p>${esc(e.text.trim()).replace(/\n/g, '<br>')}</p>` : (e.photo ? '' : '<p class="el-muted">An arrangement of objects, no words.</p>')}
           <div class="el-actions"><button type="button" class="el-ghost" data-el="remove">Remove</button></div>
         </div>
       </div></div>
@@ -713,7 +717,8 @@ window.ELEMENTAL = (() => {
     return '<div class="el-tiles">' + all.map(e => {
       const R = ROOMS[e.element];
       const date = new Date(e.keptAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-      const preview = e.text.trim()
+      const preview = e.photo ? 'A photo of your handwritten words'
+        : e.text.trim()
         ? e.text.trim().slice(0, 70) + (e.text.trim().length > 70 ? '…' : '')
         : (e.altar.length ? `An arrangement of ${e.altar.length} object${e.altar.length > 1 ? 's' : ''}` : 'Kept');
       return `<button type="button" class="el-tile el-tile-${e.element}" data-new="elemental-view" data-id="${esc(e.id)}">
@@ -724,4 +729,154 @@ window.ELEMENTAL = (() => {
   }
 
   return { openRoom, openKept, keptTiles, ROOMS };
+})();
+
+/* ---------- PhotoBody: a photo instead of typed words for exploration bodies ----------
+   Used by the exploration popups (leaf, gemstone, space, contract, contribution,
+   lamp-room leaf) and the story book. A body field keeps its typed words and can
+   also hold one photo; when a photo is present it is shown in place of the words
+   field. Titles are never photo-replaceable. Photos are downscaled client-side
+   (max 640px JPEG) before they are kept. */
+window.PhotoBody = (() => {
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const validPhoto = u => (typeof u === 'string' && u.indexOf('data:image/') === 0 ? u : null);
+
+  function field(name, label, text, photo, opts) {
+    const o = opts || {};
+    const placeholder = o.placeholder || '', rows = o.rows || 3, required = !!o.required, hideLabel = !!o.hideLabel;
+    const ml = o.maxlength ? ` maxlength="${o.maxlength}"` : '';
+    const ph = validPhoto(photo);
+    return `<div class="pb-field" data-pb-field="${esc(name)}" data-pb-required="${required ? '1' : ''}">`
+      + `<div class="pb-text"${ph ? ' hidden' : ''}>`
+      + `<label class="new-field"><span${hideLabel ? ' class="sr-only"' : ''}>${esc(label)}</span><textarea name="${esc(name)}" rows="${rows}"${ml} placeholder="${esc(placeholder)}"${required && !ph ? ' required' : ''}>${esc(text || '')}</textarea></label>`
+      + `<button type="button" class="btn2 pb-add" data-pb-add="${esc(name)}">Add a photo instead</button>`
+      + `</div>`
+      + `<div class="pb-photo"${ph ? '' : ' hidden'}>`
+      + `<img${ph ? ` src="${ph}"` : ''} alt="Your photo for ${esc(label)}">`
+      + `<div class="btnrow pb-btnrow"><button type="button" class="btn2" data-pb-replace="${esc(name)}">Replace photo</button><button type="button" class="note-act" data-pb-remove="${esc(name)}">Remove photo</button></div>`
+      + `</div></div>`;
+  }
+
+  function chooseSource(container, opts) {
+    return new Promise(resolve => {
+      const o = opts || {};
+      const inDialog = !!(container && container.closest && container.closest('dialog'));
+      const ov = document.createElement('div');
+      ov.className = 'pb-source-ov' + (inDialog ? ' in-dialog' : '');
+      ov.innerHTML = `<div class="pb-source" role="dialog" aria-modal="true" aria-label="Add a photo">`
+        + `<p class="pb-source-title">Add a photo</p>`
+        + `<p class="pb-source-sub">Take a new picture, or choose one from your camera roll — for example a photo of something you handwrote.</p>`
+        + `<div class="pb-source-btns"><button type="button" class="btn2" data-src="camera">Take a photo</button>`
+        + `<button type="button" class="btn2" data-src="roll">Camera roll</button></div>`
+        + (o.allowRemove ? `<button type="button" class="note-act" data-src="__remove">Remove photo</button>` : '')
+        + `<button type="button" class="note-act" data-src="">Cancel</button></div>`;
+      const host = inDialog ? container.closest('dialog') : document.body;
+      host.append(ov);
+      const done = v => { ov.remove(); resolve(v); };
+      ov.addEventListener('pointerdown', e => { if (e.target === ov) done(null); });
+      ov.querySelectorAll('[data-src]').forEach(b => b.addEventListener('click', () => done(b.dataset.src || null)));
+      ov.querySelector('[data-src="camera"]').focus();
+    });
+  }
+
+  function pickFile(source) {
+    return new Promise(resolve => {
+      const inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = 'image/*';
+      if (source === 'camera') inp.setAttribute('capture', 'environment');
+      inp.onchange = () => resolve(inp.files && inp.files[0] ? inp.files[0] : null);
+      inp.click();
+    });
+  }
+
+  function downscale(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const max = 640, sc = Math.min(1, max / Math.max(img.width, img.height));
+          const c = document.createElement('canvas');
+          c.width = Math.max(1, Math.round(img.width * sc));
+          c.height = Math.max(1, Math.round(img.height * sc));
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(url);
+          resolve(c.toDataURL('image/jpeg', 0.82));
+        } catch (err) { URL.revokeObjectURL(url); reject(err); }
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('unreadable')); };
+      img.src = url;
+    });
+  }
+
+  function notice(words) {
+    const n = document.getElementById('app-notice');
+    if (n) { n.textContent = words; clearTimeout(notice.t); notice.t = setTimeout(() => { n.textContent = ''; }, 3500); }
+  }
+
+  function setPhoto(container, name, url) {
+    container._pb = container._pb || {};
+    container._pb[name] = url;
+    const wrap = container.querySelector('[data-pb-field="' + CSS.escape(name) + '"]');
+    if (!wrap) return;
+    const text = wrap.querySelector('.pb-text'), ph = wrap.querySelector('.pb-photo'),
+      ta = wrap.querySelector('textarea'), img = wrap.querySelector('img');
+    if (url) {
+      if (ta) ta.required = false;
+      if (img) img.src = url;
+      text.hidden = true; ph.hidden = false;
+    } else {
+      if (ta && wrap.dataset.pbRequired === '1') ta.required = true;
+      text.hidden = false; ph.hidden = true;
+    }
+  }
+
+  /* Wire the add/replace/remove buttons inside a container. Safe to call on every
+     render: the delegated listener is attached once, and the change callback is
+     refreshed. Form dialogs may instead read pending changes at save time with
+     get(). */
+  function bind(container, onChange) {
+    if (!container) return;
+    container._pbChange = onChange || null;
+    if (container._pbBound) return;
+    container._pbBound = true;
+    container._pb = {};
+    container.addEventListener('click', async e => {
+      const addBtn = e.target.closest('[data-pb-add],[data-pb-replace]');
+      const remBtn = e.target.closest('[data-pb-remove]');
+      if (addBtn) {
+        const name = addBtn.getAttribute('data-pb-add') || addBtn.getAttribute('data-pb-replace');
+        const wrap = container.querySelector('[data-pb-field="' + CSS.escape(name) + '"]');
+        const hasPhoto = !!(wrap && wrap.querySelector('.pb-photo:not([hidden]) img') && wrap.querySelector('.pb-photo:not([hidden]) img').src.indexOf('data:image/') === 0);
+        const src = await chooseSource(container, { allowRemove: hasPhoto });
+        if (src === '__remove') {
+          setPhoto(container, name, null);
+          if (container._pbChange) container._pbChange(name, null);
+          return;
+        }
+        if (!src) return;
+        const file = await pickFile(src);
+        if (!file) return;
+        let url = null;
+        try { url = validPhoto(await downscale(file)); }
+        catch (err) { url = null; }
+        if (!url) { notice('That photo could not be read. Try another one.'); return; }
+        setPhoto(container, name, url);
+        if (container._pbChange) container._pbChange(name, url);
+      } else if (remBtn) {
+        const name = remBtn.getAttribute('data-pb-remove');
+        setPhoto(container, name, null);
+        if (container._pbChange) container._pbChange(name, null);
+      }
+    });
+  }
+
+  /* Pending photo change for a form dialog: a data URL (added/replaced),
+     null (removed), or undefined (untouched). */
+  function get(container, name) {
+    return container && container._pb ? container._pb[name] : undefined;
+  }
+  function reset(container) { if (container) container._pb = {}; }
+
+  return { field, bind, get, reset, chooseSource, pickFile, downscale };
 })();

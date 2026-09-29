@@ -201,6 +201,8 @@ const ROOM = (() => {
     { key: 'none', label: 'Others', cls: 'xl-4', example: '[E.g. something I can’t name yet]' }
   ];
   const leafTexts = { house: '', table: '', walk: '', none: '', window: '' };
+  const leafTitles = { house: '', table: '', walk: '', none: '', window: '' };
+  const leafPhotos = {}; /* data URL per leaf key, session-only like the texts */
   let leafCat = 'house';
   let extraLeaves = 0; /* leaves added via the dotted add-leaf */
   /* leaf-gathering state (practice step 1 only): the three piles of leaves
@@ -218,7 +220,10 @@ const ROOM = (() => {
     const c = LEAF_CATS.find(x => x.key === key);
     return c ? c.cls : key;
   }
+  function leafHasText(key){return String(leafTexts[key]||'').trim()||String(leafTitles[key]||'').trim();}
   function leafDisplayText(key) {
+    const ti = String(leafTitles[key] || '').trim();
+    if (ti) return ti;
     const t = String(leafTexts[key] || '').trim();
     if (t) return t;
     if (key === 'window') return '[E.g. a room with morning light]';
@@ -229,7 +234,7 @@ const ROOM = (() => {
     const cls = leafLabelCls(key);
     const el = $view().querySelector('.x-leaf-label.' + cls);
     if (!el) return;
-    const isExample = !String(leafTexts[key] || '').trim();
+    const isExample = !leafHasText(key);
     el.textContent = leafDisplayText(key);
     el.classList.toggle('is-example', isExample);
   }
@@ -321,7 +326,7 @@ const ROOM = (() => {
       return `<g transform="translate(0 ${l.dy})">${paths}</g>`;
     };
     const labelHtml = (l) => {
-      const isExample = !String(leafTexts[l.key] || '').trim();
+      const isExample = !leafHasText(l.key);
       let style = '';
       if (l.custom) style = `left:${75.3 - H_OFF}%;max-width:19.5%;top:${pctY(stack[l.key])}%;`;
       else {
@@ -356,7 +361,7 @@ const ROOM = (() => {
         </g>
       </svg>
       ${slots.filter(l => !l.add).map(labelHtml).join('')}
-      <span class="x-leaf-label xw-1${!String(leafTexts.window || '').trim() ? ' is-example' : ''}" style="left:${39 - H_OFF}%;top:${pctY(60)}%;">${esc(leafDisplayText('window'))}</span>
+      <span class="x-leaf-label xw-1${!leafHasText('window') ? ' is-example' : ''}" style="left:${39 - H_OFF}%;top:${pctY(60)}%;">${esc(leafDisplayText('window'))}</span>
       ${isLamp ? `<span class="lamp-note-h" data-od-id="lamp-note" style="left:2%;width:38%;top:${pctY(-30)}%;">Notice what makes room for your life/makes your life more possible</span>
       <span class="lamp-note-ex" data-od-id="lamp-note-long" style="left:2%;width:42%;top:${pctY(-150)}%;">Connect selected moments into a simple map or collection of helpful conditions — identify the relationships, spaces, settings, activities, expectations, and other arrangements that make a helpful difference, perhaps such as those where you get to feel like your standpoint has practical consequence.</span>` : ''}
       ${isPractice ? slots.filter(l => l.potential && !l.add && !l.custom).map(dropHtml).join('') : ''}
@@ -427,7 +432,17 @@ const ROOM = (() => {
       <h1 class="prompt" id="leaf-h">${heading}</h1>
       <div class="leaf-paper${ill ? ' has-ill' : ''}">
         ${ill ? `<div class="leaf-ill" aria-hidden="true">${ill}</div>` : ''}
-        <textarea id="leaf-text" rows="5" placeholder="A few words are enough.">${esc(leafTexts[leafCat] || '')}</textarea>
+        <label class="leaf-title-field"><span>Title</span><input type="text" id="leaf-title" maxlength="60" value="${esc(leafTitles[leafCat] || '')}" placeholder="A short title for this leaf…"></label>
+        <div class="pb-field leaf-pb" data-pb-field="leaftext">
+          <div class="pb-text"${leafPhotos[leafCat] ? ' hidden' : ''}>
+            <textarea id="leaf-text" rows="5" placeholder="A few words are enough.">${esc(leafTexts[leafCat] || '')}</textarea>
+            <button type="button" class="btn2 pb-add" data-pb-add="leaftext">Add a photo instead</button>
+          </div>
+          <div class="pb-photo"${leafPhotos[leafCat] ? '' : ' hidden'}>
+            <img${leafPhotos[leafCat] ? ` src="${esc(leafPhotos[leafCat])}"` : ''} alt="Your photo for this leaf">
+            <div class="btnrow pb-btnrow"><button type="button" class="btn2" data-pb-replace="leaftext">Replace photo</button><button type="button" class="note-act" data-pb-remove="leaftext">Remove photo</button></div>
+          </div>
+        </div>
       </div>
       ${isSun || isCustom ? '' : `<div class="leaf-cards" role="group" aria-label="Choose the backdrop">
         ${LEAF_CATS.map(c => {
@@ -442,8 +457,12 @@ const ROOM = (() => {
         <button class="note-act" type="button" data-ract="leaf-close">Not now</button>
       </div>
     </div>`;
+    PhotoBody.reset(bd);
+    PhotoBody.bind(bd, (name, url) => { leafPhotos[leafCat] = url; });
+    const ti0 = bd.querySelector('#leaf-title');
     const t = bd.querySelector('#leaf-text');
-    if (t) { t.focus(); try { t.setSelectionRange(t.value.length, t.value.length); } catch (e2) {} }
+    if (ti0) { ti0.focus(); try { ti0.setSelectionRange(ti0.value.length, ti0.value.length); } catch (e2) {} }
+    else if (t) { t.focus(); try { t.setSelectionRange(t.value.length, t.value.length); } catch (e2) {} }
   }
   /* ---------- lamp room: the homepage lamp opens the SAME plant+lamp scene
      (plantHtml above) as a separate page, sharing the leaf/lamp state so the
@@ -1450,6 +1469,7 @@ const ROOM = (() => {
           extraLeaves++;
           const key = 'leaf-x' + extraLeaves;
           if (!(key in leafTexts)) leafTexts[key] = '';
+          if (!(key in leafTitles)) leafTitles[key] = '';
           renderPractice(1);
         },
         /* belonging */
@@ -1639,9 +1659,9 @@ const ROOM = (() => {
     });
     document.addEventListener('input', (e) => {
       const t = e.target.closest && e.target.closest('#room-leaf-backdrop textarea');
-      if (!t) return;
-      leafTexts[leafCat] = t.value;
-      syncLeafLabel(leafCat);
+      if (t) { leafTexts[leafCat] = t.value; syncLeafLabel(leafCat); return; }
+      const ti = e.target.closest && e.target.closest('#room-leaf-backdrop #leaf-title');
+      if (ti) { leafTitles[leafCat] = ti.value; syncLeafLabel(leafCat); }
     });
 
     /* share-sheet buttons live outside #view */

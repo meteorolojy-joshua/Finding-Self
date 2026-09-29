@@ -21,6 +21,8 @@
     grid-template-columns: 1fr;
     grid-template-areas: "wall" "hearth" "stack" "dials";
   }
+  .fury-hearth-row { gap: 16px; }
+  .fury-bin { width: 48px; }
 }
 
 /* Artwork images scale with their containers. */
@@ -41,17 +43,27 @@
 .fury-hung:focus { outline: 2px solid var(--btn); outline-offset: 3px; border-radius: 6px; }
 .fury-string { width: 2px; height: 26px; background: #8a7a5f; }
 .fury-hung-log { width: 44px; display: block; }
+/* Residual chips hang tilted, each at its own slight angle. */
+.fury-hung:nth-child(odd) .fury-hung-log { transform: rotate(-9deg); }
+.fury-hung:nth-child(even) .fury-hung-log { transform: rotate(7deg); }
+.fury-hung:nth-child(3n) .fury-hung-log { transform: rotate(-4deg); }
+.fury-hung-title { font-size: 12px; line-height: 1.35; max-width: 100px; text-align: center; overflow-wrap: anywhere; opacity: .85; margin-top: 5px; }
 .fury-drop-hint { outline: 2px dashed var(--btn); outline-offset: 4px; border-radius: 12px; }
 
 /* ---------- fireplace ---------- */
-.fury-fireplace { position: relative; width: 100%; max-width: 300px; margin: 0 auto; }
+.fury-hearth-row { display: flex; align-items: flex-end; justify-content: center; gap: 30px; }
+.fury-fireplace { position: relative; width: 100%; max-width: 460px; margin: 0; }
 .fury-fireplace-art { width: 100%; height: auto; display: block; }
-/* The drop zone sits over the fireplace's own opening; pieces rest on its floor. */
+/* The drop zone sits over the fireplace's own mouth and is clipped to the
+   mouth's arch, so burning pieces never visibly exceed the opening — anything
+   taller disappears behind the outer walls. */
 .fury-firebox {
-  position: absolute; left: 22%; top: 43%; width: 56%; height: 51%;
+  position: absolute; left: 21.5%; top: 41%; width: 52%; height: 47.5%;
+  overflow: hidden;
+  border-radius: 50% 50% 0 0 / 55% 55% 0 0;
 }
-.fury-firebox.fury-drop-hint { outline: 3px dashed var(--btn); outline-offset: -3px; border-radius: 8px; }
-.fury-piece { position: absolute; bottom: 0; width: 54%; margin-left: -27%; cursor: grab; }
+.fury-firebox.fury-drop-hint { outline: 3px dashed var(--btn); outline-offset: -3px; }
+.fury-piece { position: absolute; bottom: 0; width: 40%; margin-left: -20%; cursor: grab; }
 .fury-piece:focus { outline: 2px solid var(--btn); outline-offset: 2px; border-radius: 8px; }
 .fury-piece-scale { transform-origin: 50% 100%; }
 .fury-piece-art { transform-origin: 50% 100%; animation: fury-breathe 2.6s ease-in-out infinite alternate; }
@@ -87,18 +99,18 @@
 .fury-dial-title { font-weight: 600; font-size: 14px; margin-bottom: 8px; overflow-wrap: anywhere; }
 .fury-dial-body { display: flex; align-items: center; gap: 10px; }
 .fury-knob {
-  position: relative; width: 54px; height: 54px; border-radius: 50%; flex: none; cursor: ns-resize;
-  background: radial-gradient(circle at 35% 30%, #8a7a66, #5d5348 70%);
-  border: 2px solid #3e3931;
-  box-shadow: 0 3px 6px rgba(0,0,0,.3), inset 0 2px 3px rgba(255,255,255,.25);
+  position: relative; width: 64px; height: 64px; flex: none; cursor: ns-resize;
+  background: url('assets/current/fury-dial-face.svg') center/contain no-repeat;
+  /* A drop shadow grounds the dial; the face art itself draws the bezel. */
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.3));
 }
 .fury-knob:focus { outline: 2px solid var(--btn); outline-offset: 3px; }
 .fury-knob-pointer {
-  position: absolute; left: 50%; top: 50%; width: 30px; height: 4px; margin-top: -2px;
-  background: #ffd9a0; border-radius: 2px;
-  transform-origin: 0 50%;
-  box-shadow: 0 0 4px rgba(0,0,0,.45);
+  position: absolute; inset: 0;
+  background: url('assets/current/fury-dial-pointer.svg') center/contain no-repeat;
+  transform-origin: 50% 50%;
   /* Aimed by aimDialPointers() at the line-marker of the level that is set. */
+  pointer-events: none;
 }
 .fury-settings { display: flex; flex-direction: column; gap: 2px; flex: 1; }
 .fury-setting {
@@ -111,14 +123,11 @@
 .fury-setting-label { opacity: .8; }
 .fury-setting.on .fury-setting-label { opacity: 1; font-weight: 600; }
 
-/* ---------- bin + footer ---------- */
+/* ---------- bin (plain, to the right of the furnace) + footer ---------- */
 .fury-foot { display: flex; align-items: center; gap: 18px; margin-top: 18px; flex-wrap: wrap; }
-.fury-bin {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 8px 14px; border: 2px dashed var(--border); border-radius: 12px;
-  font-size: 12px; opacity: .85;
-}
-.fury-bin svg { width: 44px; height: auto; }
+.fury-bin { flex: none; width: 62px; opacity: .92; }
+.fury-bin svg { width: 100%; height: auto; display: block; }
+.fury-bin.fury-drop-hint { outline: 2px dashed var(--btn); outline-offset: 4px; border-radius: 12px; }
 .fury-status { min-height: 1.4em; font-size: 13px; opacity: .75; margin-top: 10px; }
 
 /* ---------- drag ghost ---------- */
@@ -152,3 +161,9 @@
 .fury-dialog .dialog-error { color: #b3261e; font-size: 13px; min-height: 1.2em; margin: 0 0 8px; }
 .fury-dialog .btnrow { display: flex; gap: 10px; }
 .fury-dialog .btnrow .btn, .fury-dialog .btnrow .note-act { flex: 1; }
+
+/* Photo instead of typed words in the wood dialog; photo as a piece's label */
+.fury-dialog .pb-field{margin:10px 0;text-align:left}
+.fury-label-photo{display:inline-block;max-width:110px;max-height:64px;border-radius:6px;vertical-align:middle;box-shadow:0 1px 4px #0003}
+.fury-hung-title .fury-label-photo{max-width:76px;max-height:52px}
+.fury-dialog .pb-photo img{max-height:220px}

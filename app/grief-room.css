@@ -93,3 +93,9 @@
   .grief-dial { width: 100%; }
   .grief-dial-col { width: 100%; }
 }
+
+/* Photo instead of typed words */
+.el-chip .pb-field{margin:0}
+.el-chip .pb-text .pb-add{margin-top:6px;font-size:12px;padding:6px 10px}
+.el-chip .pb-photo img{max-height:180px}
+.el-kept-photo{display:block;max-width:100%;max-height:300px;border-radius:10px;margin:8px auto;box-shadow:0 2px 8px #0002}

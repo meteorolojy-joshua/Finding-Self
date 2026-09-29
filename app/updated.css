@@ -113,3 +113,24 @@ dialog.illustrated-dialog{border:0;padding:0;background:transparent;color:var(--
 .trash-bin .bin-body{height:150px}
 /* bin mouth paints above the body, below the lid */
 .trash-bin .bin-mouth{z-index:1}
+
+/* Influence fields: photo instead of typed words on the illustrated objects */
+.influence-field{position:absolute}
+.influence-field .pb-text,.influence-field .pb-photo{position:absolute;inset:0}
+.influence-object .influence-field textarea{left:0;top:0;width:100%;height:100%}
+.influence-field .pb-photo img{width:100%;height:100%;object-fit:cover;border-radius:4px}
+.influence-photo-btn{position:absolute;right:-9px;top:-9px;width:26px;height:26px;border-radius:50%;background:#fffdf8;border:1px solid #cfc9bd;color:#4b574d;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px #0004;padding:0;z-index:2}
+.influence-photo-btn svg{width:15px;height:15px}
+
+/* Contract scroll: obligation rock + appreciation gift-box with size sliders. */
+.contract-scale-block{margin:24px 0;}
+.contract-scale-block h3.serif{margin:0 0 12px;}
+.contract-scale-row{display:flex;align-items:center;gap:18px;}
+.contract-rock{position:relative;flex:none;transition:width .15s ease-out, height .15s ease-out;margin:0 auto;}
+.contract-rock img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.contract-rock textarea{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68%;height:58%;background:#fffdf8e6;border:1px solid #c4b591;border-radius:8px;font-size:12px;line-height:17px;padding:6px;resize:none;overflow:auto;}
+@media (max-width:480px){.contract-scale-row{flex-wrap:wrap;}}
+.contract-hslider{flex:1;min-width:180px;}
+.contract-hslider label{display:block;font-size:13px;font-style:italic;color:var(--muted);margin-bottom:8px;}
+.contract-hslider input[type=range]{width:100%;accent-color:var(--btn);cursor:ew-resize;}
+.contract-hslider-ends{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;}
