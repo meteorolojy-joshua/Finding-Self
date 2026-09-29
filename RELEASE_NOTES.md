@@ -1,3 +1,20 @@
+# My Presence — Updated Working Prototype 18 (2026-09-28)
+
+## What changed since Prototype 17
+
+**Your own Furnace artwork.** The Furnace of rage now uses your illustrations throughout: your fireplace, your piece of wood, and your burning piece of wood — replacing the assistant-made drawings. Your fireplace-with-wood-and-fire is also the fireplace shown in the room on the Self-Explorations page.
+
+**Furnace layout.** The wall for hanging things now sits above the furnace, full-width. Below the furnace, the unused wood pile sits at the bottom left and the anger dials at the bottom right (they stack vertically on narrow screens). The fireplace itself is substantially smaller than before.
+
+**Furnace polish.** Wood added to the fire now rests on the ground at the bottom of the fireplace. Each dial's pointer aims at the marker for the anger level that is actually the case, and burning pieces grow with the anger setting without ever spilling past the right side of the page.
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: drag wood into the fire, name it, Confirm; burning piece with its own dial; dial drag and arrow keys re-aim the pointer and resize the piece; five-piece cap with notice; fire-to-wall hangs a tiny plain-wood reminder and removes its dial; wall-to-bin forgets it; persistence across reload; leaving with Done/Back. Desktop and 390px phone layouts checked, zero horizontal overflow.
+
+---
+
 # My Presence — Updated Working Prototype 17 (2026-09-28)
 
 ## What changed since Prototype 16

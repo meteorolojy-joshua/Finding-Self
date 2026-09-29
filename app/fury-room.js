@@ -26,23 +26,11 @@ window.FURY_ROOM = (() => {
     try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch (e) { /* ignore */ }
   }
 
-  // A log, drawn as SVG. Scales with the anger level.
-  const LOG_SVG = `<svg viewBox="0 0 120 44" aria-hidden="true" focusable="false">
-    <ellipse cx="60" cy="22" rx="52" ry="16" fill="#6b4226"/>
-    <ellipse cx="60" cy="19" rx="52" ry="14" fill="#7d502e"/>
-    <path d="M12 18c14-6 30-8 48-8s34 2 48 8" stroke="#8f6238" stroke-width="2.5" fill="none" opacity=".7"/>
-    <path d="M14 26c16 5 32 7 46 7s30-2 46-7" stroke="#5a3a20" stroke-width="2" fill="none" opacity=".6"/>
-    <ellipse cx="10" cy="22" rx="9" ry="15" fill="#a07a4a"/>
-    <ellipse cx="10" cy="22" rx="5.5" ry="10" fill="#c49a63"/>
-    <ellipse cx="10" cy="22" rx="2.6" ry="5" fill="#8a6238"/>
-  </svg>`;
-
-  // A flame, drawn as SVG. Flickers via CSS.
-  const FLAME_SVG = `<svg viewBox="0 0 60 90" aria-hidden="true" focusable="false" class="fury-flame-art">
-    <path class="flame-outer" d="M30 4c8 14 20 24 20 44a20 22 0 0 1-40 0c0-12 6-18 10-26 2 6 5 9 8 11 0-10 0-19 2-29z" fill="#ff7a2e"/>
-    <path class="flame-mid" d="M30 22c5 9 12 15 12 28a12 14 0 0 1-24 0c0-8 4-12 6-17 1.4 4 3.4 6 5 7.4 0-6.4-.4-12 1-18.4z" fill="#ffb13c"/>
-    <path class="flame-inner" d="M30 38c3 5 7 8 7 15a7 8 0 0 1-14 0c0-4.6 2.2-7 3.6-10 .8 2.4 2 3.6 3 4.4 0-3.2-.2-6.2.4-9.4z" fill="#ffe08a"/>
-  </svg>`;
+  // J's own artwork for the furnace: the fireplace, a plain piece of wood,
+  // and a piece of wood on fire. Used in place of the earlier drawn versions.
+  const WOOD_IMG = '<img class="fury-art" src="assets/current/fury-wood.svg" alt="" draggable="false">';
+  const BURNING_IMG = '<img class="fury-art" src="assets/current/fury-wood-burning.svg" alt="" draggable="false">';
+  const FIREPLACE_IMG = '<img class="fury-fireplace-art" src="assets/current/fury-fireplace.svg" alt="A fireplace" draggable="false">';
 
   const BIN_SVG = `<svg viewBox="0 0 80 90" aria-hidden="true" focusable="false">
     <path d="M14 26h52l-6 56a6 6 0 0 1-6 5H26a6 6 0 0 1-6-5z" fill="#5a5348"/>
@@ -79,21 +67,20 @@ window.FURY_ROOM = (() => {
       <h1 class="prompt" tabindex="-1">Furnace of rage</h1>
       <p class="support">Anger, without the requirement to calm down, reframe it, or find the lesson.</p>
       <div class="fury-grid">
-        <section class="fury-wall" aria-label="Wall of past anger">
+        <section class="fury-wall" id="fury-wall" aria-label="Wall of past anger">
           <h2 class="h3">Wall</h2>
           <p class="fury-wall-hint">Drag a piece here to keep it as a small reminder.</p>
           <div class="fury-wall-pieces" id="fury-wall-pieces"></div>
         </section>
         <section class="fury-hearth" aria-label="Fireplace">
           <div class="fury-fireplace" id="fury-fireplace">
-            <div class="fury-mantel"></div>
+            ${FIREPLACE_IMG}
             <div class="fury-firebox" id="fury-firebox" aria-label="Fireplace — drag wood here"></div>
-            <div class="fury-hearth-base"></div>
           </div>
-          <div class="fury-stack" id="fury-stack" aria-label="Wood pile — drag a piece to the fireplace">
-            <h2 class="h3">Wood pile</h2>
-            <div class="fury-stack-pieces"></div>
-          </div>
+        </section>
+        <section class="fury-stack" id="fury-stack" aria-label="Wood pile — drag a piece to the fireplace">
+          <h2 class="h3">Wood pile</h2>
+          <div class="fury-stack-pieces"></div>
         </section>
         <section class="fury-dials" id="fury-dials" aria-label="Anger dials"></section>
       </div>
@@ -124,14 +111,16 @@ window.FURY_ROOM = (() => {
     const box = $('#fury-firebox');
     if (!box) return;
     const pieces = burningPieces();
+    const n = pieces.length;
     box.innerHTML = pieces.map((p, i) => {
       const s = scaleFor(p.level);
-      // Arrange pieces in a loose pile: spread horizontally, slight vertical offsets.
-      const left = 12 + (i * (76 / Math.max(1, pieces.length - 1 || 1))) * 0 + (pieces.length > 1 ? (i / (pieces.length - 1)) * 68 : 34);
-      const top = 52 + ((i % 2) * 14) - (p.level * 2);
-      return `<div class="fury-piece" data-id="${esc(p.id)}" style="left:${clamp(left, 6, 80)}%;top:${clamp(top, 30, 70)}%;touch-action:none" role="button" tabindex="0" aria-label="${esc(p.title)} — drag to the bin to forget it, or to the wall to keep it as a reminder">
-        <div class="fury-flames" style="transform:scale(${s.toFixed(2)})">${FLAME_SVG}</div>
-        <div class="fury-log" style="transform:scale(${(s * 0.9).toFixed(2)})">${LOG_SVG}</div>
+      // Pieces rest on the floor of the fireplace, spread across its width.
+      // Sizes stay proportional to the fireplace so nothing can spill past it.
+      const left = n > 1 ? 20 + (i / (n - 1)) * 60 : 50;
+      return `<div class="fury-piece" data-id="${esc(p.id)}" style="left:${left.toFixed(1)}%;touch-action:none" role="button" tabindex="0" aria-label="${esc(p.title)} — drag to the bin to forget it, or to the wall to keep it as a reminder">
+        <div class="fury-piece-scale" style="transform:scale(${s.toFixed(2)})">
+          <img class="fury-art fury-piece-art" src="assets/current/fury-wood-burning.svg" alt="" draggable="false">
+        </div>
       </div>`;
     }).join('');
     box.querySelectorAll('.fury-piece').forEach(attachPieceDrag);
@@ -161,6 +150,25 @@ window.FURY_ROOM = (() => {
       </div>`).join('')
       : `<p class="fury-dials-empty">Dials for your burning pieces will appear here.</p>`;
     wrap.querySelectorAll('.fury-dial').forEach(attachDial);
+    aimDialPointers();
+  }
+
+  /* The knob's pointer aims at the line-marker of the level that is actually
+     set, measured from the real layout so it stays true at any size. */
+  function aimDialPointers() {
+    $$('.fury-dial').forEach(dialEl => {
+      const knob = dialEl.querySelector('.fury-knob');
+      const pointer = dialEl.querySelector('.fury-knob-pointer');
+      const marker = dialEl.querySelector('.fury-setting.on .fury-setting-line');
+      if (!knob || !pointer || !marker) return;
+      const k = knob.getBoundingClientRect();
+      const m = marker.getBoundingClientRect();
+      const deg = Math.atan2(
+        (m.top + m.height / 2) - (k.top + k.height / 2),
+        (m.left + m.width / 2) - (k.left + k.width / 2)
+      ) * 180 / Math.PI;
+      pointer.style.transform = `rotate(${deg.toFixed(1)}deg)`;
+    });
   }
 
   function levelLabel(l) {
@@ -182,6 +190,7 @@ window.FURY_ROOM = (() => {
       knob.setAttribute('aria-valuetext', levelLabel(p.level));
       dialEl.querySelectorAll('.fury-setting').forEach(b =>
         b.classList.toggle('on', Number(b.dataset.set) === p.level));
+      aimDialPointers();
     }
   }
 
@@ -222,7 +231,7 @@ window.FURY_ROOM = (() => {
     if (!stack) return;
     // The stack is an endless supply; show three pieces to grab.
     stack.innerHTML = [0, 1, 2].map(i =>
-      `<button type="button" class="fury-stack-piece" aria-label="A piece of wood — drag it into the fireplace" style="touch-action:none">${LOG_SVG}</button>`
+      `<button type="button" class="fury-stack-piece" aria-label="A piece of wood — drag it into the fireplace" style="touch-action:none">${WOOD_IMG}</button>`
     ).join('');
     stack.querySelectorAll('.fury-stack-piece').forEach(el => {
       el.addEventListener('pointerdown', e => startStackDrag(e, el));
@@ -238,7 +247,7 @@ window.FURY_ROOM = (() => {
       <div class="fury-hung" data-id="${esc(p.id)}" style="touch-action:none" role="button" tabindex="0"
            aria-label="${esc(p.title)} — once burned here. Drag to the bin to forget it entirely." title="${esc(p.title)}">
         <span class="fury-string" aria-hidden="true"></span>
-        <span class="fury-hung-log" aria-hidden="true">${LOG_SVG}</span>
+        <span class="fury-hung-log" aria-hidden="true">${WOOD_IMG}</span>
       </div>`).join('')
       : `<p class="fury-wall-empty">Nothing hung yet.</p>`;
     wall.querySelectorAll('.fury-hung').forEach(el => {
@@ -257,7 +266,7 @@ window.FURY_ROOM = (() => {
 
   function startStackDrag(e, srcEl) {
     e.preventDefault();
-    const ghost = ghostFor(LOG_SVG);
+    const ghost = ghostFor(WOOD_IMG);
     const move = ev => {
       ghost.style.left = (ev.clientX - 40) + 'px';
       ghost.style.top = (ev.clientY - 18) + 'px';
@@ -296,7 +305,7 @@ window.FURY_ROOM = (() => {
       if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
       if (!dragging) {
         dragging = true;
-        ghost = ghostFor(LOG_SVG);
+        ghost = ghostFor(from === 'fire' ? BURNING_IMG : WOOD_IMG);
         srcEl.classList.add('fury-drag-src');
       }
       ghost.style.left = (ev.clientX - 40) + 'px';
@@ -356,7 +365,7 @@ window.FURY_ROOM = (() => {
     ov.className = 'fury-dialog-ov';
     ov.innerHTML = `
       <div class="fury-dialog" role="dialog" aria-modal="true" aria-labelledby="fury-dialog-title">
-        <div class="fury-dialog-log">${LOG_SVG}</div>
+        <div class="fury-dialog-log">${WOOD_IMG}</div>
         <h2 id="fury-dialog-title">A piece of wood</h2>
         <label class="fury-field"><span>What are you angry about?</span>
           <textarea name="title" rows="3" placeholder="Name it in your own words…"></textarea>
@@ -393,7 +402,12 @@ window.FURY_ROOM = (() => {
 
   /* ---------- static wiring ---------- */
   function wireStatic() {
-    view().querySelector('[data-fury="back"]')?.addEventListener('click', () => {
+    // Keep the dial pointers aimed at their level's line-marker on resize.
+    window.removeEventListener('resize', aimDialPointers);
+    window.addEventListener('resize', aimDialPointers);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => aimDialPointers()).catch(() => {});
+    }    view().querySelector('[data-fury="back"]')?.addEventListener('click', () => {
       if (window.UI && typeof window.UI.renderLongerExplorations === 'function') window.UI.renderLongerExplorations();
       else if (window.EXPLORATIONS?.routes) window.history.back();
     });
