@@ -1,3 +1,28 @@
+# My Presence — Updated Working Prototype 22 (2026-09-30)
+
+## What changed since Prototype 21
+
+**Delete any question or answer with its own × button.** The dustbin at the bottom-right of the check-in editor is gone. Every question and answer now carries a small × at its top-right corner. Tapping it asks "Are you sure you want to delete this question?" or "Are you sure you want to delete this answer option?", with Confirm delete and Cancel. A question that still has answers can't be removed yet — the popup explains "You must delete all subsequent answers before you can delete this question." The last answer left at its level can't go while questions follow it — "You must delete all subsequent questions, or add another answer option instead, before you can delete this answer option." The first question of a check-in can't be deleted at all ("The first question of a check-in cannot be deleted."). The small dustbin beside the title still deletes the whole check-in, as before. Deletions work with undo/redo and survive reloads.
+
+**Check-in editor, rebuilt.** The large Rename and Delete Check-In buttons are gone — a small dustbin beside the title pencil deletes the whole check-in (same confirmation as before), and the pencil renames inline. The "Drag item here to edit" box is gone: the item you're editing shows in full colour while the others fade back, and the hint reads "Drag onto the item being edited." The timeline now shows one numbered pill per question round (Q1, Q2…) on the left and one per answer set (A1, A2…) on the right instead of a tick per item; it no longer scrolls sideways and its vertical line runs the full height of the list.
+
+**Interactive first-run tutorial.** The tutorial is now a guided 6-step tour: 1 Add a Check-In → 2 Use A Template or Create From Scratch → 3 Choose a Template (Before I Enter Social Media) → 4 Use Template As It Is or Modify It Yourself First → 5 Self-Explorations → 6 Self-Records. Each setup step highlights where to tap, with Back and Exit throughout; modifying the template keeps your "— my version" copy as a home card and continues the tour.
+
+**When should this check-in activate?** A small clock button between the title pencil and dustbin opens "When do you want this scenario to activate?" — tick "at certain times" (Daily, Weekly, or Particular days, each with a time) and/or "upon certain user actions" (Before opening social media, After being on the phone for one hour, When I first pick up my phone, Before bed, After a phone call). The choice is saved per check-in and shown as a small line under its home-page card; a check-in whose time falls within the past hour is marked "due now" when the app opens. Note: as a static prototype the app records the intention — it cannot detect phone activity or fire real alarms.
+
+**Your paper texture.** Your repeating paper texture is now the default page background, tinted per colour scheme (Woodland, Warm pastel, Soft dark).
+
+**Undo/redo placement.** The editor's old Exit button is removed entirely; undo and redo are now two small round buttons sitting below the title header and above the editing area (undo fades when there is nothing to undo).
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: per-item × deletion (confirm/cancel wording and button order, both guard popups, first-question message, undo/redo, persistence after reload), the full tutorial tour including the modify-template path, the schedule popup (save, validation, summary lines, due-now marking), the rebuilt editor and timeline rail, and the paper texture in all three colour schemes. Desktop and 390px phone layouts checked, zero horizontal overflow.
+
+**Known open items (unchanged).** Photo options on the community rock/present writing areas, typed-only gemstone "What draws me to it", lamp-room leaf photo persistence, real photo-picker testing for the Furnace wood, specialized-cursor behavior against the app-wide hand rules, and the mobile Self-Records ledge choice (awaiting your pick).
+
+---
+
 # My Presence — Updated Working Prototype 21 (2026-09-30)
 
 ## What changed since Prototype 20

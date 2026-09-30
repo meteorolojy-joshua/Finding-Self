@@ -67,7 +67,9 @@ button .sub, button .id, button code { color: var(--surface); }
 .inspector .btn2:hover { background: var(--muted); color: var(--surface); }
 
 /* cards & generic node rendering */
-.card { background: var(--surface-app); border: 1px solid var(--line); padding: 26px 26px 30px; }
+/* default page background: J's paper texture, tiled and tinted with the
+   active color scheme's canvas color (--surface-app) via multiply */
+.card { background-color: var(--surface-app); background-image: url('assets/current/paper-texture.png'); background-repeat: repeat; background-blend-mode: multiply; border: 1px solid var(--line); padding: 26px 26px 30px; }
 .card.quiet { border-color: var(--border); }
 .node-title { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--obsidian); text-transform: uppercase; margin-bottom: 4px; }
 .markrow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 0 auto; }
@@ -313,7 +315,6 @@ button .sub, button .id, button code { color: var(--surface); }
 .view[data-scheme="pastel"] .banner { border-left-color: #a9bfa1; background: #eef3e9; }
 .view[data-scheme="pastel"] .fpill { background: #a9bfa1; color: #3d4638; }
 .view[data-scheme="pastel"] .fpill[aria-pressed="true"] { background: #93ab8b; color: #303830; }
-.view[data-scheme="pastel"] .scn-focus { background: #6b8470; }
 .view[data-scheme="pastel"] .pctl { background: #6B545A; }
 .view[data-scheme="pastel"] .pctl:hover { background: #7B6469; }
 .view[data-scheme="pastel"] .pctl:active { background: #6B545A; }
@@ -417,12 +418,13 @@ button .sub, button .id, button code { color: var(--surface); }
 .scn-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
 .scn-actions { margin-top: 4px; }
 .scn-canvas { display: flex; flex-direction: column; gap: 14px; margin: 14px 0; }
-.scn-group { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+/* items that are not being edited sit faded; the item being edited renders
+   at full saturation in .scn-focus below */
+.scn-group { display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: .42; filter: saturate(.5); }
 .scn-arrow { width: 0; height: 0; border-left: 27px solid transparent; border-right: 27px solid transparent; border-top: 11px solid var(--fg); align-self: center; }
 .scn-level { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; }
-.scn-focus { background: #967BB6; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; outline: 2px dashed var(--cg-lav); outline-offset: -4px; }
+.scn-focus { display: flex; flex-direction: column; align-items: center; gap: 6px; border-radius: 12px; }
 .scn-focus.scn-drop-hover { outline: 3px solid var(--fg); outline-offset: 2px; }
-.scn-focus-label { align-self: flex-start; font-weight: 700; color: #ffffff; font-size: 14px; line-height: 1.4; }
 .scn-box { border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; background: var(--surface); min-width: 180px; max-width: 340px; }
 .scn-question { border-color: var(--w1, #5F7F9A); }
 .scn-qtext { font-weight: 500; color: var(--fg); line-height: 1.35; }
@@ -439,30 +441,59 @@ button .sub, button .id, button code { color: var(--surface); }
 .scn-title-block { margin: 2px 0 12px; }
 .scn-title-block .scn-title { display: flex; align-items: flex-start; gap: 10px; margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; color: var(--fg); }
 .scn-title-block .scn-title-text { flex: 1; min-width: 0; }
-.scn-title-block .scn-title-edit { flex: none; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; color: var(--fg); cursor: pointer; padding: 0; }
-.scn-title-block .scn-title-edit:hover { border-color: var(--fg); }
-.scn-title-block .scn-title-edit:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.scn-title-block .scn-title-edit, .scn-title-block .scn-title-schedule { flex: none; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; color: var(--fg); cursor: pointer; padding: 0; }
+.scn-title-block .scn-title-edit:hover, .scn-title-block .scn-title-schedule:hover { border-color: var(--fg); }
+.scn-title-block .scn-title-edit:focus-visible, .scn-title-block .scn-title-schedule:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* editor undo/redo row: below the title header, above the editing canvas */
+.scn-editor-card .pcontrols.scn-undoredo { display: flex; gap: 8px; margin: 2px 0 14px; }
+.scn-editor-card .scn-undoredo .pctl { display: inline-flex !important; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; color: var(--fg); cursor: pointer; padding: 0; }
+.scn-editor-card .scn-undoredo .pctl:hover { border-color: var(--fg); }
+.scn-editor-card .scn-undoredo .pctl:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.scn-editor-card .scn-undoredo .pctl:disabled { opacity: 0.4; cursor: default; }
+.scn-editor-card .scn-undoredo .pctl:disabled:hover { border-color: var(--border); }
+.scn-title-block .scn-title-delete { flex: none; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; color: var(--fg); cursor: pointer; padding: 0; }
+.scn-title-block .scn-title-delete:hover { border-color: var(--fg); }
+.scn-title-block .scn-title-delete:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .scn-title-block .scn-title-input { width: 100%; box-sizing: border-box; font-size: 20px; line-height: 1.3; font-weight: 600; padding: 4px 8px; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
 .scn-title-block .scn-title-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
 .scn-title-block .scn-title-state { margin-top: 3px; font-size: 11px; letter-spacing: 0.04em; color: var(--muted); }
-/* check-in editor timeline: vertical line on the left with a tick per step
-   (questions jut left, answers jut right); the canvas shifts right to make room */
-.scn-editor-card .scn-canvas { margin-left: 48px; }
-.scn-timeline { position: absolute; left: 22px; width: 44px; z-index: 5; max-height: 480px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
-.scn-timeline .tl-line { position: absolute; left: 21px; top: 0; bottom: 0; width: 2px; background: #a39d8b; border-radius: 1px; }
-.scn-timeline .tl-tick { position: absolute; width: 22px; height: 24px; background: none; border: 0; padding: 0; cursor: pointer; }
-.scn-timeline .tl-tick::after { content: ""; position: absolute; top: 11px; left: 0; width: 20px; height: 2px; background: #5b5648; border-radius: 1px; }
-.scn-timeline .tl-tick.tl-q { left: 0; }
-.scn-timeline .tl-tick.tl-a { left: 22px; }
-.scn-timeline .tl-tick:hover::after { background: #3d3a30; }
-.scn-timeline .tl-tick.tl-current::after { top: 9px; height: 6px; background: #3d3a30; }
-.scn-timeline .tl-tick.tl-q.tl-current::after { left: -3px; width: 24px; }
-.scn-timeline .tl-tick.tl-a.tl-current::after { width: 24px; }
-.scn-timeline .tl-tick:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 4px; }
-@media (max-width: 480px) {
-  .scn-editor-card .scn-canvas { margin-left: 40px; }
-  .scn-timeline { left: 14px; }
-}
+/* check-in editor timeline: vertical line on the left; one small round button
+   per question (Q1, Q2… hugging the line's left) and per answer set
+   (A1, A2… hugging the line's right); the rail never scrolls sideways and
+   the line always runs the full height of the buttons; the canvas shifts
+   right to make room */
+.scn-editor-card .scn-canvas { margin-left: 54px; }
+.scn-timeline { position: absolute; left: 18px; width: 60px; z-index: 5; max-height: 480px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; }
+.scn-timeline .tl-line { position: absolute; left: 29px; top: 0; width: 2px; background: #a39d8b; border-radius: 1px; }
+.scn-timeline .tl-tick { position: absolute; height: 20px; min-width: 20px; padding: 0 3px; box-sizing: border-box; border-radius: 10px; background: var(--surface); border: 1px solid #5b5648; color: #5b5648; font-size: 10px; font-weight: 700; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.scn-timeline .tl-tick.tl-q { right: 31px; }
+.scn-timeline .tl-tick.tl-a { left: 31px; }
+.scn-timeline .tl-tick:hover { background: #e9e2d2; }
+.scn-timeline .tl-tick.tl-current { background: #3d3a30; border-color: #3d3a30; color: #fff; transform: scale(1.15); }
+.scn-timeline .tl-tick.tl-q.tl-current { transform-origin: right center; }
+.scn-timeline .tl-tick.tl-a.tl-current { transform-origin: left center; }
+.scn-timeline .tl-tick:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+/* activation schedule popup (check-in editor clock button) */
+.sched-check { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: var(--fg); margin: 16px 0 4px; cursor: pointer; }
+.sched-check input { width: 18px; height: 18px; accent-color: var(--btn); flex: none; }
+.sched-section { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin: 8px 0 12px; background: var(--surface); }
+.sched-types { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.sched-type { border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--fg); }
+.sched-type.on { background: var(--btn); border-color: var(--btn); color: #fffdf8; }
+.sched-type:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sched-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.sched-field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+.sched-field input, .sched-field select { font: inherit; color: var(--fg); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); padding: 8px 10px; font-size: 14px; }
+.sched-days { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.sched-day { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 999px; padding: 6px 10px; font-size: 13px; cursor: pointer; background: var(--surface); color: var(--fg); }
+.sched-day input { accent-color: var(--btn); }
+.sched-day:has(input:checked) { border-color: var(--btn); background: color-mix(in srgb, var(--btn) 14%, var(--surface)); font-weight: 600; }
+.sched-hint { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+.sched-note { color: #a33; font-size: 13px; margin: 8px 0 0; }
+/* schedule line + due marker under home check-in cards */
+.hang-sched { display: block; text-align: center; font-size: 11px; line-height: 1.4; color: var(--muted); margin-top: 6px; }
+.hang-due { display: inline-block; align-self: center; font-size: 11px; font-weight: 700; color: #fffdf8; background: var(--btn); border-radius: 999px; padding: 3px 10px; margin-top: 4px; }
 .scn-dustbin { position: absolute; bottom: 26px; right: 26px; z-index: 6; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; color: var(--fg); }
 .scn-dustbin.scn-drop-hover { outline: 3px solid var(--fg); outline-offset: 2px; }
 .scn-tip { position: fixed; z-index: 60; display: none; background: var(--fg); color: var(--surface); font-size: 11.5px; line-height: 1.3; padding: 4px 8px; border-radius: 10px; pointer-events: none; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
@@ -482,6 +513,9 @@ button .sub, button .id, button code { color: var(--surface); }
 .scn-group .scn-answer:active { background: #415542; }
 .scn-continue, .scn-system { background: var(--soft); border-style: dashed; }
 .scn-box-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
+.scn-box-x { flex: none; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; color: var(--muted); font-size: 14px; line-height: 1; cursor: pointer; padding: 0; }
+.scn-box-x:hover { color: var(--fg); border-color: var(--fg); }
+.scn-box-x:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .scn-text { font-size: 14px; line-height: 1.4; cursor: default; }
 .scn-edit { width: 100%; font: inherit; font-size: 14px; line-height: 1.4; padding: 4px 6px; border: 1px solid var(--fg); border-radius: 10px; box-sizing: border-box; background: var(--surface); color: var(--fg); }
 .scn-question .scn-edit { font-weight: 500; }
@@ -707,9 +741,8 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .card, #view .opt { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07); }
 .view[data-scheme="dark"] .card, .view[data-scheme="dark"] #view .opt { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35); }
 
-/* dotted journal paper — inner-app cards carry a faint dot grid; the
-   homepage shares it too, one continuous ground under every area */
-#view .card { background-image: radial-gradient(color-mix(in srgb, var(--muted) 22%, transparent) 1px, transparent 1.2px); background-size: 24px 24px; }
+/* (the dotted journal-paper card motif was superseded by J's paper texture —
+   see the consolidation rule below; note-board keeps its own dot grid) */
 .note-board { background-image: radial-gradient(color-mix(in srgb, var(--muted) 32%, transparent) 1.1px, transparent 1.3px); background-size: 22px 22px; }
 
 /* hand-drawn squiggle underline — page titles and section headings everywhere */
@@ -1030,9 +1063,10 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .collage-keepsake .k3 { left: 16px; top: 12px; width: 20px; height: 12px; background: var(--cg-sea); transform: rotate(-3deg); }
 .collage-keepsake .k4 { left: 42px; top: 16px; width: 14px; height: 14px; background: var(--cg-coral); border-radius: 50%; }
 
-/* 5 · consolidation — one motif per surface */
+/* 5 · consolidation — one motif per surface: J's paper texture is the card
+   ground, tinted per color scheme by .card's multiply blend with --surface-app */
 .view::after { opacity: 0.05; }
-#view .card { background-image: radial-gradient(color-mix(in srgb, var(--muted) 12%, transparent) 1px, transparent 1.2px); }
+#view .card { background-image: url('assets/current/paper-texture.png'); background-repeat: repeat; }
 
 /* ---------- making room (room.js) ---------- */
 .room-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }

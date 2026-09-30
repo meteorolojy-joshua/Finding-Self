@@ -192,12 +192,9 @@ const UI = (() => {
   }
   /* ---------- first-run tutorial offer ---------- */
   const TUT_KEY = 'fsaw.tutorial.v1';
-  /* Tutorial steps — placeholder content; J will specify the final tutorial. */
-  const TOUR_STEPS = [
-    { title: 'Check-Ins', text: 'Short guided check-ins for right now. Tap one to begin, tap its pencil to edit it, or add your own from scratch with the dotted box.', target: '[data-od-id="checkins"]', cta: 'see how to make and use a check-in' },
-    { title: 'Self-Explorations', text: 'Open rooms with no finish line. Wander in, arrange things, write a little.', target: '[data-od-id="longer-explorations-preview"]', cta: 'see how to use a self-exploration' },
-    { title: 'Self-Records', text: 'What you keep: stitches on your sampler, days gathered in small things.', target: '[data-od-id="self-records"]', cta: 'See how to make a self-record' }
-  ];
+  /* Interactive tutorial: steps 1-4 walk the user through starting a check-in
+     from a template, advancing as they click each highlighted item; steps 5-6
+     are the former tour's remaining steps. J will extend the check-in part later. */
   function tutorialAnswered() {
     try { return !!localStorage.getItem(TUT_KEY); } catch (err) { return true; }
   }
@@ -206,70 +203,155 @@ const UI = (() => {
   }
   function startTour() {
     let i = 0;
+    let observer = null;
     const ov = document.createElement('div');
     ov.className = 'tut-spot';
     ov.setAttribute('data-od-id', 'tutorial-tour');
     document.body.appendChild(ov);
 
     const clearTarget = () => document.querySelectorAll('.tut-target').forEach(el => el.classList.remove('tut-target'));
+    const stopWatching = () => { if (observer) { observer.disconnect(); observer = null; } };
+    const exit = () => { stopWatching(); clearTarget(); window.removeEventListener('resize', onResize); ov.remove(); };
+    const $home = () => $view().querySelector('[data-od-id="home"]');
+    const createChoice = () => document.querySelector('[data-od-id="create-choice"]');
+    const templatePicker = () => document.querySelector('[data-od-id="template-picker"]');
+    const templateUse = () => document.querySelector('[data-od-id="template-use"]');
+    const editorOpen = () => !!document.querySelector('.scn-editor-card[data-od-id="scenario-editor"]');
+    const watchDom = (check) => {
+      observer = new MutationObserver(check);
+      observer.observe(document.body, { childList: true, subtree: true });
+      check();
+    };
+
+    const STEPS = [
+      { // 1 · homepage — click the dotted box; advances when its popup opens
+        title: 'Add a Check-In',
+        text: 'Click the dotted box to configure your first check-in. You will be able to use this later!',
+        targets: () => { const el = document.querySelector('[data-act="add-checkin"]'); return el ? [el] : []; },
+        watch: (go) => watchDom(() => { if (createChoice()) go(1); })
+      },
+      { // 2 · "Create from scratch or use template?" popup
+        title: 'Use A Template or Create From Scratch',
+        text: 'Choose whether to use a template for your new check-in or create it yourself from scratch. For now, try using a template. You can edit this template later.',
+        targets: () => { const el = createChoice()?.querySelector('[data-cc="template"]'); return el ? [el] : []; },
+        back: true,
+        onBack: (go) => { createChoice()?.remove(); go(0); },
+        watch: (go) => watchDom(() => {
+          if (templatePicker()) { go(2); return; }
+          if (!createChoice()) go(0);
+        })
+      },
+      { // 3 · "Choose a template" screen
+        title: 'Choose a Template',
+        text: 'Choose the template that you would find most helpful. Each template is designed to support you in a different pressurizing scenario and in a different way. For now, try choosing the first template, which is designed to help you recenter yourself when a social media app might be about to pull you into anxious or mindless tendencies.',
+        targets: () => { const el = templatePicker()?.querySelector('[data-act="template-pick"][data-starter="SS01"]'); return el ? [el] : []; },
+        back: true,
+        onBack: (go) => { renderHome(); go(0); },
+        watch: (go) => watchDom(() => {
+          if (templateUse()) { go(3); return; }
+          if (!templatePicker()) go(0);
+        })
+      },
+      { // 4 · "Use template as is or modify it yourself?" popup
+        title: 'Use Template As It Is or Modify It Yourself First',
+        text: 'For now, lets try modifying this template',
+        targets: () => { const el = templateUse()?.querySelector('[data-tu="modify"]'); return el ? [el] : []; },
+        back: true,
+        next: true,
+        onBack: (go) => { templateUse()?.remove(); go(2); },
+        onNext: (go) => { templateUse()?.remove(); if (!$home()) renderHome(); go(4); },
+        watch: (go) => watchDom(() => {
+          if (editorOpen()) { if (!$home()) renderHome(); go(4); return; } // modified it — skip to former Part 2
+          if (templateUse()) return;
+          if (templatePicker()) { go(2); return; }
+          if ($home()) { go(4); return; } // "Use template as is" — check-in added; continue the tour
+          go(0);
+        })
+      },
+      { // 5 · former tour part 2
+        title: 'Self-Explorations',
+        text: 'Open rooms with no finish line. Wander in, arrange things, write a little.',
+        targets: () => { const el = document.querySelector('[data-od-id="longer-explorations-preview"]'); return el ? [el] : []; },
+        cta: 'see how to use a self-exploration',
+        back: true,
+        next: true,
+        onBack: (go) => go(0),
+        onNext: (go) => go(5)
+      },
+      { // 6 · former tour part 3
+        title: 'Self-Records',
+        text: 'What you keep: stitches on your sampler, days gathered in small things.',
+        targets: () => { const el = document.querySelector('[data-od-id="self-records"]'); return el ? [el] : []; },
+        cta: 'See how to make a self-record',
+        back: true,
+        done: true,
+        onBack: (go) => go(4)
+      }
+    ];
+
+    const go = (n) => { i = n; paint(); };
 
     const paint = () => {
+      stopWatching();
       clearTarget();
-      const s = TOUR_STEPS[i];
-      const target = s.target ? document.querySelector(s.target) : null;
+      const s = STEPS[i];
+      const targets = s.targets();
+      const target = targets[0] || null;
       ov.innerHTML = `
-        <div class="tut-box" role="dialog" aria-label="Tutorial step ${i + 1} of ${TOUR_STEPS.length}">
-          <p class="muted small">Tutorial · ${i + 1} of ${TOUR_STEPS.length}</p>
+        <div class="tut-box" role="dialog" aria-label="Tutorial step ${i + 1} of ${STEPS.length}">
+          <p class="muted small">Tutorial · ${i + 1} of ${STEPS.length}</p>
           <h2 class="prompt">${esc(s.title)}</h2>
           <p class="support">${esc(s.text)}</p>
           ${s.cta ? `<div class="btnrow"><button class="btn2" type="button" data-tour-cta>${esc(s.cta)}</button></div>` : ''}
           <div class="btnrow">
-            ${i > 0 ? '<button class="btn2" type="button" data-tour="back">Back</button>' : ''}
-            ${i < TOUR_STEPS.length - 1
-              ? '<button class="btn" type="button" data-tour="next">Next</button>'
-              : '<button class="btn" type="button" data-tour="done">Done</button>'}
+            ${s.back ? '<button class="btn2" type="button" data-tour="back">Back</button>' : ''}
+            ${s.next ? '<button class="btn" type="button" data-tour="next">Next</button>' : ''}
+            ${s.done ? '<button class="btn" type="button" data-tour="done">Done</button>' : ''}
+            <button class="note-act" type="button" data-tour="exit">Exit tutorial</button>
           </div>
           <span class="tut-arrow" aria-hidden="true"></span>
         </div>`;
       const box = ov.querySelector('.tut-box');
       const arrow = ov.querySelector('.tut-arrow');
-      if (!target) { /* introduction: centered, no arrow */
+      if (!target) { /* target not on this page: centered, no arrow */
         box.classList.add('tut-box-center');
         arrow.style.display = 'none';
-        return;
-      }
-      target.classList.add('tut-target');
-      target.scrollIntoView({ block: 'center', behavior: 'auto' });
-      const r = target.getBoundingClientRect();
-      const bw = Math.min(340, window.innerWidth - 24);
-      box.style.width = bw + 'px';
-      const bh = box.offsetHeight;
-      const spaceAbove = r.top, spaceBelow = window.innerHeight - r.bottom;
-      let top, dir;
-      if (spaceAbove >= bh + 26 || spaceAbove >= spaceBelow) {
-        top = Math.max(8, r.top - bh - 16); dir = 'down';
       } else {
-        top = Math.min(window.innerHeight - bh - 8, r.bottom + 16); dir = 'up';
+        target.classList.add('tut-target');
+        target.scrollIntoView({ block: 'center', behavior: 'auto' });
+        const r = target.getBoundingClientRect();
+        const bw = Math.min(340, window.innerWidth - 24);
+        box.style.width = bw + 'px';
+        const bh = box.offsetHeight;
+        const spaceAbove = r.top, spaceBelow = window.innerHeight - r.bottom;
+        let top, dir;
+        if (spaceAbove >= bh + 26 || spaceAbove >= spaceBelow) {
+          top = Math.max(8, r.top - bh - 16); dir = 'down';
+        } else {
+          top = Math.min(window.innerHeight - bh - 8, r.bottom + 16); dir = 'up';
+        }
+        const cx = r.left + r.width / 2;
+        const left = Math.max(8, Math.min(window.innerWidth - bw - 8, Math.round(cx - bw / 2)));
+        box.style.left = left + 'px';
+        box.style.top = Math.max(8, top) + 'px';
+        const ax = Math.max(22, Math.min(bw - 22, cx - left));
+        arrow.style.left = ax + 'px';
+        arrow.classList.add(dir === 'down' ? 'tut-arrow-down' : 'tut-arrow-up');
       }
-      const cx = r.left + r.width / 2;
-      const left = Math.max(8, Math.min(window.innerWidth - bw - 8, Math.round(cx - bw / 2)));
-      box.style.left = left + 'px';
-      box.style.top = Math.max(8, top) + 'px';
-      const ax = Math.max(22, Math.min(bw - 22, cx - left));
-      arrow.style.left = ax + 'px';
-      arrow.classList.add(dir === 'down' ? 'tut-arrow-down' : 'tut-arrow-up');
+      if (s.watch) s.watch(go);
     };
-    paint();
     const onResize = () => paint();
     window.addEventListener('resize', onResize);
     ov.addEventListener('click', (e) => {
       const b = e.target.closest('[data-tour]');
       if (!b) return;
       const a = b.getAttribute('data-tour');
-      if (a === 'next' && i < TOUR_STEPS.length - 1) { i++; paint(); }
-      else if (a === 'back' && i > 0) { i--; paint(); }
-      else { window.removeEventListener('resize', onResize); clearTarget(); ov.remove(); }
+      const s = STEPS[i];
+      if (a === 'next' && s.onNext) s.onNext(go);
+      else if (a === 'back' && s.onBack) s.onBack(go);
+      else if (a === 'done' || a === 'exit') exit();
     });
+    paint();
   }
   function maybeOfferTutorial() {
     if (tutorialAnswered()) return;
@@ -312,10 +394,9 @@ const UI = (() => {
         <div class="home-sec home-hero">
           <div class="home-hero-text">
             <div class="node-title">Home</div>
-            <h1 class="prompt">What would help you feel more grounded right now?</h1>
+            <h1 class="prompt">Choose a grounding activity</h1>
           </div>
         </div>
-        ${firstVisit() ? '<div class="banner" role="status">Everything you write stays on this device.</div>' : ''}
         ${bm ? `<div class="banner">A paused run is kept at <code>${esc(bm.nodeId)}</code>. <button class="ghost" type="button" data-act="entry" data-entry="ENTRY.RESUME">Resume</button> <button class="ghost" type="button" data-act="discard-bookmark">Discard</button></div>` : ''}
         <div class="home-sec flows-sec" data-od-id="checkins">
           <h2 class="h3">Check-Ins</h2>
@@ -329,8 +410,11 @@ const UI = (() => {
             const cards = [
               ...starters.map(s => `
               <div class="hang-wrap"><button class="opt hang door-hanger has-cursor-tip" type="button" data-act="start-starter" data-starter="${esc(s.id)}" data-variant="Standard" data-tip="${esc(s.promise)}"><img class="door-art" src="assets/current/door-hanger-sign.svg" alt="" aria-hidden="true" draggable="false"><b class="door-label"><span>${esc(displayName(s.title))}</span></b></button><button class="hang-edit has-cursor-tip" type="button" data-act="customize-starter" data-starter="${esc(s.id)}" data-tip="edit" aria-label="Edit your own copy of ${esc(displayName(s.title))}">${ICO_PENCIL}</button></div>`),
-              ...customs.map(s => `
-              <div class="hang-wrap"><button class="opt hang door-hanger has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Open in Scenario Setup"><img class="door-art" src="assets/current/door-hanger-sign.svg" alt="" aria-hidden="true" draggable="false"><b class="door-label"><span>${esc(displayName(SCENARIO.checkinLabel(s)))}</span></b></button><button class="hang-edit has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Edit this check-in" aria-label="Edit check-in ${esc(displayName(SCENARIO.checkinLabel(s)))}">${ICO_PENCIL}</button></div>`)
+              ...customs.map(s => {
+                const sched = s.schedule ? SCENARIO_UI.schedLine(s.schedule) : '';
+                const due = s.schedule && SCENARIO_UI.schedDueNow(s.schedule) ? '<span class="hang-due">due now</span>' : '';
+                return `
+              <div class="hang-wrap"><button class="opt hang door-hanger has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Open in Scenario Setup"><img class="door-art" src="assets/current/door-hanger-sign.svg" alt="" aria-hidden="true" draggable="false"><b class="door-label"><span>${esc(displayName(SCENARIO.checkinLabel(s)))}</span></b></button><button class="hang-edit has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Edit this check-in" aria-label="Edit check-in ${esc(displayName(SCENARIO.checkinLabel(s)))}">${ICO_PENCIL}</button>${sched ? `<span class="hang-sched">${esc(sched)}</span>` : ''}${due}</div>`})
             ].slice(0, SCENARIO.MAX_HOME_CHECKINS);
             const addBox = total < SCENARIO.MAX_HOME_CHECKINS
               ? `<div class="checkin-add-cell"><button class="checkin-add" type="button" data-act="add-checkin"><span class="dotted-plus" aria-hidden="true">${ICO_PLUS}</span><b>add a check-in</b></button></div>`

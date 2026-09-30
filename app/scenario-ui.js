@@ -9,6 +9,8 @@ window.SCENARIO_UI = (() => {
   const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const SCN = () => window.SCENARIO;
   const PENCIL_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>';
+  const DUSTBIN_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>';
+  const CLOCK_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
 
   /* home page holds at most SCN().MAX_HOME_CHECKINS check-ins */
   function atHomeCap() { return SCN().homeCheckinCount() >= SCN().MAX_HOME_CHECKINS; }
@@ -28,6 +30,8 @@ window.SCENARIO_UI = (() => {
   let _modal = null;
   let _pendingReplaceRef = null;
   let _editingTitle = false;
+  let _schedDraft = null;
+  let _schedNote = '';
 
   /* "Write my own" custom-input answers stay in runtime routing but are
      not part of the Scenario Setup editing view (or its timeline) */
@@ -91,9 +95,11 @@ window.SCENARIO_UI = (() => {
   }
 
   /* Builds the timeline rail: vertical line anchored at the upper edge of the
-     first visible question/answer box, one tick per step (questions left,
-     answers right). Tapping a tick jumps that item into the editor box; the
-     tick of the item currently in the editor box is enlarged. */
+     first visible question/answer box. One button per question round (Q1, Q2…
+     on the left) and one button per answer set (A1, A2… on the right) — all
+     the answers belonging to one question share a single button. Tapping a
+     button jumps that step into the editor; the button for the item currently
+     being edited is enlarged. */
   function buildTimeline() {
     const card = document.querySelector('.scn-editor-card[data-od-id="scenario-editor"]');
     if (!card) return;
@@ -102,8 +108,27 @@ window.SCENARIO_UI = (() => {
     if (prev) prev.remove();
     if (!items.length) return;
     const s = SCN().getScenario(_scenarioId);
-    const focusRef = s ? (s.editor_view_state.focus_ref || s.roots.standard) : null;
-    const n = items.length;
+    if (!s) return;
+    const g = SCN().composeGraph(s);
+    // group the flat run-order list: each question keeps its own button;
+    // all answers of one question share a single button placed where the
+    // set's first answer appears
+    const ownerOf = (answerRef) => {
+      const e = [...g.edges.values()].find(e => e.relation === 'QUESTION_HAS_ANSWER' && e.to_ref === answerRef);
+      return e ? e.from_ref : answerRef;
+    };
+    const seenSets = new Set();
+    const groups = [];
+    items.forEach(it => {
+      if (it.kind !== 'ANSWER') { groups.push({ kind: 'Q', ref: it.ref, text: it.text }); return; }
+      const owner = ownerOf(it.ref);
+      if (seenSets.has(owner)) return;
+      seenSets.add(owner);
+      const members = items.filter(x => x.kind === 'ANSWER' && ownerOf(x.ref) === owner);
+      groups.push({ kind: 'A', owner, refs: members.map(m => m.ref), texts: members.map(m => m.text) });
+    });
+    const focusRef = s.editor_view_state.focus_ref || s.roots.standard;
+    const n = groups.length;
     const margin = 24;
     const spacing = n > 1 ? Math.max(28, Math.min(46, 520 / (n - 1))) : 0;
     const tl = document.createElement('div');
@@ -114,17 +139,25 @@ window.SCENARIO_UI = (() => {
     const line = document.createElement('div');
     line.className = 'tl-line';
     line.setAttribute('aria-hidden', 'true');
+    line.style.height = ((n - 1) * spacing + margin * 2) + 'px'; // full content height: an abs-pos line sized by bottom:0 would only span the rail's visible box
     tl.appendChild(line);
-    items.forEach((it, i) => {
+    let qRound = 0, aRound = 0;
+    groups.forEach((gr, i) => {
+      const isQ = gr.kind === 'Q';
+      const num = isQ ? 'Q' + (++qRound) : 'A' + (++aRound);
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'tl-tick ' + (it.kind === 'QUESTION' ? 'tl-q' : 'tl-a') + (it.ref === focusRef ? ' tl-current' : '');
-      b.style.top = (margin + i * spacing - 12) + 'px';
-      const label = (it.kind === 'QUESTION' ? 'Question' : 'Answer') + ': ' + (it.text || '(empty)');
+      const current = isQ ? gr.ref === focusRef : gr.refs.includes(focusRef);
+      b.className = 'tl-tick ' + (isQ ? 'tl-q' : 'tl-a') + (current ? ' tl-current' : '');
+      b.style.top = (margin + i * spacing - 10) + 'px';
+      b.textContent = num;
+      const label = isQ
+        ? 'Question ' + num + ': ' + (gr.text || '(empty)')
+        : 'Answers ' + num + ' (' + gr.refs.length + '): ' + gr.texts.map(t => t || '(empty)').join('; ');
       b.title = label;
       b.setAttribute('aria-label', label + ' — jump to this step');
       b.addEventListener('click', () => {
-        const target = it.kind === 'ANSWER' ? firstAnswerOfSet(_scenarioId, it.ref) : it.ref;
+        const target = isQ ? gr.ref : firstAnswerOfSet(_scenarioId, gr.refs[0]);
         _editingRef = null; _editWidth = null; _editField = 'text'; _switchTo = null;
         SCN().setFocus(_scenarioId, target);
         renderEditor();
@@ -178,17 +211,6 @@ window.SCENARIO_UI = (() => {
     renderEditor();
   }
 
-  function openRenameScenario() {
-    const s = SCN().getScenario(_scenarioId); if (!s) return;
-    _modal = { html: `
-      <h2 class="prompt">Rename check-in</h2>
-      <div class="field"><label for="scn-rename">Name</label><input id="scn-rename" type="text" value="${esc(s.name)}" /></div>
-      <div class="btnrow"><button class="btn" type="button" data-scact="confirm-rename">Save name</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
-    renderEditor();
-    const el = document.getElementById('scn-rename');
-    if (el) { el.focus(); el.select(); }
-  }
-
   function renderEditor() {
     const s = SCN().getScenario(_scenarioId);
     if (!s) { window.UI.renderHome(); return; }
@@ -228,6 +250,7 @@ window.SCENARIO_UI = (() => {
       return `<div class="scn-box scn-${kind.toLowerCase()}"${editStyle} draggable="${editable}" data-scact="box" data-ref="${esc(ref)}" data-kind="${esc(kind)}" aria-label="${esc(label)}: ${esc(text || '(empty)')}">
         <div class="scn-box-head">
           <span class="muted small">${esc(label)}</span>
+          <button class="scn-box-x" type="button" data-scact="ask-delete-item" data-ref="${esc(ref)}" data-kind="${esc(kind)}" aria-label="Delete this ${kind === 'QUESTION' ? 'question' : 'answer'}" title="Delete">×</button>
         </div>
         ${mainField}
         ${subField}
@@ -263,33 +286,25 @@ window.SCENARIO_UI = (() => {
 
     $view().innerHTML = `
       <div class="card scn-editor-card" data-od-id="scenario-editor">
-        <div class="pcontrols">
-          <button class="pctl" type="button" data-scact="back-list">Exit</button>
-          <button class="pctl" type="button" data-scact="undo" ${(s.history && s.history.length) ? '' : 'disabled'} aria-label="Undo" title="Undo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
-          <button class="pctl" type="button" data-scact="redo" aria-label="Redo" title="Redo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
-        </div>
         <div class="scn-title-block">
           ${_editingTitle
             ? `<input class="scn-title-input" type="text" value="${esc(s.name)}" aria-label="Check-in name" />`
-            : `<h2 class="scn-title"><span class="scn-title-text">${esc(displayName(SCN().checkinLabel(s)))}</span><button class="scn-title-edit" type="button" data-scact="edit-title" aria-label="Edit check-in name">${PENCIL_SVG}</button></h2>`}
+            : `<h2 class="scn-title"><span class="scn-title-text">${esc(displayName(SCN().checkinLabel(s)))}</span><button class="scn-title-edit" type="button" data-scact="edit-title" aria-label="Edit check-in name" title="Edit check-in name">${PENCIL_SVG}</button><button class="scn-title-schedule" type="button" data-scact="open-schedule" aria-label="Set when this check-in activates" title="Set when this check-in activates">${CLOCK_SVG}</button><button class="scn-title-delete" type="button" data-scact="delete-scenario" data-id="${esc(s.scenario_id)}" aria-label="Delete check-in ${esc(displayName(s.name))}" title="Delete check-in">${DUSTBIN_SVG}</button></h2>`}
           <div class="scn-title-state">${esc(stateLabel(s))}</div>
         </div>
-        <div class="scn-doc-actions">
-          <button class="ghost" type="button" data-scact="rename-scenario">Rename</button>
-          <button class="ghost" type="button" data-scact="delete-scenario" data-id="${esc(s.scenario_id)}" aria-label="Delete check-in ${esc(displayName(s.name))}">Delete check-in</button>
+        <div class="pcontrols scn-undoredo">
+          <button class="pctl" type="button" data-scact="undo" ${(s.history && s.history.length) ? '' : 'disabled'} aria-label="Undo" title="Undo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+          <button class="pctl" type="button" data-scact="redo" aria-label="Redo" title="Redo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
         </div>
         <div class="scn-canvas">
           ${parents ? `<div class="scn-group"><div class="scn-level">${parents}</div></div>` : ''}
           ${parents ? '<div class="scn-arrow" aria-hidden="true"></div>' : ''}
-          <div class="scn-focus" data-scact="drop-zone" data-ref="${esc(proj.focus_ref)}"><div class="scn-focus-label">Drag item here to edit</div><div class="scn-level">${focusBox}</div></div>
+          <div class="scn-focus" data-scact="drop-zone" data-ref="${esc(proj.focus_ref)}"><div class="scn-level">${focusBox}</div></div>
           ${(siblings || canAddSibling) ? `<div class="scn-group"><div class="scn-level">${siblings}${canAddSibling ? `<button class="scn-add has-cursor-tip" type="button" data-scact="add-sibling" data-ref="${esc(proj.focus_ref)}" data-tip="add another answer" aria-label="Add sibling">+</button>` : ''}</div></div>` : ''}
           ${(children || canAddChild) ? '<div class="scn-arrow" aria-hidden="true"></div>' : ''}
           ${(children || canAddChild) ? `<div class="scn-group"><div class="scn-level">${children}${canAddChild ? (proj.focus.kind === 'QUESTION'
             ? `<button class="scn-add has-cursor-tip" type="button" data-scact="add-child" data-ref="${esc(proj.focus_ref)}" data-tip="add another answer" aria-label="Add child">+</button>`
             : `<button class="scn-add scn-add-wide" type="button" data-scact="choose-child-question" data-ref="${esc(proj.focus_ref)}" aria-label="Choose another question">Choose another question</button>`) : ''}</div></div>` : ''}
-        </div>
-        <div class="scn-dustbin has-cursor-tip" data-tip="delete an item by dragging it here" data-scact="dustbin" aria-label="Delete an item" role="region">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
         </div>
       </div>`;
     if (_modal) renderModal();
@@ -313,6 +328,169 @@ window.SCENARIO_UI = (() => {
       <h2 class="prompt">Delete “${esc(displayName(s.name))}”?</h2>
       <p class="support">This removes this scenario and its local changes. It will not delete premade questions, answers, or other scenarios.</p>
       <div class="btnrow"><button class="btn" type="button" data-scact="confirm-delete" data-id="${esc(id)}">Delete Scenario Setup</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
+    renderEditor();
+  }
+
+  /* ---------- activation schedule ---------- */
+  const SCHED_ACTIONS = [
+    ['before-social', 'Before opening social media'],
+    ['after-hour', 'After being on the phone for one hour'],
+    ['first-pickup', 'When I first pick up my phone'],
+    ['before-bed', 'Before bed'],
+    ['after-call', 'After a phone call'],
+  ];
+  const SCHED_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  function draftFromSchedule(sched) {
+    const d = { times: false, type: 'daily', time: '08:00', weekday: 1, days: [], actions: false, action: '' };
+    if (sched) {
+      if (sched.times) {
+        d.times = true; d.type = sched.times.type || 'daily'; d.time = sched.times.time || '08:00';
+        d.weekday = sched.times.weekday != null ? sched.times.weekday : 1;
+        d.days = Array.isArray(sched.times.days) ? sched.times.days.slice() : [];
+      }
+      if (sched.action) { d.actions = true; d.action = sched.action; }
+    }
+    return d;
+  }
+
+  function openSchedule() {
+    const s = SCN().getScenario(_scenarioId); if (!s) return;
+    _schedDraft = draftFromSchedule(s.schedule);
+    _schedNote = '';
+    _modal = { html: schedHtml() };
+    renderEditor();
+  }
+
+  function schedHtml() {
+    const d = _schedDraft;
+    const typeBtn = (val, label) => `<button class="sched-type${d.type === val ? ' on' : ''}" type="button" data-scact="sched-type" data-type="${val}" aria-pressed="${d.type === val}">${label}</button>`;
+    const dayBoxes = SCHED_DAYS.map((n, i) => `<label class="sched-day"><input type="checkbox" data-sched-day="${i}"${d.days.includes(i) ? ' checked' : ''} />${esc(n.slice(0, 3))}</label>`).join('');
+    const weekOpts = SCHED_DAYS.map((n, i) => `<option value="${i}"${+d.weekday === i ? ' selected' : ''}>${esc(n)}</option>`).join('');
+    const actOpts = `<option value="">Choose one…</option>` + SCHED_ACTIONS.map(([v, l]) => `<option value="${v}"${d.action === v ? ' selected' : ''}>${esc(l)}</option>`).join('');
+    return `
+      <h2 class="prompt">When do you want this scenario to activate?</h2>
+      <label class="sched-check"><input type="checkbox" data-sched-check="times"${d.times ? ' checked' : ''} /><span>at certain times</span></label>
+      ${d.times ? `<div class="sched-section">
+        <div class="sched-types" role="group" aria-label="How often">${typeBtn('daily', 'Daily')}${typeBtn('weekly', 'Weekly')}${typeBtn('days', 'Particular days')}</div>
+        <div class="sched-row">
+          <label class="sched-field"><span>Time</span><input type="time" data-sched-field="time" value="${esc(d.time)}" /></label>
+          ${d.type === 'weekly' ? `<label class="sched-field"><span>Day</span><select data-sched-field="weekday">${weekOpts}</select></label>` : ''}
+        </div>
+        ${d.type === 'days' ? `<div class="sched-days" role="group" aria-label="Days of the week">${dayBoxes}</div><p class="sched-hint">Repeats every week on the ticked days.</p>` : ''}
+      </div>` : ''}
+      <label class="sched-check"><input type="checkbox" data-sched-check="actions"${d.actions ? ' checked' : ''} /><span>upon certain user actions</span></label>
+      ${d.actions ? `<div class="sched-section"><label class="sched-field"><span>When this happens</span><select data-sched-field="action">${actOpts}</select></label></div>` : ''}
+      ${_schedNote ? `<p class="sched-note" role="alert">${esc(_schedNote)}</p>` : ''}
+      <div class="btnrow"><button class="btn" type="button" data-scact="sched-save">Save</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>`;
+  }
+
+  function refreshSchedModal(focusSel) {
+    _modal.html = schedHtml();
+    const m = document.querySelector('.scn-modal-backdrop .scn-modal');
+    if (m) m.innerHTML = _modal.html;
+    if (focusSel) { const t = document.querySelector('.scn-modal-backdrop ' + focusSel); if (t) t.focus({ preventScroll: true }); }
+  }
+
+  function saveSchedule() {
+    const d = _schedDraft; if (!d) return;
+    if (d.times && d.type === 'days' && !d.days.length) { _schedNote = 'Tick at least one day of the week.'; refreshSchedModal(); return; }
+    if (d.actions && !d.action) { _schedNote = 'Choose an action from the list.'; refreshSchedModal(); return; }
+    const s = SCN().getScenario(_scenarioId); if (!s) return;
+    const times = d.times ? { type: d.type, time: d.time || '08:00', weekday: +d.weekday || 0, days: d.days.slice().sort((a, b) => a - b) } : null;
+    const sched = (times || d.actions) ? { times, action: d.actions ? d.action : null } : null;
+    s.schedule = sched;
+    SCN().saveScenario(s);
+    _schedDraft = null; _schedNote = ''; _modal = null;
+    renderEditor();
+    notice(sched ? 'Activation schedule saved.' : 'Activation schedule cleared.');
+  }
+
+  /* one-line summary for home cards, e.g. "Daily · 8:00 AM" */
+  function schedTimeLabel(hhmm) {
+    const parts = String(hhmm || '08:00').split(':');
+    let h = Math.max(0, Math.min(23, +parts[0] || 0)); const m = String(parts[1] || '00').padStart(2, '0').slice(0, 2);
+    const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12;
+    return `${h}:${m} ${ap}`;
+  }
+  function schedLine(sched) {
+    if (!sched) return '';
+    const parts = [];
+    if (sched.times) {
+      const t = sched.times, when = schedTimeLabel(t.time);
+      if (t.type === 'daily') parts.push(`Daily · ${when}`);
+      else if (t.type === 'weekly') parts.push(`${SCHED_DAYS[t.weekday] || 'Monday'}s · ${when}`);
+      else if (t.days && t.days.length) parts.push(`${t.days.map(i => (SCHED_DAYS[i] || '').slice(0, 3)).join(' · ')} · ${when}`);
+    }
+    if (sched.action) { const a = SCHED_ACTIONS.find(x => x[0] === sched.action); if (a) parts.push(a[1]); }
+    return parts.join(' — ');
+  }
+  /* true when a timed schedule falls within the past hour (checked on home render) */
+  function schedDueNow(sched, now) {
+    if (!sched || !sched.times) return false;
+    now = now || new Date();
+    const t = sched.times, day = now.getDay();
+    const okDay = t.type === 'daily' ? true : t.type === 'weekly' ? day === (+t.weekday || 0) : (t.days || []).includes(day);
+    if (!okDay) return false;
+    const tp = String(t.time || '08:00').split(':');
+    const at = new Date(now); at.setHours(+tp[0] || 0, +tp[1] || 0, 0, 0);
+    const diff = now - at;
+    return diff >= 0 && diff < 3600000;
+  }
+
+  /* ---------- delete a question / answer via its × button ---------- */
+  function askDeleteItem(ref, kind) {
+    const s = SCN().getScenario(_scenarioId); if (!s) return;
+    const g = SCN().composeGraph(s);
+    const el = g.elements.get(ref);
+    const isQ = kind === 'QUESTION';
+    const edges = [...g.edges.values()];
+    const childRefs = (r) => edges.filter(e => e.from_ref === r).map(e => e.to_ref);
+    const isAnswerRef = (r) => { const n = g.elements.get(r); return n && n.kind === 'ANSWER'; };
+    if (isQ) {
+      if (s.roots.standard === ref || s.roots.low === ref) {
+        _modal = { html: `
+          <h2 class="prompt">The first question of a check-in cannot be deleted.</h2>
+          <div class="btnrow"><button class="btn" type="button" data-scact="close-modal">OK</button></div>` };
+        renderEditor();
+        return;
+      }
+      if (childRefs(ref).some(isAnswerRef)) {
+        _modal = { html: `
+          <h2 class="prompt">You must delete all subsequent answers before you can delete this question.</h2>
+          <div class="btnrow"><button class="btn" type="button" data-scact="close-modal">OK</button></div>` };
+        renderEditor();
+        return;
+      }
+    } else {
+      const parentRef = edges.filter(e => e.to_ref === ref).map(e => e.from_ref)
+        .find(r => { const n = g.elements.get(r); return n && n.kind === 'QUESTION'; });
+      const siblingAnswers = parentRef ? childRefs(parentRef).filter(isAnswerRef) : [];
+      if (parentRef && siblingAnswers.length === 1) {
+        const seen = new Set([ref]); const queue = [ref]; let hasSubQ = false;
+        while (queue.length && !hasSubQ) {
+          const cur = queue.shift();
+          for (const e of edges) {
+            if (e.from_ref !== cur || seen.has(e.to_ref)) continue;
+            seen.add(e.to_ref); queue.push(e.to_ref);
+            const n = g.elements.get(e.to_ref);
+            if (n && n.kind === 'QUESTION') { hasSubQ = true; break; }
+          }
+        }
+        if (hasSubQ) {
+          _modal = { html: `
+            <h2 class="prompt">You must delete all subsequent questions, or add another answer option instead, before you can delete this answer option.</h2>
+            <div class="btnrow"><button class="btn" type="button" data-scact="close-modal">OK</button></div>` };
+          renderEditor();
+          return;
+        }
+      }
+    }
+    const preview = el && el.text ? String(el.text).trim() : '';
+    _modal = { html: `
+      <h2 class="prompt">Are you sure you want to delete this ${isQ ? 'question' : 'answer option'}?</h2>
+      ${preview ? `<p class="support">“${esc(preview)}”</p>` : ''}
+      <div class="btnrow"><button class="btn" type="button" data-scact="confirm-delete-item" data-ref="${esc(ref)}">Confirm delete</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
     renderEditor();
   }
 
@@ -366,6 +544,22 @@ window.SCENARIO_UI = (() => {
 
   /* ---------- events ---------- */
   function bind() {
+    // schedule popup controls: checkboxes/selects/time update the draft live
+    $view().addEventListener('change', (e) => {
+      if (!_schedDraft) return;
+      const t = e.target;
+      if (t.matches('[data-sched-check]')) {
+        const k = t.getAttribute('data-sched-check');
+        _schedDraft[k] = t.checked;
+        refreshSchedModal('[data-sched-check="' + k + '"]');
+      } else if (t.matches('[data-sched-field]')) {
+        const f = t.getAttribute('data-sched-field');
+        _schedDraft[f] = f === 'weekday' ? +t.value : t.value;
+      } else if (t.matches('[data-sched-day]')) {
+        const i = +t.getAttribute('data-sched-day'), days = _schedDraft.days, at = days.indexOf(i);
+        if (t.checked && at < 0) days.push(i); else if (!t.checked && at >= 0) days.splice(at, 1);
+      }
+    });
     $view().addEventListener('click', (e) => {
       const btn = e.target.closest('[data-scact]');
       if (!btn) return;
@@ -374,19 +568,15 @@ window.SCENARIO_UI = (() => {
       const ref = btn.getAttribute('data-ref');
 
       if (act === 'back-home') { window.UI.renderHome(); return; }
-      if (act === 'back-list') { window.UI.renderHome(); return; }
       if (act === 'delete-scenario') { confirmDeleteScenario(id); return; }
+      if (act === 'open-schedule') { openSchedule(); return; }
+      if (act === 'sched-type') { if (_schedDraft) { _schedDraft.type = btn.getAttribute('data-type'); refreshSchedModal('[data-scact="sched-type"][data-type="' + _schedDraft.type + '"]'); } return; }
+      if (act === 'sched-save') { saveSchedule(); return; }
+      if (act === 'ask-delete-item') { askDeleteItem(ref, btn.getAttribute('data-kind')); return; }
+      if (act === 'confirm-delete-item') { SCN().deleteElementPlacement(_scenarioId, ref); _modal = null; renderEditor(); return; }
       if (act === 'confirm-delete') { SCN().deleteScenario(id); _modal = null; window.UI.renderHome(); return; }
-      if (act === 'rename-scenario') { openRenameScenario(); return; }
       if (act === 'edit-title') { _editingTitle = true; renderEditor(); const t = document.querySelector('.scn-title-input'); if (t) { t.focus(); t.select(); } return; }
-      if (act === 'confirm-rename') {
-        const el = document.getElementById('scn-rename');
-        const name = el ? el.value.trim() : '';
-        _modal = null;
-        if (name) SCN().renameScenario(_scenarioId, name);
-        renderEditor(); return;
-      }
-      if (act === 'close-modal') { _modal = null; _pendingReplaceRef = null; renderEditor(); return; }
+      if (act === 'close-modal') { _modal = null; _pendingReplaceRef = null; _schedDraft = null; _schedNote = ''; renderEditor(); return; }
       if (act === 'begin-edit') { const b = document.querySelector('.scn-box[data-ref="' + ref + '"]'); _editWidth = b ? b.offsetWidth : null; _editingRef = ref; _editField = 'text'; renderEditor(); const t = document.querySelector('[data-ref="' + ref + '"].scn-edit'); if (t) t.focus(); return; }
       if (act === 'begin-edit-text' && _editingRef === ref) { _switchTo = null; _editField = 'text'; renderEditor(); const t = document.querySelector('.scn-box[data-ref="' + ref + '"] textarea.scn-edit[data-field="text"]'); if (t) t.focus(); return; }
       if (act === 'begin-edit-sub' && _editingRef === ref) { _switchTo = null; _editField = 'sub'; renderEditor(); const t = document.querySelector('.scn-box[data-ref="' + ref + '"] textarea.scn-subfield'); if (t) t.focus(); return; }
@@ -460,14 +650,14 @@ window.SCENARIO_UI = (() => {
       }
     }, true);
 
-    // drag-to-focus — dropping onto the lavender "Currently Editing" box is the
-    // only way to change focus (8px threshold, view-state only)
+    // drag-to-focus — dropping onto the full-colour item being edited is the
+    // way to change focus by dragging (8px threshold, view-state only)
     let dragEl = null;
     // hover hint: since clicking a parent/sibling/child does nothing, a small
     // tooltip follows the cursor over draggable boxes saying "drag and drop"
     const tip = document.createElement('div');
     tip.className = 'scn-tip';
-    tip.textContent = 'Drag into the editor box to edit';
+    tip.textContent = 'Drag onto the item being edited';
     document.body.appendChild(tip);
     function currentFocusRef() {
       const s = SCN().getScenario(_scenarioId);
@@ -495,19 +685,6 @@ window.SCENARIO_UI = (() => {
       e.dataTransfer.setData('text/plain', box.getAttribute('data-ref'));
     });
     $view().addEventListener('dragover', (e) => {
-      const bin = e.target.closest('.scn-dustbin');
-      if (bin) {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        if (!bin.classList.contains('scn-drop-hover')) bin.classList.add('scn-drop-hover');
-        const kind = dragEl ? dragEl.getAttribute('data-kind') : '';
-        tip.textContent = kind === 'QUESTION' ? 'delete this question' : (kind === 'ANSWER' ? 'delete this answer' : 'delete an item');
-        tip.classList.add('on');
-        const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
-        tip.style.left = Math.max(8, x) + 'px';
-        tip.style.top = (e.clientY + 16) + 'px';
-        return;
-      }
       const dz = e.target.closest('.scn-focus');
       if (!dz) return;
       e.preventDefault();
@@ -515,27 +692,14 @@ window.SCENARIO_UI = (() => {
       if (!dz.classList.contains('scn-drop-hover')) dz.classList.add('scn-drop-hover');
     });
     $view().addEventListener('dragleave', (e) => {
-      const bin = e.target.closest('.scn-dustbin');
-      if (bin) { bin.classList.remove('scn-drop-hover'); tip.classList.remove('on'); return; }
       const dz = e.target.closest('.scn-focus');
       if (dz) dz.classList.remove('scn-drop-hover');
     });
     $view().addEventListener('drop', (e) => {
-      const bin = e.target.closest('.scn-dustbin');
-      document.querySelectorAll('.scn-dustbin').forEach(el => el.classList.remove('scn-drop-hover'));
       document.querySelectorAll('.scn-focus').forEach(el => el.classList.remove('scn-drop-hover'));
       tip.classList.remove('on');
       const ref = e.dataTransfer.getData('text/plain');
-      const kind = dragEl ? dragEl.getAttribute('data-kind') : '';
       dragEl = null;
-      if (bin) {
-        e.preventDefault();
-        if (ref && (kind === 'QUESTION' || kind === 'ANSWER')) {
-          SCN().deleteElementPlacement(_scenarioId, ref);
-          renderEditor();
-        }
-        return;
-      }
       const dz = e.target.closest('.scn-focus');
       if (!dz) return;
       e.preventDefault();
@@ -546,6 +710,6 @@ window.SCENARIO_UI = (() => {
     });
   }
 
-  function navSnapshot() { const saved = structuredClone({_mode,_scenarioId,_editingRef,_editField,_editWidth,_switchTo,_modal,_pendingReplaceRef}); return () => { ({_mode,_scenarioId,_editingRef,_editField,_editWidth,_switchTo,_modal,_pendingReplaceRef} = structuredClone(saved)); }; }
-  return { navSnapshot, openEditor, newBlankCheckin, notice, bind };
+  function navSnapshot() { const saved = structuredClone({_mode,_scenarioId,_editingRef,_editField,_editWidth,_switchTo,_modal,_pendingReplaceRef,_schedDraft,_schedNote}); return () => { ({_mode,_scenarioId,_editingRef,_editField,_editWidth,_switchTo,_modal,_pendingReplaceRef,_schedDraft,_schedNote} = structuredClone(saved)); }; }
+  return { navSnapshot, openEditor, newBlankCheckin, notice, bind, schedLine, schedDueNow };
 })();
