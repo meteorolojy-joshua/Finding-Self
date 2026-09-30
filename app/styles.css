@@ -163,44 +163,29 @@ button .sub, button .id, button code { color: var(--surface); }
 .options.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: stretch; }
 .options.grid3 .opt { min-height: 76px; padding: 12px 10px; text-align: center; }
 
-/* Flows cards hang like small frames: one twine loops over a peg in the
-   wall and ties to the top-left and top-right corners — an inverted V.
-   The string SVG stretches to the card's full width, so its ends land on
-   the corners themselves and run a little behind the card. */
+/* Check-in cards are door-hanger signs (the user's artwork, integrated exactly):
+   the rope and peg are painted into the art, so the card is the sign
+   itself — a transparent button whose image is the sign, with the check-in
+   name laid on the sign board. The whole sign lifts on hover/press, and
+   the pencil rides with it. */
 .options.grid3 { gap: 8px 12px; }
-.hang-wrap { position: relative; display: flex; flex-direction: column; padding-top: 34px; }
-.hang-string { position: absolute; top: 0; left: 0; width: 100%; height: 37px; overflow: visible; pointer-events: none; }
-.hang-string .hs { stroke: color-mix(in srgb, var(--brown) 78%, transparent); stroke-width: 2; stroke-linecap: round; }
-/* the wall peg: a domed head on a short nail stem, string looping under it */
-.hang-peg { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 13px; height: 14px; pointer-events: none; z-index: 1; }
-.hang-peg::before { content: ''; position: absolute; left: 50%; top: 6px; transform: translateX(-50%); width: 5px; height: 8px;
-  border-radius: 1px 1px 2px 2px;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--fg) 28%, var(--surface)) 0%,
-    color-mix(in srgb, var(--fg) 55%, var(--surface)) 45%, color-mix(in srgb, var(--fg) 28%, var(--surface)) 100%);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
-.hang-peg::after { content: ''; position: absolute; left: 0; top: 0; width: 13px; height: 8px; border-radius: 50%; box-sizing: border-box;
-  background: color-mix(in srgb, var(--fg) 38%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--fg) 55%, transparent);
-  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.45), inset -1px -1px 2px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.25); }
-.opt.hang { position: relative; border-radius: 3px 7px 4px 8px / 7px 3px 8px 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+.hang-wrap { position: relative; display: flex; flex-direction: column; }
+.options.checkin-grid .opt.hang.door-hanger { position: relative; padding: 0; min-height: 0;
+  background: transparent; border: 0; box-shadow: none; text-align: center;
   transform: rotate(var(--tilt, 0deg)); transition: transform 0.15s ease; }
-.options.grid3 .hang-wrap:nth-child(odd) { --tilt: -1.1deg; }
-.options.grid3 .hang-wrap:nth-child(even) { --tilt: 0.9deg; }
-/* no hover/pressed colors — the card is lifted toward the peg instead, and
-   the twine stretches upward as if coming off it; the peg stays on the wall.
-   The string's bottom corners track the card exactly (bottom edge = card
-   top + 3px), while its apex rises well above the peg's top. */
-.opt.hang:hover, .opt.hang:active { background: var(--btn); color: var(--surface); }
-.checkin-grid .opt.hang b { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.opt.hang:hover { transform: rotate(var(--tilt, 0deg)) translateY(-4px); box-shadow: 0 6px 10px rgba(0,0,0,0.18); }
-.opt.hang:active { transform: rotate(var(--tilt, 0deg)) translateY(-6px); box-shadow: 0 8px 12px rgba(0,0,0,0.2); }
-.hang-string { transition: top 0.15s ease, height 0.15s ease; }
-.hang-wrap:has(.opt.hang:hover) .hang-string { top: -20px; height: 53px; }
-.hang-wrap:has(.opt.hang:active) .hang-string { top: -26px; height: 57px; }
-.view[data-scheme="dark"] .hang-peg::before { background: linear-gradient(90deg, color-mix(in srgb, var(--fg) 38%, var(--surface)) 0%,
-  color-mix(in srgb, var(--fg) 65%, var(--surface)) 45%, color-mix(in srgb, var(--fg) 38%, var(--surface)) 100%); }
-.view[data-scheme="dark"] .hang-peg::after { background: color-mix(in srgb, var(--fg) 50%, var(--surface)); }
-.view[data-scheme="dark"] .opt.hang { background: #C9D5CF; }
+.options.checkin-grid .opt.hang.door-hanger .door-art { display: block; width: 100%; height: auto; pointer-events: none; }
+.options.checkin-grid .opt.hang.door-hanger .door-label { position: absolute; left: 11%; right: 11%; top: 36%; bottom: 9%;
+  display: flex; align-items: center; justify-content: center; margin: 0;
+  color: #3a2517; font-size: 13.5px; line-height: 1.3; font-weight: 600; text-align: center; }
+.options.checkin-grid .opt.hang.door-hanger .door-label span { display: -webkit-box; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden; }
+.options.checkin-grid .opt.hang.door-hanger:hover { transform: rotate(var(--tilt, 0deg)) translateY(-4px);
+  background: transparent; box-shadow: none; }
+.options.checkin-grid .opt.hang.door-hanger:active { transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+  background: transparent; box-shadow: none; }
+@media (max-width: 720px) {
+  .options.checkin-grid .opt.hang.door-hanger .door-label { font-size: 12px; }
+}
 /* Situational Check-Ins: a quiet centered heading above the wall of
    hanging signs — heading and signs share one open stretch of paper */
 .flows-sec { text-align: center; }
@@ -343,7 +328,7 @@ button .sub, button .id, button code { color: var(--surface); }
 .view[data-scheme="pastel"] .opt.entry-row.ledge { background: #FCF8F4; }
 .view[data-scheme="pastel"] .book-page { background-color: #F4EFEA; }
 /* pastel: hanging-card strings and card ledges match the taupe ledge wood */
-.view[data-scheme="pastel"] .hang-string .hs { stroke: #B39A89; }
+/* (door-hanger signs use the user's artwork; no string tinting needed) */
 .view[data-scheme="pastel"] .opt.entry-row.ledge::after {
   background: linear-gradient(180deg, #B39A89 0 4px, #846D63 4px); }
 /* hover/pressed states consistent with the pastel palette */
@@ -448,7 +433,36 @@ button .sub, button .id, button code { color: var(--surface); }
 .scn-add:hover { background: var(--btn-hover); color: var(--surface); }
 .scn-add:active { background: var(--btn-pressed); color: var(--surface); }
 .scn-add.scn-add-wide { width: auto; padding: 6px 12px; font-size: 12.5px; font-weight: 600; }
-.scn-editor-card { padding-bottom: 96px; }
+.scn-editor-card { padding-bottom: 96px; position: relative; }
+/* check-in editor title with inline rename: prominent heading, small pencil
+   at the top-right of the title row; clicking it swaps in an editable field */
+.scn-title-block { margin: 2px 0 12px; }
+.scn-title-block .scn-title { display: flex; align-items: flex-start; gap: 10px; margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; color: var(--fg); }
+.scn-title-block .scn-title-text { flex: 1; min-width: 0; }
+.scn-title-block .scn-title-edit { flex: none; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; color: var(--fg); cursor: pointer; padding: 0; }
+.scn-title-block .scn-title-edit:hover { border-color: var(--fg); }
+.scn-title-block .scn-title-edit:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.scn-title-block .scn-title-input { width: 100%; box-sizing: border-box; font-size: 20px; line-height: 1.3; font-weight: 600; padding: 4px 8px; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.scn-title-block .scn-title-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.scn-title-block .scn-title-state { margin-top: 3px; font-size: 11px; letter-spacing: 0.04em; color: var(--muted); }
+/* check-in editor timeline: vertical line on the left with a tick per step
+   (questions jut left, answers jut right); the canvas shifts right to make room */
+.scn-editor-card .scn-canvas { margin-left: 48px; }
+.scn-timeline { position: absolute; left: 22px; width: 44px; z-index: 5; max-height: 480px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.scn-timeline .tl-line { position: absolute; left: 21px; top: 0; bottom: 0; width: 2px; background: #a39d8b; border-radius: 1px; }
+.scn-timeline .tl-tick { position: absolute; width: 22px; height: 24px; background: none; border: 0; padding: 0; cursor: pointer; }
+.scn-timeline .tl-tick::after { content: ""; position: absolute; top: 11px; left: 0; width: 20px; height: 2px; background: #5b5648; border-radius: 1px; }
+.scn-timeline .tl-tick.tl-q { left: 0; }
+.scn-timeline .tl-tick.tl-a { left: 22px; }
+.scn-timeline .tl-tick:hover::after { background: #3d3a30; }
+.scn-timeline .tl-tick.tl-current::after { top: 9px; height: 6px; background: #3d3a30; }
+.scn-timeline .tl-tick.tl-q.tl-current::after { left: -3px; width: 24px; }
+.scn-timeline .tl-tick.tl-a.tl-current::after { width: 24px; }
+.scn-timeline .tl-tick:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 4px; }
+@media (max-width: 480px) {
+  .scn-editor-card .scn-canvas { margin-left: 40px; }
+  .scn-timeline { left: 14px; }
+}
 .scn-dustbin { position: absolute; bottom: 26px; right: 26px; z-index: 6; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; color: var(--fg); }
 .scn-dustbin.scn-drop-hover { outline: 3px solid var(--fg); outline-offset: 2px; }
 .scn-tip { position: fixed; z-index: 60; display: none; background: var(--fg); color: var(--surface); font-size: 11.5px; line-height: 1.3; padding: 4px 8px; border-radius: 10px; pointer-events: none; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
@@ -529,15 +543,8 @@ button .sub, button .id, button code { color: var(--surface); }
 .entry-shelf .opt.entry-row.ledge { flex: 1 1 190px; width: auto; max-width: 238px; min-height: 52px; margin-bottom: 0; }
 /* the notes' individual mini-ledges are replaced by the shared shelf */
 .entry-shelf .opt.entry-row.ledge::after { content: none; }
-.entry-shelf-ledge { position: absolute; left: 2px; right: 2px; bottom: 0; height: 13px;
-  border-radius: 5px 5px 8px 8px / 4px 4px 8px 8px;
-  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px),
-    #A79A89;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); }
-.view[data-scheme="pastel"] .entry-shelf-ledge { background:
-  repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #846D63 35%, transparent) 26px 28px),
-  #B39A89; }
-.view[data-scheme="dark"] .entry-shelf-ledge { box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); }
+/* the shared shelf is the user's long horizontal ledge artwork, integrated exactly */
+.entry-shelf-ledge { display: block; width: 100%; height: auto; margin-top: 4px; }
 /* narrow screens: the notes stack full-width inside the page margins, each
    back on its own small ledge — nothing approaches the viewport edge */
 @media (max-width: 500px) {
@@ -795,10 +802,10 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .explore-preview .pv-pair svg { width: 42px; height: 26px; }
 .explore-preview .pv-circle svg { width: 50px; height: 38px; }
 .explore-preview .pv-shovel svg { width: 38px; height: 28px; }
-.explore-preview .pv-ledge { display: block; height: 13px; margin: 0 2px; border-radius: 5px;
-  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px), #A79A89;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); transition: transform 0.15s ease; }
+/* the ledge is the user's long horizontal ledge artwork, integrated exactly */
+.explore-preview .pv-ledge { display: block; width: 100%; height: auto; margin: 0; transition: transform 0.15s ease; }
 .explore-preview .pv-title { display: block; margin: 0; font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--fg); transition: transform 0.15s ease; }
+.explore-preview .pv-support { display: block; margin: 6px 4px 0; }
 .explore-preview .pv-cta { display: inline-block; margin: 3px 0 12px; font-size: 13px; font-weight: 600; color: var(--btn-hover); }
 .explore-preview:hover { transform: translateY(-4px); }
 .explore-preview:active { transform: translateY(-6px); }
@@ -809,9 +816,7 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .explore-preview .book-cover { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
 .explore-preview .book-pages { fill: color-mix(in srgb, var(--surface) 92%, #fff); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1; }
 .explore-preview .book-spine { fill: color-mix(in srgb, var(--cg-sea) 72%, var(--surface)); }
-.view[data-scheme="dark"] .explore-preview .pv-ledge {
-  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #6F685F 35%, transparent) 26px 28px), #9C9284;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); }
+
 .view[data-scheme="dark"] .explore-preview .book-cover { fill: color-mix(in srgb, var(--cg-sea) 58%, #fff); }
 .view[data-scheme="dark"] .explore-preview .book-spine { fill: color-mix(in srgb, var(--cg-sea) 72%, #fff); }
 .view[data-scheme="dark"] .explore-preview .book-pages { fill: color-mix(in srgb, var(--surface) 70%, #fff); }
@@ -853,15 +858,10 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .view[data-scheme="dark"] .ls-ground {
   border-top: 2px solid color-mix(in srgb, var(--border) 70%, var(--surface-app));
   background: color-mix(in srgb, #000 8%, var(--surface-app)); }
-/* a thin wooden shelf mounted on the wall, above the floor line — its length
-   is just under half the room's width */
-.wall-ledge { position: absolute; left: 11%; bottom: 68%; width: 48%; height: 1.5%;
-  border-radius: 3px;
-  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #7A6D60 35%, transparent) 26px 28px), #A79A89;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); }
-.view[data-scheme="dark"] .wall-ledge {
-  background: repeating-linear-gradient(90deg, transparent 0 26px, color-mix(in srgb, #6F685F 35%, transparent) 26px 28px), #9C9284;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
+/* the wall shelf is the user's long horizontal ledge artwork, integrated exactly;
+   its top edge sits where the old shelf's top was, so the book and magnet
+   keep resting on it */
+.wall-ledge { position: absolute; left: 11%; bottom: 65.3%; width: 48%; height: auto; display: block; }
 
 /* the room's backdrop (sky + ground + wall ledge) as one layer, so hovering or
    pressing the "Room to Be Myself" text lifts the whole background with it */

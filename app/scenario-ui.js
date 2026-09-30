@@ -8,6 +8,7 @@ window.SCENARIO_UI = (() => {
   const $view = () => document.getElementById('view');
   const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const SCN = () => window.SCENARIO;
+  const PENCIL_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>';
 
   /* home page holds at most SCN().MAX_HOME_CHECKINS check-ins */
   function atHomeCap() { return SCN().homeCheckinCount() >= SCN().MAX_HOME_CHECKINS; }
@@ -26,6 +27,125 @@ window.SCENARIO_UI = (() => {
   let _switchTo = null;
   let _modal = null;
   let _pendingReplaceRef = null;
+  let _editingTitle = false;
+
+  /* "Write my own" custom-input answers stay in runtime routing but are
+     not part of the Scenario Setup editing view (or its timeline) */
+  const isCustomInputAnswerRef = (ref) => {
+    if (typeof ref !== 'string' || ref.indexOf('base:answer:') !== 0) return false;
+    const o = (window.ENGINE.PKG.options || []).find(x => x.id === ref.slice('base:answer:'.length));
+    return !!(o && o.control_intent === 'CUSTOM_INPUT');
+  };
+
+  /* All question/answer steps of a check-in, in run-encounter order:
+     depth-first from each entry root (question, then its answers in order,
+     then the question each answer routes to). Only steps reachable in the
+     check-in's flow are included; shared base content not used by this
+     check-in is left out. */
+  function timelineItems(scenarioId) {
+    const s = SCN().getScenario(scenarioId);
+    if (!s) return [];
+    const g = SCN().composeGraph(s);
+    const items = [];
+    const seen = new Set();
+    const pushEl = (ref) => {
+      const el = g.elements.get(ref);
+      if (!el || seen.has(ref)) return false;
+      if (el.kind !== 'QUESTION' && el.kind !== 'ANSWER') return false;
+      if (isCustomInputAnswerRef(ref)) return false;
+      seen.add(ref);
+      items.push({ ref, kind: el.kind, text: el.text || '' });
+      return true;
+    };
+    const answersOf = (qref) => [...g.edges.values()]
+      .filter(e => e.from_ref === qref && e.relation === 'QUESTION_HAS_ANSWER')
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
+    function visitQuestion(qref) {
+      if (!pushEl(qref)) return;
+      answersOf(qref).forEach(e => {
+        if (!pushEl(e.to_ref)) return;
+        [...g.edges.values()]
+          .filter(r => r.from_ref === e.to_ref && r.relation === 'ANSWER_ROUTES_TO')
+          .forEach(r => visitQuestion(r.to_ref));
+      });
+      [...g.edges.values()]
+        .filter(e => e.from_ref === qref && e.relation === 'QUESTION_CONTINUES_TO')
+        .forEach(e => visitQuestion(e.to_ref));
+    }
+    if (g.roots.standard) visitQuestion(g.roots.standard);
+    if (g.roots.low && g.roots.low !== g.roots.standard) visitQuestion(g.roots.low);
+    return items;
+  }
+
+  /* The first answer of an answer's sibling set (answers of its owner question, in order) */
+  function firstAnswerOfSet(scenarioId, answerRef) {
+    const s = SCN().getScenario(scenarioId);
+    if (!s) return answerRef;
+    const g = SCN().composeGraph(s);
+    const owner = [...g.edges.values()].find(e => e.relation === 'QUESTION_HAS_ANSWER' && e.to_ref === answerRef);
+    if (!owner) return answerRef;
+    const sibs = [...g.edges.values()]
+      .filter(e => e.from_ref === owner.from_ref && e.relation === 'QUESTION_HAS_ANSWER' && !isCustomInputAnswerRef(e.to_ref))
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
+    return sibs.length ? sibs[0].to_ref : answerRef;
+  }
+
+  /* Builds the timeline rail: vertical line anchored at the upper edge of the
+     first visible question/answer box, one tick per step (questions left,
+     answers right). Tapping a tick jumps that item into the editor box; the
+     tick of the item currently in the editor box is enlarged. */
+  function buildTimeline() {
+    const card = document.querySelector('.scn-editor-card[data-od-id="scenario-editor"]');
+    if (!card) return;
+    const items = timelineItems(_scenarioId);
+    const prev = card.querySelector('.scn-timeline');
+    if (prev) prev.remove();
+    if (!items.length) return;
+    const s = SCN().getScenario(_scenarioId);
+    const focusRef = s ? (s.editor_view_state.focus_ref || s.roots.standard) : null;
+    const n = items.length;
+    const margin = 24;
+    const spacing = n > 1 ? Math.max(28, Math.min(46, 520 / (n - 1))) : 0;
+    const tl = document.createElement('div');
+    tl.className = 'scn-timeline';
+    tl.setAttribute('role', 'group');
+    tl.setAttribute('aria-label', 'Timeline of check-in steps');
+    tl.style.height = ((n - 1) * spacing + margin * 2) + 'px';
+    const line = document.createElement('div');
+    line.className = 'tl-line';
+    line.setAttribute('aria-hidden', 'true');
+    tl.appendChild(line);
+    items.forEach((it, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tl-tick ' + (it.kind === 'QUESTION' ? 'tl-q' : 'tl-a') + (it.ref === focusRef ? ' tl-current' : '');
+      b.style.top = (margin + i * spacing - 12) + 'px';
+      const label = (it.kind === 'QUESTION' ? 'Question' : 'Answer') + ': ' + (it.text || '(empty)');
+      b.title = label;
+      b.setAttribute('aria-label', label + ' — jump to this step');
+      b.addEventListener('click', () => {
+        const target = it.kind === 'ANSWER' ? firstAnswerOfSet(_scenarioId, it.ref) : it.ref;
+        _editingRef = null; _editWidth = null; _editField = 'text'; _switchTo = null;
+        SCN().setFocus(_scenarioId, target);
+        renderEditor();
+        const fb = document.querySelector('.scn-editor-card .scn-focus');
+        if (fb) fb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      tl.appendChild(b);
+    });
+    card.appendChild(tl);
+    // keep the current step's tick in view inside the rail
+    const cur = tl.querySelector('.tl-current');
+    if (cur && tl.scrollHeight > tl.clientHeight) {
+      tl.scrollTop = Math.max(0, parseFloat(cur.style.top) + 12 - tl.clientHeight / 2);
+    }
+    const firstBox = card.querySelector('.scn-canvas .scn-box[data-kind="QUESTION"], .scn-canvas .scn-box[data-kind="ANSWER"]');
+    if (firstBox) {
+      const cardRect = card.getBoundingClientRect();
+      const boxRect = firstBox.getBoundingClientRect();
+      tl.style.top = Math.max(0, boxRect.top - cardRect.top) + 'px';
+    }
+  }
 
   /* display renames (stored scenario names stay canonical) */
   const DISPLAY_NAMES = { 'Before I Enter a Persuasive Feed': 'Before I Enter Social Media', 'When I Cannot Tell What I Want': "When I Can't Tell What I Want" };
@@ -33,14 +153,13 @@ window.SCENARIO_UI = (() => {
   function stateLabel(s) {
     if (s.lifecycle_state === 'DELETED') return 'Deleted';
     if (s.lifecycle_state === 'EMPTY_DRAFT') return 'Empty draft';
-    if (s.lifecycle_state === 'DRAFT_CHANGES_NOT_ACTIVE') return 'Draft changes not active';
     if (s.lifecycle_state === 'NEEDS_ATTENTION') return 'Needs attention';
     return 'Active';
   }
 
   /* ---------- editor ---------- */
   function openEditor(id) {
-    _mode = 'editor'; _scenarioId = id; _editingRef = null; _modal = null;
+    _mode = 'editor'; _scenarioId = id; _editingRef = null; _modal = null; _editingTitle = false;
     renderEditor();
   }
 
@@ -50,6 +169,13 @@ window.SCENARIO_UI = (() => {
     SCN().purgePristineUntitled();
     const s = SCN().createScenario('Untitled check-in', 'BLANK');
     openEditor(s.scenario_id);
+  }
+
+  function commitTitleName(value) {
+    const name = String(value == null ? '' : value).trim();
+    _editingTitle = false;
+    if (name) SCN().renameScenario(_scenarioId, name);
+    renderEditor();
   }
 
   function openRenameScenario() {
@@ -68,7 +194,6 @@ window.SCENARIO_UI = (() => {
     if (!s) { window.UI.renderHome(); return; }
     const focusRef = s.editor_view_state.focus_ref || s.roots.standard;
     const proj = SCN().projection(s, focusRef);
-    const draftActive = s.lifecycle_state === 'DRAFT_CHANGES_NOT_ACTIVE';
 
     const box = (ref, text, kind, opts, isFocus) => {
       const editable = kind === 'QUESTION' || kind === 'ANSWER';
@@ -110,13 +235,7 @@ window.SCENARIO_UI = (() => {
       </div>`;
     };
 
-    // "Write my own" custom-input answers stay in runtime routing but are
-    // not part of the Scenario Setup editing view
-    const isCustomInputAnswerRef = (ref) => {
-      if (typeof ref !== 'string' || ref.indexOf('base:answer:') !== 0) return false;
-      const o = (window.ENGINE.PKG.options || []).find(x => x.id === ref.slice('base:answer:'.length));
-      return !!(o && o.control_intent === 'CUSTOM_INPUT');
-    };
+    // (isCustomInputAnswerRef is defined at module scope)
 
     const parents = proj.parents.filter(p => !isCustomInputAnswerRef(p.ref)).map(p => box(p.ref, p.text, p.kind, '')).join('');
     const siblings = proj.siblings.filter(sb => !isCustomInputAnswerRef(sb.ref)).map(sb => box(sb.ref, sb.text, sb.kind, '')).join('');
@@ -149,12 +268,16 @@ window.SCENARIO_UI = (() => {
           <button class="pctl" type="button" data-scact="undo" ${(s.history && s.history.length) ? '' : 'disabled'} aria-label="Undo" title="Undo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
           <button class="pctl" type="button" data-scact="redo" aria-label="Redo" title="Redo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
         </div>
-        <div class="node-title">${esc(displayName(SCN().checkinLabel(s)))} · ${esc(stateLabel(s))}</div>
+        <div class="scn-title-block">
+          ${_editingTitle
+            ? `<input class="scn-title-input" type="text" value="${esc(s.name)}" aria-label="Check-in name" />`
+            : `<h2 class="scn-title"><span class="scn-title-text">${esc(displayName(SCN().checkinLabel(s)))}</span><button class="scn-title-edit" type="button" data-scact="edit-title" aria-label="Edit check-in name">${PENCIL_SVG}</button></h2>`}
+          <div class="scn-title-state">${esc(stateLabel(s))}</div>
+        </div>
         <div class="scn-doc-actions">
           <button class="ghost" type="button" data-scact="rename-scenario">Rename</button>
           <button class="ghost" type="button" data-scact="delete-scenario" data-id="${esc(s.scenario_id)}" aria-label="Delete check-in ${esc(displayName(s.name))}">Delete check-in</button>
         </div>
-        ${draftActive ? '<div class="note dash">Draft changes not active — the last valid version is still used.</div>' : ''}
         <div class="scn-canvas">
           ${parents ? `<div class="scn-group"><div class="scn-level">${parents}</div></div>` : ''}
           ${parents ? '<div class="scn-arrow" aria-hidden="true"></div>' : ''}
@@ -170,6 +293,7 @@ window.SCENARIO_UI = (() => {
         </div>
       </div>`;
     if (_modal) renderModal();
+    buildTimeline();
   }
 
   function hasDest(ref) { const s = SCN().getScenario(_scenarioId); const g = SCN().composeGraph(s); return [...g.edges.values()].some(e => e.relation === 'ANSWER_ROUTES_TO' && e.from_ref === ref); }
@@ -254,6 +378,7 @@ window.SCENARIO_UI = (() => {
       if (act === 'delete-scenario') { confirmDeleteScenario(id); return; }
       if (act === 'confirm-delete') { SCN().deleteScenario(id); _modal = null; window.UI.renderHome(); return; }
       if (act === 'rename-scenario') { openRenameScenario(); return; }
+      if (act === 'edit-title') { _editingTitle = true; renderEditor(); const t = document.querySelector('.scn-title-input'); if (t) { t.focus(); t.select(); } return; }
       if (act === 'confirm-rename') {
         const el = document.getElementById('scn-rename');
         const name = el ? el.value.trim() : '';
@@ -293,6 +418,11 @@ window.SCENARIO_UI = (() => {
       }
     }, true);
     $view().addEventListener('keydown', (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains('scn-title-input')) {
+        if (e.key === 'Enter') { e.preventDefault(); commitTitleName(e.target.value); }
+        else if (e.key === 'Escape') { _editingTitle = false; renderEditor(); }
+        return;
+      }
       if (e.target && e.target.classList && e.target.classList.contains('scn-edit')) {
         const ref = e.target.getAttribute('data-ref');
         const isSub = e.target.getAttribute('data-field') === 'sub';
@@ -302,6 +432,10 @@ window.SCENARIO_UI = (() => {
       }
     });
     $view().addEventListener('blur', (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains('scn-title-input')) {
+        if (_editingTitle) commitTitleName(e.target.value);
+        return;
+      }
       if (e.target && e.target.classList && e.target.classList.contains('scn-edit')) {
         const ref = e.target.getAttribute('data-ref');
         const isSub = e.target.getAttribute('data-field') === 'sub';

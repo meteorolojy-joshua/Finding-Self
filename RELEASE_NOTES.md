@@ -1,3 +1,30 @@
+# My Presence — Updated Working Prototype 21 (2026-09-30)
+
+## What changed since Prototype 20
+
+**Your bookshelf, trolley, and trash can.** The Inherited Stories page now uses your own bookshelf, library trolley, and flip-top trash can illustrations exactly as drawn. "My bookshelf" sits above the shelf; its boards are labelled KEEP, UNDECIDED, and CHANGE. The dotted add-story book rides on the trolley and makes a new Undecided story. The trash-can lid swings open when you drag it upward, or tap it to open/close (keyboard: Enter/Space), so you can see the discarded books; "discarded stories" is captioned beneath the can. Shelf books are wider and read cleanly ("No bookmark yet" no longer clips), and empty shelf levels now accept dropped books. The bookshelf keeps its size advantage over the trolley and bin at every screen width.
+
+**Your door-hanger check-in cards.** Each homepage check-in card is now your door-hanger sign — the check-in's name sits on the board, the slight tilt is kept, the card lifts on hover and press, and the pencil button sits at the board's top-right corner and rides the lift. Its hover tip is simply "edit".
+
+**Your long ledge.** Your long horizontal ledge now holds the Self-Explorations preview, the desktop Self-Records buttons, and the objects on the interactive Self-Explorations room shelf. On phones, each Self-Records button keeps its own small ledge so everything stays readable.
+
+**Homepage words.** New descriptions under the section headings — Check-Ins: "Ground yourself with a series of questions and answer options, or prepare them in advance for yourself"; Self-Explorations: "Build a sense of your own presence, and let your feelings, preferences, intentions, and plans take up (virtual) space - or come and revisit them"; Self-Records: "Keep, gather, or revisit records of the small things in your days". The Self-Explorations preview now reads title → description → View all → ledge.
+
+**Check-in editor.** The check-in's title now shows at the top with a small pencil for inline editing (Enter or click-away saves, Escape cancels). The "Draft changes not active" notice is gone. A timeline runs down the left of the page — ticks jut left for each question step and right for each answer step in run order; tapping a tick puts that item into the editor, and the current item's tick is emphasized.
+
+**Community scroll.** Removed the leftover "The arrangements I choose, question, or leave undecided." line; the popup fits its parchment on desktop and phone.
+
+**One torch beam.** On "Aspects of My Self to Explore", the torch no longer shows two overlapping rays — the extra ray baked into the torch drawing is gone, so the single beam begins exactly at the torch mouth and gemstones light up where you see the light. Note: the small torch resting on the Self-Explorations room shelf now sits without a beam too, since they shared the drawing — it looked clean when checked; say the word if you want a beam there.
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: bookshelf art (books drag between Keep/Undecided/Change and the bin, lid drag/tap open, discarded books visible, empty shelves accept drops), door-hanger cards (tilt, lift, pencil ride, "edit" tip), ledge art on all three shelves, homepage wording and preview order, check-in editor (inline title rename, timeline tap-to-jump on blank and full templates), community scroll popup fit and planting scene at 390px, single torch beam with mouth-aligned ray and gemstone illumination. Desktop and 390px phone layouts checked, zero horizontal overflow.
+
+**Known open items (unchanged).** Photo options on the community rock/present writing areas, typed-only gemstone "What draws me to it", lamp-room leaf photo persistence, real photo-picker testing for the Furnace wood, specialized-cursor behavior against the app-wide hand rules, and the mobile Self-Records ledge choice (awaiting your pick).
+
+---
+
 # My Presence — Updated Working Prototype 20 (2026-09-29)
 
 ## What changed since Prototype 19

@@ -319,7 +319,7 @@ const UI = (() => {
         ${bm ? `<div class="banner">A paused run is kept at <code>${esc(bm.nodeId)}</code>. <button class="ghost" type="button" data-act="entry" data-entry="ENTRY.RESUME">Resume</button> <button class="ghost" type="button" data-act="discard-bookmark">Discard</button></div>` : ''}
         <div class="home-sec flows-sec" data-od-id="checkins">
           <h2 class="h3">Check-Ins</h2>
-          <p class="support">Check-ins are short guided moments for right now.</p>
+          <p class="support">Ground yourself with a series of questions and answer options, or prepare them in advance for yourself</p>
           ${(() => {
             const chosenIds = SCENARIO.getChosenStarterIds();
             const starters = ENGINE.PKG.starters.filter(s => chosenIds.indexOf(s.id) !== -1);
@@ -328,12 +328,12 @@ const UI = (() => {
             const total = starters.length + customs.length;
             const cards = [
               ...starters.map(s => `
-              <div class="hang-wrap"><svg class="hang-string" viewBox="0 0 200 37" preserveAspectRatio="none" aria-hidden="true"><line class="hs" x1="0" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/><line class="hs" x1="200" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/></svg><span class="hang-peg" aria-hidden="true"></span><button class="opt hang has-cursor-tip" type="button" data-act="start-starter" data-starter="${esc(s.id)}" data-variant="Standard" data-tip="${esc(s.promise)}"><b>${esc(displayName(s.title))}</b></button><button class="hang-edit has-cursor-tip" type="button" data-act="customize-starter" data-starter="${esc(s.id)}" data-tip="Make an editable copy to edit" aria-label="Edit your own copy of ${esc(displayName(s.title))}">${ICO_PENCIL}</button></div>`),
+              <div class="hang-wrap"><button class="opt hang door-hanger has-cursor-tip" type="button" data-act="start-starter" data-starter="${esc(s.id)}" data-variant="Standard" data-tip="${esc(s.promise)}"><img class="door-art" src="assets/current/door-hanger-sign.svg" alt="" aria-hidden="true" draggable="false"><b class="door-label"><span>${esc(displayName(s.title))}</span></b></button><button class="hang-edit has-cursor-tip" type="button" data-act="customize-starter" data-starter="${esc(s.id)}" data-tip="edit" aria-label="Edit your own copy of ${esc(displayName(s.title))}">${ICO_PENCIL}</button></div>`),
               ...customs.map(s => `
-              <div class="hang-wrap"><svg class="hang-string" viewBox="0 0 200 37" preserveAspectRatio="none" aria-hidden="true"><line class="hs" x1="0" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/><line class="hs" x1="200" y1="37" x2="100" y2="9" vector-effect="non-scaling-stroke"/></svg><span class="hang-peg" aria-hidden="true"></span><button class="opt hang has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Open in Scenario Setup"><b>${esc(displayName(SCENARIO.checkinLabel(s)))}</b></button><button class="hang-edit has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Edit this check-in" aria-label="Edit check-in ${esc(displayName(SCENARIO.checkinLabel(s)))}">${ICO_PENCIL}</button></div>`)
+              <div class="hang-wrap"><button class="opt hang door-hanger has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Open in Scenario Setup"><img class="door-art" src="assets/current/door-hanger-sign.svg" alt="" aria-hidden="true" draggable="false"><b class="door-label"><span>${esc(displayName(SCENARIO.checkinLabel(s)))}</span></b></button><button class="hang-edit has-cursor-tip" type="button" data-act="open-scenario" data-id="${esc(s.scenario_id)}" data-tip="Edit this check-in" aria-label="Edit check-in ${esc(displayName(SCENARIO.checkinLabel(s)))}">${ICO_PENCIL}</button></div>`)
             ].slice(0, SCENARIO.MAX_HOME_CHECKINS);
             const addBox = total < SCENARIO.MAX_HOME_CHECKINS
-              ? `<div class="checkin-add-cell"><button class="checkin-add has-cursor-tip" type="button" data-act="add-checkin" data-tip="Start a new check-in — from scratch or from a template"><span class="dotted-plus" aria-hidden="true">${ICO_PLUS}</span><b>add a check-in</b></button></div>`
+              ? `<div class="checkin-add-cell"><button class="checkin-add" type="button" data-act="add-checkin"><span class="dotted-plus" aria-hidden="true">${ICO_PLUS}</span><b>add a check-in</b></button></div>`
               : '';
             return `<div class="options checkin-grid">${cards.join('')}${addBox}</div>`;
           })()}
@@ -341,6 +341,7 @@ const UI = (() => {
         <div class="home-sec" data-od-id="home-making-room">
           <button class="explore-preview has-cursor-tip" type="button" data-act="longer-explorations" data-od-id="longer-explorations-preview" data-tip="Open the full shelves of self-explorations" aria-label="Self-Explorations — view all">
             <span class="pv-title">Self-Explorations</span>
+            <span class="support pv-support">Build a sense of your own presence, and let your feelings, preferences, intentions, and plans take up (virtual) space - or come and revisit them</span>
             <span class="pv-cta">View all <span aria-hidden="true">→</span></span>
             <span class="pv-scene" aria-hidden="true">
               <span class="pv-row">
@@ -352,19 +353,18 @@ const UI = (() => {
                 <span class="pv-obj pv-circle">${TABLE_SVG}</span>
                 <span class="pv-obj pv-shovel">${SHOVEL_SVG}</span>
               </span>
-              <span class="pv-ledge"></span>
+              <img class="pv-ledge" src="assets/current/long-horizontal-ledge.svg" alt="" aria-hidden="true" draggable="false">
             </span>
           </button>
-          <p class="support">Explorations are open rooms with no finish line.</p>
         </div>
         <div class="home-sec home-sec-entries" data-od-id="self-records">
           <h2 class="h3">Self-Records</h2>
-          <p class="support">Self-records keep what you keep — stitches on your sampler, days gathered in small things.</p>
+          <p class="support">Keep, gather, or revisit records of the small things in your days</p>
           <div class="entry-shelf">
             <div class="options entry-list">
               <button class="opt entry-row ledge has-cursor-tip" type="button" data-act="practice-library" data-tip="Your sampler, your practices, and your kept days — everything the app keeps for you"><span class="entry-ico" aria-hidden="true">${ICO_ARM}</span><b>Open your self-records</b></button>
             </div>
-            <i class="entry-shelf-ledge" aria-hidden="true"></i>
+            <img class="entry-shelf-ledge" src="assets/current/long-horizontal-ledge.svg" alt="" aria-hidden="true" draggable="false">
           </div>
         </div>
       </div>`;
@@ -402,7 +402,7 @@ const UI = (() => {
             <div class="ls-sky"></div>
             <div class="ls-ground"></div>
           </div>
-          <div class="wall-ledge" aria-hidden="true"></div>
+          <img class="wall-ledge" src="assets/current/long-horizontal-ledge.svg" alt="" aria-hidden="true" draggable="false">
           <span class="region-mark rm-1" data-od-id="region-own-self">I · Finding My Own Self</span>
           <span class="region-mark rm-2" data-od-id="region-shapes-me">II · What Shapes Me</span>
           <span class="region-mark rm-3" data-od-id="region-relationships">III · Relationships &amp; Community</span>

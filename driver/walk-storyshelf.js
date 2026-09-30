@@ -1,5 +1,6 @@
-// Story-shelf walkthrough: room book -> shelf page, 3 levels, trash bin lid
-// drag-open/click-close, legacy Release migration, bookmark order on story page.
+// Story-shelf walkthrough: room book -> shelf page, 3 levels with name tags,
+// trash bin lid (drag-open / tap-toggle / keyboard), dotted add-book on the trolley,
+// legacy Release migration, bookmark order on story page.
 const { chromium } = require('playwright-core');
 
 (async () => {
@@ -63,15 +64,22 @@ const { chromium } = require('playwright-core');
   }));
   note('shelf', await shelfState());
   note('add-book', await page.evaluate(() => {
-    const b = document.querySelector('.shelf-level[data-level="undecided"] .story-add-book');
+    const b = document.querySelector('.book-trolley .story-add-book');
     if (!b) return null;
     const cs = getComputedStyle(b);
     return {
-      onMiddleLevel: true, text: b.textContent.trim(), hasPlus: !!b.querySelector('svg'),
+      onTrolley: true, notOnLevel: !b.closest('.shelf-level'),
+      text: b.textContent.trim(), hasPlus: !!b.querySelector('svg'),
       noFill: cs.backgroundColor === 'rgba(0, 0, 0, 0)' || cs.backgroundColor === 'transparent',
       dotted: cs.borderStyle.includes('dotted'), action: b.dataset.new,
     };
   }));
+  note('level-tags', await page.evaluate(() =>
+    [...document.querySelectorAll('.shelf-level')].map(l => ({
+      level: l.dataset.level, tag: l.querySelector('.level-tag')?.textContent || null,
+      groupLabel: l.getAttribute('aria-label'),
+    }))));
+  note('no-bookmark-small', await page.evaluate(() => document.querySelectorAll('#view .story-cover small').length));
   await page.screenshot({ path: `/tmp/storyshelf-closed-${tag}.png` });
 
   // dotted add-book -> new story page, then back to shelf shows it on the middle level
@@ -86,7 +94,7 @@ const { chromium } = require('playwright-core');
   await page.waitForTimeout(800);
   note('after-add-shelf', await page.evaluate(() => ({
     undecided: [...document.querySelectorAll('.shelf-level[data-level="undecided"] .shelf-book b')].map(b => b.textContent),
-    addBookStillThere: !!document.querySelector('.shelf-level[data-level="undecided"] .story-add-book'),
+    addBookStillThere: !!document.querySelector('.book-trolley .story-add-book'),
   })));
 
   // hover the closed lid -> hover text
@@ -123,16 +131,22 @@ const { chromium } = require('playwright-core');
     tip: document.querySelector('.bin-lid').dataset.tip,
   })));
 
-  // click the closed lid -> stays closed (drag is the way in)
+  // tap the closed lid -> opens (tap toggles the lid)
   await lid.click();
   await page.waitForTimeout(400);
-  note('click-closed-stays', await page.evaluate(() => document.querySelector('.trash-bin-wrap').classList.contains('lid-open')));
+  note('tap-closed-opens', await page.evaluate(() => ({
+    open: document.querySelector('.trash-bin-wrap').classList.contains('lid-open'),
+    tip: document.querySelector('.bin-lid').dataset.tip,
+  })));
 
-  // open via keyboard, then open a discarded story from the bin
+  // keyboard toggles both ways
   await lid.focus();
   await page.keyboard.press('Enter');
-  await page.waitForTimeout(600);
-  note('keyboard-open', await page.evaluate(() => document.querySelector('.trash-bin-wrap').classList.contains('lid-open')));
+  await page.waitForTimeout(400);
+  note('keyboard-toggle-close', await page.evaluate(() => document.querySelector('.trash-bin-wrap').classList.contains('lid-open')));
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(400);
+  note('keyboard-toggle-open', await page.evaluate(() => document.querySelector('.trash-bin-wrap').classList.contains('lid-open')));
   await page.click('.bin-mouth .bin-book b:has-text("Discarded tale")');
   await page.waitForTimeout(800);
   note('bin-book-open', await page.evaluate(() => ({
