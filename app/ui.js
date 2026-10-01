@@ -302,12 +302,12 @@ const UI = (() => {
           <p class="muted small">Tutorial · ${i + 1} of ${STEPS.length}</p>
           <h2 class="prompt">${esc(s.title)}</h2>
           <p class="support">${esc(s.text)}</p>
-          ${s.cta ? `<div class="btnrow"><button class="btn2" type="button" data-tour-cta>${esc(s.cta)}</button></div>` : ''}
+          ${s.cta ? `<div class="btnrow"><button class="btn2 bw302" type="button" data-tour-cta>${esc(s.cta)}</button></div>` : ''}
           <div class="btnrow">
-            ${s.back ? '<button class="btn2" type="button" data-tour="back">Back</button>' : ''}
-            ${s.next ? '<button class="btn" type="button" data-tour="next">Next</button>' : ''}
-            ${s.done ? '<button class="btn" type="button" data-tour="done">Done</button>' : ''}
-            <button class="note-act" type="button" data-tour="exit">Exit tutorial</button>
+            ${s.back ? '<button class="btn2 bw64" type="button" data-tour="back">Back</button>' : ''}
+            ${s.next ? '<button class="btn bw94" type="button" data-tour="next">Next</button>' : ''}
+            ${s.done ? '<button class="btn bw94" type="button" data-tour="done">Done</button>' : ''}
+            <button class="note-act bw94" type="button" data-tour="exit">Exit tutorial</button>
           </div>
           <span class="tut-arrow" aria-hidden="true"></span>
         </div>`;
@@ -363,8 +363,8 @@ const UI = (() => {
         <h2 class="prompt" id="tut-q">Would you like a tutorial?</h2>
         <p class="support">A short walk through the three parts of the app — check-ins, self-explorations, and self-records.</p>
         <div class="btnrow">
-          <button class="btn" type="button" data-tut="yes">Yes</button>
-          <button class="btn2" type="button" data-tut="no">No</button>
+          <button class="btn bw64" type="button" data-tut="yes">Yes</button>
+          <button class="btn2 bw64" type="button" data-tut="no">No</button>
         </div>
       </div>`;
     document.body.appendChild(ov);
@@ -524,8 +524,8 @@ const UI = (() => {
       <div class="scn-modal" role="dialog" aria-modal="true" aria-labelledby="cc-q">
         <h2 class="prompt" id="cc-q">Create from scratch or use template?</h2>
         <div class="btnrow">
-          <button class="btn" type="button" data-cc="scratch">Create from scratch</button>
-          <button class="btn2" type="button" data-cc="template">Use template</button>
+          <button class="btn bw165" type="button" data-cc="scratch">Create from scratch</button>
+          <button class="btn2 bw120" type="button" data-cc="template">Use template</button>
         </div>
       </div>`;
     document.body.appendChild(ov);
@@ -569,8 +569,8 @@ const UI = (() => {
         <h2 class="prompt" id="tu-q">Use template as is or modify it yourself?</h2>
         <p class="support">${esc(displayName(st.title))}</p>
         <div class="btnrow">
-          <button class="btn" type="button" data-tu="asis">Use template as is</button>
-          <button class="btn2" type="button" data-tu="modify">Modify template myself</button>
+          <button class="btn bw165" type="button" data-tu="asis">Use template as is</button>
+          <button class="btn2 bw165" type="button" data-tu="modify">Modify it myself</button>
         </div>
       </div>`;
     document.body.appendChild(ov);

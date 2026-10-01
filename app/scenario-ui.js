@@ -332,7 +332,7 @@ window.SCENARIO_UI = (() => {
     _modal = { html: `
       <h2 class="prompt">Delete “${esc(displayName(s.name))}”?</h2>
       <p class="support">This removes this scenario and its local changes. It will not delete premade questions, answers, or other scenarios.</p>
-      <div class="btnrow"><button class="btn" type="button" data-scact="confirm-delete" data-id="${esc(id)}">Delete Scenario Setup</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
+      <div class="btnrow"><button class="btn" type="button" data-scact="confirm-delete" data-id="${esc(id)}">Delete Scenario Setup</button><button class="btn2 bw64 bwtrim" type="button" data-scact="close-modal">Cancel</button></div>` };
     renderEditor();
   }
 
@@ -387,7 +387,7 @@ window.SCENARIO_UI = (() => {
       <label class="sched-check"><input type="checkbox" data-sched-check="actions"${d.actions ? ' checked' : ''} /><span>upon certain user actions</span></label>
       ${d.actions ? `<div class="sched-section"><label class="sched-field"><span>When this happens</span><select data-sched-field="action">${actOpts}</select></label></div>` : ''}
       ${_schedNote ? `<p class="sched-note" role="alert">${esc(_schedNote)}</p>` : ''}
-      <div class="btnrow"><button class="btn" type="button" data-scact="sched-save">Save</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>`;
+      <div class="btnrow"><button class="btn" type="button" data-scact="sched-save">Save</button><button class="btn2 bw64 bwtrim" type="button" data-scact="close-modal">Cancel</button></div>`;
   }
 
   function refreshSchedModal(focusSel) {
@@ -495,7 +495,7 @@ window.SCENARIO_UI = (() => {
     _modal = { html: `
       <h2 class="prompt">Are you sure you want to delete this ${isQ ? 'question' : 'answer option'}?</h2>
       ${preview ? `<p class="support">“${esc(preview)}”</p>` : ''}
-      <div class="btnrow"><button class="btn" type="button" data-scact="confirm-delete-item" data-ref="${esc(ref)}">Confirm delete</button><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
+      <div class="btnrow"><button class="btn bw165" type="button" data-scact="confirm-delete-item" data-ref="${esc(ref)}">Confirm delete</button><button class="btn2 bw64 bwtrim" type="button" data-scact="close-modal">Cancel</button></div>` };
     renderEditor();
   }
 
@@ -517,7 +517,7 @@ window.SCENARIO_UI = (() => {
       <h2 class="prompt">Replace content</h2>
       <p class="support">Choose a ${isQ ? 'question' : 'answer'} to replace the box text. Connections and behavior are preserved.</p>
       <div class="scn-search">${list || '<p class="muted">No items.</p>'}</div>
-      <div class="btnrow"><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
+      <div class="btnrow"><button class="btn2 bw64 bwtrim" type="button" data-scact="close-modal">Cancel</button></div>` };
     renderEditor();
   }
 
@@ -528,7 +528,7 @@ window.SCENARIO_UI = (() => {
       <p class="support">After: “${esc(text)}”</p>
       <div class="btnrow">
         <button class="btn" type="button" data-scact="confirm-replace" data-id="${esc(id)}" data-text="${esc(text)}">Confirm replacement</button>
-        <button class="btn2" type="button" data-scact="close-modal">Cancel</button>
+        <button class="btn2 bw64 bwtrim" type="button" data-scact="close-modal">Cancel</button>
       </div>` };
     renderEditor();
   }
@@ -543,7 +543,7 @@ window.SCENARIO_UI = (() => {
       <h2 class="prompt">Choose another question</h2>
       <p class="support">The selected question becomes this answer's next step. Connections remain editable afterwards.</p>
       <div class="scn-search">${list || '<p class="muted">No questions.</p>'}</div>
-      <div class="btnrow"><button class="btn2" type="button" data-scact="close-modal">Cancel</button></div>` };
+      <div class="btnrow"><button class="btn2 bw64 bwtrim" type="button" data-scact="close-modal">Cancel</button></div>` };
     renderEditor();
   }
 

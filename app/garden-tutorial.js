@@ -91,9 +91,9 @@ window.GARDEN_TUTORIAL = (() => {
         <h2 class="prompt">${esc(step.title)}</h2>
         <p class="support">${esc(step.text)}</p>
         <div class="btnrow">
-          ${step.showNext ? '<button class="btn2" type="button" data-gtut="next">Next</button>' : ''}
-          ${step.showDone ? '<button class="btn" type="button" data-gtut="done">Done</button>' : ''}
-          <button class="note-act" type="button" data-gtut="exit">Exit tutorial</button>
+          ${step.showNext ? '<button class="btn2 bw94" type="button" data-gtut="next">Next</button>' : ''}
+          ${step.showDone ? '<button class="btn bw94" type="button" data-gtut="done">Done</button>' : ''}
+          <button class="note-act bw94" type="button" data-gtut="exit">Exit tutorial</button>
         </div>
         <span class="tut-arrow" aria-hidden="true"></span>
       </div>`;

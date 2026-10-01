@@ -182,3 +182,68 @@ dialog.illustrated-dialog.contract-dialog{width:min(480px,100vw);}
 .invest-pot:focus-visible{outline:2px solid #6a8a5a;outline-offset:4px;}
 @keyframes manbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .invest-man.walking .man-bob{animation:manbob .28s ease-in-out 2;}
+
+/* ---- Button-size standardization (2026-10-01) ----
+   Pinned widths for the popup/action-button family, applied consistently
+   app-wide. white-space:nowrap keeps every label on a single 44px line
+   (no wrapping taller); flex:none overrides stretchy rows such as the
+   tutorial tour's btnrow. Labels were measured to fit their pins; if a
+   label ever outgrows its pin the overflow is hidden rather than breaking
+   the row layout. */
+.bw64,.bw94,.bw120,.bw165,.bw302{flex:none!important;white-space:nowrap!important;text-align:center;overflow:hidden;min-width:0}
+.bw64{width:64px!important}
+.bw94{width:94px!important}
+.bw120{width:120px!important}
+.bw165{width:165px!important}
+.bw302{width:302px!important}
+/* Trimmed variant: 6px side padding and no visible border, so short labels
+   like Cancel/Confirm fit the 64px pin. Border width is kept (transparent)
+   so layout does not shift. */
+.bwtrim{padding-left:6px!important;padding-right:6px!important;border-color:transparent!important}
+
+/* ---- Fabric-patch buttons (2026-10-01) ----
+   J's fabric patch photos (studio backdrop removed) give each pinned button
+   group its shape and surface: the patch's own irregular frayed edges ARE
+   the button edges (via mask), and the weave is tinted by each button's own
+   fill through multiply blending — so a dark-green button reads as
+   dark-green fabric, a light button as light fabric, and the borderless
+   text buttons as natural undyed fabric. This replaces the notebook-paper
+   + torn-edge treatment on the light buttons and the generic fabric weave
+   on the dark ones. Light buttons are tinted by var(--surface), their most
+   recent solid fill from before the paper treatment. Soft dark is excluded
+   (same precedent as the paper/torn work): the patch is a light texture and
+   the borderless text buttons have no fill to darken it, so light text
+   would turn unreadable there; dark keeps today's look. Keyboard focus
+   draws just inside the frayed edge, since the mask would clip a ring
+   drawn outside it. */
+body:not(:has(.view[data-scheme="dark"])) .bw64,
+body:not(:has(.view[data-scheme="dark"])) .bw94,
+body:not(:has(.view[data-scheme="dark"])) .bw120,
+body:not(:has(.view[data-scheme="dark"])) .bw165,
+body:not(:has(.view[data-scheme="dark"])) .bw302{
+  -webkit-mask-image:var(--patch);mask-image:var(--patch);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  background-image:var(--patch)!important;
+  background-size:100% 100%!important;
+  background-repeat:no-repeat!important;
+  background-blend-mode:multiply!important;
+  clip-path:none!important;
+}
+body:not(:has(.view[data-scheme="dark"])) .bw64{--patch:url('assets/current/btn-patch-64.png')}
+body:not(:has(.view[data-scheme="dark"])) .bw94{--patch:url('assets/current/btn-patch-94.png')}
+body:not(:has(.view[data-scheme="dark"])) .bw120{--patch:url('assets/current/btn-patch-120.png')}
+body:not(:has(.view[data-scheme="dark"])) .bw165{--patch:url('assets/current/btn-patch-165.png')}
+body:not(:has(.view[data-scheme="dark"])) .bw302{--patch:url('assets/current/btn-patch-302.png')}
+body:not(:has(.view[data-scheme="dark"])) .bw64:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .bw94:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .bw120:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .bw165:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .bw302:focus-visible{outline-offset:-6px}
+/* The focus ring draws inside the frayed edge now; on the dark-green
+   buttons it needs a light ring to stay visible against the dark fill. */
+body:not(:has(.view[data-scheme="dark"])) .btn.bw64:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw94:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw120:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw165:focus-visible,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw302:focus-visible{outline-color:var(--surface)!important}

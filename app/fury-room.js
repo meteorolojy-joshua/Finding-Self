@@ -99,7 +99,7 @@ window.FURY_ROOM = (() => {
         <section class="fury-dials" id="fury-dials" aria-label="Anger dials"></section>
       </div>
       <div class="fury-foot">
-        <button class="btn2" type="button" data-fury="leave">Done for now</button>
+        <button class="btn2 bw120" type="button" data-fury="leave">Done for now</button>
       </div>
       <p class="fury-status" id="fury-status" role="status"></p>
     </div>`;
@@ -382,8 +382,8 @@ window.FURY_ROOM = (() => {
         ${PhotoBody.field('title','What are you angry about?','',null,{placeholder:'Name it in your own words…',required:true,maxlength:60})}
         <p class="dialog-error" role="alert"></p>
         <div class="btnrow">
-          <button class="btn" type="button" data-fd="confirm">Confirm</button>
-          <button class="note-act" type="button" data-fd="cancel">Cancel</button>
+          <button class="btn bw64 bwtrim" type="button" data-fd="confirm">Confirm</button>
+          <button class="note-act bw64" type="button" data-fd="cancel">Cancel</button>
         </div>
       </div>`;
     document.body.append(ov);

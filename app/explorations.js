@@ -23,7 +23,7 @@ window.EXPLORATIONS = (() => {
   function openModal(kind,title,body,onSave){
     closeModal();returnFocus=document.activeElement;
     const d=document.createElement('dialog');d.className='illustrated-dialog '+kind;d.setAttribute('aria-labelledby','dialog-title');
-    d.innerHTML=`<form class="dialog-surface"><h2 id="dialog-title">${title}</h2>${body}<p class="dialog-error" role="alert"></p><div class="btnrow"><button type="submit" class="btn">${kind==='contract-dialog'?'Keep contract':kind==='leaf-dialog'?'Confirm':'Keep these words'}</button>${btn('close-modal','Cancel','note-act')}</div></form>`;
+    d.innerHTML=`<form class="dialog-surface"><h2 id="dialog-title">${title}</h2>${body}<p class="dialog-error" role="alert"></p><div class="btnrow"><button type="submit" class="${kind==='contract-dialog'?'btn bw165':kind==='leaf-dialog'?'btn bw64 bwtrim':'btn bw165'}">${kind==='contract-dialog'?'Confirm':kind==='leaf-dialog'?'Confirm':'Keep these words'}</button>${btn('close-modal','Cancel','note-act bw64')}</div></form>`;
     document.body.append(d);modal=d;d.showModal();
     d.addEventListener('cancel',e=>{e.preventDefault();closeModal();});
     d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
