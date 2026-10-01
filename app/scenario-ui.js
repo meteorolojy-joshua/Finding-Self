@@ -135,7 +135,11 @@ window.SCENARIO_UI = (() => {
     tl.className = 'scn-timeline';
     tl.setAttribute('role', 'group');
     tl.setAttribute('aria-label', 'Timeline of check-in steps');
-    tl.style.height = ((n - 1) * spacing + margin * 2) + 'px';
+    /* The rail's visible box is sized by top (set below, aligned with the
+       first question/answer box) plus bottom:28px from the stylesheet, so it
+       always ends before the card's bottom edge no matter how short the page
+       is; the long inner line and the buttons scroll inside it. (Do not set an
+       explicit height here: it would override the bottom constraint.) */
     const line = document.createElement('div');
     line.className = 'tl-line';
     line.setAttribute('aria-hidden', 'true');
@@ -167,16 +171,17 @@ window.SCENARIO_UI = (() => {
       tl.appendChild(b);
     });
     card.appendChild(tl);
-    // keep the current step's tick in view inside the rail
-    const cur = tl.querySelector('.tl-current');
-    if (cur && tl.scrollHeight > tl.clientHeight) {
-      tl.scrollTop = Math.max(0, parseFloat(cur.style.top) + 12 - tl.clientHeight / 2);
-    }
     const firstBox = card.querySelector('.scn-canvas .scn-box[data-kind="QUESTION"], .scn-canvas .scn-box[data-kind="ANSWER"]');
     if (firstBox) {
       const cardRect = card.getBoundingClientRect();
       const boxRect = firstBox.getBoundingClientRect();
       tl.style.top = Math.max(0, boxRect.top - cardRect.top) + 'px';
+    }
+    // keep the current step's tick in view inside the rail (after top is set,
+    // so the rail's visible height is final when centering the tick)
+    const cur = tl.querySelector('.tl-current');
+    if (cur && tl.scrollHeight > tl.clientHeight) {
+      tl.scrollTop = Math.max(0, parseFloat(cur.style.top) + 12 - tl.clientHeight / 2);
     }
   }
 

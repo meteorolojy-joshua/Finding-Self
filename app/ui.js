@@ -585,7 +585,7 @@ const UI = (() => {
         SCENARIO.addChosenStarter(sid);
         renderHome();
       } else {
-        const s = SCENARIO.createScenario(displayName(st.title) + ' — my version', 'TEMPLATE', sid);
+        const s = SCENARIO.createScenario(displayName(st.title), 'TEMPLATE', sid);
         SCENARIO_UI.openEditor(s.scenario_id);
       }
     });
@@ -1698,7 +1698,7 @@ const UI = (() => {
           const sid = btn.getAttribute('data-starter');
           const st = ENGINE.PKG.starterById && ENGINE.PKG.starterById[sid];
           if (!st) return;
-          const s = SCENARIO.createScenario(displayName(st.title) + ' — my version', 'TEMPLATE', sid);
+          const s = SCENARIO.createScenario(displayName(st.title), 'TEMPLATE', sid);
           SCENARIO.removeChosenStarter(sid);
           SCENARIO_UI.openEditor(s.scenario_id);
         },

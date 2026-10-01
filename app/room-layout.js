@@ -1,7 +1,7 @@
 /* Perspective placement: explicit artwork bodies, footprints and supported stacks. */
 'use strict';
 window.ROOM_LAYOUT=(()=>{
-  const E=()=>EXPLORATIONS,$=s=>document.querySelector(s),W=428,H=1070,FLOOR=277.90625;
+  const E=()=>EXPLORATIONS,$=s=>document.querySelector(s),W=428,H=900,FLOOR=277.90625;
   const concepts=[['compass','Compass'],['clock','Clock'],['mirror','Mirror'],['lantern','Lantern'],['watering-can','Watering can'],['sewing-box','Sewing box']];
   const registry={
     plant:{label:'The Self I Want to Grow',action:'open-practice',art:'room-plant',x:13,y:222.90625,w:118,h:290,body:[22.83,18,72.34,220],base:[22.83,237.8,72.34],labelBox:[0,246,118,38],mass:3},

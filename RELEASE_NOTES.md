@@ -1,3 +1,28 @@
+# My Presence — Updated Working Prototype 23 (2026-10-01)
+
+## What changed since Prototype 22
+
+**Your notebook paper on popups, your wood on small buttons.** Your lined notebook paper is now the background of popup pages — About this page, delete confirmations, the check-in schedule popup, the tutorial boxes, the fury name-it popup, and the leaf dialog — cut to the shape of each popup rather than stretched, with the red margin line trimmed away. Your light wood texture is on the small flat buttons: the × buttons, the pencil/clock/dustbin by the check-in title, undo/redo, the Q/A timeline pills, and the schedule day pills — each cut to the button's own shape. The illustrated popups (room, gemstone, contract scroll) keep their own artwork, and the Soft dark scheme is unchanged.
+
+**Template copies keep the exact template name.** Both ways of making your own version of a template — "modify it myself" and the pencil on a pre-made home card — now name the new check-in exactly after the template. The "— my version" suffix is gone.
+
+**Living-room floor, cut shorter, with your textures.** The Self-Explorations living room now ends shortly below the "pick more self-explorations" basket instead of stretching so far down. Your white plaster texture is tiled across the wall and your light wood photo is fitted as one continuous floor; everything in the room stays where it was.
+
+**Timeline rail stays inside the editor.** The check-in editor's vertical timeline (the line with the Q/A pills) no longer runs past the bottom of the editor card on short screens — its visible area ends comfortably above the card's bottom edge and scrolls internally, still jumping to any step you tap.
+
+**Purple focus box removed.** The lavender box that still appeared behind the selected question or answer in the check-in editor is gone. The item you're editing still shows in full colour while the others fade back.
+
+**Steady homepage description.** The Self-Explorations description on the homepage no longer lifts on hover; "View all →" and the ledge objects still do.
+
+## Verification
+
+- Automated suite: 143/143 passing, zero page errors.
+- Walked through in a browser: the notebook and wood textures on popups and small buttons (including the dark "on" states and the Soft dark scheme, which are untouched), template naming on both paths, the shorter living room with the new textures at desktop and 390px, the timeline rail at short screen heights, and the editor with no purple box. Desktop and 390px phone layouts checked, zero horizontal overflow.
+
+**Known open items (unchanged).** Photo options on the community rock/present writing areas, typed-only gemstone "What draws me to it", lamp-room leaf photo persistence, real photo-picker testing for the Furnace wood, specialized-cursor behavior against the app-wide hand rules, and the mobile Self-Records ledge choice (awaiting your pick).
+
+---
+
 # My Presence — Updated Working Prototype 22 (2026-09-30)
 
 ## What changed since Prototype 21

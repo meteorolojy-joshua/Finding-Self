@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #ececec;
   --surface: #ffffff;
   --surface-app: #faf7f2;
@@ -463,7 +463,7 @@ button .sub, button .id, button code { color: var(--surface); }
    the line always runs the full height of the buttons; the canvas shifts
    right to make room */
 .scn-editor-card .scn-canvas { margin-left: 54px; }
-.scn-timeline { position: absolute; left: 18px; width: 60px; z-index: 5; max-height: 480px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; }
+.scn-timeline { position: absolute; left: 18px; width: 60px; z-index: 5; bottom: 32px; max-height: 480px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; }
 .scn-timeline .tl-line { position: absolute; left: 29px; top: 0; width: 2px; background: #a39d8b; border-radius: 1px; }
 .scn-timeline .tl-tick { position: absolute; height: 20px; min-width: 20px; padding: 0 3px; box-sizing: border-box; border-radius: 10px; background: var(--surface); border: 1px solid #5b5648; color: #5b5648; font-size: 10px; font-weight: 700; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .scn-timeline .tl-tick.tl-q { right: 31px; }
@@ -838,7 +838,7 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 /* the ledge is the user's long horizontal ledge artwork, integrated exactly */
 .explore-preview .pv-ledge { display: block; width: 100%; height: auto; margin: 0; transition: transform 0.15s ease; }
 .explore-preview .pv-title { display: block; margin: 0; font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--fg); transition: transform 0.15s ease; }
-.explore-preview .pv-support { display: block; margin: 6px 4px 0; }
+.explore-preview .pv-support { display: block; margin: 6px 4px 0; transition: transform 0.15s ease; }
 .explore-preview .pv-cta { display: inline-block; margin: 3px 0 12px; font-size: 13px; font-weight: 600; color: var(--btn-hover); }
 .explore-preview:hover { transform: translateY(-4px); }
 .explore-preview:active { transform: translateY(-6px); }
@@ -846,6 +846,8 @@ input, select, textarea, .note, .banner, .worldbox, .resultrow { border-radius: 
 .explore-preview:active .pv-title { transform: translateY(6px); }
 .explore-preview:hover .pv-ledge { transform: translateY(4px); }
 .explore-preview:active .pv-ledge { transform: translateY(6px); }
+.explore-preview:hover .pv-support { transform: translateY(4px); }
+.explore-preview:active .pv-support { transform: translateY(6px); }
 .explore-preview .book-cover { fill: color-mix(in srgb, var(--cg-sea) 58%, var(--surface)); stroke: color-mix(in srgb, var(--fg) 40%, transparent); stroke-width: 1.5; }
 .explore-preview .book-pages { fill: color-mix(in srgb, var(--surface) 92%, #fff); stroke: color-mix(in srgb, var(--fg) 28%, transparent); stroke-width: 1; }
 .explore-preview .book-spine { fill: color-mix(in srgb, var(--cg-sea) 72%, var(--surface)); }
@@ -1715,3 +1717,46 @@ html body input[type=text], html body input[type=email], html body input[type=se
 html body input[type=password], html body textarea, html body [contenteditable=true]{cursor:text !important;}
 html body input[type=text]:active, html body input[type=email]:active, html body input[type=search]:active,
 html body input[type=password]:active, html body textarea:active, html body [contenteditable=true]:active{cursor:text !important;}
+
+/* Notebook paper texture (J's artwork): applied to popup pages and
+   light-colored flat buttons, cut to the shape of each particular thing —
+   natural scale, no tiling, clipped automatically by each element's own
+   border-radius. The flat fill stays underneath as the base. Illustrated
+   popups (room / gemstone / contract-scroll) keep their artwork; the dark
+   color scheme is excluded so light text on dark surfaces stays readable.
+   Working copy notebook-paper.png has the red margin line cropped out;
+   the supplied original is kept byte-for-byte as notebook-texture.png. */
+body:not(:has(.view[data-scheme="dark"])) dialog.illustrated-dialog:not(.room-dialog):not(.gem-dialog):not(.contract-dialog) .dialog-surface,
+body:not(:has(.view[data-scheme="dark"])) .scn-modal,
+body:not(:has(.view[data-scheme="dark"])) .tut-box,
+body:not(:has(.view[data-scheme="dark"])) .fury-dialog {
+  background-image: url('assets/current/notebook-paper.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+/* Light wood texture (J's artwork) for small buttons with flat fills: cut to
+   the shape of each button — natural scale, no tiling, clipped by each
+   button's own border-radius. Dark states (.tl-current, .sched-type.on) keep
+   their dark fills so light text stays readable; dark scheme excluded. */
+body:not(:has(.view[data-scheme="dark"])) .scn-box-x,
+body:not(:has(.view[data-scheme="dark"])) .scn-title-edit,
+body:not(:has(.view[data-scheme="dark"])) .scn-title-schedule,
+body:not(:has(.view[data-scheme="dark"])) .scn-title-delete,
+body:not(:has(.view[data-scheme="dark"])) .scn-undoredo .pctl,
+body:not(:has(.view[data-scheme="dark"])) .tl-tick:not(.tl-current),
+body:not(:has(.view[data-scheme="dark"])) .sched-type:not(.on),
+body:not(:has(.view[data-scheme="dark"])) .sched-day {
+  background-image: url('assets/current/wood-texture.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* Larger light buttons keep the notebook paper: */
+body:not(:has(.view[data-scheme="dark"])) .btn2,
+body:not(:has(.view[data-scheme="dark"])) .appearance-choice {
+  background-image: url('assets/current/notebook-paper.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
