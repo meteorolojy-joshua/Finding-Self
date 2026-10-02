@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="180" height="150" viewBox="0 0 180 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame">
+<path id="Vector" d="M18 45H164V137H18V45Z" fill="#B59B7A" stroke="#786A55" stroke-width="2"/>
+<path id="Vector_2" d="M28 56H152V124H28V56Z" fill="#D0BE9B" stroke="#A38C6E" stroke-width="1.5"/>
+<path id="Vector_3" d="M10 33H172V49H10V33Z" fill="#8E7B61" stroke="#6D6050" stroke-width="2"/>
+<g id="Vector_4">
+<path d="M14 37H168Z" fill="black"/>
+<path d="M14 37H168" stroke="#BCA88A" stroke-width="2"/>
+</g>
+<path id="Vector_5" d="M110 8H145V29H110V8Z" fill="#A5B6A8" stroke="#61796C" stroke-width="2"/>
+<g id="Vector_6">
+<path d="M126 29V33Z" fill="black"/>
+<path d="M126 29V33" stroke="#61796C" stroke-width="3"/>
+</g>
+<path id="Vector_7" d="M121 18H136M131 13L137 18L131 23" stroke="#FFFDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Vector_8">
+<path d="M28 137V146ZM154 137V146Z" fill="black"/>
+<path d="M28 137V146M154 137V146" stroke="#786A55" stroke-width="5"/>
+</g>
+</g>
+</svg>
