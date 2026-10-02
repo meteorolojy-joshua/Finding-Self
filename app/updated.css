@@ -1,6 +1,6 @@
 /* Current Figma paper, palette, illustrated objects, and responsive interactions. */
 :root{--surface:#fffdf8;--fg:#2c352f;--muted:#626d65;--obsidian:#626d65;--border:#d4d7cd;--soft:#efeee7;--line:#cdd2c7;--btn:#526b58;--btn-hover:#435c4b;--btn-pressed:#364c3e;--focus:#526b58}
-body{background:#e9e7df} .top{display:none}.main{padding:24px 12px 60px}.view{background:var(--surface-app);box-shadow:0 8px 40px #352e2514;min-height:90vh}.card,.card.quiet{border:0;background-color:var(--surface-app);background-image:url('assets/current/paper-texture.png');background-repeat:repeat;/* J's paper texture, tinted per scheme by styles.css multiply blend */padding:24px 26px 30px;min-height:calc(90vh - 45px)}
+body{background:#e9e7df} .top{display:none}.main{padding:24px 12px 60px}.view{background:var(--surface-app);box-shadow:0 8px 40px #352e2514;min-height:90vh}.card,.card.quiet{border:0;background-color:var(--surface-app);background-image:url('assets/current/paper-texture.png');background-repeat:repeat;/* J's paper texture, tinted per scheme by styles.css multiply blend */padding:24px 26px 30px;min-height:calc(90vh - 45px);border-radius:0!important}/* Square corners so the repeating paper covers the full page with no blank gaps (2026-10-01) */
 .app-bar{height:45px;background:var(--brown);color:#fffdf8;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 20px;position:relative;z-index:9}.app-identity{display:flex;align-items:center;gap:12px;font-size:10px;line-height:12px;font-weight:600}.app-identity img{width:22px;height:28px;object-fit:contain}.app-bar nav{display:flex;height:45px;align-items:center;gap:0}.app-bar button{padding:0 12px;height:45px;font-size:12px}.app-bar button img{width:17px;height:17px}.app-bar button:disabled{opacity:.4;cursor:default}.app-bar button:hover:not(:disabled){color:#e5d8c6;background:#ffffff08}.app-bar [hidden]{display:none}.app-settings{display:none}
 .card .pcontrols{display:contents;background:none;padding:0;margin:0}.pcontrols>*{display:none!important}.pcontrols [data-act="wrong"]{display:inline-block!important;color:var(--muted);background:transparent;padding:0 0 12px}.explore-crumb,.node-title,.markrow{display:none}.prompt{font-weight:600;font-size:20px;line-height:28px;margin:0 0 28px}.support{color:var(--muted);font-size:13.5px;line-height:21px;margin:0 0 28px}.room-hero{background:transparent!important;margin:0;padding:0}.home-hero{padding-top:0}.home-sec .h3,.pv-title{font-size:17px;font-weight:600}.ink-underline{background:none}.home-sec-book .ink-underline:after{display:none}.home-hero .prompt{margin:0}.home-hero{margin-bottom:32px}.home-sec{background:transparent}.home-sec-book{padding-top:24px}.home-sec-entries{margin-bottom:35px}.explore-preview{padding-top:16px;padding-bottom:24px}.pv-obj img,.spot-art img{width:100%;height:100%;object-fit:contain}.pv-plant img{object-position:bottom}.pv-torch img{transform:rotate(-90deg);width:44px;height:17px;max-width:none;position:absolute;left:-14px;bottom:13px}.pv-book img{transform:rotate(-90deg);width:40px;height:11px;max-width:none;position:absolute;left:-11px;bottom:14px}.pv-pair{width:42px}.pv-circle{width:50px}.pv-obj{position:relative}.o-plant .spot-art img{object-fit:contain}.spot-label{z-index:2}.o-shovel .spot-label{line-height:14px}
 .book-shape{filter:none}.book-shape:before{display:none}.book-page{background:transparent center/100% 100% no-repeat!important;clip-path:none!important;transform:none!important;border:0!important;box-shadow:none!important}.book-page-left{background-image:url('assets/notebook-left.svg')!important}.book-page-right{background-image:url('assets/notebook-right.svg')!important}.book-page svg{position:relative}.book-page-label{position:relative}.book-page:after,.book-page:before{display:none!important}
@@ -191,13 +191,19 @@ dialog.illustrated-dialog.contract-dialog{width:min(480px,100vw);}
    label ever outgrows its pin the overflow is hidden rather than breaking
    the row layout. */
 .bw64,.bw94,.bw120,.bw165,.bw302{flex:none!important;white-space:nowrap!important;text-align:center;overflow:hidden;min-width:0}
-.bw64{width:64px!important}
-.bw94{width:94px!important}
-.bw120{width:120px!important}
-.bw165{width:165px!important}
-.bw302{width:302px!important}
+/* Widths are each patch's own natural width at 44px tall, so the fabric
+   fills the full button height; the names bw64..bw302 stay as group ids. */
+.bw64{width:69px!important}
+.bw94{width:77px!important}
+.bw120{width:108px!important}
+.bw165{width:136px!important}
+.bw302{width:221px!important}
+/* Stretched variant: for labels wider than the largest patch, the button
+   keeps its natural label width and the 302 patch stretches to fill it
+   (mask and image both scale to the button box). */
+.bw-stretch{width:auto!important}
 /* Trimmed variant: 6px side padding and no visible border, so short labels
-   like Cancel/Confirm fit the 64px pin. Border width is kept (transparent)
+   like Cancel/Confirm fit the 69px pin. Border width is kept (transparent)
    so layout does not shift. */
 .bwtrim{padding-left:6px!important;padding-right:6px!important;border-color:transparent!important}
 
@@ -247,3 +253,25 @@ body:not(:has(.view[data-scheme="dark"])) .btn.bw94:focus-visible,
 body:not(:has(.view[data-scheme="dark"])) .btn.bw120:focus-visible,
 body:not(:has(.view[data-scheme="dark"])) .btn.bw165:focus-visible,
 body:not(:has(.view[data-scheme="dark"])) .btn.bw302:focus-visible{outline-color:var(--surface)!important}
+/* Patch buttons keep their default colors on hover/press (2026-10-01):
+   no drastic light-to-dark shift — the patch texture is the visual. */
+body:not(:has(.view[data-scheme="dark"])) .btn.bw64:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw94:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw120:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw165:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw302:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw64:active,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw94:active,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw120:active,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw165:active,
+body:not(:has(.view[data-scheme="dark"])) .btn.bw302:active{background:var(--btn)}
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw64:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw94:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw120:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw165:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw302:hover,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw64:active,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw94:active,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw120:active,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw165:active,
+body:not(:has(.view[data-scheme="dark"])) .btn2.bw302:active{background:var(--surface);color:var(--fg)}

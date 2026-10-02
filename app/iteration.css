@@ -1,5 +1,6 @@
-/* Current Figma palette, artwork geometry, and real interaction states. */
-.app-bar{background:#806953!important}.app-bar button{color:#fffdf8}.app-bar button:disabled{opacity:.68}
+/* Current Figma palette, artwork geometry, and real interaction states.
+   Top bar uses J's wooden retaining-bar texture (light wood, so bar text/buttons go dark). */
+.app-bar{background-image:url('assets/current/topbar-wood.png')!important;background-size:cover!important;background-position:center!important;background-color:#c9a876!important;color:#2c352f!important}.app-bar button{color:#2c352f}.app-bar button:disabled{opacity:.68}.app-bar button:hover:not(:disabled){color:#2c352f}
 button:focus-visible,[tabindex]:focus-visible{outline:3px solid #365b72!important;outline-offset:4px}button{font-family:inherit}
 .about-control{font-size:13.5px!important;line-height:21px;min-height:33px;padding:6px 12px!important;margin:0 0 18px;width:max-content;max-width:100%}
 .card>.support{margin-bottom:10px}.plain-dialog p{line-height:1.65}.plain-dialog .dialog-surface{max-height:85vh;overflow:auto}.dialog-surface .note-act{color:#2c352f}
