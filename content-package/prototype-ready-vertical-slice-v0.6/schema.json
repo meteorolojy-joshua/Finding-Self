@@ -1,0 +1,1327 @@
+{
+  "schema_version": "1.0",
+  "package_version": "0.6",
+  "identifier_rules": {
+    "node_id": "Case-sensitive stable string; never inferred from display copy.",
+    "option_id": "Case-sensitive stable string; one row per visible answer or control.",
+    "destination": "Must resolve to nodes.id or destinations.id."
+  },
+  "datasets": {
+    "starters": {
+      "record_count": 3,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "title",
+          "required": true
+        },
+        {
+          "name": "promise",
+          "required": true
+        },
+        {
+          "name": "primary_moment",
+          "required": true
+        },
+        {
+          "name": "trigger_posture",
+          "required": true
+        },
+        {
+          "name": "standard_duration",
+          "required": true
+        },
+        {
+          "name": "low_duration",
+          "required": true
+        },
+        {
+          "name": "worlds",
+          "required": true
+        },
+        {
+          "name": "function_order",
+          "required": true
+        },
+        {
+          "name": "standard_entry_node",
+          "required": true
+        },
+        {
+          "name": "low_entry_node",
+          "required": true
+        },
+        {
+          "name": "marker_behavior",
+          "required": true
+        },
+        {
+          "name": "practice_link",
+          "required": true
+        },
+        {
+          "name": "toolkit_suggestions",
+          "required": true
+        },
+        {
+          "name": "privacy_default",
+          "required": true
+        },
+        {
+          "name": "status",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "nodes": {
+      "record_count": 128,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "content_area",
+          "required": true
+        },
+        {
+          "name": "starter_id",
+          "required": true
+        },
+        {
+          "name": "practice_id",
+          "required": true
+        },
+        {
+          "name": "variant",
+          "required": true
+        },
+        {
+          "name": "sequence",
+          "required": true
+        },
+        {
+          "name": "node_type",
+          "required": true
+        },
+        {
+          "name": "world_code",
+          "required": true
+        },
+        {
+          "name": "function_code",
+          "required": true
+        },
+        {
+          "name": "function_label",
+          "required": true
+        },
+        {
+          "name": "prompt",
+          "required": true
+        },
+        {
+          "name": "support_copy",
+          "required": true
+        },
+        {
+          "name": "selection_mode",
+          "required": true
+        },
+        {
+          "name": "default_next",
+          "required": true
+        },
+        {
+          "name": "capacity",
+          "required": true
+        },
+        {
+          "name": "persistent_controls",
+          "required": true
+        },
+        {
+          "name": "persistence_rule_id",
+          "required": true
+        },
+        {
+          "name": "assumption_counterweight",
+          "required": true
+        },
+        {
+          "name": "behavior_notes",
+          "required": true
+        },
+        {
+          "name": "question_source_id",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        },
+        {
+          "name": "page_role",
+          "required": true
+        },
+        {
+          "name": "cognitive_lens",
+          "required": true
+        },
+        {
+          "name": "accepted_answer_intents",
+          "required": true
+        },
+        {
+          "name": "world_scope",
+          "required": true
+        },
+        {
+          "name": "context_requirements",
+          "required": true
+        },
+        {
+          "name": "thread_display_template",
+          "required": true
+        },
+        {
+          "name": "completion_boundary",
+          "required": true
+        },
+        {
+          "name": "carried_state_keys",
+          "required": true
+        },
+        {
+          "name": "semantic_contract_version",
+          "required": true
+        },
+        {
+          "name": "default_option_set_id",
+          "required": true
+        },
+        {
+          "name": "primary_button_limit",
+          "required": true
+        },
+        {
+          "name": "seeded_answer_limit",
+          "required": true
+        },
+        {
+          "name": "always_offer_more_options",
+          "required": true
+        },
+        {
+          "name": "nonseeded_answer_behavior",
+          "required": true
+        },
+        {
+          "name": "notes",
+          "required": true
+        }
+      ]
+    },
+    "options": {
+      "record_count": 890,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "node_id",
+          "required": true
+        },
+        {
+          "name": "starter_id",
+          "required": true
+        },
+        {
+          "name": "variant",
+          "required": true
+        },
+        {
+          "name": "order",
+          "required": true
+        },
+        {
+          "name": "label",
+          "required": true
+        },
+        {
+          "name": "answer_source_id",
+          "required": true
+        },
+        {
+          "name": "semantic_tag",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "required": true
+        },
+        {
+          "name": "display_condition",
+          "required": true
+        },
+        {
+          "name": "route_condition",
+          "required": true
+        },
+        {
+          "name": "effect",
+          "required": true
+        },
+        {
+          "name": "inventory_family",
+          "required": true
+        },
+        {
+          "name": "persistence_behavior",
+          "required": true
+        },
+        {
+          "name": "routing_behavior",
+          "required": true
+        },
+        {
+          "name": "notes",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        },
+        {
+          "name": "answer_intent",
+          "required": true
+        },
+        {
+          "name": "control_intent",
+          "required": true
+        },
+        {
+          "name": "semantic_value",
+          "required": true
+        },
+        {
+          "name": "promise_statement",
+          "required": true
+        },
+        {
+          "name": "expected_next_roles",
+          "required": true
+        },
+        {
+          "name": "state_writes",
+          "required": true
+        },
+        {
+          "name": "state_preserves",
+          "required": true
+        },
+        {
+          "name": "state_clears",
+          "required": true
+        },
+        {
+          "name": "bridge_policy",
+          "required": true
+        },
+        {
+          "name": "completion_eligibility",
+          "required": true
+        },
+        {
+          "name": "transition_acknowledgment",
+          "required": true
+        },
+        {
+          "name": "semantic_contract_version",
+          "required": true
+        },
+        {
+          "name": "seeded_default",
+          "required": true
+        },
+        {
+          "name": "default_rank",
+          "required": true
+        },
+        {
+          "name": "default_visibility",
+          "required": true
+        },
+        {
+          "name": "user_addable",
+          "required": true
+        },
+        {
+          "name": "screen_control_role",
+          "required": true
+        },
+        {
+          "name": "safety_context",
+          "required": false
+        }
+      ]
+    },
+    "entry_points": {
+      "record_count": 13,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "entry_type",
+          "required": true
+        },
+        {
+          "name": "node_id",
+          "required": true
+        },
+        {
+          "name": "precondition",
+          "required": true
+        },
+        {
+          "name": "handoff_payload",
+          "required": true
+        },
+        {
+          "name": "behavior",
+          "required": true
+        },
+        {
+          "name": "external_action",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "destinations": {
+      "record_count": 129,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "destination_class",
+          "required": true
+        },
+        {
+          "name": "definition",
+          "required": true
+        },
+        {
+          "name": "handler",
+          "required": true
+        },
+        {
+          "name": "next_node",
+          "required": true
+        },
+        {
+          "name": "return_behavior",
+          "required": true
+        },
+        {
+          "name": "terminal",
+          "required": true
+        },
+        {
+          "name": "external_action",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        },
+        {
+          "name": "next_destination",
+          "required": true
+        },
+        {
+          "name": "possible_next_nodes",
+          "required": true
+        },
+        {
+          "name": "required_context",
+          "required": true
+        },
+        {
+          "name": "fallback_destination",
+          "required": true
+        },
+        {
+          "name": "state_preserved",
+          "required": true
+        },
+        {
+          "name": "visible_transition_copy",
+          "required": true
+        }
+      ]
+    },
+    "onboarding": {
+      "record_count": 43,
+      "fields": [
+        {
+          "name": "question_id",
+          "required": true
+        },
+        {
+          "name": "question",
+          "required": true
+        },
+        {
+          "name": "answer_id",
+          "required": true
+        },
+        {
+          "name": "answer",
+          "required": true
+        },
+        {
+          "name": "order",
+          "required": true
+        },
+        {
+          "name": "use",
+          "required": true
+        },
+        {
+          "name": "guardrail",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "recommendation_rules": {
+      "record_count": 68,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "question_id",
+          "required": true
+        },
+        {
+          "name": "selected_answer_key",
+          "required": true
+        },
+        {
+          "name": "starter_id",
+          "required": true
+        },
+        {
+          "name": "weight",
+          "required": true
+        },
+        {
+          "name": "reason",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "inventory_questions": {
+      "record_count": 189,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "family",
+          "required": true
+        },
+        {
+          "name": "world_code",
+          "required": true
+        },
+        {
+          "name": "world_label",
+          "required": true
+        },
+        {
+          "name": "world_color",
+          "required": true
+        },
+        {
+          "name": "compatible_worlds",
+          "required": true
+        },
+        {
+          "name": "function_code",
+          "required": true
+        },
+        {
+          "name": "function_symbol",
+          "required": true
+        },
+        {
+          "name": "function_label",
+          "required": true
+        },
+        {
+          "name": "question",
+          "required": true
+        },
+        {
+          "name": "response_type",
+          "required": true
+        },
+        {
+          "name": "suggested_set_id",
+          "required": true
+        },
+        {
+          "name": "suggested_starter_buttons",
+          "required": true
+        },
+        {
+          "name": "suitable_modes",
+          "required": true
+        },
+        {
+          "name": "capacity",
+          "required": true
+        },
+        {
+          "name": "assumption_counterweight",
+          "required": true
+        },
+        {
+          "name": "inventory_matches",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "inventory_answers": {
+      "record_count": 475,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "label",
+          "required": true
+        },
+        {
+          "name": "response_types",
+          "required": true
+        },
+        {
+          "name": "compatible_worlds",
+          "required": true
+        },
+        {
+          "name": "compatible_functions",
+          "required": true
+        },
+        {
+          "name": "answer_set_ids",
+          "required": true
+        },
+        {
+          "name": "search_tags",
+          "required": true
+        },
+        {
+          "name": "safety_context_note",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "answer_sets": {
+      "record_count": 574,
+      "fields": [
+        {
+          "name": "set_id",
+          "required": true
+        },
+        {
+          "name": "set_name",
+          "required": true
+        },
+        {
+          "name": "response_type",
+          "required": true
+        },
+        {
+          "name": "answer_id",
+          "required": true
+        },
+        {
+          "name": "label",
+          "required": true
+        },
+        {
+          "name": "order",
+          "required": true
+        },
+        {
+          "name": "search_tags",
+          "required": true
+        },
+        {
+          "name": "new_set_flag",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "guardrails": {
+      "record_count": 14,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "category",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "required": true
+        },
+        {
+          "name": "permitted_examples",
+          "required": true
+        },
+        {
+          "name": "excluded_examples",
+          "required": true
+        },
+        {
+          "name": "reason",
+          "required": true
+        },
+        {
+          "name": "enforcement",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "persistence_rules": {
+      "record_count": 7,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "object",
+          "required": true
+        },
+        {
+          "name": "default_state",
+          "required": true
+        },
+        {
+          "name": "may_persist_only_when",
+          "required": true
+        },
+        {
+          "name": "must_not_be_silently_added",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "triggers": {
+      "record_count": 1,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "label",
+          "required": true
+        },
+        {
+          "name": "type",
+          "required": true
+        },
+        {
+          "name": "association",
+          "required": true
+        },
+        {
+          "name": "standard_entry",
+          "required": true
+        },
+        {
+          "name": "low_entry",
+          "required": true
+        },
+        {
+          "name": "invitation_node",
+          "required": true
+        },
+        {
+          "name": "cooldown",
+          "required": true
+        },
+        {
+          "name": "exclusions",
+          "required": true
+        },
+        {
+          "name": "bypass",
+          "required": true
+        },
+        {
+          "name": "snooze_pause",
+          "required": true
+        },
+        {
+          "name": "persistence_rule_id",
+          "required": true
+        },
+        {
+          "name": "external_action",
+          "required": true
+        },
+        {
+          "name": "source_file",
+          "required": true
+        },
+        {
+          "name": "source_location",
+          "required": true
+        },
+        {
+          "name": "source_status",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "acceptance_coverage": {
+      "record_count": 18,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "journey",
+          "required": true
+        },
+        {
+          "name": "required_objects",
+          "required": true
+        },
+        {
+          "name": "status",
+          "required": true
+        },
+        {
+          "name": "verification",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "deviations": {
+      "record_count": 8,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "area",
+          "required": true
+        },
+        {
+          "name": "decision",
+          "required": true
+        },
+        {
+          "name": "reason",
+          "required": true
+        },
+        {
+          "name": "authority",
+          "required": true
+        },
+        {
+          "name": "risk",
+          "required": true
+        }
+      ]
+    },
+    "regression_cases": {
+      "record_count": 9,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "start",
+          "required": true
+        },
+        {
+          "name": "selections",
+          "required": true
+        },
+        {
+          "name": "expected_sequence",
+          "required": true
+        },
+        {
+          "name": "assertion",
+          "required": true
+        },
+        {
+          "name": "expected_destinations",
+          "required": true
+        },
+        {
+          "name": "expected_destination_prefix",
+          "required": true
+        }
+      ]
+    },
+    "repair_traceability": {
+      "record_count": 115,
+      "fields": [
+        {
+          "name": "option_id",
+          "required": true
+        },
+        {
+          "name": "v03_status",
+          "required": true
+        },
+        {
+          "name": "v03_problem",
+          "required": true
+        },
+        {
+          "name": "v03_destination",
+          "required": true
+        },
+        {
+          "name": "v04_destination",
+          "required": true
+        },
+        {
+          "name": "v04_bridge_policy",
+          "required": true
+        },
+        {
+          "name": "v04_acknowledgment",
+          "required": true
+        },
+        {
+          "name": "v04_state_writes",
+          "required": true
+        },
+        {
+          "name": "implementation_status",
+          "required": true
+        }
+      ]
+    },
+    "default_option_sets": {
+      "record_count": 128,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "node_id",
+          "required": true
+        },
+        {
+          "name": "node_prompt",
+          "required": true
+        },
+        {
+          "name": "page_role",
+          "required": true
+        },
+        {
+          "name": "selection_mode",
+          "required": true
+        },
+        {
+          "name": "primary_button_limit",
+          "required": true
+        },
+        {
+          "name": "seeded_answer_limit",
+          "required": true
+        },
+        {
+          "name": "seeded_answer_option_ids",
+          "required": true
+        },
+        {
+          "name": "continuation_control_option_ids",
+          "required": true
+        },
+        {
+          "name": "more_options_mode",
+          "required": true
+        },
+        {
+          "name": "more_options_option_ids",
+          "required": true
+        },
+        {
+          "name": "display_only_option_ids",
+          "required": true
+        },
+        {
+          "name": "node_inventory_option_ids",
+          "required": true
+        },
+        {
+          "name": "default_primary_button_count",
+          "required": true
+        },
+        {
+          "name": "user_added_answers_may_exceed_default_limit",
+          "required": true
+        },
+        {
+          "name": "curation_method",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    },
+    "question_clarity_audit": {
+      "record_count": 178,
+      "fields": [
+        {
+          "name": "id",
+          "required": true
+        },
+        {
+          "name": "surface",
+          "required": true
+        },
+        {
+          "name": "record_id",
+          "required": true
+        },
+        {
+          "name": "original_question",
+          "required": true
+        },
+        {
+          "name": "revised_question",
+          "required": true
+        },
+        {
+          "name": "clarity_issue",
+          "required": true
+        },
+        {
+          "name": "intended_meaning_preserved",
+          "required": true
+        },
+        {
+          "name": "routes_or_answers_changed",
+          "required": true
+        },
+        {
+          "name": "content_version",
+          "required": true
+        }
+      ]
+    }
+  },
+  "semantic_contract_version": "0.1",
+  "semantic_rules": [
+    {
+      "id": "SRT-01",
+      "rule": "Answer meaning determines the next page; graph availability does not."
+    },
+    {
+      "id": "SRT-02",
+      "rule": "A change of page role or cognitive lens must be requested by the answer or introduced by a bridge."
+    },
+    {
+      "id": "SRT-03",
+      "rule": "A transition with ambiguous continuity must visibly acknowledge what the user selected."
+    },
+    {
+      "id": "SRT-04",
+      "rule": "Relevant prior state must be carried forward and displayed where needed."
+    },
+    {
+      "id": "SRT-05",
+      "rule": "Fulfill or operationalize an answer’s promise before asking what to retain or closing."
+    },
+    {
+      "id": "SRT-06",
+      "rule": "Retention is a separate, optional choice; it is not a substitute for fulfilling an answer."
+    },
+    {
+      "id": "SRT-07",
+      "rule": "Expansion preserves context and does not silently restart."
+    },
+    {
+      "id": "SRT-08",
+      "rule": "A restart is an explicit choice distinct from expanding the current thread."
+    },
+    {
+      "id": "SRT-09",
+      "rule": "Low-capacity paths can complete independently without escalation to a longer path."
+    },
+    {
+      "id": "SRT-10",
+      "rule": "Actions are gated by actual availability, safety, capacity, and jurisdiction."
+    },
+    {
+      "id": "SRT-11",
+      "rule": "Every displayed answer must fit its question grammatically and conceptually."
+    },
+    {
+      "id": "SRT-12",
+      "rule": "Uncertainty, privacy, no action, delay, and protective responses are valid endpoints."
+    },
+    {
+      "id": "SRT-13",
+      "rule": "Recovery preserves agency and offers back, reword, alternate route, skip, and exit where applicable."
+    },
+    {
+      "id": "SRT-14",
+      "rule": "The system does not use guilt, pressure, or forced disclosure."
+    },
+    {
+      "id": "SRT-15",
+      "rule": "Power analysis includes interpersonal, structural, material, and technological influences without imposing an interpretation."
+    },
+    {
+      "id": "SRT-16",
+      "rule": "The app may scaffold reflection but never performs external action in the user’s place."
+    },
+    {
+      "id": "SRT-17",
+      "rule": "Free text is optional, restrained, and never required to unlock completion."
+    },
+    {
+      "id": "SRT-18",
+      "rule": "Every destination, conditional branch, state requirement, return pointer, and fallback is explicit."
+    }
+  ],
+  "runtime_invariants": [
+    "The meaning and promise of the selected answer determine the next page.",
+    "A role or lens change is requested by the answer, acknowledged visibly, or mediated by an explicit bridge.",
+    "Expansion preserves carried context; restart is a separate explicit option.",
+    "Custom input is captured explicitly and never inferred from the button label.",
+    "Resource needs are operationalized before retention or closure.",
+    "Uncertainty, privacy, protective response, unavailable-now, no action, and exit remain valid.",
+    "No destination performs an external action for the user."
+  ],
+  "default_option_contract_version": "0.1",
+  "default_option_invariants": [
+    "Default screens render only SEEDED_ANSWER options, progression controls, and one More options control.",
+    "Default primary buttons never exceed five. Back, Exit, and Wrong question remain navigation chrome and are not counted.",
+    "A multi-select page reserves one primary button for Continue and one for More options, leaving at most three seeded toggles.",
+    "Nonseeded answers remain in the node-specific inventory with their existing destination and semantic contract.",
+    "A user-added answer joins the seeded defaults for that user and node until explicitly removed; user additions may exceed five.",
+    "Hiding an answer from the starter default never deletes or rewrites its route."
+  ],
+  "question_clarity_contract_version": "0.1",
+  "question_clarity_invariants": [
+    "Every revised question keeps its existing record ID, answer set, semantic contract, destination, and default-option membership.",
+    "Routed prompts and thread_display_template text use the same revised wording.",
+    "Default-option node_prompt mirrors the revised routed prompt.",
+    "Question-inventory and onboarding revisions change wording only.",
+    "Plain-language revisions name the subject and requested judgment directly; metaphor is retained only when the screen explicitly explains it."
+  ]
+}
