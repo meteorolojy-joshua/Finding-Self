@@ -1,0 +1,169 @@
+/* Furnace of Rage — redesigned room styles. Normal app background. */
+.fury-room .prompt { margin-bottom: 4px; }
+/* Wall above the furnace; below it the wood pile (left) and the dials (right). */
+.fury-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "wall wall"
+    "hearth hearth"
+    "stack dials";
+  gap: 18px;
+  align-items: start;
+  margin-top: 14px;
+}
+.fury-wall { grid-area: wall; }
+.fury-hearth { grid-area: hearth; }
+.fury-stack { grid-area: stack; }
+.fury-dials { grid-area: dials; }
+@media (max-width: 760px) {
+  .fury-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "wall" "hearth" "stack" "dials";
+  }
+  .fury-hearth-row { gap: 16px; }
+  .fury-bin { width: 48px; }
+}
+
+/* Artwork images scale with their containers. */
+.fury-art { width: 100%; height: auto; display: block; }
+
+/* ---------- wall (above the furnace) ---------- */
+.fury-wall {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+.fury-wall .h3 { margin: 0 0 4px; }
+.fury-wall-hint { font-size: 12px; opacity: .65; margin: 0 0 8px; }
+.fury-wall-pieces { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+.fury-wall-empty { font-size: 13px; opacity: .55; margin: 0; }
+.fury-hung { display: flex; flex-direction: column; align-items: center; cursor: grab; }
+.fury-hung:focus { outline: 2px solid var(--btn); outline-offset: 3px; border-radius: 6px; }
+.fury-string { width: 2px; height: 26px; background: #8a7a5f; }
+.fury-hung-log { width: 44px; display: block; }
+/* Residual chips hang tilted, each at its own slight angle. */
+.fury-hung:nth-child(odd) .fury-hung-log { transform: rotate(-9deg); }
+.fury-hung:nth-child(even) .fury-hung-log { transform: rotate(7deg); }
+.fury-hung:nth-child(3n) .fury-hung-log { transform: rotate(-4deg); }
+.fury-hung-title { font-size: 12px; line-height: 1.35; max-width: 100px; text-align: center; overflow-wrap: anywhere; opacity: .85; margin-top: 5px; }
+.fury-drop-hint { outline: 2px dashed var(--btn); outline-offset: 4px; border-radius: 12px; }
+
+/* ---------- fireplace ---------- */
+.fury-hearth-row { display: flex; align-items: flex-end; justify-content: center; gap: 30px; }
+.fury-fireplace { position: relative; width: 100%; max-width: 460px; margin: 0; }
+.fury-fireplace-art { width: 100%; height: auto; display: block; }
+/* The drop zone sits over the fireplace's own mouth and is clipped to the
+   mouth's arch, so burning pieces never visibly exceed the opening — anything
+   taller disappears behind the outer walls. */
+.fury-firebox {
+  position: absolute; left: 21.5%; top: 41%; width: 52%; height: 47.5%;
+  overflow: hidden;
+  border-radius: 50% 50% 0 0 / 55% 55% 0 0;
+}
+.fury-firebox.fury-drop-hint { outline: 3px dashed var(--btn); outline-offset: -3px; }
+.fury-piece { position: absolute; bottom: 0; width: 40%; margin-left: -20%; cursor: grab; }
+.fury-piece:focus { outline: 2px solid var(--btn); outline-offset: 2px; border-radius: 8px; }
+.fury-piece-scale { transform-origin: 50% 100%; }
+.fury-piece-art { transform-origin: 50% 100%; animation: fury-breathe 2.6s ease-in-out infinite alternate; }
+@keyframes fury-breathe {
+  from { transform: scale(1); }
+  to { transform: scale(1.035); filter: brightness(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fury-piece-art { animation: none; }
+}
+.fury-drag-src { opacity: .35; }
+
+/* ---------- wood stack (bottom left, below the fireplace) ---------- */
+.fury-stack { text-align: center; min-width: 0; }
+.fury-stack .h3 { margin: 0 0 6px; }
+.fury-stack-pieces { display: flex; justify-content: center; align-items: center; }
+.fury-stack-piece {
+  background: none; border: none; padding: 4px; cursor: grab; width: 88px; flex: none;
+}
+/* A real pile: the pieces overlap. */
+.fury-stack-piece + .fury-stack-piece { margin-left: -24px; }
+.fury-stack-piece svg, .fury-stack-piece img { width: 100%; height: auto; display: block; filter: drop-shadow(0 3px 3px rgba(0,0,0,.25)); }
+.fury-stack-piece:nth-child(2) { transform: rotate(-4deg) translateY(4px); }
+.fury-stack-piece:nth-child(3) { transform: rotate(3deg) translateY(7px); }
+.fury-stack-piece:hover { transform: translateY(-4px); }
+.fury-stack-piece:nth-child(2):hover { transform: rotate(-4deg) translateY(0); }
+.fury-stack-piece:nth-child(3):hover { transform: rotate(3deg) translateY(3px); }
+
+/* ---------- dials (bottom right, below the fireplace) ---------- */
+.fury-dials { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.fury-dials-empty { font-size: 13px; opacity: .6; margin: 0; }
+.fury-dial { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; background: var(--surface); }
+.fury-dial-title { font-weight: 600; font-size: 14px; margin-bottom: 8px; overflow-wrap: anywhere; }
+.fury-dial-body { display: flex; align-items: center; gap: 10px; }
+.fury-knob {
+  position: relative; width: 64px; height: 64px; flex: none; cursor: ns-resize;
+  background: url('assets/current/fury-dial-face.svg') center/contain no-repeat;
+  /* A drop shadow grounds the dial; the face art itself draws the bezel. */
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.3));
+}
+.fury-knob:focus { outline: 2px solid var(--btn); outline-offset: 3px; }
+.fury-knob-pointer {
+  position: absolute; inset: 0;
+  background: url('assets/current/fury-dial-pointer.svg') center/contain no-repeat;
+  transform-origin: 50% 50%;
+  /* Aimed by aimDialPointers() at the line-marker of the level that is set. */
+  pointer-events: none;
+}
+.fury-settings { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.fury-setting {
+  display: flex; align-items: center; gap: 8px; background: none; border: none;
+  padding: 3px 2px; font-size: 12px; text-align: left; cursor: pointer; border-radius: 6px;
+}
+.fury-setting:hover { background: color-mix(in srgb, var(--btn) 12%, transparent); }
+.fury-setting-line { width: 18px; height: 2px; background: #8a7a66; flex: none; border-radius: 1px; }
+.fury-setting.on .fury-setting-line { background: var(--btn); height: 3px; }
+.fury-setting-label { opacity: .8; }
+.fury-setting.on .fury-setting-label { opacity: 1; font-weight: 600; }
+
+/* ---------- bin (plain, to the right of the furnace) + footer ---------- */
+.fury-foot { display: flex; align-items: center; gap: 18px; margin-top: 18px; flex-wrap: wrap; }
+.fury-bin { flex: none; width: 62px; opacity: .92; }
+.fury-bin svg { width: 100%; height: auto; display: block; }
+.fury-bin.fury-drop-hint { outline: 2px dashed var(--btn); outline-offset: 4px; border-radius: 12px; }
+.fury-status { min-height: 1.4em; font-size: 13px; opacity: .75; margin-top: 10px; }
+
+/* ---------- drag ghost ---------- */
+.fury-drag-ghost {
+  position: fixed; z-index: 400; width: 80px; pointer-events: none; opacity: .85;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,.35));
+}
+.fury-drag-ghost svg, .fury-drag-ghost img { width: 100%; height: auto; display: block; }
+
+/* ---------- wood dialog ---------- */
+.fury-dialog-ov {
+  position: fixed; inset: 0; z-index: 300; background: rgba(20,14,8,.45);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.fury-dialog {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+  padding: 22px; width: min(400px, calc(100vw - 40px)); box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  /* wood-piece-ish: slightly irregular rounded shape */
+  border-radius: 60% 40% 55% 45% / 12% 12% 14% 14%;
+  padding: 30px 26px;
+}
+.fury-dialog-log { width: 150px; margin: 0 auto 6px; }
+.fury-dialog-log svg, .fury-dialog-log img { width: 100%; height: auto; display: block; }
+.fury-dialog h2 { text-align: center; margin: 0 0 10px; }
+.fury-field { display: block; margin-bottom: 12px; }
+.fury-field > span { display: block; font-size: 14px; margin-bottom: 6px; }
+.fury-field textarea {
+  width: 100%; box-sizing: border-box; border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px; font: inherit; background: var(--surface-app, #fff); resize: vertical;
+}
+.fury-dialog .dialog-error { color: #b3261e; font-size: 13px; min-height: 1.2em; margin: 0 0 8px; }
+.fury-dialog .btnrow { display: flex; gap: 10px; }
+.fury-dialog .btnrow .btn, .fury-dialog .btnrow .note-act { flex: 1; }
+
+/* Photo instead of typed words in the wood dialog; photo as a piece's label */
+.fury-dialog .pb-field{margin:10px 0;text-align:left}
+.fury-label-photo{display:inline-block;max-width:110px;max-height:64px;border-radius:6px;vertical-align:middle;box-shadow:0 1px 4px #0003}
+.fury-hung-title .fury-label-photo{max-width:76px;max-height:52px}
+.fury-dialog .pb-photo img{max-height:220px}
