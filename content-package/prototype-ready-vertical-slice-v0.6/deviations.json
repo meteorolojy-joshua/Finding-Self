@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "content_version": "0.6",
+  "records": [
+    {
+      "id": "DEV001",
+      "area": "Inventory bridge",
+      "decision": "Added exact prototype copy for INV.SEARCH, INV.SCOPE, INV.PREVIEW, and INV.CONFIRMED.",
+      "reason": "The binding sources settle behavior but do not provide complete screen copy for the run-only versus permanent-addition seam.",
+      "authority": "Prototype-only research candidate; revise in authoritative content source after testing.",
+      "risk": "Wording may imply more persistence than intended if misunderstood."
+    },
+    {
+      "id": "DEV002",
+      "area": "Recovery bridge",
+      "decision": "Added exact candidate copy for resume and invalid-route recovery states.",
+      "reason": "The contract requires these states but higher sources specify behavior rather than full product copy.",
+      "authority": "Prototype-only research candidate.",
+      "risk": "Must be tested for clarity without technical burden."
+    },
+    {
+      "id": "DEV003",
+      "area": "Practice breadth",
+      "decision": "Included both existing Practice scripts, with their standard and low-capacity routes, instead of a single one-world extract.",
+      "reason": "Every canonical SS01, SS02, or SS06 Practice choice can resolve without a dead-end.",
+      "authority": "Exact existing Script 01 and Script 02 content with binding v0.2 patches.",
+      "risk": "Larger import surface; no additional content invention."
+    },
+    {
+      "id": "DEV004",
+      "area": "Cross-mode route coherence",
+      "decision": "Separated Marker, portable Artifact, Toolkit review, and Practice selection into explicit context-safe handoffs.",
+      "reason": "Randomized route review found that saving a phrase could open Toolkit editing, marker intent could be asked twice, and SS02 could enter Practice handlers without an active Practice.",
+      "authority": "v0.2 route-coherence repair; prototype binding until incorporated into the next product-content decision record.",
+      "risk": "Adds three short bridge nodes, but removes ambiguous and unresolvable transitions."
+    },
+    {
+      "id": "DEV005",
+      "area": "Semantic route validation",
+      "decision": "Added semantic checks for Practice identity, context-safe completion, exclusive uncertainty choices, and noninteractive summary rows.",
+      "reason": "The prior validator checked referential integrity but could pass semantically contradictory or context-dependent routes.",
+      "authority": "v0.2 prototype validation rule.",
+      "risk": "Future content changes must preserve or intentionally revise these invariants."
+    },
+    {
+      "id": "DEV006",
+      "area": "Visited-world continuity",
+      "decision": "Made the S2 review distinguish worlds actually visited from worlds merely planned, and hid review answers for unvisited worlds.",
+      "reason": "A second randomized route review found that ending after W1 could still produce a W3 continuity answer and wording that implied every planned world had been traversed.",
+      "authority": "v0.3 route-coherence repair; prototype binding until incorporated into the next product-content decision record.",
+      "risk": "The runtime must track the visited-world set explicitly."
+    },
+    {
+      "id": "DEV007",
+      "area": "Context-aware Toolkit scope",
+      "decision": "Gated Toolkit scope and inventory controls by active trigger, starter, target, and change kind; clarified the Artifact return-pointer label.",
+      "reason": "A manual route could offer 'Only this trigger' without a trigger, or offer 'Save to inventory only' for a removal or sequencing change.",
+      "authority": "v0.3 route-coherence repair; prototype binding until incorporated into the next product-content decision record.",
+      "risk": "The renderer must evaluate explicit display and route conditions before showing a control."
+    },
+    {
+      "id": "DEV008",
+      "area": "Recovery rewording",
+      "decision": "Replaced a no-op 'Reword it' return with an explicit run-only user-rewording handler and required recovery entry to retain its origin node.",
+      "reason": "The second route audit showed that the prior control returned to identical wording and could loop while implying that rewording had occurred.",
+      "authority": "v0.3 route-coherence repair; prototype binding until incorporated into the next product-content decision record.",
+      "risk": "User-authored wording must remain volatile unless separately saved and must never be interpreted as diagnostic data."
+    }
+  ]
+}
