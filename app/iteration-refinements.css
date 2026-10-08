@@ -1,0 +1,217 @@
+/* Artwork and captions use separate bounds, including at narrow widths. */
+.scene-instruction:empty{display:none}
+.room-scene .room-label{color:#2c352f;font-weight:500;margin:0}
+.influence-object{container-type:inline-size}
+.influence-object textarea{font-size:5.769cqw;line-height:8.173cqw}
+.influence-object[data-kind=person] textarea{font-size:5.288cqw;line-height:7.211cqw;padding:0!important}
+.influence-object[data-kind=place] textarea{font-size:5.288cqw;line-height:6.73cqw;padding:0!important}
+.growing-leaf .empty-leaf{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.current-notebook{background:url('assets/current/notebook.svg') center/100% 100% no-repeat;filter:none;aspect-ratio:296/149}
+.current-notebook:before{display:none}
+.current-notebook .book-page{background:none!important;clip-path:none;transform:none;min-height:149px;padding:16px 14px;box-shadow:none}
+.current-notebook .book-page:hover{transform:none;filter:brightness(.94)}
+.current-notebook .book-page svg{display:none}
+.current-notebook .book-page-label{font-weight:400;font-size:12px}
+.current-notebook .book-page{position:absolute;top:12%;height:76%;min-height:0;width:32%;padding:8px}
+.current-notebook .book-page-left{left:18%}.current-notebook .book-page-right{right:18%}
+.current-notebook .book-page-hint{font-size:11px}
+.piece-handle{display:block;cursor:grab;touch-action:pan-y}
+.helper-companion{position:fixed;bottom:18px;right:max(18px,calc((100vw - 480px)/2 + 18px));z-index:40;box-shadow:0 3px 14px #0002}
+.room-item.dragging{z-index:2000!important}.landing-preview{z-index:1999}.drag-preview *{pointer-events:none!important}
+.room-item,.packed-item{touch-action:auto}
+.archive-plant{position:relative;width:66px;height:130px}.archive-plant .room-plant-art{inset:0}.archive-plant .room-plant-art img{max-width:100%}.archive-option{display:flex;align-items:center;gap:16px;text-align:left}.archive-option img{width:42px;height:48px;object-fit:contain}
+.current-miniature{position:relative}.current-miniature .room-plant-art{inset:0}.current-miniature.upward-torch img{transform:rotate(-90deg)}
+.pv-magnet.current-miniature img{transform:scaleY(-1)}
+.explore-preview .pv-book.current-miniature{width:40px;height:14px}
+.explore-preview .pv-torch.current-miniature{width:54px;height:21px}
+.pv-book.current-miniature img{position:static;transform:none;width:100%;height:100%}
+.drag-preview .store-basket{width:100%}.drag-preview .packed-items{top:22%;left:20%;right:20%}
+/* Restore the existing lift only on room destinations and notebook pages.
+   Move artwork with its caption inside a stable hit target. Drag transforms
+   and support geometry remain owned by the room placement controller. */
+.room-fixed-label{display:block;pointer-events:none}
+.room-item.room-fixed-art{display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.room-item.room-fixed-art>img{position:relative;left:auto;top:auto;width:100%;height:auto;flex:none}
+.room-item.room-fixed-art .room-fixed-label{margin-top:8px}
+.room-item.room-fixed-art.label-side{flex-direction:row;align-items:center}
+.room-item.room-fixed-art.label-side>img{width:65%;height:auto}
+.room-item.room-fixed-art.label-side .room-fixed-label{margin:0 0 0 8px;text-align:left;flex:1;min-width:0;font-size:3.271cqw;line-height:4.206cqw}
+.room-item>img,.room-item>.room-label,.room-item>.room-plant-art,.room-item>.room-fixed-label{transition:translate 150ms ease-out}
+@media(hover:hover){
+  .room-item:not(.dragging):hover>img,
+  .room-item:not(.dragging):hover>.room-label,
+  .room-item:not(.dragging):hover>.room-plant-art,
+  .room-item:not(.dragging):hover>.room-fixed-label{translate:0 -4px}
+}
+.room-item:not(.dragging):active>img,
+.room-item:not(.dragging):active>.room-label,
+.room-item:not(.dragging):active>.room-plant-art,
+.room-item:not(.dragging):active>.room-fixed-label{translate:0 -6px}
+.room-item.dragging>*{translate:none;transition:none}
+/* Both page illustrations are halves of the supplied notebook asset. */
+.current-notebook{background:none}
+.current-notebook::before,.current-notebook::after{content:"";display:block;position:absolute;inset:0;width:auto;height:auto;margin:0;border:0;border-radius:0;box-shadow:none;background:url('assets/current/notebook.svg') center/100% 100% no-repeat;pointer-events:none;transform:none;transition:translate 150ms ease-out}
+.current-notebook::before{clip-path:inset(0 50% 0 0);z-index:0}
+.current-notebook::after{clip-path:inset(0 0 0 50%);z-index:0}
+.current-notebook .book-page{z-index:1;transition:translate 150ms ease-out}
+@media(hover:hover){
+  .current-notebook:has(.book-page-left:hover)::before,
+  .current-notebook:has(.book-page-right:hover)::after,
+  .current-notebook .book-page:hover{translate:0 -4px}
+}
+.current-notebook:has(.book-page-left:active)::before,
+.current-notebook:has(.book-page-right:active)::after,
+.current-notebook .book-page:active{translate:0 -6px}
+@media(prefers-reduced-motion:reduce){
+  .room-item>*,.current-notebook::before,.current-notebook::after,.current-notebook .book-page{transition:none}
+}
+/* Attached garden leaves render 1.3x their base size, with the petiole base
+   pinned to the stem: the leaf grows outward from its stalk instead of
+   shifting away from the stem (a center-origin scale pushed left leaves'
+   bases right of the stem and right leaves' bases left of it). */
+.growing-leaf .saved-leaf{left:-13.68%;top:6.45%;width:103.48%;height:87.1%;transform:none}
+.growing-leaf.right .saved-leaf{left:10.2%;top:6.45%;width:103.48%;height:87.1%;transform:scaleX(-1)}
+
+/* Communities: a glass jar of paper stars, not a stack of scrolls. */
+.star-scene{display:grid;grid-template-columns:minmax(230px,290px) 1fr;gap:30px;align-items:start;margin:36px 0 10px}
+.star-zone{min-width:0}
+.star-jar{position:relative;height:360px;border:3px solid #b9c9d3;border-top-width:2px;border-radius:22px 22px 52px 52px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(205,225,233,.16) 55%,rgba(178,198,210,.32));box-shadow:inset 0 0 28px rgba(255,255,255,.55),0 10px 22px rgba(40,60,70,.10);overflow:hidden}
+.star-jar::after{content:"";position:absolute;left:14px;top:16px;bottom:16px;width:20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));pointer-events:none}
+.star-jar-stars{position:absolute;inset:28px 16px 22px;display:flex;flex-wrap:wrap;gap:10px 8px;align-content:flex-end;justify-content:center;align-items:flex-end}
+.star-outside{min-height:360px;border:2px dashed var(--border);border-radius:18px;padding:22px;display:flex;flex-wrap:wrap;gap:14px 12px;align-content:flex-start;background:rgba(255,255,255,.22)}
+.zone-caption{margin:10px 4px 0;font-size:12px;line-height:18px;color:var(--muted)}
+.star-empty{margin:auto;font-size:13px;color:var(--muted)}
+.paper-star{position:relative;width:66px;min-height:66px;background:none;border:0;padding:0;cursor:pointer;touch-action:none}
+.paper-star svg{display:block;width:66px;height:66px;filter:drop-shadow(0 2px 2px rgba(60,50,30,.25));transition:transform .15s ease}
+.paper-star:hover svg,.paper-star:focus-visible svg{transform:translateY(-3px) rotate(-4deg)}
+.paper-star span{display:block;max-width:70px;margin:3px auto 0;font-size:11px;line-height:14px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.paper-star:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:8px}
+/* The assessment popup is an unfolded paper star, not a scroll: a paper page
+   with the unfolded star bursting behind the title, crease lines on the star,
+   and an unfold animation on open. Background layers never affect hit-testing,
+   so every control stays clickable. */
+dialog.illustrated-dialog.contract-dialog.star-dialog{width:min(620px,96vw)}
+.contract-dialog.star-dialog .dialog-surface{position:relative;min-height:0;overflow:visible;border-radius:24px;box-shadow:0 18px 44px rgba(50,40,20,.25);padding:66px 56px 60px;animation:star-unfold .32s ease-out;transform-origin:center;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 5L190.4 70.6 155.9 176.9 44.1 176.9 9.6 70.6Z' fill='%23e9d9a8' stroke='%23b39b62' stroke-width='2' stroke-linejoin='round'/%3E%3Cg stroke='%23c9b586' stroke-width='1' opacity='.85' fill='none'%3E%3Cpath d='M100 100V5M100 100l90.4-29.4M100 100l55.9 76.9M100 100l-55.9 76.9M100 100L9.6 70.6'/%3E%3C/g%3E%3C/svg%3E") center 30px / 400px no-repeat,url('assets/current/paper-texture.png'),#f6efdd;background-size:400px auto,340px,auto}
+.contract-dialog.star-dialog[open]{animation:none}
+.contract-dialog.star-dialog .dialog-surface h2{font-size:30px;line-height:40px;padding-top:150px}
+.star-placement{margin-top:26px}
+.star-placement .btnrow{margin-top:10px}
+@keyframes star-unfold{from{transform:scale(.86) rotate(-5deg);opacity:.55}to{transform:none;opacity:1}}
+@media(max-width:640px){.star-scene{grid-template-columns:1fr}.star-jar{height:300px}.star-outside{min-height:210px}}
+@media(max-width:520px){.contract-dialog.star-dialog .dialog-surface{padding:56px 34px 52px}.contract-dialog.star-dialog .dialog-surface h2{font-size:25px;line-height:34px;padding-top:120px}}
+@media(prefers-reduced-motion:reduce){.contract-dialog.star-dialog .dialog-surface{animation:none}.paper-star svg{transition:none}}
+
+/* Garden: the plant as a whole is much larger (1.5x). Everything on the plant
+   (stem, pot, placed leaves, dotted slots) scales uniformly because all of its
+   geometry is percentage-based, so leaf bases stay pinned to the stem. The leaf
+   piles on the ground are a separate section and keep their size. Horizontal
+   bleed is clipped on this page so it never creates sideways scrolling. */
+section[data-page="garden"]{overflow-x:clip}
+.growth-plant{width:150%;margin:12px -25% 0}
+/* Leaf titles sit ON the leaf as an opaque pill, instead of beside it. */
+.growing-leaf .leaf-title{position:absolute;left:50%;right:auto;top:50%;transform:translate(-50%,-50%)!important;width:auto;max-width:88%;max-height:48px;background:#fffdf7;border-radius:12px;padding:3px 10px;font-size:11px;line-height:14px;color:#2e3a2f;text-align:center;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;box-shadow:0 1px 4px rgba(50,40,20,.22)}
+.growing-leaf .leaf-example{position:absolute;left:8%;right:8%;top:50%;transform:translateY(-50%)!important;width:auto;text-align:center;font-size:10px;line-height:14px;color:var(--muted)}
+/* An uploaded title photo fills the leaf's interior, masked to the leaf's own
+   shape so the leaf's border and silhouette stay visible around it. */
+.growing-leaf .leaf-photo{position:absolute;left:-13.68%;top:6.45%;width:103.48%;height:87.1%;max-height:none;padding:0;right:auto;-webkit-mask-size:85%;mask-size:85%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;pointer-events:none}
+.growing-leaf .leaf-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.growing-leaf.right .leaf-photo{left:10.2%;transform:scaleX(-1)!important}
+/* Text boxes on the leaf popup are fully opaque. */
+.leaf-dialog textarea{background:#fff}
+.leaf-dialog .new-field input[type=text]{background:#fff}
+/* Title photo picker in the leaf popup. */
+.title-photo{margin:2px 0 14px}
+.title-photo img{display:block;width:132px;height:96px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(50,40,20,.2)}
+.title-photo .btnrow{margin-top:8px}
+.title-photo .note-hint{display:inline;margin-left:8px}
+
+/* Leaf zoom: a tapped leaf grows and turns a quarter-turn into its editing page,
+   so it feels like diving into the leaf on the same page rather than jumping
+   to a popup. */
+.leaf-zoom-ov{position:fixed;inset:0;z-index:300;display:grid;place-items:center;overflow:hidden}
+html.leaf-zoom-open{overflow-x:hidden}
+.leaf-zoom-dim{position:absolute;inset:0;background:rgba(35,30,18,.52);opacity:0;transition:opacity .35s ease}
+.leaf-zoom-art{position:fixed;left:0;top:0;z-index:1;pointer-events:none;transform-origin:center}
+.leaf-zoom-art img{display:block;width:100%;height:100%;object-fit:contain}
+.leaf-zoom-art.mirrored img{transform:scaleX(-1)}
+.leaf-zoom-panel{position:relative;z-index:2;width:min(460px,94vw);max-height:92vh;max-height:92dvh;overflow:auto;overscroll-behavior:contain;opacity:0;visibility:hidden}
+.leaf-zoom-panel .dialog-surface{margin:0}
+body.leaf-zoom-open{overflow:hidden}
+#view{transition:transform .45s ease,filter .45s ease}
+body.leaf-zoom-open #view{transform:scale(1.025);filter:brightness(.93)}
+body.leaf-zoom-open #app-notice{z-index:1300}
+.growing-leaf.leaf-zoom-src .saved-leaf,.growing-leaf.leaf-zoom-src .empty-leaf,.growing-leaf.leaf-zoom-src .leaf-title,.growing-leaf.leaf-zoom-src .leaf-photo,.growing-leaf.leaf-zoom-src .leaf-example{visibility:hidden}
+@media(prefers-reduced-motion:reduce){.leaf-zoom-dim{transition:none}#view{transition:none}}
+
+/* ---- Leaf zoom: filterable background art layer (edit popup) ---- */
+.dialog-surface{position:relative;}
+.leaf-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none;border-radius:inherit;}
+.dialog-surface>.leaf-bg~*{position:relative;}
+
+/* ---- Leaf creation zoom: the sheet grows out of the tapped slot ---- */
+.creation-panel{max-width:540px;}
+.creation-panel .dialog-surface{padding:34px 30px 30px;border-radius:18px;}
+.creation-panel .dialog-surface{max-height:min(88vh,900px);overflow:auto;}
+.creation-canvas{display:flex;align-items:center;justify-content:center;min-height:150px;margin:6px 0 10px;}
+.creation-slot{width:min(300px,72vw);aspect-ratio:1.85/1;border:4px dotted #626D65;border-radius:100% 6% 100% 6%;position:relative;opacity:.85;}
+.creation-slot::before,.creation-slot::after{content:"";position:absolute;background:#626D65;opacity:.7;}
+.creation-slot::before{left:50%;top:50%;width:26px;height:4px;transform:translate(-50%,-50%);}
+.creation-slot::after{left:50%;top:50%;width:4px;height:26px;transform:translate(-50%,-50%);}
+.creation-leaf{width:min(320px,78vw);height:auto;display:block;}
+.creation-tray{margin:0 0 8px;}
+.tray-label{margin:0 0 6px;font-weight:600;}
+.tray-piles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.tray-pile{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;background:rgba(255,255,255,.55);border:2px solid transparent;border-radius:10px;cursor:pointer;}
+.tray-pile img{width:44px;height:auto;pointer-events:none;}
+.tray-pile span{font-size:12px;line-height:1.15;text-align:center;color:#2c3a2e;}
+.tray-pile:hover{border-color:#8aa184;}
+.tray-pile.picked{border-color:#3f5a44;background:rgba(255,255,255,.85);}
+.creation-fields{margin-top:10px;}
+.creation-appearance{margin:12px 0 4px;padding:10px 12px;background:rgba(255,255,255,.45);border-radius:10px;}
+.appearance-title{margin:0 0 8px;font-weight:600;}
+.app-row{display:flex;align-items:center;gap:10px;margin:6px 0;}
+.app-cap{flex:0 0 52px;font-size:13px;color:#2c3a2e;}
+.app-shapes{display:flex;flex-wrap:wrap;gap:6px;}
+.app-shape{width:44px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.6);border:2px solid transparent;border-radius:8px;cursor:pointer;padding:2px;}
+.app-shape img{max-width:100%;max-height:100%;pointer-events:none;}
+.app-shape.picked{border-color:#3f5a44;}
+.app-colors{display:flex;flex-wrap:wrap;gap:8px;}
+.app-color{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.18);cursor:pointer;padding:0;}
+.app-color.picked{border-color:#222;box-shadow:0 0 0 2px #fff inset;}
+@media (max-width:480px){
+  .tray-piles{grid-template-columns:repeat(4,1fr);gap:6px;}
+  .tray-pile img{width:36px;}
+  .tray-pile span{font-size:11px;}
+}
+
+/* ---- Bond scene: stickman, draggable stone+gift pair, double-headed arrow ---- */
+.bond-scene{margin:18px 0;}
+.bond-stage{position:relative;min-height:340px;border:1px dashed #c9bfa8;border-radius:14px;background:rgba(255,255,255,.35);padding:12px;overflow:hidden;}
+.bond-self{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:44px;text-align:center;z-index:2;}
+.bond-self svg{width:40px;height:84px;display:block;margin:0 auto;}
+.bond-self span{font-size:12px;color:#5a4a3a;font-weight:600;}
+.bond-arrow{position:absolute;top:50%;height:3px;background:#8a7a5a;transform:translateY(-50%);z-index:1;pointer-events:none;}
+.bond-arrow::before,.bond-arrow::after{content:"";position:absolute;top:50%;width:0;height:0;border:7px solid transparent;}
+.bond-arrow::before{left:-14px;border-right:11px solid #8a7a5a;transform:translateY(-50%);}
+.bond-arrow::after{right:-14px;border-left:11px solid #8a7a5a;transform:translateY(-50%);}
+.bond-arrow-label{position:absolute;left:50%;top:8px;transform:translateX(-50%);font-size:12px;color:#6b5f4a;text-align:center;max-width:90%;z-index:2;pointer-events:none;}
+.bond-pair{position:absolute;top:50%;transform:translateY(-50%);display:flex;gap:18px;z-index:2;cursor:grab;touch-action:pan-y;}
+.bond-pair.dragging{cursor:grabbing;}
+.bond-pair:focus{outline:3px solid #526b58;outline-offset:4px;border-radius:8px;}
+.bond-item{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:220px;}
+.bond-item .contract-rock{position:relative;}
+.bond-item .contract-rock img{width:100%;height:100%;object-fit:contain;pointer-events:none;}
+.bond-item .contract-rock textarea{position:absolute;inset:18% 12%;background:rgba(255,255,255,.88);border:1px solid #d8cfae;border-radius:6px;font-size:12px;padding:6px;resize:none;}
+.bond-info{font-size:12px;color:#5a4a3a;text-align:center;font-style:italic;max-width:200px;}
+.bond-slider{width:100%;max-width:200px;}
+.bond-slider label{font-size:11px;color:#6b5f4a;display:block;margin-bottom:2px;}
+.bond-slider input[type=range]{width:100%;}
+.contract-hslider-ends{display:flex;justify-content:space-between;font-size:10px;color:#8a7a5a;}
+@media (max-width:560px){
+  .bond-pair{gap:10px;}
+  .bond-item{max-width:150px;}
+  .bond-info{font-size:11px;}
+}
+
+/* ---- Star zoom fly ---- */
+.star-zoom-fly svg{width:100%;height:100%;display:block;}
