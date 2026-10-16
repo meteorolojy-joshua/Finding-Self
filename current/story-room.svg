@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="92" height="32" viewBox="0 0 92 32">
+  <title>A sage-green book lying on its side</title>
+  <path d="M4 10 15 1h72q4 0 4 4v21q0 5-5 5H7q-6 0-6-6V15q0-3 3-5Z" fill="#748467"/>
+  <path d="m7 11 10-8h70l-7 9Z" fill="#99a98b"/>
+  <path d="M10 13h76v13H10q-4-6 0-13Z" fill="#eee8d5"/>
+  <path d="M12 16h72M11 19h73M12 23h72" fill="none" stroke="#d3cbb5" stroke-width=".7"/>
+  <path d="M7 11h6q-5 8 0 17H7q-5 0-5-5v-7q0-5 5-5Z" fill="#859575"/>
+  <path d="M13 11h74v3H13ZM8 27h80q3 0 3 3H8q-6 0-6-5 1 2 6 2Z" fill="#99a98b"/>
+  <path d="M7 13v11" stroke="#647659" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M68 14h6v15l-3-3-3 3Z" fill="#ba886e"/>
+</svg>
