@@ -1,0 +1,45 @@
+const { chromium } = require('playwright-core');
+const assert = require('node:assert/strict');
+(async () => {
+  const browser = await chromium.launch({ executablePath: '/opt/meta-chromium/chrome', args: ['--no-sandbox', '--disable-dev-shm-usage', '--allow-file-access-from-files'] });
+  const p = await browser.newPage({ viewport: { width: 1100, height: 1150 } });
+  const errors = [];
+  p.on('pageerror', e => errors.push(e.message));
+  p.setDefaultTimeout(10000);
+  await p.goto('file:///home/hatch/workspace/finding-self/app/index.html');
+  await p.waitForTimeout(800);
+  await p.evaluate(() => { const n = document.querySelector('[data-od-id="tutorial-offer"] [data-tut="no"]'); if (n) n.click(); });
+  await p.waitForTimeout(400);
+  await p.evaluate(() => {
+    const d = JSON.parse(localStorage.getItem('fsaw.updated.v1') || '{}');
+    d.growthIntroSeen = true; d.garden = {};
+    localStorage.setItem('fsaw.updated.v1', JSON.stringify(d));
+  });
+  await p.goto('file:///home/hatch/workspace/finding-self/app/index.html');
+  await p.waitForTimeout(800);
+  await p.evaluate(() => { const n = document.querySelector('[data-od-id="tutorial-offer"] [data-tut="no"]'); if (n) n.click(); });
+  await p.waitForTimeout(400);
+  await p.locator('[data-act="longer-explorations"]').click();
+  await p.locator('.room-label-btn[data-ract="open-practice"]').click({ force: true });
+  await p.waitForTimeout(800);
+  // tap the first mini-leaf
+  const mini = p.locator('.growing-leaf.mini .mini-leaf').first();
+  const src = await mini.getAttribute('src');
+  assert.ok(src.includes('leaf-monstera-others.png'), `mini is monstera: ${src}`);
+  await p.locator('.growing-leaf.mini').first().click();
+  await p.waitForTimeout(450);
+  const growing = await p.locator('.growing-leaf.mini.growing').count();
+  assert.equal(growing, 1, 'grow animation started');
+  await p.screenshot({ path: '/tmp/grow-mid.png' });
+  await p.waitForTimeout(1200);
+  const editorOpen = await p.locator('.inplace-leaf').count();
+  assert.equal(editorOpen, 1, 'leaf editor opened after grow');
+  const artSrc = await p.locator('.inplace-leaf .il-front .il-art').getAttribute('src');
+  assert.ok(artSrc.includes('leaf-monstera-others.png'), `editor shows monstera: ${artSrc}`);
+  const artW = await p.locator('.inplace-leaf .il-front .il-art').evaluate(el => el.getBoundingClientRect().width);
+  console.log(`editor leaf width: ${Math.round(artW)}px (viewport 1100)`);
+  assert.deepEqual(errors, []);
+  await p.screenshot({ path: '/tmp/grow-editor.png' });
+  console.log('PASS: mini -> grow -> full-leaf editor works with new art');
+  await browser.close();
+})().catch(e => { console.error('FAILED:', e.message); process.exit(1); });
