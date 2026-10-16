@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 112">
+  <g id="book-trolley">
+    <!-- push handle -->
+    <path d="M104 8 Q 118 8 118 24 L 118 34" fill="none" stroke="#7a6c55" stroke-width="5" stroke-linecap="round"/>
+    <!-- rear posts -->
+    <rect x="10" y="6" width="6" height="90" rx="3" fill="#8a7a5f"/>
+    <rect x="100" y="6" width="6" height="90" rx="3" fill="#8a7a5f"/>
+    <!-- top shelf -->
+    <rect x="10" y="40" width="96" height="7" rx="2.5" fill="#b3a58c"/>
+    <rect x="10" y="40" width="96" height="2.5" rx="1" fill="#cbbfa8"/>
+    <!-- middle shelf -->
+    <rect x="10" y="68" width="96" height="7" rx="2.5" fill="#b3a58c"/>
+    <rect x="10" y="68" width="96" height="2.5" rx="1" fill="#cbbfa8"/>
+    <!-- bottom shelf -->
+    <rect x="10" y="92" width="96" height="6" rx="2.5" fill="#a08e73"/>
+    <!-- books on middle shelf -->
+    <rect x="22" y="48" width="9" height="20" rx="1" fill="#b77d68"/>
+    <rect x="32" y="44" width="9" height="24" rx="1" fill="#91a7b3"/>
+    <rect x="42" y="50" width="9" height="18" rx="1" fill="#9caa91"/>
+    <rect x="52" y="46" width="9" height="22" rx="1" fill="#c9a86a"/>
+    <!-- leaning book on middle shelf -->
+    <g transform="rotate(12 70 68)">
+      <rect x="64" y="46" width="9" height="22" rx="1" fill="#a87b8f"/>
+    </g>
+    <!-- books on bottom shelf -->
+    <rect x="30" y="76" width="9" height="16" rx="1" fill="#8fa3a8"/>
+    <rect x="40" y="73" width="9" height="19" rx="1" fill="#c98f6b"/>
+    <rect x="50" y="77" width="9" height="15" rx="1" fill="#a8b394"/>
+    <!-- wheels -->
+    <circle cx="24" cy="104" r="7" fill="#4a4238"/>
+    <circle cx="24" cy="104" r="2.5" fill="#8a7a5f"/>
+    <circle cx="92" cy="104" r="7" fill="#4a4238"/>
+    <circle cx="92" cy="104" r="2.5" fill="#8a7a5f"/>
+  </g>
+</svg>
