@@ -1,0 +1,521 @@
+/* Furnace of Rage — redesigned room.
+   A fireplace with a wood stack below. Drag wood into the fireplace, name
+   what you're angry about, and each piece gets a dial (pissed → screaming
+   fury and rage) that grows the wood and its flame. Drag a piece to the bin
+   to forget it, or to the wall to keep it as a tiny reminder. */
+'use strict';
+window.FURY_ROOM = (() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  // A piece's label: its typed words, or the photo of its handwritten words,
+  // which stands in for the name wherever the name would appear.
+  function pieceCaption(p) {
+    if ((p.title || '').trim()) return esc(p.title);
+    if (p.titlePhoto) return `<img class="fury-label-photo" src="${p.titlePhoto}" alt="Your handwritten words">`;
+    return 'Unnamed piece';
+  }
+  function pieceSpoken(p) { return (p.title || '').trim() || 'your handwritten words'; }
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const LS_KEY = 'fsaw.fury.v1';
+  const MAX_BURNING = 5;
+  const LEVELS = ['pissed', '', 'angry', '', 'screaming fury and rage'];
+
+  const view = () => $('#view');
+
+  function loadState() {
+    try {
+      const s = JSON.parse(localStorage.getItem(LS_KEY));
+      if (s && Array.isArray(s.pieces)) return s;
+    } catch (e) { /* ignore */ }
+    return { pieces: [] };
+  }
+  function saveState(s) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch (e) { /* ignore */ }
+  }
+
+  // J's own artwork for the furnace: the fireplace, a plain piece of wood,
+  // and a piece of wood on fire. Used in place of the earlier drawn versions.
+  const WOOD_IMG = '<img class="fury-art" src="assets/current/fury-log-unburned.png" alt="" draggable="false">';
+  const CHIP_IMG = '<img class="fury-art fury-chip-art" src="assets/current/fury-chip.svg" alt="" draggable="false">';
+  const BURNING_IMG = '<img class="fury-art" src="assets/current/fury-log-burning.png" alt="" draggable="false">';
+  const FIREPLACE_IMG = '<img class="fury-fireplace-art" src="assets/current/fury-fireplace.png" alt="A fireplace" draggable="false">';
+
+  const BIN_SVG = `<svg viewBox="0 0 80 90" aria-hidden="true" focusable="false">
+    <path d="M14 26h52l-6 56a6 6 0 0 1-6 5H26a6 6 0 0 1-6-5z" fill="#5a5348"/>
+    <path d="M14 26h52l-6 56a6 6 0 0 1-6 5H26a6 6 0 0 1-6-5z" fill="none" stroke="#3e3931" stroke-width="2"/>
+    <rect x="8" y="18" width="64" height="10" rx="3" fill="#6e675c"/>
+    <rect x="32" y="8" width="16" height="12" rx="3" fill="#6e675c"/>
+    <path d="M28 30l4 50M40 30v52M52 30l-4 50" stroke="#3e3931" stroke-width="2" opacity=".5"/>
+  </svg>`;
+
+  let state = null;
+
+  function burningPieces() { return state.pieces.filter(p => p.place === 'fire'); }
+  function wallPieces() { return state.pieces.filter(p => p.place === 'wall'); }
+
+  function open() {
+    state = loadState();
+    render();
+    /* enhance() runs on the next microtask via MutationObserver and clears
+       the About text, so set ours on a macrotask after it. */
+    setTimeout(() => {
+      if (window.ITERATION && typeof window.ITERATION.setPageAbout === 'function') {
+        window.ITERATION.setPageAbout(
+          'The furnace holds what you are angry about, without any requirement to calm down, reframe it, or find the lesson. Drag a piece of wood from the stack into the fireplace and name what fuels it. Each burning piece gets a dial — turn it from "pissed" up to "screaming fury and rage" and watch its flame grow. When you are no longer angry about something, drag its piece to the bin to forget it, or hang it on the wall as a small reminder of what once burned.',
+          'About this exploration'
+        );
+      }
+    }, 0);
+  }
+
+  function render() {
+    view().innerHTML = `
+    <div class="card fury-room" data-page="fury-room" data-od-id="fury-room">
+      <div class="pcontrols"><button class="pctl" type="button" data-fury="back">Self-Explorations</button></div>
+      <h1 class="prompt" tabindex="-1">Anger</h1>
+      <p class="support">Embody your anger in a burning log, then listen to its wisdom</p>
+      <div class="fury-grid">
+        <section class="fury-wall" id="fury-wall" aria-label="Wall of past anger">
+          <div class="fury-paper-label">Reminders of Past Anger</div>
+          <p class="fury-wall-hint">Drag a piece here to keep it as a small reminder.</p>
+          <div class="fury-wall-pieces" id="fury-wall-pieces"></div>
+        </section>
+        <section class="fury-hearth" aria-label="Fireplace">
+          <div class="fury-paper-label">Things I\'m Angry About</div>
+          <div class="fury-hearth-row">
+            <div class="fury-fireplace" id="fury-fireplace">
+              ${FIREPLACE_IMG}
+              <div class="fury-firebox" id="fury-firebox" aria-label="Fireplace — drag wood here"></div>
+              <div class="fury-paper-label fury-bin-label">Forget</div>
+              <div class="fury-bin" id="fury-bin" aria-label="Bin — drag a piece here to forget it">
+                ${BIN_SVG}
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="fury-stack" id="fury-stack" aria-label="Wood pile — drag a piece to the fireplace">
+          <div class="fury-paper-label">Wood Pile</div>
+          <div class="fury-stack-pieces"></div>
+        </section>
+        <section class="fury-dials" id="fury-dials" aria-label="Anger dials">
+          <div class="fury-paper-label">Anger Level</div>
+          <div class="fury-dials-wrap" id="fury-dials-wrap"></div>
+        </section>
+      </div>
+      <div class="fury-foot">
+        <button class="btn2 bw120" type="button" data-fury="leave">View Other Pieces of Myself</button>
+      </div>
+      <p class="fury-status" id="fury-status" role="status"></p>
+    </div>`;
+    view().querySelector('h1')?.focus({ preventScroll: true });
+    renderAll();
+    wireStatic();
+  }
+
+  function renderAll() {
+    renderFirebox();
+    renderDials();
+    renderStack();
+    renderWall();
+  }
+
+  /* ---------- fireplace + burning pieces ---------- */
+  function scaleFor(level) { return 0.55 + (level / 4) * 0.95; } // 0.55 → 1.5
+
+  function renderFirebox() {
+    const box = $('#fury-firebox');
+    if (!box) return;
+    const pieces = burningPieces();
+    const n = pieces.length;
+    box.innerHTML = pieces.map((p, i) => {
+      const s = scaleFor(p.level);
+      // Pieces rest on the floor of the fireplace, spread across its width.
+      // Sizes stay proportional to the fireplace so nothing can spill past it.
+      // The title is shown on the log (fitted); clicking zooms to the full text.
+      const left = n > 1 ? 20 + (i / (n - 1)) * 60 : 50;
+      const title=(p.title||'').trim(), full=(p.text||'').trim();
+      const label = title ? `<div class="fury-log-label" data-log-title>${esc(title)}</div>` : '';
+      const fullLabel = full ? `<div class="fury-log-label fury-full" data-log-full hidden>${esc(full)}</div>` : '';
+      return `<div class="fury-piece" data-id="${esc(p.id)}" style="left:${left.toFixed(1)}%;touch-action:none" role="button" tabindex="0" aria-label="${esc(pieceSpoken(p))} — drag to the bin to forget it, or to the wall to keep it as a reminder. Activate to zoom in and read the full text.">
+        <div class="fury-piece-scale" style="transform:scale(${s.toFixed(2)})">
+          <img class="fury-art fury-piece-art" src="assets/current/fury-wood-burning.svg" alt="" draggable="false">
+          ${label}${fullLabel}
+        </div>
+      </div>`;
+    }).join('');
+    box.querySelectorAll('.fury-piece').forEach(el=>{
+      attachPieceDrag(el);
+      // Click (not drag) toggles zoom to full text.
+      let downPos=null;
+      el.addEventListener('pointerdown',e=>{downPos={x:e.clientX,y:e.clientY};});
+      el.addEventListener('pointerup',e=>{
+        if(!downPos)return;
+        const dx=e.clientX-downPos.x, dy=e.clientY-downPos.y;
+        downPos=null;
+        if(Math.hypot(dx,dy)<8 && !e.target.closest('.fury-log-writer')) toggleLogZoom(el.dataset.id);
+      });
+      el.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleLogZoom(el.dataset.id);}
+      });
+    });
+    // Fit all labels within their logs.
+    requestAnimationFrame(()=>box.querySelectorAll('.fury-piece').forEach(el=>fitLogLabel(el)));
+  }
+
+  /* ---------- dials ---------- */
+  function renderDials() {
+    const wrap = $('#fury-dials-wrap');
+    if (!wrap) return;
+    const pieces = burningPieces();
+    wrap.innerHTML = pieces.length ? pieces.map(p => `
+      <div class="fury-dial" data-id="${esc(p.id)}">
+        <div class="fury-dial-title">${pieceCaption(p)}</div>
+        <div class="fury-dial-body">
+          <div class="fury-knob" role="slider" tabindex="0" aria-label="How angry: ${esc(pieceSpoken(p))}"
+               aria-valuemin="0" aria-valuemax="4" aria-valuenow="${p.level}" aria-valuetext="${esc(levelLabel(p.level))}"
+               data-level="${p.level}" style="touch-action:none">
+            <span class="fury-knob-pointer"></span>
+          </div>
+          <div class="fury-settings" aria-hidden="true">
+            ${[4, 3, 2, 1, 0].map(l => `
+              <button type="button" tabindex="-1" class="fury-setting${l === p.level ? ' on' : ''}" data-set="${l}">
+                <span class="fury-setting-line"></span><span class="fury-setting-label">${esc(LEVELS[l])}</span>
+              </button>`).join('')}
+          </div>
+        </div>
+      </div>`).join('')
+      : ``;
+    wrap.querySelectorAll('.fury-dial').forEach(attachDial);
+    aimDialPointers();
+  }
+
+  /* The knob's pointer aims at the line-marker of the level that is actually
+     set, measured from the real layout so it stays true at any size. */
+  function aimDialPointers() {
+    $$('.fury-dial').forEach(dialEl => {
+      const knob = dialEl.querySelector('.fury-knob');
+      const pointer = dialEl.querySelector('.fury-knob-pointer');
+      const marker = dialEl.querySelector('.fury-setting.on .fury-setting-line');
+      if (!knob || !pointer || !marker) return;
+      const k = knob.getBoundingClientRect();
+      const m = marker.getBoundingClientRect();
+      const deg = Math.atan2(
+        (m.top + m.height / 2) - (k.top + k.height / 2),
+        (m.left + m.width / 2) - (k.left + k.width / 2)
+      ) * 180 / Math.PI;
+      pointer.style.transform = `rotate(${deg.toFixed(1)}deg)`;
+    });
+  }
+
+  function levelLabel(l) {
+    return LEVELS[l] || ('level ' + (l + 1) + ' of 5');
+  }
+
+  function setLevel(id, level) {
+    const p = state.pieces.find(x => x.id === id);
+    if (!p || p.place !== 'fire') return;
+    p.level = clamp(Math.round(level), 0, 4);
+    saveState(state);
+    renderFirebox();
+    // Update the dial in place (no re-render — the user may be mid-drag or focused).
+    const dialEl = document.querySelector(`.fury-dial[data-id="${CSS.escape(id)}"]`);
+    if (dialEl) {
+      const knob = dialEl.querySelector('.fury-knob');
+      knob.dataset.level = p.level;
+      knob.setAttribute('aria-valuenow', p.level);
+      knob.setAttribute('aria-valuetext', levelLabel(p.level));
+      dialEl.querySelectorAll('.fury-setting').forEach(b =>
+        b.classList.toggle('on', Number(b.dataset.set) === p.level));
+      aimDialPointers();
+    }
+  }
+
+  function attachDial(dialEl) {
+    const id = dialEl.dataset.id;
+    const knob = dialEl.querySelector('.fury-knob');
+    let dragging = false, startY = 0, startLevel = 0;
+    const pxPerLevel = 40;
+
+    knob.addEventListener('pointerdown', e => {
+      dragging = true; startY = e.clientY;
+      startLevel = Number(knob.dataset.level) || 0;
+      knob.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    knob.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const d = Math.round((startY - e.clientY) / pxPerLevel);
+      setLevel(id, startLevel + d);
+      startY = e.clientY; startLevel = clamp(startLevel + d, 0, 4);
+    });
+    const stop = () => { dragging = false; };
+    knob.addEventListener('pointerup', stop);
+    knob.addEventListener('pointercancel', stop);
+    knob.addEventListener('keydown', e => {
+      const cur = Number(knob.dataset.level) || 0;
+      if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); setLevel(id, cur + 1); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); setLevel(id, cur - 1); }
+    });
+    dialEl.querySelectorAll('.fury-setting').forEach(btn => {
+      btn.addEventListener('click', () => setLevel(id, Number(btn.dataset.set)));
+    });
+  }
+
+  /* ---------- wood stack ---------- */
+  function renderStack() {
+    const stack = document.querySelector('#fury-stack .fury-stack-pieces');
+    if (!stack) return;
+    // The stack is an endless supply; show three pieces to grab.
+    stack.innerHTML = [0, 1, 2].map(i =>
+      `<button type="button" class="fury-stack-piece" aria-label="A piece of wood — drag it into the fireplace" style="touch-action:none">${WOOD_IMG}</button>`
+    ).join('');
+    stack.querySelectorAll('.fury-stack-piece').forEach(el => {
+      el.addEventListener('pointerdown', e => startStackDrag(e, el));
+    });
+  }
+
+  /* ---------- wall ---------- */
+  function renderWall() {
+    const wall = $('#fury-wall-pieces');
+    if (!wall) return;
+    const pieces = wallPieces();
+    wall.innerHTML = pieces.length ? pieces.map(p => `
+      <div class="fury-hung" data-id="${esc(p.id)}" style="touch-action:none" role="button" tabindex="0"
+           aria-label="${esc(pieceSpoken(p))} — once burned here. Drag to the bin to forget it entirely." title="${esc(pieceSpoken(p))}">
+        <span class="fury-string" aria-hidden="true"></span>
+        <span class="fury-hung-log" aria-hidden="true">${CHIP_IMG}</span>
+        <span class="fury-hung-title">${pieceCaption(p)}</span>
+      </div>`).join('')
+      : `<p class="fury-wall-empty">Nothing hung yet.</p>`;
+    wall.querySelectorAll('.fury-hung').forEach(el => {
+      el.addEventListener('pointerdown', e => startPieceDrag(e, el, el.dataset.id, 'wall'));
+    });
+  }
+
+  /* ---------- drag & drop ---------- */
+  function ghostFor(html) {
+    const g = document.createElement('div');
+    g.className = 'fury-drag-ghost';
+    g.innerHTML = html;
+    document.body.append(g);
+    return g;
+  }
+
+  function startStackDrag(e, srcEl) {
+    e.preventDefault();
+    const ghost = ghostFor(WOOD_IMG);
+    const move = ev => {
+      ghost.style.left = (ev.clientX - 40) + 'px';
+      ghost.style.top = (ev.clientY - 18) + 'px';
+      const box = $('#fury-firebox');
+      box?.classList.toggle('fury-drop-hint', !!document.elementFromPoint(ev.clientX, ev.clientY)?.closest('#fury-firebox'));
+    };
+    const up = ev => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+      ghost.remove();
+      $('#fury-firebox')?.classList.remove('fury-drop-hint');
+      const target = document.elementFromPoint(ev.clientX, ev.clientY)?.closest('#fury-firebox');
+      if (target) {
+        if (burningPieces().length >= MAX_BURNING) {
+          status('The fireplace holds five pieces already — let one go before adding another.');
+          return;
+        }
+        const id='w'+Math.random().toString(36).slice(2);
+        state.pieces.push({id,title:'',text:'',titlePhoto:null,level:0,place:'fire'});
+        saveState(state);
+        renderAll();
+        writeOnLog(id);
+      }
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+    move(e);
+  }
+
+  function attachPieceDrag(el) {
+    el.addEventListener('pointerdown', e => startPieceDrag(e, el, el.dataset.id, 'fire'));
+  }
+
+  // Zoom a log to read its full text. Text always fits within the log.
+  function toggleLogZoom(id){
+    const p=state.pieces.find(x=>x.id===id);
+    if(!p||p.place!=='fire')return;
+    const el=document.querySelector(`.fury-piece[data-id="${id}"]`);
+    if(!el||el.querySelector('.fury-log-writer'))return; // don't zoom while writing
+    const zoomed=el.classList.toggle('fury-zoomed');
+    const titleEl=el.querySelector('[data-log-title]');
+    const fullEl=el.querySelector('[data-log-full]');
+    // Zoomed: full text; rest: title only.
+    const showFull=zoomed&&fullEl;
+    if(titleEl)titleEl.hidden=!!showFull;
+    if(fullEl)fullEl.hidden=!showFull;
+    fitLogLabel(el);
+    // Bring the zoomed log above its neighbors.
+    el.style.zIndex=zoomed?'20':'';
+  }
+
+  // Shrink the label's font until it fits inside the log's bounds.
+  function fitLogLabel(el){
+    const label=el.querySelector('[data-log-full]:not([hidden])')||el.querySelector('[data-log-title]:not([hidden])');
+    const img=el.querySelector('.fury-piece-art');
+    if(!label||!img)return;
+    const r=img.getBoundingClientRect();
+    // Usable area: the wood is the bottom ~35% of the art; keep text inside
+    // the art with a margin so it never crosses the perimeter.
+    const maxW=r.width*0.86, maxH=r.height*0.9;
+    label.style.maxWidth=maxW+'px';
+    // Start from a reasonable size; only shrink if actually overflowing.
+    let size=el.classList.contains('fury-zoomed')?17:15;
+    label.style.fontSize=size+'px';
+    // Read layout after the browser has positioned the label.
+    const sw=label.scrollWidth, sh=label.scrollHeight;
+    if(sw>maxW+2||sh>maxH+2){
+      for(let i=0;i<20;i++){
+        size-=1;
+        if(size<8)break;
+        label.style.fontSize=size+'px';
+        if(label.scrollWidth<=maxW+1&&label.scrollHeight<=maxH+1)break;
+      }
+    }
+  }
+
+  function startPieceDrag(e, srcEl, id, from) {
+    // Don't start a drag from keyboard focus or tiny jitter; require movement.
+    const sx = e.clientX, sy = e.clientY;
+    let dragging = false, ghost = null;
+    e.preventDefault();
+    const move = ev => {
+      if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+      if (!dragging) {
+        dragging = true;
+        ghost = ghostFor(from === 'fire' ? BURNING_IMG : WOOD_IMG);
+        srcEl.classList.add('fury-drag-src');
+      }
+      ghost.style.left = (ev.clientX - 40) + 'px';
+      ghost.style.top = (ev.clientY - 18) + 'px';
+      const pt = document.elementFromPoint(ev.clientX, ev.clientY);
+      $('#fury-bin')?.classList.toggle('fury-drop-hint', !!pt?.closest('#fury-bin'));
+      $('#fury-wall')?.classList.toggle('fury-drop-hint', !!pt?.closest('#fury-wall'));
+    };
+    const up = ev => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+      srcEl.classList.remove('fury-drag-src');
+      if (ghost) ghost.remove();
+      $('#fury-bin')?.classList.remove('fury-drop-hint');
+      $('#fury-wall')?.classList.remove('fury-drop-hint');
+      if (!dragging) { writeOnLog(id); return; } // it was a tap — write on the log
+      const pt = document.elementFromPoint(ev.clientX, ev.clientY);
+      if (pt?.closest('#fury-bin')) {
+        removePiece(id, 'forgotten');
+      } else if (pt?.closest('#fury-wall') && from === 'fire') {
+        movePiece(id, 'wall');
+      }
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+
+  function showPieceTitle(id) {
+    const p = state.pieces.find(x => x.id === id);
+    if (p) status(p.place === 'fire' ? `"${pieceSpoken(p)}" — burning at "${LEVELS[p.level]}". Drag it to the bin to forget it, or to the wall to keep it as a reminder.` : `"${pieceSpoken(p)}" — once burned here.`);
+  }
+
+  function removePiece(id, how) {
+    state.pieces = state.pieces.filter(x => x.id !== id);
+    saveState(state);
+    renderAll();
+    status(how === 'forgotten' ? 'Let go — the piece is gone.' : 'Piece removed.');
+  }
+
+  function movePiece(id, place) {
+    const p = state.pieces.find(x => x.id === id);
+    if (!p) return;
+    p.place = place;
+    saveState(state);
+    renderAll();
+    status(place === 'wall' ? `"${pieceSpoken(p)}" now hangs on the wall — a small reminder of what once burned.` : 'Moved.');
+  }
+
+  function status(msg) {
+    const el = $('#fury-status');
+    if (el) el.textContent = msg;
+  }
+
+  /* ---------- wood dialog ---------- */
+  /* ---------- anger writing belongs to the burning log, not a dialog ---------- */
+  function writeOnLog(id){
+    const p=state.pieces.find(x=>x.id===id);
+    if(!p||p.place!=='fire')return;
+    const el=document.querySelector(`.fury-piece[data-id="${id}"]`);
+    if(!el||el.querySelector('.fury-log-writer'))return;
+    // The writing goes on the log itself — no card. A transparent field
+    // overlaid on the burning wood.
+    const card=document.createElement('div');
+    card.className='fury-log-writer';
+    card.innerHTML=`
+      <input type="text" maxlength="40" placeholder="Title\u2026" aria-label="Title for this log" data-lw-title value="${esc(p.title||'')}">
+      <textarea rows="3" maxlength="400" placeholder="The full story, in your own words\u2026" aria-label="Full text for this log" data-lw-text>${esc(p.text||'')}</textarea>
+      <div class="fury-log-verbs"><button type="button" class="btn2" data-lw-done>Done</button><button type="button" class="btn2" data-lw-pocket>Put in pocket</button></div>`;
+    el.appendChild(card);
+    const titleInput=card.querySelector('[data-lw-title]');
+    const textArea=card.querySelector('[data-lw-text]');
+    // Interacting with the writer must not start a piece drag.
+    card.addEventListener('pointerdown',e=>e.stopPropagation());
+    card.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
+    let deb=null;
+    const save=()=>{
+      const t=titleInput.value.trim(), tx=textArea.value.trim();
+      let changed=false;
+      if(t!==(p.title||'').trim()){p.title=t;changed=true;}
+      if(tx!==(p.text||'').trim()){p.text=tx;changed=true;}
+      if(changed){saveState(state);renderDials();}
+    };
+    titleInput.addEventListener('input',()=>{clearTimeout(deb);deb=setTimeout(save,800);});
+    textArea.addEventListener('input',()=>{clearTimeout(deb);deb=setTimeout(save,800);});
+    const close=()=>{
+      clearTimeout(deb);save();
+      if(!(p.title||'').trim()){removePiece(id,'forgotten');return;}
+      renderAll();
+      status(`"${p.title}" is in the fire. Turn its dial to say how hot it burns.`);
+    };
+    card.querySelector('[data-lw-done]').addEventListener('click',e=>{e.stopPropagation();close();});
+    card.querySelector('[data-lw-pocket]').addEventListener('click',e=>{e.stopPropagation();save();if(window.EXPLORATIONS&&typeof window.EXPLORATIONS.addToPocket==='function')window.EXPLORATIONS.addToPocket('log',id);});
+    const keyHandler=e=>{
+      if(e.key==='Enter'&&!e.shiftKey&&e.target===titleInput){e.preventDefault();textArea.focus();}
+      else if(e.key==='Escape'){e.stopPropagation();close();}
+    };
+    titleInput.addEventListener('keydown',keyHandler);
+    textArea.addEventListener('keydown',keyHandler);
+    titleInput.focus();
+  }
+  
+
+  /* ---------- static wiring ---------- */
+  function wireStatic() {
+    // Keep the dial pointers aimed at their level's line-marker on resize.
+    window.removeEventListener('resize', aimDialPointers);
+    window.addEventListener('resize', aimDialPointers);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => aimDialPointers()).catch(() => {});
+    }    view().querySelector('[data-fury="back"]')?.addEventListener('click', () => {
+      if (window.UI && typeof window.UI.renderLongerExplorations === 'function') window.UI.renderLongerExplorations();
+      else if (window.EXPLORATIONS?.routes) window.history.back();
+    });
+    view().querySelector('[data-fury="leave"]')?.addEventListener('click', () => {
+      if (window.UI && typeof window.UI.renderLongerExplorations === 'function') window.UI.renderLongerExplorations();
+    });
+    // Keyboard: pieces are focusable; Enter shows info, Delete removes.
+    view().addEventListener('keydown', e => {
+      const piece = e.target.closest?.('.fury-piece, .fury-hung');
+      if (!piece) return;
+      const id = piece.dataset.id;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showPieceTitle(id); }
+      if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); removePiece(id, 'forgotten'); }
+    });
+  }
+
+  return { open };
+})();
